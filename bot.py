@@ -9,6 +9,7 @@ from telegram.ext import (
     filters,
 )
 from google import genai
+from google.genai import types
 
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
@@ -53,6 +54,7 @@ async def start_command(
 
 
 # AI javob
+
 async def reply_to_message(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
@@ -64,7 +66,84 @@ async def reply_to_message(
     if update.message.from_user and update.message.from_user.is_bot:
         return
 
-    # Faqat matnli xabarlar
+    # Rasm yuborilgan bo'lsa
+    if update.message.photo:
+
+        try:
+            # Telegramdagi eng katta sifatli rasmni olamiz
+            photo = update.message.photo[-1]
+
+            # Rasm faylini Telegram serveridan yuklab olamiz
+            file = await context.bot.get_file(photo.file_id)
+
+            image_bytes = await file.download_as_bytearray()
+
+            # Caption bo'lsa, savol sifatida ishlatamiz
+            user_text = (
+                update.message.caption.strip()
+                if update.message.caption
+                else "Bu rasmda nima borligini batafsil tushuntir."
+            )
+
+            prompt = f"""
+Sen Telegramdagi AKSO AI yordamchisisan.
+
+Foydalanuvchi senga rasm yubordi.
+
+Rasmni diqqat bilan tahlil qil va foydalanuvchining savoliga javob ber.
+
+Qoidalar:
+- O'zbek tilida yozilsa, o'zbek tilida javob ber.
+- Rus tilida yozilsa, rus tilida javob ber.
+- Ingliz tilida yozilsa, ingliz tilida javob ber.
+- Rasmda ko'rinadigan narsalarni aniq tasvirla.
+- Bilmagan narsangni taxmin qilib fakt sifatida aytma.
+- Javobni tushunarli va foydali qil.
+- Keraksiz uzun javob bermagin.
+
+Foydalanuvchi savoli:
+{user_text}
+"""
+
+            image_part = types.Part.from_bytes(
+                data=bytes(image_bytes),
+                mime_type="image/jpeg"
+            )
+
+            response = await ai_client.models.generate_content(
+                model="gemini-3.5-flash-lite",
+                contents=[
+                    image_part,
+                    prompt
+                ]
+            )
+
+            answer = response.text
+
+            if not answer:
+                answer = "Kechirasiz, rasmni tahlil qila olmadim."
+
+            if len(answer) > 4000:
+                answer = answer[:4000] + "..."
+
+            if update.message.chat.type in ["group", "supergroup"]:
+                await update.message.reply_text(
+                    answer,
+                    reply_to_message_id=update.message.message_id
+                )
+            else:
+                await update.message.reply_text(answer)
+
+        except Exception as e:
+            print("RASM GEMINI XATOSI:", repr(e))
+
+            await update.message.reply_text(
+                "Kechirasiz, rasmni tahlil qilishda texnik xatolik yuz berdi."
+            )
+
+        return
+
+    # Oddiy matnli xabar
     if not update.message.text:
         return
 
@@ -103,11 +182,9 @@ Foydalanuvchi xabari:
         if not answer:
             answer = "Kechirasiz, hozir javob bera olmadim."
 
-        # Telegram xabar chegarasi
         if len(answer) > 4000:
             answer = answer[:4000] + "..."
 
-        # Guruhda reply, lichkada oddiy javob
         if update.message.chat.type in ["group", "supergroup"]:
             await update.message.reply_text(
                 answer,
@@ -136,7 +213,6 @@ Foydalanuvchi xabari:
                 "TELEGRAM JAVOB XATOSI:",
                 repr(telegram_error)
             )
-
 
 # /start
 telegram_app.add_handler(
