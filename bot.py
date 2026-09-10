@@ -223,7 +223,7 @@ telegram_app.add_handler(
 # Oddiy matnli xabarlar
 telegram_app.add_handler(
     MessageHandler(
-        filters.TEXT & ~filters.COMMAND,
+        (filters.TEXT | filters.PHOTO) & ~filters.COMMAND,
         reply_to_message
     )
 )
