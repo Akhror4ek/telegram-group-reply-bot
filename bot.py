@@ -1,5 +1,4 @@
 import os
-import asyncio
 
 from telegram import Update
 from telegram.ext import (
@@ -35,7 +34,7 @@ BASE_URL = os.environ["RENDER_EXTERNAL_URL"]
 
 ai_client = genai.Client(
     api_key=GEMINI_API_KEY
-)
+).aio
 
 
 # =========================
@@ -102,12 +101,11 @@ Foydalanuvchi xabari:
 """
 
         # Gemini so'rovini alohida thread'da bajarish
-        response = await asyncio.to_thread(
-            ai_client.models.generate_content,
-            model="gemini-3.7-flash",
-            contents=prompt
-        )
-
+        
+response = await ai_client.models.generate_content(
+    model="gemini-3.7-flash",
+    contents=prompt
+)
         answer = response.text
 
         if not answer:
