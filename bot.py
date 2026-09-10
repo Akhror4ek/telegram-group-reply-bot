@@ -79,7 +79,7 @@ Foydalanuvchi xabari:
 """
 
         response = await ai_client.models.generate_content(
-            model="gemini-3.7-flash",
+            model="gemini-3.8-flash",
             contents=prompt
         )
 
