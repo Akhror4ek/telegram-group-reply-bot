@@ -20,7 +20,7 @@ async def reply_to_group_message(update: Update, context: ContextTypes.DEFAULT_T
         return
 
     await update.message.reply_text(
-        "Lichkangizga maʼlumot yubordik ✅",
+        "Tez fursatlarda lichkangizga maʼlumot yuboramiz 😊",
         reply_to_message_id=update.message.message_id,
     )
 
