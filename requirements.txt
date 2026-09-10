@@ -1,3 +1,2 @@
-python-telegram-bot==22.5
-Flask[async]==3.1.2
+python-telegram-bot[webhooks]==22.5
 google-genai
