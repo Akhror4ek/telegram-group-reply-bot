@@ -3,6 +3,7 @@ import os
 from telegram import Update
 from telegram.ext import (
     Application,
+    CommandHandler,
     MessageHandler,
     ContextTypes,
     filters,
@@ -37,16 +38,33 @@ telegram_app = (
 )
 
 
-async def reply_to_group_message(
+# /start komandasi
+async def start_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
 ):
     if not update.message:
         return
 
+    await update.message.reply_text(
+        "👋 Assalomu alaykum! Men AKSO AI botman.\n\n"
+        "Menga istalgan savolingizni yozishingiz mumkin. 🤖"
+    )
+
+
+# AI javob
+async def reply_to_message(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+    if not update.message:
+        return
+
+    # Botlarning xabariga javob bermaslik
     if update.message.from_user and update.message.from_user.is_bot:
         return
 
+    # Faqat matnli xabarlar
     if not update.message.text:
         return
 
@@ -55,14 +73,11 @@ async def reply_to_group_message(
     if not user_text:
         return
 
-    if user_text.startswith("/"):
-        return
-
     try:
         prompt = f"""
-Sen Telegram guruhidagi aqlli yordamchi botsan.
+Sen Telegramdagi AKSO AI yordamchisisan.
 
-Foydalanuvchining xabariga mazmuniga qarab javob ber.
+Foydalanuvchiga uning xabariga qarab tabiiy, foydali va aniq javob ber.
 
 Qoidalar:
 - O'zbek tilida yozilsa, o'zbek tilida javob ber.
@@ -88,22 +103,34 @@ Foydalanuvchi xabari:
         if not answer:
             answer = "Kechirasiz, hozir javob bera olmadim."
 
+        # Telegram xabar chegarasi
         if len(answer) > 4000:
             answer = answer[:4000] + "..."
 
-        await update.message.reply_text(
-            answer,
-            reply_to_message_id=update.message.message_id
-        )
+        # Guruhda reply, lichkada oddiy javob
+        if update.message.chat.type in ["group", "supergroup"]:
+            await update.message.reply_text(
+                answer,
+                reply_to_message_id=update.message.message_id
+            )
+        else:
+            await update.message.reply_text(answer)
 
     except Exception as e:
         print("GEMINI XATOSI:", repr(e))
 
         try:
-            await update.message.reply_text(
-                "Kechirasiz, hozir javob berishda texnik xatolik yuz berdi.",
-                reply_to_message_id=update.message.message_id
-            )
+            if update.message.chat.type in ["group", "supergroup"]:
+                await update.message.reply_text(
+                    "Kechirasiz, hozir javob berishda "
+                    "texnik xatolik yuz berdi.",
+                    reply_to_message_id=update.message.message_id
+                )
+            else:
+                await update.message.reply_text(
+                    "Kechirasiz, hozir javob berishda "
+                    "texnik xatolik yuz berdi."
+                )
         except Exception as telegram_error:
             print(
                 "TELEGRAM JAVOB XATOSI:",
@@ -111,10 +138,17 @@ Foydalanuvchi xabari:
             )
 
 
+# /start
+telegram_app.add_handler(
+    CommandHandler("start", start_command)
+)
+
+
+# Oddiy matnli xabarlar
 telegram_app.add_handler(
     MessageHandler(
         filters.TEXT & ~filters.COMMAND,
-        reply_to_group_message
+        reply_to_message
     )
 )
 
