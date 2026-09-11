@@ -127,7 +127,11 @@ def normalize_text(text):
         "ignore"
     ).decode("ascii")
 
-    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    text = re.sub(
+        r"[^a-z0-9\s]",
+        " ",
+        text
+    )
 
     text = re.sub(
         r"\s+",
@@ -226,6 +230,7 @@ def github_api(
             )
 
     except HTTPError as e:
+
         body = e.read().decode(
             "utf-8",
             errors="ignore"
@@ -264,7 +269,6 @@ def github_get_products():
 
     now = time.time()
 
-    # 60 soniya cache
     if (
         products_cache
         and now - products_cache_time < 60
@@ -272,6 +276,7 @@ def github_get_products():
         return products_cache
 
     try:
+
         result = github_api(
             "GET",
             f"{PRODUCTS_FILE}?ref={GITHUB_BRANCH}"
@@ -283,8 +288,10 @@ def github_get_products():
         )
 
         if not content:
+
             products_cache = []
             products_cache_time = now
+
             return []
 
         content = content.replace(
@@ -313,10 +320,11 @@ def github_get_products():
 
     except Exception as e:
 
-        # products.json hali mavjud bo'lmasa
         if "404" in str(e):
+
             products_cache = []
             products_cache_time = now
+
             return []
 
         raise
@@ -339,6 +347,7 @@ def github_save_products(products):
     sha = None
 
     try:
+
         current = github_api(
             "GET",
             f"{PRODUCTS_FILE}?ref={GITHUB_BRANCH}"
@@ -373,7 +382,7 @@ def github_save_products(products):
 
 
 # =========================
-# MAHSULOTNI TELEGRAMDA KO'RSATISH
+# MAHSULOTNI MIJOZGA KO'RSATISH
 # =========================
 
 async def send_product(
@@ -388,16 +397,20 @@ async def send_product(
         price
     )
 
+    # DIQQAT:
+    # Naqd narx bu yerda MIJOZGA KO'RSATILMAYDI.
+    # Faqat oylik to'lovlar chiqadi.
+
     caption = (
         f"🛍 <b>{product['name']}</b>\n\n"
-        f"💵 Naqd: <b>{format_money(price)}</b>\n\n"
-        f"📅 Bo'lib to'lash:\n"
+        f"📅 <b>Bo'lib to'lash:</b>\n"
         f"• 3 oy — <b>{format_money(month_3)}/oy</b>\n"
         f"• 6 oy — <b>{format_money(month_6)}/oy</b>\n"
         f"• 12 oy — <b>{format_money(month_12)}/oy</b>"
     )
 
     try:
+
         await update.message.reply_photo(
             photo=product["telegram_file_id"],
             caption=caption,
@@ -405,19 +418,18 @@ async def send_product(
         )
 
     except Exception as e:
+
         print(
             "TELEGRAM FILE_ID XATOSI:",
             repr(e)
         )
-
-        # Agar file_id bilan yuborishning iloji bo'lmasa,
-        # GitHub raw URL orqali yuborishga urinadi.
 
         raw_url = product.get(
             "raw_url"
         )
 
         if raw_url:
+
             await update.message.reply_photo(
                 photo=raw_url,
                 caption=caption,
@@ -464,6 +476,7 @@ def find_local_products(
             )
 
         for keyword in keywords:
+
             search_words.append(
                 normalize_text(
                     keyword
@@ -487,6 +500,7 @@ def find_local_products(
                 score += 5
 
         if score > 0:
+
             scored.append(
                 (
                     score,
@@ -517,6 +531,7 @@ async def find_ai_products(
     for index, product in enumerate(
         products
     ):
+
         catalog_lines.append(
             f"{index}: {product['name']}"
         )
@@ -578,9 +593,11 @@ Hech qanday izoh yozma.
             if (
                 0 <= index < len(products)
             ):
+
                 product = products[index]
 
                 if product not in selected:
+
                     selected.append(
                         product
                     )
@@ -591,6 +608,7 @@ Hech qanday izoh yozma.
         return selected
 
     except Exception as e:
+
         print(
             "AI KATALOG XATOSI:",
             repr(e)
@@ -656,9 +674,11 @@ async def add_product_command(
         return
 
     if user.id != ADMIN_ID:
+
         await update.message.reply_text(
             "❌ Sizda bu komandadan foydalanish huquqi yo'q."
         )
+
         return
 
     admin_states[user.id] = {
@@ -690,6 +710,7 @@ async def cancel_command(
         return
 
     if user.id == ADMIN_ID:
+
         admin_states.pop(
             user.id,
             None
@@ -730,9 +751,9 @@ async def handle_admin_product(
         "step"
     )
 
-    # -------------------------
+    # =========================
     # 1. RASM
-    # -------------------------
+    # =========================
 
     if step == "photo":
 
@@ -787,9 +808,9 @@ async def handle_admin_product(
 
         return True
 
-    # -------------------------
+    # =========================
     # 2. NOMI
-    # -------------------------
+    # =========================
 
     if step == "name":
 
@@ -828,9 +849,9 @@ async def handle_admin_product(
 
         return True
 
-    # -------------------------
+    # =========================
     # 3. NARX
-    # -------------------------
+    # =========================
 
     if step == "price":
 
@@ -864,7 +885,11 @@ async def handle_admin_product(
         try:
 
             name = state["name"]
-            image_bytes = state["image_bytes"]
+
+            image_bytes = state[
+                "image_bytes"
+            ]
+
             telegram_file_id = state[
                 "telegram_file_id"
             ]
@@ -880,6 +905,7 @@ async def handle_admin_product(
             )
 
             # 1. Rasmni GitHub'ga yuklash
+
             github_upload_file(
                 github_path,
                 image_bytes,
@@ -895,9 +921,11 @@ async def handle_admin_product(
             )
 
             # 2. Mahsulot katalogini olish
+
             products = github_get_products()
 
-            # 3. Mahsulot uchun qidiruv so'zlari
+            # 3. Qidiruv so'zlari
+
             normalized_name = normalize_text(
                 name
             )
@@ -928,11 +956,13 @@ async def handle_admin_product(
             )
 
             # 4. products.json'ga saqlash
+
             github_save_products(
                 products
             )
 
             # 5. Admin holatini tozalash
+
             admin_states.pop(
                 user.id,
                 None
@@ -941,6 +971,9 @@ async def handle_admin_product(
             month_3, month_6, month_12 = calculate_monthly(
                 price
             )
+
+            # ADMIN uchun naqd narxni ko'rsatamiz.
+            # Bu xabar mijozga yuborilmaydi.
 
             await update.message.reply_text(
                 "✅ <b>Mahsulot muvaffaqiyatli saqlandi!</b>\n\n"
@@ -987,15 +1020,16 @@ async def reply_to_message(
         return
 
     # Botlarning xabariga javob bermaslik
+
     if (
         update.message.from_user
         and update.message.from_user.is_bot
     ):
         return
 
-    # -------------------------
+    # =========================
     # ADMIN MAHSULOT QO'SHISH
-    # -------------------------
+    # =========================
 
     handled = await handle_admin_product(
         update,
@@ -1005,9 +1039,9 @@ async def reply_to_message(
     if handled:
         return
 
-    # -------------------------
+    # =========================
     # RASM TAHLILI
-    # -------------------------
+    # =========================
 
     if update.message.photo:
 
@@ -1063,12 +1097,14 @@ Foydalanuvchi savoli:
             answer = response.text
 
             if not answer:
+
                 answer = (
                     "Kechirasiz, rasmni "
                     "tahlil qila olmadim."
                 )
 
             if len(answer) > 4000:
+
                 answer = answer[:4000] + "..."
 
             if update.message.chat.type in [
@@ -1101,9 +1137,9 @@ Foydalanuvchi savoli:
 
         return
 
-    # -------------------------
+    # =========================
     # ODDIY MATN
-    # -------------------------
+    # =========================
 
     if not update.message.text:
         return
@@ -1113,9 +1149,9 @@ Foydalanuvchi savoli:
     if not user_text:
         return
 
-    # -------------------------
-    # MAHSULOT KATALOGINI QIDIRISH
-    # -------------------------
+    # =========================
+    # MAHSULOT KATALOGI
+    # =========================
 
     try:
 
@@ -1138,7 +1174,7 @@ Foydalanuvchi savoli:
             return
 
         # Mahalliy qidiruv topmasa,
-        # Gemini orqali katalogdan qidiramiz.
+        # Gemini yordamida katalogdan qidirish.
 
         ai_products = await find_ai_products(
             user_text,
@@ -1163,9 +1199,9 @@ Foydalanuvchi savoli:
             repr(e)
         )
 
-    # -------------------------
+    # =========================
     # ODDIY GEMINI JAVOBI
-    # -------------------------
+    # =========================
 
     try:
 
@@ -1197,12 +1233,14 @@ Foydalanuvchi xabari:
         answer = response.text
 
         if not answer:
+
             answer = (
                 "Kechirasiz, hozir javob "
                 "bera olmadim."
             )
 
         if len(answer) > 4000:
+
             answer = answer[:4000] + "..."
 
         if update.message.chat.type in [
