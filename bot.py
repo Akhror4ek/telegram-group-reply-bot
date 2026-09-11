@@ -273,8 +273,11 @@ def likely_product_query(text):
     if any(hint in q for hint in hints):
         return True
 
+    # 2-3 so'zli oddiy suhbatlar (masalan,
+    # "juda yaxshi", "juda zo'r") katalog qidiruvi emas.
+    # Bitta so'zli mahsulot nomi esa katalog qidiruviga o'tishi mumkin.
     words = q.split()
-    return 1 <= len(words) <= 3
+    return len(words) == 1
 
 
 # ============================================================
