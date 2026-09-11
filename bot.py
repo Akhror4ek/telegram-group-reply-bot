@@ -8,7 +8,11 @@ from difflib import SequenceMatcher
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
-from telegram import Update
+from telegram import (
+    Update,
+    BotCommand,
+    BotCommandScopeChat,
+)
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -32,11 +36,24 @@ WEBHOOK_SECRET = os.environ.get(
     "telegram-bot-secret"
 )
 
-PORT = int(os.environ.get("PORT", "10000"))
-BASE_URL = os.environ["RENDER_EXTERNAL_URL"]
+PORT = int(
+    os.environ.get(
+        "PORT",
+        "10000"
+    )
+)
 
-ADMIN_ID = int(os.environ["ADMIN_ID"])
-GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
+BASE_URL = os.environ[
+    "RENDER_EXTERNAL_URL"
+]
+
+ADMIN_ID = int(
+    os.environ["ADMIN_ID"]
+)
+
+GITHUB_TOKEN = os.environ[
+    "GITHUB_TOKEN"
+]
 
 
 # =========================
@@ -61,18 +78,6 @@ ai_client = genai.Client(
 
 
 # =========================
-# TELEGRAM BOT
-# =========================
-
-telegram_app = (
-    Application
-    .builder()
-    .token(BOT_TOKEN)
-    .build()
-)
-
-
-# =========================
 # ADMIN PRODUCT STATE
 # =========================
 
@@ -92,33 +97,44 @@ products_cache_time = 0
 # =========================
 
 def format_money(value):
-    return f"{int(value):,}".replace(",", " ") + " so'm"
+    return (
+        f"{int(value):,}"
+        .replace(",", " ")
+        + " so'm"
+    )
 
 
 def calculate_monthly(price):
-    month_3 = round(price / 3)
-    month_6 = round((price * 1.18) / 6)
-    month_12 = round((price * 1.36) / 12)
+    month_3 = round(
+        price / 3
+    )
 
-    return month_3, month_6, month_12
+    month_6 = round(
+        (price * 1.18) / 6
+    )
+
+    month_12 = round(
+        (price * 1.36) / 12
+    )
+
+    return (
+        month_3,
+        month_6,
+        month_12
+    )
 
 
 def normalize_text(text):
-    """
-    O'zbek, rus va ingliz tilidagi yozuvlarni
-    qidiruv uchun yagona ko'rinishga keltiradi.
-    """
 
-    text = (text or "").lower().strip()
+    text = (
+        text or ""
+    ).lower().strip()
 
     replacements = {
-        # O'zbek kirill
         "ў": "o",
         "қ": "q",
         "ғ": "g",
         "ҳ": "h",
-
-        # Rus / kirill
         "ё": "yo",
         "й": "y",
         "ю": "yu",
@@ -133,7 +149,6 @@ def normalize_text(text):
         "ъ": "",
         "ь": "",
         "ы": "y",
-
         "а": "a",
         "б": "b",
         "в": "v",
@@ -153,8 +168,6 @@ def normalize_text(text):
         "т": "t",
         "у": "u",
         "ф": "f",
-
-        # Apostroflar
         "‘": "'",
         "’": "'",
         "`": "'",
@@ -162,7 +175,10 @@ def normalize_text(text):
     }
 
     for old, new in replacements.items():
-        text = text.replace(old, new)
+        text = text.replace(
+            old,
+            new
+        )
 
     text = unicodedata.normalize(
         "NFKD",
@@ -193,14 +209,10 @@ def normalize_text(text):
 
 
 def stem_token(token):
-    """
-    Sandiqlarni -> sandiq
-    shkaflar -> shkaf
-    kullerlar -> kuller
-    kabi oddiy qo'shimchalarni ajratadi.
-    """
 
-    token = normalize_text(token)
+    token = normalize_text(
+        token
+    )
 
     if len(token) <= 3:
         return token
@@ -220,17 +232,28 @@ def stem_token(token):
 
     changed = True
 
-    while changed and len(token) > 3:
+    while (
+        changed
+        and len(token) > 3
+    ):
 
         changed = False
 
         for suffix in suffixes:
 
             if (
-                token.endswith(suffix)
-                and len(token) - len(suffix) >= 3
+                token.endswith(
+                    suffix
+                )
+                and
+                len(token) - len(suffix)
+                >= 3
             ):
-                token = token[:-len(suffix)]
+
+                token = token[
+                    :-len(suffix)
+                ]
+
                 changed = True
                 break
 
@@ -250,6 +273,7 @@ def token_list(text):
         )
 
         if len(stemmed) >= 2:
+
             result.append(
                 stemmed
             )
@@ -269,6 +293,7 @@ def slugify(text):
     )
 
     if not text:
+
         text = "product"
 
     return text[:60]
@@ -283,6 +308,7 @@ def parse_price(text):
     )
 
     if not digits:
+
         return None
 
     try:
@@ -292,11 +318,13 @@ def parse_price(text):
         )
 
         if value <= 0:
+
             return None
 
         return value
 
     except Exception:
+
         return None
 
 
@@ -318,11 +346,20 @@ def github_api(
     )
 
     headers = {
-        "Authorization": f"Bearer {GITHUB_TOKEN}",
-        "Accept": "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "AKSO-AI-Bot",
-        "Content-Type": "application/json",
+        "Authorization":
+            f"Bearer {GITHUB_TOKEN}",
+
+        "Accept":
+            "application/vnd.github+json",
+
+        "X-GitHub-Api-Version":
+            "2022-11-28",
+
+        "User-Agent":
+            "AKSO-AI-Bot",
+
+        "Content-Type":
+            "application/json",
     }
 
     request = Request(
@@ -336,7 +373,9 @@ def github_api(
         request.data = json.dumps(
             data,
             ensure_ascii=False
-        ).encode("utf-8")
+        ).encode(
+            "utf-8"
+        )
 
     try:
 
@@ -345,20 +384,28 @@ def github_api(
             timeout=30
         ) as response:
 
-            raw = response.read()
+            raw = (
+                response.read()
+            )
 
             if not raw:
+
                 return {}
 
             return json.loads(
-                raw.decode("utf-8")
+                raw.decode(
+                    "utf-8"
+                )
             )
 
     except HTTPError as e:
 
-        body = e.read().decode(
-            "utf-8",
-            errors="ignore"
+        body = (
+            e.read()
+            .decode(
+                "utf-8",
+                errors="ignore"
+            )
         )
 
         raise Exception(
@@ -372,14 +419,22 @@ def github_upload_file(
     commit_message
 ):
 
-    content = base64.b64encode(
-        file_bytes
-    ).decode("ascii")
+    content = (
+        base64.b64encode(
+            file_bytes
+        )
+        .decode("ascii")
+    )
 
     data = {
-        "message": commit_message,
-        "content": content,
-        "branch": GITHUB_BRANCH,
+        "message":
+            commit_message,
+
+        "content":
+            content,
+
+        "branch":
+            GITHUB_BRANCH,
     }
 
     return github_api(
@@ -398,8 +453,10 @@ def github_get_products():
 
     if (
         products_cache
-        and now - products_cache_time < 60
+        and
+        now - products_cache_time < 60
     ):
+
         return products_cache
 
     try:
@@ -426,9 +483,12 @@ def github_get_products():
             ""
         )
 
-        decoded = base64.b64decode(
-            content
-        ).decode("utf-8")
+        decoded = (
+            base64.b64decode(
+                content
+            )
+            .decode("utf-8")
+        )
 
         products = json.loads(
             decoded
@@ -438,6 +498,7 @@ def github_get_products():
             products,
             list
         ):
+
             products = []
 
         products_cache = products
@@ -470,9 +531,12 @@ def github_save_products(
         indent=2
     ).encode("utf-8")
 
-    encoded = base64.b64encode(
-        content
-    ).decode("ascii")
+    encoded = (
+        base64.b64encode(
+            content
+        )
+        .decode("ascii")
+    )
 
     sha = None
 
@@ -490,15 +554,22 @@ def github_save_products(
     except Exception as e:
 
         if "404" not in str(e):
+
             raise
 
     data = {
-        "message": "Update product catalog",
-        "content": encoded,
-        "branch": GITHUB_BRANCH,
+        "message":
+            "Update product catalog",
+
+        "content":
+            encoded,
+
+        "branch":
+            GITHUB_BRANCH,
     }
 
     if sha:
+
         data["sha"] = sha
 
     github_api(
@@ -519,24 +590,19 @@ def fuzzy_product_score(
     user_text,
     product
 ):
-    """
-    Imlo xatolari va kichik farqlarni ushlaydi.
-
-    Masalan:
-    kuler -> kuller
-    shkaflar -> shkaf
-    sandiqlarni -> sandiq
-    """
 
     query = normalize_text(
         user_text
     )
 
     if not query:
+
         return 0
 
     query_tokens = set(
-        token_list(user_text)
+        token_list(
+            user_text
+        )
     )
 
     name = product.get(
@@ -558,22 +624,25 @@ def fuzzy_product_score(
     ):
 
         name_tokens.update(
-            token_list(keyword)
+            token_list(
+                keyword
+            )
         )
 
     if not name_tokens:
+
         return 0
 
     score = 0
 
-    # To'liq nom mosligi
     if (
         name_normalized
-        and name_normalized in query
+        and
+        name_normalized in query
     ):
+
         score += 100
 
-    # Har bir so'zning eng yaqin mosligini topamiz.
     for qt in query_tokens:
 
         best = 0.0
@@ -584,27 +653,35 @@ def fuzzy_product_score(
                 len(qt) < 3
                 or len(nt) < 3
             ):
+
                 continue
 
-            similarity = SequenceMatcher(
-                None,
-                qt,
-                nt
-            ).ratio()
+            similarity = (
+                SequenceMatcher(
+                    None,
+                    qt,
+                    nt
+                ).ratio()
+            )
 
             if similarity > best:
+
                 best = similarity
 
         if best >= 0.90:
+
             score += 40
 
         elif best >= 0.82:
+
             score += 25
 
         elif best >= 0.74:
+
             score += 12
 
         if qt in name_tokens:
+
             score += 35
 
     overlap = len(
@@ -613,7 +690,9 @@ def fuzzy_product_score(
         )
     )
 
-    score += overlap * 20
+    score += (
+        overlap * 20
+    )
 
     return score
 
@@ -654,7 +733,7 @@ def find_local_products(
 
 
 # =========================
-# AI SEMANTIK KATALOG QIDIRUVI
+# AI SEMANTIK KATALOG
 # =========================
 
 async def find_ai_products(
@@ -663,6 +742,7 @@ async def find_ai_products(
 ):
 
     if not products:
+
         return []
 
     catalog_lines = []
@@ -681,16 +761,20 @@ async def find_ai_products(
         catalog_lines.append(
             f"{index}: "
             f"{product.get('name', '')} "
-            f"| kalit so'zlar: {keywords}"
+            f"| kalit so'zlar: "
+            f"{keywords}"
         )
 
-    catalog_text = "\n".join(
-        catalog_lines
+    catalog_text = (
+        "\n".join(
+            catalog_lines
+        )
     )
 
     prompt = f"""
-Sen AKSO SAVDO mahsulot katalogidan
-mijoz so'ragan mahsulotni topuvchi yordamchisan.
+Sen AKSO SAVDO mahsulot
+katalogidan mijoz so'ragan
+mahsulotni topuvchi yordamchisan.
 
 Mijozning so'rovi:
 {user_text}
@@ -699,20 +783,21 @@ Katalog:
 {catalog_text}
 
 MUHIM:
-Mijoz mahsulot nomini aynan katalogdagi
-nom bilan yozishi shart emas.
 
-Quyidagilarni tushun:
+Mijoz mahsulot nomini aynan
+katalogdagi nom bilan yozishi shart emas.
 
-1. Imlo xatolari.
-2. Harf almashishi.
-3. Birlik va ko'plik.
-4. O'zbekcha va ruscha yozilish.
-5. Sinonimlar.
-6. Mahsulotni nomi bilan emas,
-   vazifasi yoki ko'rinishi bilan so'rash.
-7. Og'zaki va qisqartirilgan yozuvlar.
-8. Transliteratsiya.
+Tushun:
+
+- imlo xatolari
+- harf almashishi
+- birlik va ko'plik
+- o'zbekcha va ruscha yozilish
+- sinonimlar
+- og'zaki yozuv
+- transliteratsiya
+- mahsulotning vazifasi
+- mahsulotning ishlatilish maqsadi
 
 Misollar:
 
@@ -732,7 +817,7 @@ Misollar:
 -> bolalar shkaflari
 
 "kiyim osadigan mebel"
--> kiyim saqlash/osish uchun shkaflar
+-> shkaflar
 
 "kiyim uchun mebel"
 -> shkaflar
@@ -744,14 +829,15 @@ Misollar:
 -> katalogdagi divanlar
 
 "yotadigan mebel"
--> mos divan yoki yotoq mahsulotlari
+-> mos divanlar
 
-Agar bir nechta mahsulot mos bo'lsa,
-ularning barchasini tanla.
+Agar bir nechta mahsulot mos
+bo'lsa, mos mahsulotlarning
+barchasini tanla.
 
 Eng ko'p 5 ta mahsulot tanla.
 
-FAqat JSON qaytar:
+FAQAT JSON qaytar:
 
 [0, 2, 5]
 
@@ -764,9 +850,11 @@ Hech qanday izoh yozma.
 
     try:
 
-        response = await ai_client.models.generate_content(
-            model="gemini-3.5-flash-lite",
-            contents=prompt
+        response = (
+            await ai_client.models.generate_content(
+                model="gemini-3.5-flash-lite",
+                contents=prompt
+            )
         )
 
         result = (
@@ -774,10 +862,9 @@ Hech qanday izoh yozma.
         ).strip()
 
         if not result:
+
             return []
 
-        # Model ```json ... ``` yuborsa ham
-        # ichidagi massivni ajratib olamiz.
         match = re.search(
             r"\[[^\]]*\]",
             result,
@@ -785,6 +872,7 @@ Hech qanday izoh yozma.
         )
 
         if not match:
+
             return []
 
         parsed = json.loads(
@@ -795,6 +883,7 @@ Hech qanday izoh yozma.
             parsed,
             list
         ):
+
             return []
 
         selected = []
@@ -802,17 +891,26 @@ Hech qanday izoh yozma.
         for value in parsed:
 
             try:
-                index = int(value)
+
+                index = int(
+                    value
+                )
 
             except (
                 TypeError,
                 ValueError
             ):
+
                 continue
 
-            if 0 <= index < len(products):
+            if (
+                0 <= index
+                < len(products)
+            ):
 
-                product = products[index]
+                product = products[
+                    index
+                ]
 
                 if product not in selected:
 
@@ -821,6 +919,7 @@ Hech qanday izoh yozma.
                     )
 
             if len(selected) >= 5:
+
                 break
 
         return selected
@@ -836,7 +935,7 @@ Hech qanday izoh yozma.
 
 
 # =========================
-# MAHSULOTNI MIJOZGA KO'RSATISH
+# MAHSULOTNI MIJOZGA YUBORISH
 # =========================
 
 async def send_product(
@@ -848,20 +947,25 @@ async def send_product(
         product["price"]
     )
 
-    month_3, month_6, month_12 = calculate_monthly(
-        price
+    month_3, month_6, month_12 = (
+        calculate_monthly(
+            price
+        )
     )
 
     # MUHIM:
-    # MIJOZGA NAQD NARX KO'RSATILMAYDI.
-    # FAQAT OYLIK TO'LOVLAR KO'RSATILADI.
+    # MIJOZGA NAQD NARX
+    # KO'RSATILMAYDI.
 
     caption = (
         f"🛍 <b>{product['name']}</b>\n\n"
         f"📅 <b>Bo'lib to'lash:</b>\n"
-        f"• 3 oy — <b>{format_money(month_3)}/oy</b>\n"
-        f"• 6 oy — <b>{format_money(month_6)}/oy</b>\n"
-        f"• 12 oy — <b>{format_money(month_12)}/oy</b>"
+        f"• 3 oy — "
+        f"<b>{format_money(month_3)}/oy</b>\n"
+        f"• 6 oy — "
+        f"<b>{format_money(month_6)}/oy</b>\n"
+        f"• 12 oy — "
+        f"<b>{format_money(month_12)}/oy</b>"
     )
 
     try:
@@ -908,13 +1012,44 @@ async def start_command(
 ):
 
     if not update.message:
+
         return
 
     await update.message.reply_text(
         "👋 Assalomu alaykum! "
         "Men AKSO AI botman.\n\n"
-        "Menga istalgan savolingizni "
-        "yozishingiz mumkin. 🤖"
+        "Menga mahsulot nomini yoki "
+        "o'zingizga kerakli mahsulotni "
+        "oddiy tilda yozishingiz mumkin. 🤖"
+    )
+
+
+# =========================
+# /help
+# =========================
+
+async def help_command(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+
+    if not update.message:
+
+        return
+
+    await update.message.reply_text(
+        "ℹ️ <b>AKSO AI yordam</b>\n\n"
+        "Mahsulotni oddiy tilda so'rang.\n\n"
+        "Masalan:\n"
+        "• Kuller bormi?\n"
+        "• Shkaf bormi?\n"
+        "• Detski shkaflar kerak\n"
+        "• Kiyim osadigan mebel bormi?\n"
+        "• Stol kerak\n\n"
+        "Men katalogdan mos mahsulotlarni "
+        "topib, rasmlari va bo'lib to'lash "
+        "oylik to'lovlarini yuboraman.",
+        parse_mode="HTML"
     )
 
 
@@ -928,11 +1063,15 @@ async def my_id_command(
 ):
 
     if not update.message:
+
         return
 
-    user = update.message.from_user
+    user = (
+        update.message.from_user
+    )
 
     if not user:
+
         return
 
     await update.message.reply_text(
@@ -952,11 +1091,15 @@ async def add_product_command(
 ):
 
     if not update.message:
+
         return
 
-    user = update.message.from_user
+    user = (
+        update.message.from_user
+    )
 
     if not user:
+
         return
 
     if user.id != ADMIN_ID:
@@ -973,7 +1116,8 @@ async def add_product_command(
     }
 
     await update.message.reply_text(
-        "➕ <b>Yangi mahsulot qo'shish</b>\n\n"
+        "➕ <b>Yangi mahsulot "
+        "qo'shish</b>\n\n"
         "1/3\n"
         "📸 Mahsulot rasmini yuboring.",
         parse_mode="HTML"
@@ -990,11 +1134,15 @@ async def cancel_command(
 ):
 
     if not update.message:
+
         return
 
-    user = update.message.from_user
+    user = (
+        update.message.from_user
+    )
 
     if not user:
+
         return
 
     if user.id == ADMIN_ID:
@@ -1005,7 +1153,8 @@ async def cancel_command(
         )
 
         await update.message.reply_text(
-            "❌ Mahsulot qo'shish bekor qilindi."
+            "❌ Mahsulot qo'shish "
+            "bekor qilindi."
         )
 
 
@@ -1019,14 +1168,19 @@ async def handle_admin_product(
 ):
 
     if not update.message:
+
         return False
 
-    user = update.message.from_user
+    user = (
+        update.message.from_user
+    )
 
     if not user:
+
         return False
 
     if user.id != ADMIN_ID:
+
         return False
 
     state = admin_states.get(
@@ -1034,11 +1188,13 @@ async def handle_admin_product(
     )
 
     if not state:
+
         return False
 
     step = state.get(
         "step"
     )
+
 
     # =========================
     # 1. RASM
@@ -1071,15 +1227,19 @@ async def handle_admin_product(
                 await telegram_file.download_as_bytearray()
             )
 
-            state["telegram_file_id"] = (
-                photo.file_id
-            )
+            state[
+                "telegram_file_id"
+            ] = photo.file_id
 
-            state["image_bytes"] = bytes(
+            state[
+                "image_bytes"
+            ] = bytes(
                 image_bytes
             )
 
-            state["step"] = "name"
+            state[
+                "step"
+            ] = "name"
 
             await update.message.reply_text(
                 "✅ Rasm qabul qilindi.\n\n"
@@ -1105,6 +1265,7 @@ async def handle_admin_product(
 
         return True
 
+
     # =========================
     # 2. NOMI
     # =========================
@@ -1114,8 +1275,9 @@ async def handle_admin_product(
         if not update.message.text:
 
             await update.message.reply_text(
-                "📝 Iltimos, mahsulot nomini "
-                "matn ko'rinishida yozing."
+                "📝 Iltimos, mahsulot "
+                "nomini matn ko'rinishida "
+                "yozing."
             )
 
             return True
@@ -1150,6 +1312,7 @@ async def handle_admin_product(
         )
 
         return True
+
 
     # =========================
     # 3. NARX
@@ -1210,8 +1373,6 @@ async def handle_admin_product(
                 f"{filename}"
             )
 
-            # 1. Rasm GitHub'ga yuklanadi
-
             github_upload_file(
                 github_path,
                 image_bytes,
@@ -1226,13 +1387,9 @@ async def handle_admin_product(
                 f"{github_path}"
             )
 
-            # 2. Katalog
-
             products = (
                 github_get_products()
             )
-
-            # 3. Qidiruv so'zlari
 
             normalized_name = (
                 normalize_text(name)
@@ -1274,13 +1431,9 @@ async def handle_admin_product(
                 product
             )
 
-            # 4. Katalogni saqlash
-
             github_save_products(
                 products
             )
-
-            # 5. Holatni tozalash
 
             admin_states.pop(
                 user.id,
@@ -1292,8 +1445,6 @@ async def handle_admin_product(
                     price
                 )
             )
-
-            # Bu faqat ADMIN uchun.
 
             await update.message.reply_text(
                 "✅ <b>Mahsulot "
@@ -1346,19 +1497,16 @@ async def reply_to_message(
 ):
 
     if not update.message:
-        return
 
-    # Bot xabarlariga javob bermaslik
+        return
 
     if (
         update.message.from_user
-        and update.message.from_user.is_bot
+        and
+        update.message.from_user.is_bot
     ):
-        return
 
-    # =========================
-    # ADMIN MAHSULOT QO'SHISH
-    # =========================
+        return
 
     handled = (
         await handle_admin_product(
@@ -1368,7 +1516,9 @@ async def reply_to_message(
     )
 
     if handled:
+
         return
+
 
     # =========================
     # RASM TAHLILI
@@ -1401,12 +1551,14 @@ async def reply_to_message(
             )
 
             prompt = f"""
-Sen Telegramdagi AKSO AI yordamchisisan.
+Sen Telegramdagi AKSO AI
+yordamchisisan.
 
 Foydalanuvchi senga rasm yubordi.
 
 Rasmni diqqat bilan tahlil qil
-va foydalanuvchining savoliga javob ber.
+va foydalanuvchining savoliga
+javob ber.
 
 Qoidalar:
 - O'zbek tilida yozilsa,
@@ -1445,7 +1597,9 @@ Foydalanuvchi savoli:
                 )
             )
 
-            answer = response.text
+            answer = (
+                response.text
+            )
 
             if not answer:
 
@@ -1494,11 +1648,13 @@ Foydalanuvchi savoli:
 
         return
 
+
     # =========================
     # ODDIY MATN
     # =========================
 
     if not update.message.text:
+
         return
 
     user_text = (
@@ -1506,7 +1662,9 @@ Foydalanuvchi savoli:
     )
 
     if not user_text:
+
         return
+
 
     # =========================
     # MAHSULOT KATALOGI
@@ -1520,8 +1678,6 @@ Foydalanuvchi savoli:
 
         if products:
 
-            # 1. Avval xato yozuv / typo qidiruvi
-
             local_products = (
                 find_local_products(
                     user_text,
@@ -1531,7 +1687,9 @@ Foydalanuvchi savoli:
 
             if local_products:
 
-                for product in local_products:
+                for product in (
+                    local_products
+                ):
 
                     await send_product(
                         update,
@@ -1539,8 +1697,6 @@ Foydalanuvchi savoli:
                     )
 
                 return
-
-            # 2. Keyin ma'no bo'yicha AI qidiruvi
 
             ai_products = (
                 await find_ai_products(
@@ -1551,7 +1707,9 @@ Foydalanuvchi savoli:
 
             if ai_products:
 
-                for product in ai_products:
+                for product in (
+                    ai_products
+                ):
 
                     await send_product(
                         update,
@@ -1567,6 +1725,7 @@ Foydalanuvchi savoli:
             repr(e)
         )
 
+
     # =========================
     # ODDIY GEMINI JAVOBI
     # =========================
@@ -1574,10 +1733,12 @@ Foydalanuvchi savoli:
     try:
 
         prompt = f"""
-Sen Telegramdagi AKSO AI yordamchisisan.
+Sen Telegramdagi AKSO AI
+yordamchisisan.
 
-Foydalanuvchiga uning xabariga qarab
-tabiiy, foydali va aniq javob ber.
+Foydalanuvchiga uning xabariga
+qarab tabiiy, foydali va aniq
+javob ber.
 
 Qoidalar:
 - O'zbek tilida yozilsa,
@@ -1588,9 +1749,12 @@ Qoidalar:
   ingliz tilida javob ber.
 - Javobni tushunarli va foydali qil.
 - Keraksiz uzun javob bermagin.
-- Oddiy savolga oddiy va aniq javob ber.
-- Salomlashishga odob bilan javob ber.
-- Foydalanuvchi xabarini qayta takrorlama.
+- Oddiy savolga oddiy va aniq
+  javob ber.
+- Salomlashishga odob bilan
+  javob ber.
+- Foydalanuvchi xabarini
+  qayta takrorlama.
 
 Foydalanuvchi xabari:
 {user_text}
@@ -1603,7 +1767,9 @@ Foydalanuvchi xabari:
             )
         )
 
-        answer = response.text
+        answer = (
+            response.text
+        )
 
         if not answer:
 
@@ -1677,6 +1843,87 @@ Foydalanuvchi xabari:
 
 
 # =========================
+# TELEGRAM COMMAND MENUS
+# =========================
+
+async def setup_command_menus(
+    application
+):
+    """
+    Oddiy foydalanuvchilar uchun
+    umumiy menyu.
+    """
+
+    user_commands = [
+        BotCommand(
+            "start",
+            "🤖 Botni ishga tushirish"
+        ),
+        BotCommand(
+            "help",
+            "❓ Yordam"
+        ),
+    ]
+
+    await application.bot.set_my_commands(
+        user_commands
+    )
+
+    """
+    Admin uchun alohida menyu.
+    """
+
+    admin_commands = [
+        BotCommand(
+            "start",
+            "🤖 Botni ishga tushirish"
+        ),
+        BotCommand(
+            "help",
+            "❓ Yordam"
+        ),
+        BotCommand(
+            "id",
+            "🆔 Telegram ID"
+        ),
+        BotCommand(
+            "addproduct",
+            "➕ Mahsulot qo'shish"
+        ),
+        BotCommand(
+            "cancel",
+            "❌ Amalni bekor qilish"
+        ),
+    ]
+
+    await application.bot.set_my_commands(
+        admin_commands,
+        scope=BotCommandScopeChat(
+            chat_id=ADMIN_ID
+        )
+    )
+
+    print(
+        "✅ Telegram command menus o'rnatildi."
+    )
+
+
+# =========================
+# APPLICATION
+# =========================
+
+telegram_app = (
+    Application
+    .builder()
+    .token(BOT_TOKEN)
+    .post_init(
+        setup_command_menus
+    )
+    .build()
+)
+
+
+# =========================
 # COMMAND HANDLERS
 # =========================
 
@@ -1684,6 +1931,13 @@ telegram_app.add_handler(
     CommandHandler(
         "start",
         start_command
+    )
+)
+
+telegram_app.add_handler(
+    CommandHandler(
+        "help",
+        help_command
     )
 )
 
@@ -1718,7 +1972,8 @@ telegram_app.add_handler(
         (
             filters.TEXT
             | filters.PHOTO
-        ) & ~filters.COMMAND,
+        )
+        & ~filters.COMMAND,
         reply_to_message
     )
 )
@@ -1743,7 +1998,9 @@ if __name__ == "__main__":
         listen="0.0.0.0",
         port=PORT,
         url_path="webhook",
-        webhook_url=f"{BASE_URL}/webhook",
+        webhook_url=(
+            f"{BASE_URL}/webhook"
+        ),
         secret_token=WEBHOOK_SECRET,
         allowed_updates=[
             "message"
