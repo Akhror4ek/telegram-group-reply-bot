@@ -39,7 +39,33 @@ telegram_app = (
 )
 
 
+# =========================
+# /id komandasi
+# =========================
+
+async def my_id_command(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+
+    if not user:
+        return
+
+    await update.message.reply_text(
+        f"🆔 Sizning Telegram ID'ingiz:\n\n"
+        f"`{user.id}`",
+        parse_mode="Markdown"
+    )
+
+
+# =========================
 # /start komandasi
+# =========================
+
 async def start_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
@@ -53,7 +79,9 @@ async def start_command(
     )
 
 
+# =========================
 # AI javob
+# =========================
 
 async def reply_to_message(
     update: Update,
@@ -66,7 +94,10 @@ async def reply_to_message(
     if update.message.from_user and update.message.from_user.is_bot:
         return
 
+    # =========================
     # Rasm yuborilgan bo'lsa
+    # =========================
+
     if update.message.photo:
 
         try:
@@ -143,7 +174,10 @@ Foydalanuvchi savoli:
 
         return
 
+    # =========================
     # Oddiy matnli xabar
+    # =========================
+
     if not update.message.text:
         return
 
@@ -214,13 +248,24 @@ Foydalanuvchi xabari:
                 repr(telegram_error)
             )
 
-# /start
+
+# =========================
+# /start va /id
+# =========================
+
 telegram_app.add_handler(
     CommandHandler("start", start_command)
 )
 
+telegram_app.add_handler(
+    CommandHandler("id", my_id_command)
+)
 
-# Oddiy matnli xabarlar
+
+# =========================
+# Matnli va rasmli xabarlar
+# =========================
+
 telegram_app.add_handler(
     MessageHandler(
         (filters.TEXT | filters.PHOTO) & ~filters.COMMAND,
@@ -228,6 +273,10 @@ telegram_app.add_handler(
     )
 )
 
+
+# =========================
+# Botni ishga tushirish
+# =========================
 
 if __name__ == "__main__":
     print("Bot ishga tushmoqda...")
