@@ -4,6 +4,7 @@ import base64
 import re
 import time
 import unicodedata
+import asyncio
 from difflib import SequenceMatcher
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
@@ -27,18 +28,13 @@ from google import genai
 from google.genai import types
 
 
-# =========================
-# ENVIRONMENT VARIABLES
-# =========================
+# ============================================================
+# ENVIRONMENT
+# ============================================================
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
-
-WEBHOOK_SECRET = os.environ.get(
-    "WEBHOOK_SECRET",
-    "telegram-bot-secret"
-)
-
+WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "telegram-bot-secret")
 PORT = int(os.environ.get("PORT", "10000"))
 BASE_URL = os.environ["RENDER_EXTERNAL_URL"]
 
@@ -46,35 +42,33 @@ ADMIN_ID = int(os.environ["ADMIN_ID"])
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 
 
-# =========================
-# GITHUB SETTINGS
-# =========================
+# ============================================================
+# GITHUB
+# ============================================================
 
 GITHUB_OWNER = "Akhror4ek"
 GITHUB_REPO = "telegram-group-reply-bot"
 GITHUB_BRANCH = "main"
-
 PRODUCTS_FILE = "products.json"
 PRODUCTS_FOLDER = "products"
 
 
-# =========================
-# GEMINI AI
-# =========================
+# ============================================================
+# GEMINI
+# ============================================================
 
-ai_client = genai.Client(
-    api_key=GEMINI_API_KEY
-).aio
+ai_client = genai.Client(api_key=GEMINI_API_KEY).aio
 
 
-# =========================
+# ============================================================
 # STATE / CACHE / STATS
-# =========================
+# ============================================================
 
 admin_states = {}
 
 products_cache = []
-products_cache_time = 0
+products_cache_time = 0.0
+PRODUCT_CACHE_TTL = 600  # 10 daqiqa
 
 stats = {
     "messages": 0,
@@ -87,101 +81,50 @@ stats = {
 }
 
 
-# =========================
-# YORDAMCHI FUNKSIYALAR
-# =========================
+# ============================================================
+# HELPERS
+# ============================================================
 
 def is_admin(user_id):
     return user_id == ADMIN_ID
 
 
 def format_money(value):
-    return (
-        f"{int(value):,}"
-        .replace(",", " ")
-        + " so'm"
-    )
+    return f"{int(value):,}".replace(",", " ") + " so'm"
 
 
 def calculate_monthly(price):
-    month_3 = round(price / 3)
-    month_6 = round((price * 1.18) / 6)
-    month_12 = round((price * 1.36) / 12)
-
-    return month_3, month_6, month_12
+    return (
+        round(price / 3),
+        round((price * 1.18) / 6),
+        round((price * 1.36) / 12),
+    )
 
 
 def normalize_text(text):
     text = (text or "").lower().strip()
 
     replacements = {
-        "ў": "o",
-        "қ": "q",
-        "ғ": "g",
-        "ҳ": "h",
-        "ё": "yo",
-        "й": "y",
-        "ю": "yu",
-        "я": "ya",
-        "ш": "sh",
-        "ч": "ch",
-        "ц": "ts",
-        "щ": "shch",
-        "ж": "j",
-        "х": "x",
-        "э": "e",
-        "ъ": "",
-        "ь": "",
+        "ў": "o", "қ": "q", "ғ": "g", "ҳ": "h",
+        "ё": "yo", "й": "y", "ю": "yu", "я": "ya",
+        "ш": "sh", "ч": "ch", "ц": "ts", "щ": "shch",
+        "ж": "j", "х": "x", "э": "e", "ъ": "", "ь": "",
         "ы": "y",
-        "а": "a",
-        "б": "b",
-        "в": "v",
-        "г": "g",
-        "д": "d",
-        "е": "e",
-        "з": "z",
-        "и": "i",
-        "к": "k",
-        "л": "l",
-        "м": "m",
-        "н": "n",
-        "о": "o",
-        "п": "p",
-        "р": "r",
-        "с": "s",
-        "т": "t",
-        "у": "u",
-        "ф": "f",
-        "‘": "'",
-        "’": "'",
-        "`": "'",
-        "ʻ": "'",
+        "а": "a", "б": "b", "в": "v", "г": "g", "д": "d",
+        "е": "e", "з": "z", "и": "i", "к": "k", "л": "l",
+        "м": "m", "н": "n", "о": "o", "п": "p", "р": "r",
+        "с": "s", "т": "t", "у": "u", "ф": "f",
+        "‘": "'", "’": "'", "`": "'", "ʻ": "'",
     }
 
     for old, new in replacements.items():
         text = text.replace(old, new)
 
-    text = unicodedata.normalize(
-        "NFKD",
-        text
-    ).encode(
-        "ascii",
-        "ignore"
-    ).decode("ascii")
-
+    text = unicodedata.normalize("NFKD", text)
+    text = text.encode("ascii", "ignore").decode("ascii")
     text = text.replace("'", "")
-
-    text = re.sub(
-        r"[^a-z0-9\s]",
-        " ",
-        text
-    )
-
-    text = re.sub(
-        r"\s+",
-        " ",
-        text
-    ).strip()
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
 
     return text
 
@@ -193,16 +136,9 @@ def stem_token(token):
         return token
 
     suffixes = [
-        "larning",
-        "larni",
-        "lar",
-        "ning",
-        "dan",
-        "dagi",
-        "ga",
-        "da",
-        "ni",
-        "mi",
+        "larning", "larni", "lar",
+        "ning", "dan", "dagi",
+        "ga", "da", "ni", "mi",
     ]
 
     changed = True
@@ -226,22 +162,17 @@ def token_list(text):
     result = []
 
     for word in normalize_text(text).split():
-        stemmed = stem_token(word)
+        word = stem_token(word)
 
-        if len(stemmed) >= 2:
-            result.append(stemmed)
+        if len(word) >= 2:
+            result.append(word)
 
     return result
 
 
 def slugify(text):
-    text = normalize_text(text)
-    text = text.replace(" ", "_")
-
-    if not text:
-        text = "product"
-
-    return text[:60]
+    text = normalize_text(text).replace(" ", "_")
+    return (text or "product")[:60]
 
 
 def parse_price(text):
@@ -252,14 +183,10 @@ def parse_price(text):
 
     try:
         value = int(digits)
-
-        if value <= 0:
-            return None
-
-        return value
-
-    except Exception:
+    except ValueError:
         return None
+
+    return value if value > 0 else None
 
 
 def product_images(product):
@@ -268,12 +195,9 @@ def product_images(product):
     if isinstance(images, list) and images:
         return images
 
-    old_file_id = product.get("telegram_file_id")
+    file_id = product.get("telegram_file_id")
 
-    if old_file_id:
-        return [old_file_id]
-
-    return []
+    return [file_id] if file_id else []
 
 
 def visible_product(product):
@@ -290,24 +214,77 @@ def refresh_product_keywords(product):
     keywords = []
 
     for word in normalize_text(source).split():
-        stemmed = stem_token(word)
+        word = stem_token(word)
 
-        if len(stemmed) >= 2 and stemmed not in keywords:
-            keywords.append(stemmed)
+        if len(word) >= 2 and word not in keywords:
+            keywords.append(word)
 
     product["keywords"] = keywords
 
 
-# =========================
-# GITHUB API
-# =========================
+def likely_product_query(text):
+    q = normalize_text(text)
 
-def github_api(method, path, data=None):
+    if not q:
+        return False
+
+    ordinary = {
+        "salom",
+        "assalomu alaykum",
+        "rahmat",
+        "raxmat",
+        "ok",
+        "okay",
+        "ha",
+        "yoq",
+        "xayr",
+        "mayli",
+        "boladi",
+        "tushunarli",
+        "zor",
+    }
+
+    if q in ordinary:
+        return False
+
+    hints = (
+        "bormi",
+        "kerak",
+        "korsat",
+        "top",
+        "narx",
+        "narxi",
+        "mahsulot",
+        "mebel",
+        "shkaf",
+        "kuller",
+        "kuler",
+        "sandiq",
+        "stol",
+        "stul",
+        "divan",
+        "karavat",
+        "yotoq",
+        "oshxona",
+        "spalni",
+        "spalnya",
+    )
+
+    if any(hint in q for hint in hints):
+        return True
+
+    words = q.split()
+    return 1 <= len(words) <= 3
+
+
+# ============================================================
+# GITHUB API - NEVER BLOCK TELEGRAM EVENT LOOP
+# ============================================================
+
+def _github_api_sync(method, path, data=None):
     url = (
         f"https://api.github.com/repos/"
-        f"{GITHUB_OWNER}/"
-        f"{GITHUB_REPO}/contents/"
-        f"{path}"
+        f"{GITHUB_OWNER}/{GITHUB_REPO}/contents/{path}"
     )
 
     headers = {
@@ -327,7 +304,7 @@ def github_api(method, path, data=None):
     if data is not None:
         request.data = json.dumps(
             data,
-            ensure_ascii=False
+            ensure_ascii=False,
         ).encode("utf-8")
 
     try:
@@ -337,53 +314,66 @@ def github_api(method, path, data=None):
             if not raw:
                 return {}
 
-            return json.loads(raw.decode("utf-8"))
+            return json.loads(
+                raw.decode("utf-8")
+            )
 
     except HTTPError as e:
         body = e.read().decode(
             "utf-8",
-            errors="ignore"
+            errors="ignore",
         )
-
         raise Exception(
             f"GitHub API {e.code}: {body}"
         )
 
 
-def github_upload_file(path, file_bytes, commit_message):
+async def github_api(method, path, data=None):
+    return await asyncio.to_thread(
+        _github_api_sync,
+        method,
+        path,
+        data,
+    )
+
+
+async def github_upload_file(
+    path,
+    file_bytes,
+    commit_message,
+):
     content = base64.b64encode(
         file_bytes
     ).decode("ascii")
 
-    data = {
-        "message": commit_message,
-        "content": content,
-        "branch": GITHUB_BRANCH,
-    }
-
-    return github_api(
+    return await github_api(
         "PUT",
         path,
-        data
+        {
+            "message": commit_message,
+            "content": content,
+            "branch": GITHUB_BRANCH,
+        },
     )
 
 
-def github_get_products():
+async def github_get_products(force_refresh=False):
     global products_cache
     global products_cache_time
 
     now = time.time()
 
     if (
-        products_cache
-        and now - products_cache_time < 60
+        not force_refresh
+        and products_cache
+        and now - products_cache_time < PRODUCT_CACHE_TTL
     ):
         return products_cache
 
     try:
-        result = github_api(
+        result = await github_api(
             "GET",
-            f"{PRODUCTS_FILE}?ref={GITHUB_BRANCH}"
+            f"{PRODUCTS_FILE}?ref={GITHUB_BRANCH}",
         )
 
         content = result.get("content", "")
@@ -402,23 +392,15 @@ def github_get_products():
         if not isinstance(products, list):
             products = []
 
-        # Eski mahsulotlarni yangi maydonlarga moslashtiramiz.
         for product in products:
             if "images" not in product:
                 old = product.get("telegram_file_id")
                 product["images"] = [old] if old else []
 
-            if "visible" not in product:
-                product["visible"] = True
-
-            if "category" not in product:
-                product["category"] = ""
-
-            if "description" not in product:
-                product["description"] = ""
-
-            if "keywords" not in product:
-                refresh_product_keywords(product)
+            product.setdefault("visible", True)
+            product.setdefault("category", "")
+            product.setdefault("description", "")
+            refresh_product_keywords(product)
 
         products_cache = products
         products_cache_time = now
@@ -434,14 +416,14 @@ def github_get_products():
         raise
 
 
-def github_save_products(products):
+async def github_save_products(products):
     global products_cache
     global products_cache_time
 
     content = json.dumps(
         products,
         ensure_ascii=False,
-        indent=2
+        indent=2,
     ).encode("utf-8")
 
     encoded = base64.b64encode(
@@ -451,57 +433,50 @@ def github_save_products(products):
     sha = None
 
     try:
-        current = github_api(
+        current = await github_api(
             "GET",
-            f"{PRODUCTS_FILE}?ref={GITHUB_BRANCH}"
+            f"{PRODUCTS_FILE}?ref={GITHUB_BRANCH}",
         )
-
         sha = current.get("sha")
 
     except Exception as e:
         if "404" not in str(e):
             raise
 
-    data = {
+    payload = {
         "message": "Update product catalog",
         "content": encoded,
         "branch": GITHUB_BRANCH,
     }
 
     if sha:
-        data["sha"] = sha
+        payload["sha"] = sha
 
-    github_api(
+    await github_api(
         "PUT",
         PRODUCTS_FILE,
-        data
+        payload,
     )
 
     products_cache = products
     products_cache_time = time.time()
 
 
-# =========================
-# FUZZY QIDIRUV
-# =========================
+# ============================================================
+# PRODUCT SEARCH
+# ============================================================
 
 def fuzzy_product_score(user_text, product):
-    query = normalize_text(user_text)
+    query_tokens = set(token_list(user_text))
 
-    if not query:
+    if not query_tokens:
         return 0
-
-    query_tokens = set(
-        token_list(user_text)
-    )
 
     searchable = " ".join([
         product.get("name", ""),
         product.get("category", ""),
         product.get("description", ""),
-        " ".join(
-            product.get("keywords", [])
-        ),
+        " ".join(product.get("keywords", [])),
     ])
 
     searchable_tokens = set(
@@ -512,28 +487,28 @@ def fuzzy_product_score(user_text, product):
         product.get("name", "")
     )
 
-    if not searchable_tokens:
-        return 0
-
     score = 0
 
     if (
         name_normalized
-        and name_normalized in query
+        and name_normalized in normalize_text(user_text)
     ):
         score += 100
 
     for qt in query_tokens:
+        if qt in searchable_tokens:
+            score += 35
+
         best = 0.0
 
-        for nt in searchable_tokens:
-            if len(qt) < 3 or len(nt) < 3:
+        for st in searchable_tokens:
+            if len(qt) < 3 or len(st) < 3:
                 continue
 
             similarity = SequenceMatcher(
                 None,
                 qt,
-                nt
+                st,
             ).ratio()
 
             if similarity > best:
@@ -546,16 +521,11 @@ def fuzzy_product_score(user_text, product):
         elif best >= 0.74:
             score += 12
 
-        if qt in searchable_tokens:
-            score += 35
-
-    overlap = len(
+    score += 20 * len(
         query_tokens.intersection(
             searchable_tokens
         )
     )
-
-    score += overlap * 20
 
     return score
 
@@ -573,27 +543,18 @@ def find_local_products(user_text, products):
         )
 
         if score >= 20:
-            scored.append(
-                (
-                    score,
-                    product
-                )
-            )
+            scored.append((score, product))
 
     scored.sort(
-        key=lambda item: item[0],
+        key=lambda x: x[0],
         reverse=True
     )
 
     return [
         product
-        for score, product in scored[:5]
+        for _, product in scored[:5]
     ]
 
-
-# =========================
-# AI SEMANTIK KATALOG
-# =========================
 
 async def find_ai_products(user_text, products):
     visible = [
@@ -605,119 +566,96 @@ async def find_ai_products(user_text, products):
     if not visible:
         return []
 
-    candidates = visible[:150]
+    # AI'ga butun katalogni emas, eng yaqin 80 nomzodni yuboramiz.
+    ranked = []
 
-    catalog_lines = []
+    for product in visible:
+        ranked.append(
+            (
+                fuzzy_product_score(
+                    user_text,
+                    product
+                ),
+                product
+            )
+        )
+
+    ranked.sort(
+        key=lambda x: x[0],
+        reverse=True
+    )
+
+    candidates = [
+        product
+        for _, product
+        in ranked[:80]
+    ]
+
+    catalog = []
 
     for index, product in enumerate(candidates):
-        keywords = ", ".join(
-            product.get("keywords", [])
-        )
-
-        catalog_lines.append(
+        catalog.append(
             f"{index}: "
-            f"{product.get('name', '')} "
-            f"| kategoriya: "
-            f"{product.get('category', '')} "
-            f"| tavsif: "
-            f"{product.get('description', '')} "
-            f"| kalit so'zlar: "
-            f"{keywords}"
+            f"{product.get('name', '')} | "
+            f"kategoriya: {product.get('category', '')} | "
+            f"tavsif: {product.get('description', '')}"
         )
-
-    catalog_text = "\n".join(catalog_lines)
 
     prompt = f"""
-Sen AKSO SAVDO mahsulot katalogidan
-mijoz so'ragan mahsulotni topuvchi
-aqlli katalog yordamchisisan.
+Sen AKSO SAVDO katalogidan mahsulot topuvchi yordamchisan.
 
-Mijozning so'rovi:
+Mijoz:
 {user_text}
 
-Katalog:
-{catalog_text}
+Nomzod mahsulotlar:
+{chr(10).join(catalog)}
 
-Mijoz katalogdagi nomni aynan yozishi shart emas.
+Mijoz mahsulot nomini aynan katalogdagidek yozmasligi mumkin.
 
 Tushun:
 - imlo xatolari
 - harf almashishi
-- birlik va ko'plik
-- o'zbekcha va ruscha yozilish
-- sinonimlar
-- og'zaki yozuv
+- o'zbekcha/ruscha yozilish
 - transliteratsiya
-- mahsulotning vazifasi
-- mahsulotning ishlatilish maqsadi
+- sinonimlar
+- birlik/ko'plik
+- og'zaki yozuv
+- mahsulot vazifasi va maqsadi
 
 Misollar:
+"kuler" -> "kuller"
+"detski shkaf" -> bolalar shkafi
+"shkaf bormi?" -> shkaf
+"kiyim osadigan mebel" -> shkaf
+"oshxonaga mebel" -> oshxona mebeli
 
-"kuler"
--> "kuller"
+Faqat katalogda mavjud va mazmunan mos
+mahsulotlarni tanla.
 
-"kuller bormi?"
--> kullerlar
+Ko'pi bilan 5 ta.
 
-"detski shkaf"
--> bolalar shkaflari
-
-"shkaf bormi?"
--> shkaflar
-
-"kiyim osadigan mebel"
--> shkaflar
-
-"kiyim qo'yadigan shkaf"
--> shkaflar
-
-"oshxonaga mebel kerak"
--> oshxona mebellari
-
-"stol kerak"
--> stollar
-
-"yotadigan mebel kerak"
--> mos divan/yotoq mahsulotlari
-
-Faqat katalogda mavjud bo'lgan
-mahsulotlardan tanla.
-
-Agar bir nechta mahsulot mos bo'lsa,
-eng moslarini tanla.
-
-Ko'pi bilan 5 ta indeks tanla.
-
-FAQAT JSON qaytar:
-
+Faqat JSON massiv qaytar:
 [0, 2, 5]
 
-Mos mahsulot bo'lmasa:
-
+Mos kelmasa:
 []
-
-Hech qanday izoh yozma.
 """
 
     try:
-        response = (
-            await ai_client.models.generate_content(
-                model="gemini-3.5-flash-lite",
-                contents=prompt
-            )
+        response = await ai_client.models.generate_content(
+            model="gemini-3.5-flash-lite",
+            contents=prompt,
         )
 
         result = (
-            response.text or ""
+            response.text
+            or ""
         ).strip()
-
-        if not result:
-            return []
 
         match = re.search(
             r"\[[^\]]*\]",
             result,
-            flags=re.DOTALL
+            flags=re.DOTALL,
         )
 
         if not match:
@@ -737,13 +675,11 @@ Hech qanday izoh yozma.
                 index = int(value)
             except (
                 TypeError,
-                ValueError
+                ValueError,
             ):
                 continue
 
-            if (
-                0 <= index < len(candidates)
-            ):
+            if 0 <= index < len(candidates):
                 product = candidates[index]
 
                 if product not in selected:
@@ -759,107 +695,91 @@ Hech qanday izoh yozma.
             "AI KATALOG XATOSI:",
             repr(e)
         )
-
         return []
 
 
-# =========================
-# MAHSULOTNI MIJOZGA YUBORISH
-# =========================
+# ============================================================
+# SEND PRODUCT
+# ============================================================
 
 async def send_product_to_chat(
     bot,
     chat_id,
     product,
-    reply_to_message_id=None
+    reply_to_message_id=None,
 ):
-    price = int(
-        product["price"]
-    )
+    price = int(product["price"])
 
     month_3, month_6, month_12 = (
         calculate_monthly(price)
     )
 
-    caption_parts = [
+    text_parts = [
         f"🛍 <b>{product['name']}</b>"
     ]
 
     if product.get("category"):
-        caption_parts.append(
+        text_parts.append(
             f"🗂 {product['category']}"
         )
 
     if product.get("description"):
-        caption_parts.append(
+        text_parts.append(
             f"\n{product['description']}"
         )
 
-    caption_parts.append(
+    # MIJOZGA NAQD NARX YUBORILMAYDI.
+    text_parts.append(
         "\n📅 <b>Bo'lib to'lash:</b>\n"
-        f"• 3 oy — "
-        f"<b>{format_money(month_3)}/oy</b>\n"
-        f"• 6 oy — "
-        f"<b>{format_money(month_6)}/oy</b>\n"
-        f"• 12 oy — "
-        f"<b>{format_money(month_12)}/oy</b>"
+        f"• 3 oy — <b>{format_money(month_3)}/oy</b>\n"
+        f"• 6 oy — <b>{format_money(month_6)}/oy</b>\n"
+        f"• 12 oy — <b>{format_money(month_12)}/oy</b>"
     )
 
-    # Naqd narx MIJOZGA yuborilmaydi.
-    caption = "\n".join(
-        caption_parts
-    )
+    caption = "\n".join(text_parts)
 
-    images = product_images(
-        product
-    )
+    images = product_images(product)
 
     if not images:
-        await bot.send_message(
-            chat_id=chat_id,
-            text=caption,
-            parse_mode="HTML"
-        )
+        kwargs = {
+            "chat_id": chat_id,
+            "text": caption,
+            "parse_mode": "HTML",
+        }
+
+        if reply_to_message_id is not None:
+            kwargs["reply_to_message_id"] = (
+                reply_to_message_id
+            )
+
+        await bot.send_message(**kwargs)
         return
 
-    raw_urls = product.get(
-        "raw_urls",
-        []
-    )
+    raw_urls = product.get("raw_urls", [])
 
     if not isinstance(raw_urls, list):
         raw_urls = []
 
-    if (
-        not raw_urls
-        and product.get("raw_url")
-    ):
-        raw_urls = [
-            product["raw_url"]
-        ]
+    if not raw_urls and product.get("raw_url"):
+        raw_urls = [product["raw_url"]]
 
     for index, image in enumerate(images):
+        kwargs = {
+            "chat_id": chat_id,
+            "photo": image,
+        }
+
+        if index == 0:
+            kwargs["caption"] = caption
+            kwargs["parse_mode"] = "HTML"
+
+            if reply_to_message_id is not None:
+                kwargs["reply_to_message_id"] = (
+                    reply_to_message_id
+                )
+
         try:
-            kwargs = {
-                "chat_id": chat_id,
-                "photo": image,
-            }
-
-            if index == 0:
-                kwargs["caption"] = caption
-                kwargs["parse_mode"] = "HTML"
-
-            if (
-                reply_to_message_id is not None
-                and index == 0
-            ):
-                kwargs[
-                    "reply_to_message_id"
-                ] = reply_to_message_id
-
-            await bot.send_photo(
-                **kwargs
-            )
+            await bot.send_photo(**kwargs)
 
         except Exception as e:
             print(
@@ -868,96 +788,110 @@ async def send_product_to_chat(
             )
 
             if index < len(raw_urls):
-                kwargs = {
+                fallback = {
                     "chat_id": chat_id,
                     "photo": raw_urls[index],
                 }
 
                 if index == 0:
-                    kwargs["caption"] = caption
-                    kwargs["parse_mode"] = "HTML"
+                    fallback["caption"] = caption
+                    fallback["parse_mode"] = "HTML"
 
-                if (
-                    reply_to_message_id is not None
-                    and index == 0
-                ):
-                    kwargs[
-                        "reply_to_message_id"
-                    ] = reply_to_message_id
+                    if reply_to_message_id is not None:
+                        fallback[
+                            "reply_to_message_id"
+                        ] = reply_to_message_id
 
-                await bot.send_photo(
-                    **kwargs
-                )
+                await bot.send_photo(**fallback)
             else:
                 raise
 
 
-async def send_products_to_message(
-    bot,
-    message,
-    products
-):
-    if not products:
-        return
+# ============================================================
+# COMMANDS
+# ============================================================
 
-    stats["catalog_matches"] += len(products)
-
-    for product in products:
-        await send_product_to_chat(
-            bot,
-            message.chat_id,
-            product,
-            reply_to_message_id=message.message_id
-        )
-
-
-# =========================
-# ADMIN: /ADDPRODUCT
-# =========================
-
-async def add_product_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
+async def start_command(
+    update,
+    context
 ):
     if not update.message:
         return
 
-    user = update.message.from_user
-
-    if not user or not is_admin(user.id):
-        await update.message.reply_text(
-            "❌ Sizda bu komandadan "
-            "foydalanish huquqi yo'q."
-        )
-        return
-
-    admin_states[user.id] = {
-        "mode": "add",
-        "step": "photos",
-        "pending_images": [],
-        "image_bytes_list": [],
-        "pending_raw_urls": [],
-    }
-
     await update.message.reply_text(
-        "➕ <b>Yangi mahsulot qo'shish</b>\n\n"
-        "📸 Mahsulotning 1 yoki bir nechta "
-        "rasmini yuboring.\n\n"
-        "Rasmlar tugagach:\n"
-        "<code>/done</code>\n"
-        "ni bosing.\n\n"
-        "Bekor qilish: <code>/cancel</code>",
-        parse_mode="HTML"
+        "👋 Assalomu alaykum! Men AKSO AI botman.\n\n"
+        "Mahsulot nomini yoki sizga kerakli mahsulotni "
+        "oddiy tilda yozishingiz mumkin. 🤖"
     )
 
 
-# =========================
-# ADMIN: /PRODUCTS
-# =========================
+async def help_command(
+    update,
+    context
+):
+    if not update.message:
+        return
+
+    await update.message.reply_text(
+        "ℹ️ <b>AKSO AI yordam</b>\n\n"
+        "Mahsulotni oddiy tilda so'rang.\n\n"
+        "Masalan:\n"
+        "• Kuller bormi?\n"
+        "• Shkaf bormi?\n"
+        "• Detski shkaflar kerak\n"
+        "• Kiyim osadigan mebel bormi?\n"
+        "• Stol kerak\n\n"
+        "Men katalogdan mos mahsulotlarni topib, "
+        "rasmlari va bo'lib to'lash oylik to'lovlarini yuboraman.",
+        parse_mode="HTML",
+    )
+
+
+async def my_id_command(
+    update,
+    context
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+
+    if not user:
+        return
+
+    await update.message.reply_text(
+        f"🆔 Sizning Telegram ID'ingiz:\n\n"
+        f"<code>{user.id}</code>",
+        parse_mode="HTML",
+    )
+
+
+async def cancel_command(
+    update,
+    context
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+
+    if not user:
+        return
+
+    if is_admin(user.id):
+        admin_states.pop(
+            user.id,
+            None
+        )
+
+        await update.message.reply_text(
+            "❌ Joriy amal bekor qilindi."
+        )
+
 
 async def products_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
+    update,
+    context
 ):
     if not update.message:
         return
@@ -966,12 +900,13 @@ async def products_command(
 
     if not user or not is_admin(user.id):
         await update.message.reply_text(
-            "❌ Sizda bu komandadan "
-            "foydalanish huquqi yo'q."
+            "❌ Sizda bu komandadan foydalanish huquqi yo'q."
         )
         return
 
-    products = github_get_products()
+    products = await github_get_products(
+        force_refresh=True
+    )
 
     if not products:
         await update.message.reply_text(
@@ -980,39 +915,23 @@ async def products_command(
         return
 
     lines = [
-        "📦 <b>MAHSULOTLAR KATALOGI</b>\n"
+        "📦 <b>MAHSULOTLAR</b>\n"
     ]
 
-    for index, product in enumerate(
-        products[:30],
+    for i, product in enumerate(
+        products[:50],
         start=1
     ):
-        status = (
-            "✅"
-            if visible_product(product)
-            else "🚫"
-        )
-
-        category = product.get(
-            "category",
-            ""
-        )
-
-        category_text = (
-            f" | {category}"
-            if category
-            else ""
-        )
+        status = "✅" if visible_product(product) else "🚫"
 
         lines.append(
-            f"{index}. {status} "
+            f"{i}. {status} "
             f"<b>{product.get('name', 'Nomsiz')}</b>"
-            f"{category_text}"
         )
 
-    if len(products) > 30:
+    if len(products) > 50:
         lines.append(
-            f"\n… yana {len(products) - 30} ta mahsulot."
+            f"\n… yana {len(products) - 50} ta."
         )
 
     lines.append(
@@ -1021,17 +940,13 @@ async def products_command(
 
     await update.message.reply_text(
         "\n".join(lines),
-        parse_mode="HTML"
+        parse_mode="HTML",
     )
 
 
-# =========================
-# ADMIN: /EDITPRODUCT
-# =========================
-
-async def edit_product_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
+async def categories_command(
+    update,
+    context
 ):
     if not update.message:
         return
@@ -1040,12 +955,537 @@ async def edit_product_command(
 
     if not user or not is_admin(user.id):
         await update.message.reply_text(
-            "❌ Sizda bu komandadan "
-            "foydalanish huquqi yo'q."
+            "❌ Sizda bu komandadan foydalanish huquqi yo'q."
         )
         return
 
-    products = github_get_products()
+    products = await github_get_products(
+        force_refresh=True
+    )
+
+    counts = {}
+
+    for product in products:
+        category = (
+            product.get("category", "").strip()
+            or "Kategoriyasiz"
+        )
+
+        counts[category] = counts.get(
+            category,
+            0
+        ) + 1
+
+    if not counts:
+        await update.message.reply_text(
+            "🗂 Kategoriyalar hali yo'q."
+        )
+        return
+
+    lines = [
+        "🗂 <b>KATEGORIYALAR</b>\n"
+    ]
+
+    for category, count in sorted(
+        counts.items(),
+        key=lambda x: x[0].lower(),
+    ):
+        lines.append(
+            f"• {category} — {count} ta"
+        )
+
+    await update.message.reply_text(
+        "\n".join(lines),
+        parse_mode="HTML",
+    )
+
+
+async def stats_command(
+    update,
+    context
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+
+    if not user or not is_admin(user.id):
+        await update.message.reply_text(
+            "❌ Sizda bu komandadan foydalanish huquqi yo'q."
+        )
+        return
+
+    products = await github_get_products(
+        force_refresh=True
+    )
+
+    visible_count = sum(
+        1
+        for p in products
+        if visible_product(p)
+    )
+
+    await update.message.reply_text(
+        "📊 <b>AKSO BOT STATISTIKASI</b>\n\n"
+        f"📦 Jami mahsulotlar: <b>{len(products)}</b>\n"
+        f"👁 Ko'rinadigan: <b>{visible_count}</b>\n"
+        f"🚫 Yashirilgan: "
+        f"<b>{len(products) - visible_count}</b>\n\n"
+        f"💬 Xabarlar: <b>{stats['messages']}</b>\n"
+        f"🔎 Katalog so'rovlari: "
+        f"<b>{stats['catalog_queries']}</b>\n"
+        f"🎯 Topilgan mahsulotlar: "
+        f"<b>{stats['catalog_matches']}</b>\n\n"
+        f"➕ Qo'shilgan: <b>{stats['products_added']}</b>\n"
+        f"✏️ Tahrirlangan: "
+        f"<b>{stats['products_edited']}</b>\n"
+        f"🗑 O'chirilgan: "
+        f"<b>{stats['products_deleted']}</b>",
+        parse_mode="HTML",
+    )
+
+
+# ============================================================
+# ADD PRODUCT
+# ============================================================
+
+async def add_product_command(
+    update,
+    context
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+
+    if not user or not is_admin(user.id):
+        await update.message.reply_text(
+            "❌ Sizda bu komandadan foydalanish huquqi yo'q."
+        )
+        return
+
+    admin_states[user.id] = {
+        "mode": "add",
+        "step": "photos",
+        "pending_images": [],
+        "image_bytes_list": [],
+    }
+
+    await update.message.reply_text(
+        "➕ <b>Yangi mahsulot qo'shish</b>\n\n"
+        "📸 1 yoki bir nechta rasm yuboring.\n\n"
+        "Rasmlar tugagach: /done\n"
+        "Bekor qilish: /cancel",
+        parse_mode="HTML",
+    )
+
+
+async def save_new_product(
+    update,
+    context,
+    state
+):
+    if not update.message:
+        return
+
+    await update.message.reply_text(
+        "⏳ Mahsulot GitHub'ga saqlanmoqda..."
+    )
+
+    try:
+        name = state["name"]
+        price = int(state["price"])
+        category = state.get("category", "")
+        description = state.get("description", "")
+
+        image_bytes_list = state[
+            "image_bytes_list"
+        ]
+
+        telegram_ids = state[
+            "pending_images"
+        ]
+
+        raw_urls = []
+
+        for index, image_bytes in enumerate(
+            image_bytes_list,
+            start=1
+        ):
+            filename = (
+                f"{slugify(name)}_"
+                f"{int(time.time() * 1000)}_"
+                f"{index}.jpg"
+            )
+
+            github_path = (
+                f"{PRODUCTS_FOLDER}/{filename}"
+            )
+
+            await github_upload_file(
+                github_path,
+                image_bytes,
+                f"Add product image: {name}",
+            )
+
+            raw_urls.append(
+                "https://raw.githubusercontent.com/"
+                f"{GITHUB_OWNER}/{GITHUB_REPO}/"
+                f"{GITHUB_BRANCH}/{github_path}"
+            )
+
+        products = await github_get_products(
+            force_refresh=True
+        )
+
+        product = {
+            "id": str(
+                int(time.time() * 1000)
+            ),
+            "name": name,
+            "price": price,
+            "category": category,
+            "description": description,
+            "telegram_file_id": telegram_ids[0],
+            "images": telegram_ids,
+            "raw_url": raw_urls[0] if raw_urls else "",
+            "raw_urls": raw_urls,
+            "keywords": [],
+            "visible": True,
+            "created_at": time.strftime(
+                "%Y-%m-%d %H:%M:%S"
+            ),
+        }
+
+        refresh_product_keywords(product)
+        products.append(product)
+
+        await github_save_products(
+            products
+        )
+
+        admin_states.pop(
+            update.message.from_user.id,
+            None
+        )
+
+        stats[
+            "products_added"
+        ] += 1
+
+        month_3, month_6, month_12 = calculate_monthly(
+            price
+        )
+
+        await update.message.reply_text(
+            "✅ <b>Mahsulot muvaffaqiyatli saqlandi!</b>\n\n"
+            f"🛍 <b>{name}</b>\n"
+            f"🗂 Kategoriya: "
+            f"<b>{category or 'Kategoriyasiz'}</b>\n"
+            f"💵 Naqd: <b>{format_money(price)}</b>\n\n"
+            f"📅 3 oy — "
+            f"<b>{format_money(month_3)}/oy</b>\n"
+            f"📅 6 oy — "
+            f"<b>{format_money(month_6)}/oy</b>\n"
+            f"📅 12 oy — "
+            f"<b>{format_money(month_12)}/oy</b>\n\n"
+            f"📸 Rasmlar: <b>{len(telegram_ids)} ta</b>\n"
+            "📦 Ma'lumotlar GitHub'ga saqlandi.",
+            parse_mode="HTML",
+        )
+
+    except Exception as e:
+        print(
+            "ADD PRODUCT XATOSI:",
+            repr(e)
+        )
+
+        await update.message.reply_text(
+            "❌ Mahsulotni saqlashda xatolik yuz berdi."
+        )
+
+        admin_states.pop(
+            update.message.from_user.id,
+            None
+        )
+
+
+# ============================================================
+# ADMIN STATE
+# ============================================================
+
+async def handle_admin_state(
+    update,
+    context
+):
+    if not update.message:
+        return False
+
+    user = update.message.from_user
+
+    if not user or not is_admin(user.id):
+        return False
+
+    state = admin_states.get(user.id)
+
+    if not state:
+        return False
+
+    step = state.get("step")
+
+    if step == "photos":
+        if not update.message.photo:
+            await update.message.reply_text(
+                "📸 Rasm yuboring yoki /done bosing."
+            )
+            return True
+
+        photo = update.message.photo[-1]
+
+        try:
+            tg_file = await context.bot.get_file(
+                photo.file_id
+            )
+
+            image_bytes = await tg_file.download_as_bytearray()
+
+            state[
+                "pending_images"
+            ].append(
+                photo.file_id
+            )
+
+            state[
+                "image_bytes_list"
+            ].append(
+                bytes(image_bytes)
+            )
+
+            count = len(
+                state["pending_images"]
+            )
+
+            await update.message.reply_text(
+                f"✅ {count}-rasm qabul qilindi.\n"
+                "Yana rasm yuboring yoki /done bosing."
+            )
+
+        except Exception as e:
+            print(
+                "ADMIN PHOTO XATOSI:",
+                repr(e)
+            )
+
+            await update.message.reply_text(
+                "❌ Rasmni qabul qilishda xatolik yuz berdi."
+            )
+
+        return True
+
+    if step == "name":
+        if not update.message.text:
+            await update.message.reply_text(
+                "📝 Mahsulot nomini yozing."
+            )
+            return True
+
+        name = update.message.text.strip()
+
+        if not name:
+            await update.message.reply_text(
+                "❌ Mahsulot nomi bo'sh bo'lishi mumkin emas."
+            )
+            return True
+
+        state["name"] = name
+        state["step"] = "price"
+
+        await update.message.reply_text(
+            "✅ Nom saqlandi.\n\n"
+            "💰 Naqd narxni yozing.\n"
+            "Masalan: 1500000",
+        )
+
+        return True
+
+    if step == "price":
+        if not update.message.text:
+            await update.message.reply_text(
+                "💰 Narxni raqam bilan yozing."
+            )
+            return True
+
+        price = parse_price(
+            update.message.text
+        )
+
+        if price is None:
+            await update.message.reply_text(
+                "❌ Narx noto'g'ri."
+            )
+            return True
+
+        state["price"] = price
+        state["step"] = "category"
+
+        await update.message.reply_text(
+            "✅ Narx saqlandi.\n\n"
+            "🗂 Kategoriya yozing.\n"
+            "Masalan: Kullerlar\n\n"
+            "Kerak bo'lmasa: /skip",
+        )
+
+        return True
+
+    if step == "category":
+        if not update.message.text:
+            await update.message.reply_text(
+                "🗂 Kategoriya yozing yoki /skip bosing."
+            )
+            return True
+
+        state["category"] = (
+            update.message.text.strip()
+        )
+
+        state["step"] = "description"
+
+        await update.message.reply_text(
+            "✅ Kategoriya saqlandi.\n\n"
+            "📄 Mahsulot tavsifini yozing.\n"
+            "Kerak bo'lmasa: /skip",
+        )
+
+        return True
+
+    if step == "description":
+        if not update.message.text:
+            await update.message.reply_text(
+                "📄 Tavsif yozing yoki /skip bosing."
+            )
+            return True
+
+        state["description"] = (
+            update.message.text.strip()
+        )
+
+        await save_new_product(
+            update,
+            context,
+            state
+        )
+
+        return True
+
+    return False
+
+
+async def done_command(
+    update,
+    context
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+
+    if not user or not is_admin(user.id):
+        return
+
+    state = admin_states.get(
+        user.id
+    )
+
+    if not state:
+        await update.message.reply_text(
+            "ℹ️ Hozir mahsulot qo'shish jarayoni yo'q."
+        )
+        return
+
+    if state.get("step") != "photos":
+        await update.message.reply_text(
+            "ℹ️ /done hozirgi bosqichda ishlamaydi."
+        )
+        return
+
+    if not state.get("pending_images"):
+        await update.message.reply_text(
+            "📸 Kamida 1 ta rasm yuboring."
+        )
+        return
+
+    state["step"] = "name"
+
+    await update.message.reply_text(
+        "✅ Rasmlar qabul qilindi.\n\n"
+        "📝 Mahsulot nomini yozing."
+    )
+
+
+async def skip_command(
+    update,
+    context
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+
+    if not user or not is_admin(user.id):
+        return
+
+    state = admin_states.get(
+        user.id
+    )
+
+    if not state:
+        return
+
+    step = state.get("step")
+
+    if step == "category":
+        state["category"] = ""
+        state["step"] = "description"
+
+        await update.message.reply_text(
+            "✅ Kategoriya o'tkazildi.\n\n"
+            "📄 Tavsif yozing yoki /skip bosing."
+        )
+        return
+
+    if step == "description":
+        state["description"] = ""
+
+        await save_new_product(
+            update,
+            context,
+            state
+        )
+        return
+
+
+# ============================================================
+# EDIT / DELETE
+# ============================================================
+
+async def edit_product_command(
+    update,
+    context
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+
+    if not user or not is_admin(user.id):
+        await update.message.reply_text(
+            "❌ Sizda bu komandadan foydalanish huquqi yo'q."
+        )
+        return
+
+    products = await github_get_products(
+        force_refresh=True
+    )
 
     if not products:
         await update.message.reply_text(
@@ -1077,8 +1517,7 @@ async def edit_product_command(
         ])
 
     await update.message.reply_text(
-        "✏️ <b>Qaysi mahsulotni "
-        "tahrirlamoqchisiz?</b>",
+        "✏️ <b>Mahsulotni tanlang:</b>",
         parse_mode="HTML",
         reply_markup=InlineKeyboardMarkup(
             keyboard
@@ -1086,13 +1525,9 @@ async def edit_product_command(
     )
 
 
-# =========================
-# ADMIN: /DELETEPRODUCT
-# =========================
-
 async def delete_product_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
+    update,
+    context
 ):
     if not update.message:
         return
@@ -1101,12 +1536,13 @@ async def delete_product_command(
 
     if not user or not is_admin(user.id):
         await update.message.reply_text(
-            "❌ Sizda bu komandadan "
-            "foydalanish huquqi yo'q."
+            "❌ Sizda bu komandadan foydalanish huquqi yo'q."
         )
         return
 
-    products = github_get_products()
+    products = await github_get_products(
+        force_refresh=True
+    )
 
     if not products:
         await update.message.reply_text(
@@ -1117,13 +1553,11 @@ async def delete_product_command(
     keyboard = []
 
     for product in products[:50]:
-        label = (
-            f"🗑 {product.get('name', 'Nomsiz')}"
-        )[:60]
-
         keyboard.append([
             InlineKeyboardButton(
-                label,
+                (
+                    f"🗑 {product.get('name', 'Nomsiz')}"
+                )[:60],
                 callback_data=(
                     f"delconfirm:{product['id']}"
                 )
@@ -1131,8 +1565,7 @@ async def delete_product_command(
         ])
 
     await update.message.reply_text(
-        "🗑 <b>O'chirish uchun "
-        "mahsulotni tanlang:</b>",
+        "🗑 <b>O'chirish uchun mahsulotni tanlang:</b>",
         parse_mode="HTML",
         reply_markup=InlineKeyboardMarkup(
             keyboard
@@ -1140,967 +1573,86 @@ async def delete_product_command(
     )
 
 
-# =========================
-# ADMIN: /CATEGORIES
-# =========================
-
-async def categories_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
+async def toggle_product(
+    query,
+    product_id
 ):
-    if not update.message:
-        return
+    products = await github_get_products(
+        force_refresh=True
+    )
 
-    user = update.message.from_user
+    product = next(
+        (
+            p
+            for p in products
+            if p.get("id") == product_id
+        ),
+        None
+    )
 
-    if not user or not is_admin(user.id):
-        await update.message.reply_text(
-            "❌ Sizda bu komandadan "
-            "foydalanish huquqi yo'q."
+    if not product:
+        await query.edit_message_text(
+            "❌ Mahsulot topilmadi."
         )
         return
 
-    products = github_get_products()
+    old_visible = visible_product(product)
 
-    counts = {}
+    product["visible"] = not old_visible
 
-    for product in products:
-        category = (
-            product.get(
-                "category",
-                ""
-            ).strip()
-            or "Kategoriyasiz"
-        )
+    await github_save_products(
+        products
+    )
 
-        counts[category] = (
-            counts.get(
-                category,
-                0
-            ) + 1
-        )
+    if old_visible:
+        stats["products_hidden"] += 1
+        message = "🚫 Mahsulot yashirildi."
+    else:
+        message = "👁 Mahsulot yana ko'rsatildi."
 
-    if not counts:
-        await update.message.reply_text(
-            "🗂 Kategoriyalar hali yo'q."
-        )
-        return
+    await query.edit_message_text(
+        (
+            f"✅ <b>{product.get('name', '')}</b>\n\n"
+            f"{message}"
+        ),
+        parse_mode="HTML",
+    )
 
-    lines = [
-        "🗂 <b>KATEGORIYALAR</b>\n"
+
+async def delete_product(
+    query,
+    product_id
+):
+    products = await github_get_products(
+        force_refresh=True
+    )
+
+    new_products = [
+        p
+        for p in products
+        if p.get("id") != product_id
     ]
 
-    for category, count in sorted(
-        counts.items(),
-        key=lambda x: x[0].lower()
-    ):
-        lines.append(
-            f"• {category} — {count} ta"
+    if len(new_products) == len(products):
+        await query.edit_message_text(
+            "❌ Mahsulot topilmadi."
         )
+        return
 
-    await update.message.reply_text(
-        "\n".join(lines),
-        parse_mode="HTML"
+    await github_save_products(
+        new_products
     )
 
+    stats["products_deleted"] += 1
 
-# =========================
-# ADMIN: /STATS
-# =========================
-
-async def stats_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    if not update.message:
-        return
-
-    user = update.message.from_user
-
-    if not user or not is_admin(user.id):
-        await update.message.reply_text(
-            "❌ Sizda bu komandadan "
-            "foydalanish huquqi yo'q."
-        )
-        return
-
-    products = github_get_products()
-
-    visible_count = sum(
-        1
-        for product in products
-        if visible_product(product)
+    await query.edit_message_text(
+        "✅ Mahsulot katalogdan o'chirildi."
     )
 
-    hidden_count = (
-        len(products)
-        - visible_count
-    )
-
-    await update.message.reply_text(
-        "📊 <b>AKSO BOT STATISTIKASI</b>\n\n"
-        f"📦 Jami mahsulotlar: "
-        f"<b>{len(products)}</b>\n"
-        f"👁 Ko'rinadigan: "
-        f"<b>{visible_count}</b>\n"
-        f"🚫 Yashirilgan: "
-        f"<b>{hidden_count}</b>\n\n"
-        f"💬 Xabarlar "
-        f"(bot restartidan beri): "
-        f"<b>{stats['messages']}</b>\n"
-        f"🔎 Katalog so'rovlari: "
-        f"<b>{stats['catalog_queries']}</b>\n"
-        f"🎯 Topilgan mahsulotlar: "
-        f"<b>{stats['catalog_matches']}</b>\n\n"
-        f"➕ Qo'shilgan: "
-        f"<b>{stats['products_added']}</b>\n"
-        f"✏️ Tahrirlangan: "
-        f"<b>{stats['products_edited']}</b>\n"
-        f"🚫 Yashirilgan: "
-        f"<b>{stats['products_hidden']}</b>\n"
-        f"🗑 O'chirilgan: "
-        f"<b>{stats['products_deleted']}</b>",
-        parse_mode="HTML"
-    )
-
-
-# =========================
-# ADMIN: /DONE
-# =========================
-
-async def done_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    if not update.message:
-        return
-
-    user = update.message.from_user
-
-    if not user or not is_admin(user.id):
-        return
-
-    state = admin_states.get(user.id)
-
-    if not state:
-        await update.message.reply_text(
-            "ℹ️ Hozir mahsulot qo'shish "
-            "yoki tahrirlash jarayoni yo'q."
-        )
-        return
-
-    step = state.get("step")
-
-    # -------------------------
-    # ADD PHOTOS -> NAME
-    # -------------------------
-
-    if step == "photos":
-
-        if not state.get("pending_images"):
-            await update.message.reply_text(
-                "📸 Kamida 1 ta rasm yuboring."
-            )
-            return
-
-        state["step"] = "name"
-
-        await update.message.reply_text(
-            "✅ Rasmlar qabul qilindi.\n\n"
-            "📝 Endi mahsulot nomini yozing.\n\n"
-            "Masalan:\n"
-            "<b>Immer Kuller 10bsb</b>",
-            parse_mode="HTML"
-        )
-
-        return
-
-    # -------------------------
-    # EDIT IMAGES -> SAVE
-    # -------------------------
-
-    if step == "edit_images":
-
-        if not state.get("pending_images"):
-            await update.message.reply_text(
-                "📸 Kamida 1 ta rasm yuboring."
-            )
-            return
-
-        product_id = state.get(
-            "product_id"
-        )
-
-        products = github_get_products()
-
-        target = next(
-            (
-                p
-                for p in products
-                if p.get("id") == product_id
-            ),
-            None
-        )
-
-        if not target:
-            admin_states.pop(
-                user.id,
-                None
-            )
-
-            await update.message.reply_text(
-                "❌ Mahsulot topilmadi."
-            )
-            return
-
-        target["images"] = state[
-            "pending_images"
-        ]
-
-        target["telegram_file_id"] = (
-            state["pending_images"][0]
-        )
-
-        target["raw_urls"] = state.get(
-            "pending_raw_urls",
-            []
-        )
-
-        if target["raw_urls"]:
-            target["raw_url"] = (
-                target["raw_urls"][0]
-            )
-
-        try:
-            github_save_products(
-                products
-            )
-
-            stats[
-                "products_edited"
-            ] += 1
-
-            admin_states.pop(
-                user.id,
-                None
-            )
-
-            await update.message.reply_text(
-                "✅ Mahsulot rasmlari "
-                "muvaffaqiyatli almashtirildi."
-            )
-
-        except Exception as e:
-            print(
-                "EDIT IMAGES XATOSI:",
-                repr(e)
-            )
-
-            await update.message.reply_text(
-                "❌ Rasmlarni saqlashda "
-                "xatolik yuz berdi."
-            )
-
-        return
-
-    await update.message.reply_text(
-        "ℹ️ /done hozirgi bosqichda "
-        "ishlamaydi."
-    )
-
-
-# =========================
-# ADMIN: /SKIP
-# =========================
-
-async def skip_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    if not update.message:
-        return
-
-    user = update.message.from_user
-
-    if not user or not is_admin(user.id):
-        return
-
-    state = admin_states.get(user.id)
-
-    if not state:
-        return
-
-    step = state.get("step")
-
-    if step == "category":
-        state["category"] = ""
-        state["step"] = "description"
-
-        await update.message.reply_text(
-            "✅ Kategoriya o'tkazib yuborildi.\n\n"
-            "📄 Mahsulot tavsifini yozing.\n"
-            "Kerak bo'lmasa <code>/skip</code> bosing.",
-            parse_mode="HTML"
-        )
-        return
-
-    if step == "description":
-        await save_new_product(
-            update,
-            context,
-            state
-        )
-        return
-
-    await update.message.reply_text(
-        "ℹ️ /skip hozirgi bosqichda ishlamaydi."
-    )
-
-
-# =========================
-# ADMIN: SAVE NEW PRODUCT
-# =========================
-
-async def save_new_product(
-    update,
-    context,
-    state
-):
-    if not update.message:
-        return
-
-    await update.message.reply_text(
-        "⏳ Mahsulot GitHub'ga "
-        "saqlanmoqda..."
-    )
-
-    try:
-        name = state["name"]
-        price = int(state["price"])
-
-        image_bytes_list = state[
-            "image_bytes_list"
-        ]
-
-        telegram_ids = state[
-            "pending_images"
-        ]
-
-        category = state.get(
-            "category",
-            ""
-        )
-
-        description = state.get(
-            "description",
-            ""
-        )
-
-        raw_urls = []
-
-        for index, image_bytes in enumerate(
-            image_bytes_list,
-            start=1
-        ):
-            filename = (
-                f"{slugify(name)}_"
-                f"{int(time.time() * 1000)}_"
-                f"{index}.jpg"
-            )
-
-            github_path = (
-                f"{PRODUCTS_FOLDER}/"
-                f"{filename}"
-            )
-
-            github_upload_file(
-                github_path,
-                image_bytes,
-                f"Add product image: {name}"
-            )
-
-            raw_urls.append(
-                "https://raw.githubusercontent.com/"
-                f"{GITHUB_OWNER}/"
-                f"{GITHUB_REPO}/"
-                f"{GITHUB_BRANCH}/"
-                f"{github_path}"
-            )
-
-        products = github_get_products()
-
-        product = {
-            "id": str(
-                int(
-                    time.time() * 1000
-                )
-            ),
-            "name": name,
-            "price": price,
-            "category": category,
-            "description": description,
-            "telegram_file_id": telegram_ids[0],
-            "images": telegram_ids,
-            "raw_url": (
-                raw_urls[0]
-                if raw_urls
-                else ""
-            ),
-            "raw_urls": raw_urls,
-            "github_path": (
-                f"{PRODUCTS_FOLDER}/"
-                f"{slugify(name)}"
-            ),
-            "keywords": [],
-            "visible": True,
-            "created_at": (
-                time.strftime(
-                    "%Y-%m-%d %H:%M:%S"
-                )
-            ),
-        }
-
-        refresh_product_keywords(
-            product
-        )
-
-        products.append(
-            product
-        )
-
-        github_save_products(
-            products
-        )
-
-        admin_states.pop(
-            update.message.from_user.id,
-            None
-        )
-
-        stats[
-            "products_added"
-        ] += 1
-
-        month_3, month_6, month_12 = (
-            calculate_monthly(
-                price
-            )
-        )
-
-        await update.message.reply_text(
-            "✅ <b>Mahsulot muvaffaqiyatli saqlandi!</b>\n\n"
-            f"🛍 <b>{name}</b>\n"
-            f"🗂 Kategoriya: "
-            f"<b>{category or 'Kategoriyasiz'}</b>\n"
-            f"💵 Naqd: "
-            f"<b>{format_money(price)}</b>\n\n"
-            f"📅 3 oy — "
-            f"<b>{format_money(month_3)}/oy</b>\n"
-            f"📅 6 oy — "
-            f"<b>{format_money(month_6)}/oy</b>\n"
-            f"📅 12 oy — "
-            f"<b>{format_money(month_12)}/oy</b>\n\n"
-            f"📸 Rasmlar: "
-            f"<b>{len(telegram_ids)} ta</b>\n"
-            "📦 Ma'lumotlar GitHub'ga saqlandi.",
-            parse_mode="HTML"
-        )
-
-    except Exception as e:
-        print(
-            "ADD PRODUCT XATOSI:",
-            repr(e)
-        )
-
-        await update.message.reply_text(
-            "❌ Mahsulotni saqlashda "
-            "xatolik yuz berdi.\n\n"
-            "Render → Logs bo'limidan "
-            "xatoni tekshiramiz."
-        )
-
-        admin_states.pop(
-            update.message.from_user.id,
-            None
-        )
-
-
-# =========================
-# ADMIN STATE HANDLER
-# =========================
-
-async def handle_admin_state(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    if not update.message:
-        return False
-
-    user = update.message.from_user
-
-    if not user or not is_admin(user.id):
-        return False
-
-    state = admin_states.get(
-        user.id
-    )
-
-    if not state:
-        return False
-
-    step = state.get(
-        "step"
-    )
-
-    # -------------------------
-    # ADD: PHOTOS
-    # -------------------------
-
-    if step == "photos":
-
-        if not update.message.photo:
-            await update.message.reply_text(
-                "📸 Rasm yuboring.\n"
-                "Bitta yoki bir nechta rasm "
-                "yuborishingiz mumkin.\n\n"
-                "Tugagach /done bosing."
-            )
-            return True
-
-        photo = (
-            update.message.photo[-1]
-        )
-
-        try:
-            telegram_file = (
-                await context.bot.get_file(
-                    photo.file_id
-                )
-            )
-
-            image_bytes = (
-                await telegram_file.download_as_bytearray()
-            )
-
-            state[
-                "pending_images"
-            ].append(
-                photo.file_id
-            )
-
-            state.setdefault(
-                "image_bytes_list",
-                []
-            ).append(
-                bytes(image_bytes)
-            )
-
-            await update.message.reply_text(
-                f"✅ {len(state['pending_images'])}-rasm qabul qilindi.\n\n"
-                "Yana rasm yuboring yoki "
-                "<code>/done</code> bosing.",
-                parse_mode="HTML"
-            )
-
-        except Exception as e:
-            print(
-                "ADMIN PHOTO XATOSI:",
-                repr(e)
-            )
-
-            await update.message.reply_text(
-                "❌ Rasmni qabul qilishda "
-                "xatolik yuz berdi."
-            )
-
-        return True
-
-    # -------------------------
-    # ADD: NAME
-    # -------------------------
-
-    if step == "name":
-
-        if not update.message.text:
-            await update.message.reply_text(
-                "📝 Mahsulot nomini yozing."
-            )
-            return True
-
-        name = (
-            update.message.text.strip()
-        )
-
-        if not name:
-            await update.message.reply_text(
-                "❌ Nom bo'sh bo'lishi mumkin emas."
-            )
-            return True
-
-        state[
-            "name"
-        ] = name
-
-        state[
-            "step"
-        ] = "price"
-
-        await update.message.reply_text(
-            "✅ Mahsulot nomi saqlandi.\n\n"
-            "💰 Endi naqd narxni yozing.\n\n"
-            "Masalan:\n"
-            "<b>1500000</b>",
-            parse_mode="HTML"
-        )
-
-        return True
-
-    # -------------------------
-    # ADD: PRICE
-    # -------------------------
-
-    if step == "price":
-
-        if not update.message.text:
-            await update.message.reply_text(
-                "💰 Narxni raqam bilan yozing."
-            )
-            return True
-
-        price = parse_price(
-            update.message.text
-        )
-
-        if price is None:
-            await update.message.reply_text(
-                "❌ Narxni tushuna olmadim.\n"
-                "Masalan: 1500000"
-            )
-            return True
-
-        state[
-            "price"
-        ] = price
-
-        state[
-            "step"
-        ] = "category"
-
-        await update.message.reply_text(
-            "✅ Narx saqlandi.\n\n"
-            "🗂 Endi kategoriya nomini yozing.\n\n"
-            "Masalan:\n"
-            "<b>Kullerlar</b>\n\n"
-            "Kategoriya kerak bo'lmasa:\n"
-            "<code>/skip</code>",
-            parse_mode="HTML"
-        )
-
-        return True
-
-    # -------------------------
-    # ADD: CATEGORY
-    # -------------------------
-
-    if step == "category":
-
-        if not update.message.text:
-            await update.message.reply_text(
-                "🗂 Kategoriya nomini yozing yoki /skip bosing."
-            )
-            return True
-
-        category = (
-            update.message.text.strip()
-        )
-
-        if not category:
-            await update.message.reply_text(
-                "🗂 Kategoriya nomini yozing yoki /skip bosing."
-            )
-            return True
-
-        state[
-            "category"
-        ] = category
-
-        state[
-            "step"
-        ] = "description"
-
-        await update.message.reply_text(
-            "✅ Kategoriya saqlandi.\n\n"
-            "📄 Endi mahsulot haqida qisqa tavsif yozing.\n\n"
-            "Masalan:\n"
-            "<b>Suvni sovutadi va isitadi.</b>\n\n"
-            "Tavsif kerak bo'lmasa:\n"
-            "<code>/skip</code>",
-            parse_mode="HTML"
-        )
-
-        return True
-
-    # -------------------------
-    # ADD: DESCRIPTION
-    # -------------------------
-
-    if step == "description":
-
-        if not update.message.text:
-            await update.message.reply_text(
-                "📄 Tavsifni yozing yoki /skip bosing."
-            )
-            return True
-
-        state[
-            "description"
-        ] = (
-            update.message.text.strip()
-        )
-
-        await save_new_product(
-            update,
-            context,
-            state
-        )
-
-        return True
-
-    # -------------------------
-    # EDIT: TEXT
-    # -------------------------
-
-    if step in {
-        "edit_name",
-        "edit_price",
-        "edit_category",
-        "edit_description",
-    }:
-
-        if not update.message.text:
-            await update.message.reply_text(
-                "📝 Iltimos, matn yuboring."
-            )
-            return True
-
-        product_id = state.get(
-            "product_id"
-        )
-
-        field = state.get(
-            "field"
-        )
-
-        products = github_get_products()
-
-        target = next(
-            (
-                p
-                for p in products
-                if p.get("id") == product_id
-            ),
-            None
-        )
-
-        if not target:
-            admin_states.pop(
-                user.id,
-                None
-            )
-
-            await update.message.reply_text(
-                "❌ Mahsulot topilmadi."
-            )
-
-            return True
-
-        text = (
-            update.message.text.strip()
-        )
-
-        if field == "name":
-
-            if not text:
-                await update.message.reply_text(
-                    "❌ Nom bo'sh bo'lishi mumkin emas."
-                )
-                return True
-
-            target[
-                "name"
-            ] = text
-
-        elif field == "price":
-
-            price = parse_price(
-                text
-            )
-
-            if price is None:
-                await update.message.reply_text(
-                    "❌ Narx noto'g'ri.\n"
-                    "Masalan: 1500000"
-                )
-                return True
-
-            target[
-                "price"
-            ] = price
-
-        elif field == "category":
-
-            target[
-                "category"
-            ] = text
-
-        elif field == "description":
-
-            target[
-                "description"
-            ] = text
-
-        refresh_product_keywords(
-            target
-        )
-
-        try:
-            github_save_products(
-                products
-            )
-
-            stats[
-                "products_edited"
-            ] += 1
-
-            admin_states.pop(
-                user.id,
-                None
-            )
-
-            await update.message.reply_text(
-                "✅ Mahsulot muvaffaqiyatli "
-                "tahrirlandi."
-            )
-
-        except Exception as e:
-            print(
-                "EDIT PRODUCT XATOSI:",
-                repr(e)
-            )
-
-            await update.message.reply_text(
-                "❌ O'zgarishni saqlashda "
-                "xatolik yuz berdi."
-            )
-
-        return True
-
-    # -------------------------
-    # EDIT: IMAGES
-    # -------------------------
-
-    if step == "edit_images":
-
-        if not update.message.photo:
-            await update.message.reply_text(
-                "📸 Rasm yuboring.\n"
-                "Tugagach /done bosing."
-            )
-            return True
-
-        photo = (
-            update.message.photo[-1]
-        )
-
-        try:
-            telegram_file = (
-                await context.bot.get_file(
-                    photo.file_id
-                )
-            )
-
-            image_bytes = (
-                await telegram_file.download_as_bytearray()
-            )
-
-            state[
-                "pending_images"
-            ].append(
-                photo.file_id
-            )
-
-            # GitHub'ga darhol yuklaymiz.
-            name = state.get(
-                "name",
-                "product"
-            )
-
-            index = len(
-                state["pending_images"]
-            )
-
-            filename = (
-                f"{slugify(name)}_edited_"
-                f"{int(time.time() * 1000)}_"
-                f"{index}.jpg"
-            )
-
-            github_path = (
-                f"{PRODUCTS_FOLDER}/"
-                f"{filename}"
-            )
-
-            github_upload_file(
-                github_path,
-                bytes(image_bytes),
-                f"Add edited product image: {name}"
-            )
-
-            state.setdefault(
-                "pending_raw_urls",
-                []
-            )
-
-            state[
-                "pending_raw_urls"
-            ].append(
-                "https://raw.githubusercontent.com/"
-                f"{GITHUB_OWNER}/"
-                f"{GITHUB_REPO}/"
-                f"{GITHUB_BRANCH}/"
-                f"{github_path}"
-            )
-
-            await update.message.reply_text(
-                f"✅ {index}-rasm qabul qilindi.\n\n"
-                "Yana rasm yuboring yoki "
-                "<code>/done</code> bosing.",
-                parse_mode="HTML"
-            )
-
-        except Exception as e:
-            print(
-                "EDIT PHOTO XATOSI:",
-                repr(e)
-            )
-
-            await update.message.reply_text(
-                "❌ Rasmni saqlashda "
-                "xatolik yuz berdi."
-            )
-
-        return True
-
-    return False
-
-
-# =========================
-# CALLBACK HANDLER
-# =========================
 
 async def callback_handler(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
+    update,
+    context
 ):
     query = update.callback_query
 
@@ -2109,17 +1661,13 @@ async def callback_handler(
 
     data = query.data or ""
 
-    # Admin callback'larini himoyalaymiz.
-    if data.startswith(
-        (
-            "edit:",
-            "edfield:",
-            "toggle:",
-            "delconfirm:",
-            "del:",
-        )
-    ):
-
+    if data.startswith((
+        "edit:",
+        "edfield:",
+        "toggle:",
+        "delconfirm:",
+        "del:",
+    )):
         if not is_admin(
             query.from_user.id
         ):
@@ -2131,18 +1679,12 @@ async def callback_handler(
 
     await query.answer()
 
-    # -------------------------
-    # EDIT PRODUCT
-    # -------------------------
-
     if data.startswith("edit:"):
+        product_id = data.split(":", 1)[1]
 
-        product_id = data.split(
-            ":",
-            1
-        )[1]
-
-        products = github_get_products()
+        products = await github_get_products(
+            force_refresh=True
+        )
 
         product = next(
             (
@@ -2194,19 +1736,7 @@ async def callback_handler(
             ],
             [
                 InlineKeyboardButton(
-                    "📸 Rasmlarini almashtirish",
-                    callback_data=(
-                        f"edfield:{product_id}:images"
-                    )
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    (
-                        "🚫 Mahsulotni yashirish"
-                        if visible_product(product)
-                        else "👁 Mahsulotni ko'rsatish"
-                    ),
+                    "🚫 Yashirish / 👁 Ko'rsatish",
                     callback_data=(
                         f"toggle:{product_id}"
                     )
@@ -2232,15 +1762,9 @@ async def callback_handler(
                 keyboard
             )
         )
-
         return
 
-    # -------------------------
-    # EDIT FIELD
-    # -------------------------
-
     if data.startswith("edfield:"):
-
         parts = data.split(":")
 
         if len(parts) != 3:
@@ -2249,68 +1773,24 @@ async def callback_handler(
         product_id = parts[1]
         field = parts[2]
 
-        products = github_get_products()
-
-        product = next(
-            (
-                p
-                for p in products
-                if p.get("id") == product_id
-            ),
-            None
-        )
-
-        if not product:
-            await query.edit_message_text(
-                "❌ Mahsulot topilmadi."
-            )
-            return
-
         if field == "images":
-
-            admin_states[
-                query.from_user.id
-            ] = {
-                "mode": "edit",
-                "step": "edit_images",
-                "product_id": product_id,
-                "name": product.get(
-                    "name",
-                    "product"
-                ),
-                "pending_images": [],
-                "pending_raw_urls": [],
-            }
-
             await query.message.reply_text(
-                "📸 Yangi rasmlarni yuboring.\n\n"
-                "Bu rasmlar eski rasmlarning "
-                "o'rnini egallaydi.\n\n"
-                "Tugagach <code>/done</code> bosing.\n"
-                "Bekor qilish: <code>/cancel</code>",
-                parse_mode="HTML"
+                "ℹ️ Rasm almashtirish keyingi bosqichda qo'shiladi."
             )
-
             return
 
-        prompt_map = {
-            "name": (
-                "📝 Yangi mahsulot nomini yozing:"
-            ),
-            "price": (
-                "💰 Yangi naqd narxni yozing:"
-            ),
-            "category": (
-                "🗂 Yangi kategoriyani yozing:"
-            ),
-            "description": (
-                "📄 Yangi tavsifni yozing:"
-            ),
+        prompts = {
+            "name":
+                "📝 Yangi mahsulot nomini yozing:",
+            "price":
+                "💰 Yangi naqd narxni yozing:",
+            "category":
+                "🗂 Yangi kategoriyani yozing:",
+            "description":
+                "📄 Yangi tavsifni yozing:",
         }
 
-        prompt = prompt_map.get(
-            field
-        )
+        prompt = prompts.get(field)
 
         if not prompt:
             return
@@ -2327,97 +1807,21 @@ async def callback_handler(
         await query.message.reply_text(
             prompt
         )
-
         return
-
-    # -------------------------
-    # TOGGLE VISIBILITY
-    # -------------------------
 
     if data.startswith("toggle:"):
-
-        product_id = data.split(
-            ":",
-            1
-        )[1]
-
-        products = github_get_products()
-
-        product = next(
-            (
-                p
-                for p in products
-                if p.get("id") == product_id
-            ),
-            None
+        await toggle_product(
+            query,
+            data.split(":", 1)[1]
         )
-
-        if not product:
-            await query.edit_message_text(
-                "❌ Mahsulot topilmadi."
-            )
-            return
-
-        old_visible = (
-            visible_product(product)
-        )
-
-        product["visible"] = not old_visible
-
-        try:
-            github_save_products(
-                products
-            )
-
-            if old_visible:
-                stats[
-                    "products_hidden"
-                ] += 1
-
-                message = (
-                    "🚫 Mahsulot yashirildi."
-                )
-
-            else:
-                message = (
-                    "👁 Mahsulot yana ko'rsatildi."
-                )
-
-            await query.edit_message_text(
-                (
-                    f"✅ <b>{product.get('name', '')}</b>\n\n"
-                    f"{message}"
-                ),
-                parse_mode="HTML"
-            )
-
-        except Exception as e:
-            print(
-                "TOGGLE XATOSI:",
-                repr(e)
-            )
-
-            await query.edit_message_text(
-                "❌ O'zgarishni saqlashda "
-                "xatolik yuz berdi."
-            )
-
         return
 
-    # -------------------------
-    # DELETE CONFIRM
-    # -------------------------
+    if data.startswith("delconfirm:"):
+        product_id = data.split(":", 1)[1]
 
-    if data.startswith(
-        "delconfirm:"
-    ):
-
-        product_id = data.split(
-            ":",
-            1
-        )[1]
-
-        products = github_get_products()
+        products = await github_get_products(
+            force_refresh=True
+        )
 
         product = next(
             (
@@ -2434,114 +1838,48 @@ async def callback_handler(
             )
             return
 
-        keyboard = [
-            [
-                InlineKeyboardButton(
-                    "✅ Ha, o'chirish",
-                    callback_data=(
-                        f"del:{product_id}"
-                    )
-                ),
-                InlineKeyboardButton(
-                    "❌ Yo'q",
-                    callback_data=(
-                        f"edit:{product_id}"
-                    )
-                ),
-            ]
-        ]
+        keyboard = [[
+            InlineKeyboardButton(
+                "✅ Ha, o'chirish",
+                callback_data=(
+                    f"del:{product_id}"
+                )
+            ),
+            InlineKeyboardButton(
+                "❌ Yo'q",
+                callback_data=(
+                    f"edit:{product_id}"
+                )
+            ),
+        ]]
 
         await query.edit_message_text(
             (
-                "⚠️ <b>Haqiqatan "
-                "o'chirmoqchimisiz?</b>\n\n"
-                f"🛍 {product.get('name', '')}\n\n"
-                "Mahsulot katalogdan olib tashlanadi."
+                "⚠️ <b>Haqiqatan o'chirmoqchimisiz?</b>\n\n"
+                f"🛍 {product.get('name', '')}"
             ),
             parse_mode="HTML",
             reply_markup=InlineKeyboardMarkup(
                 keyboard
             )
         )
-
         return
-
-    # -------------------------
-    # DELETE
-    # -------------------------
 
     if data.startswith("del:"):
-
-        product_id = data.split(
-            ":",
-            1
-        )[1]
-
-        products = github_get_products()
-
-        new_products = [
-            p
-            for p in products
-            if p.get("id") != product_id
-        ]
-
-        if len(new_products) == len(
-            products
-        ):
-            await query.edit_message_text(
-                "❌ Mahsulot topilmadi."
-            )
-            return
-
-        try:
-            await query.edit_message_text(
-                "⏳ Mahsulot o'chirilmoqda..."
-            )
-
-            github_save_products(
-                new_products
-            )
-
-            stats[
-                "products_deleted"
-            ] += 1
-
-            await query.edit_message_text(
-                "✅ Mahsulot katalogdan "
-                "o'chirildi."
-            )
-
-        except Exception as e:
-            print(
-                "DELETE XATOSI:",
-                repr(e)
-            )
-
-            await query.edit_message_text(
-                "❌ O'chirishda xatolik yuz berdi."
-            )
-
+        await delete_product(
+            query,
+            data.split(":", 1)[1]
+        )
         return
 
-    # -------------------------
-    # CATALOG CATEGORY
-    # -------------------------
-
     if data.startswith("cat:"):
-
-        try:
-            index = int(
-                data.split(
-                    ":",
-                    1
-                )[1]
-            )
-        except ValueError:
-            return
+        index = int(
+            data.split(":", 1)[1]
+        )
 
         products = [
             p
-            for p in github_get_products()
+            for p in await github_get_products()
             if visible_product(p)
         ]
 
@@ -2561,26 +1899,15 @@ async def callback_handler(
                 []
             ).append(product)
 
-        sorted_categories = sorted(
+        names = sorted(
             categories.keys(),
             key=lambda x: x.lower()
         )
 
-        if (
-            index < 0
-            or index >= len(
-                sorted_categories
-            )
-        ):
+        if not 0 <= index < len(names):
             return
 
-        category = sorted_categories[
-            index
-        ]
-
-        selected = categories[
-            category
-        ][:10]
+        category = names[index]
 
         await query.message.reply_text(
             (
@@ -2590,7 +1917,7 @@ async def callback_handler(
             parse_mode="HTML"
         )
 
-        for product in selected:
+        for product in categories[category][:10]:
             await send_product_to_chat(
                 context.bot,
                 query.message.chat_id,
@@ -2600,20 +1927,126 @@ async def callback_handler(
         return
 
 
-# =========================
-# /CATALOG
-# =========================
+# ============================================================
+# EDIT STATE
+# ============================================================
+
+async def handle_edit_state(
+    update,
+    context
+):
+    if not update.message:
+        return False
+
+    user = update.message.from_user
+
+    if not user or not is_admin(user.id):
+        return False
+
+    state = admin_states.get(user.id)
+
+    if not state:
+        return False
+
+    step = state.get("step")
+
+    if step not in {
+        "edit_name",
+        "edit_price",
+        "edit_category",
+        "edit_description",
+    }:
+        return False
+
+    if not update.message.text:
+        await update.message.reply_text(
+            "📝 Matn yuboring."
+        )
+        return True
+
+    products = await github_get_products()
+
+    product = next(
+        (
+            p
+            for p in products
+            if p.get("id")
+            == state.get("product_id")
+        ),
+        None
+    )
+
+    if not product:
+        admin_states.pop(user.id, None)
+
+        await update.message.reply_text(
+            "❌ Mahsulot topilmadi."
+        )
+        return True
+
+    text = update.message.text.strip()
+    field = state["field"]
+
+    if field == "name":
+        if not text:
+            await update.message.reply_text(
+                "❌ Nom bo'sh bo'lishi mumkin emas."
+            )
+            return True
+
+        product["name"] = text
+
+    elif field == "price":
+        price = parse_price(text)
+
+        if price is None:
+            await update.message.reply_text(
+                "❌ Narx noto'g'ri."
+            )
+            return True
+
+        product["price"] = price
+
+    elif field == "category":
+        product["category"] = text
+
+    elif field == "description":
+        product["description"] = text
+
+    refresh_product_keywords(product)
+
+    await github_save_products(
+        products
+    )
+
+    stats["products_edited"] += 1
+
+    admin_states.pop(
+        user.id,
+        None
+    )
+
+    await update.message.reply_text(
+        "✅ Mahsulot muvaffaqiyatli tahrirlandi."
+    )
+
+    return True
+
+
+# ============================================================
+# CATALOG
+# ============================================================
 
 async def catalog_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
+    update,
+    context
 ):
     if not update.message:
         return
 
     products = [
         p
-        for p in github_get_products()
+        for p in await github_get_products()
         if visible_product(p)
     ]
 
@@ -2634,32 +2067,25 @@ async def catalog_command(
             or "Kategoriyasiz"
         )
 
-        categories.setdefault(
-            category,
-            0
+        categories[category] = (
+            categories.get(category, 0) + 1
         )
 
-        categories[category] += 1
-
-    keyboard = []
-
-    sorted_categories = sorted(
+    names = sorted(
         categories.keys(),
         key=lambda x: x.lower()
     )
 
-    for index, category in enumerate(
-        sorted_categories
-    ):
+    keyboard = []
+
+    for index, category in enumerate(names):
         keyboard.append([
             InlineKeyboardButton(
                 (
                     f"🗂 {category} "
                     f"({categories[category]})"
                 ),
-                callback_data=(
-                    f"cat:{index}"
-                )
+                callback_data=f"cat:{index}",
             )
         ])
 
@@ -2673,146 +2099,48 @@ async def catalog_command(
     )
 
 
-# =========================
-# /HELP
-# =========================
-
-async def help_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    if not update.message:
-        return
-
-    await update.message.reply_text(
-        "ℹ️ <b>AKSO AI yordam</b>\n\n"
-        "Mahsulotni oddiy tilda so'rang.\n\n"
-        "Masalan:\n"
-        "• Kuller bormi?\n"
-        "• Shkaf bormi?\n"
-        "• Detski shkaflar kerak\n"
-        "• Kiyim osadigan mebel bormi?\n"
-        "• Stol kerak\n\n"
-        "Men katalogdan mos mahsulotlarni "
-        "topib, rasmlari va bo'lib to'lash "
-        "oylik to'lovlarini yuboraman.",
-        parse_mode="HTML"
-    )
-
-
-# =========================
-# /START
-# =========================
-
-async def start_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    if not update.message:
-        return
-
-    await update.message.reply_text(
-        "👋 Assalomu alaykum! "
-        "Men AKSO AI botman.\n\n"
-        "Mahsulot nomini yoki sizga kerakli "
-        "mahsulotni oddiy tilda yozishingiz mumkin. 🤖",
-        parse_mode="HTML"
-    )
-
-
-# =========================
-# /ID
-# =========================
-
-async def my_id_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    if not update.message:
-        return
-
-    user = update.message.from_user
-
-    if not user:
-        return
-
-    await update.message.reply_text(
-        f"🆔 Sizning Telegram ID'ingiz:\n\n"
-        f"<code>{user.id}</code>",
-        parse_mode="HTML"
-    )
-
-
-# =========================
-# /CANCEL
-# =========================
-
-async def cancel_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    if not update.message:
-        return
-
-    user = update.message.from_user
-
-    if not user:
-        return
-
-    if is_admin(user.id):
-        admin_states.pop(
-            user.id,
-            None
-        )
-
-        await update.message.reply_text(
-            "❌ Joriy amal bekor qilindi."
-        )
-
-
-# =========================
-# ASOSIY AI + MAHSULOT
-# =========================
+# ============================================================
+# MAIN MESSAGE HANDLER
+# ============================================================
 
 async def reply_to_message(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
+    update,
+    context
 ):
     if not update.message:
         return
 
     if (
         update.message.from_user
-        and
-        update.message.from_user.is_bot
+        and update.message.from_user.is_bot
     ):
         return
 
     stats["messages"] += 1
 
-    handled = await handle_admin_state(
+    # Admin add/edit workflow first.
+    if await handle_edit_state(
         update,
         context
-    )
-
-    if handled:
+    ):
         return
 
-    # -------------------------
-    # RASM TAHLILI
-    # -------------------------
+    if await handle_admin_state(
+        update,
+        context
+    ):
+        return
+
+    # =========================
+    # PHOTO -> GEMINI VISION
+    # =========================
 
     if update.message.photo:
-
         try:
-            photo = (
-                update.message.photo[-1]
-            )
+            photo = update.message.photo[-1]
 
-            file = (
-                await context.bot.get_file(
-                    photo.file_id
-                )
+            file = await context.bot.get_file(
+                photo.file_id
             )
 
             image_bytes = (
@@ -2823,8 +2151,7 @@ async def reply_to_message(
                 update.message.caption.strip()
                 if update.message.caption
                 else
-                "Bu rasmda nima borligini "
-                "batafsil tushuntir."
+                "Bu rasmda nima borligini batafsil tushuntir."
             )
 
             prompt = f"""
@@ -2832,34 +2159,23 @@ Sen Telegramdagi AKSO AI yordamchisisan.
 
 Foydalanuvchi senga rasm yubordi.
 
-Rasmni diqqat bilan tahlil qil
-va foydalanuvchining savoliga javob ber.
+Rasmni diqqat bilan tahlil qil va savolga javob ber.
 
 Qoidalar:
-- O'zbek tilida yozilsa,
-  o'zbek tilida javob ber.
-- Rus tilida yozilsa,
-  rus tilida javob ber.
-- Ingliz tilida yozilsa,
-  ingliz tilida javob ber.
-- Rasmda ko'rinadigan narsalarni
-  aniq tasvirla.
-- Bilmagan narsangni taxmin qilib
-  fakt sifatida aytma.
-- Javobni tushunarli va foydali qil.
+- O'zbekcha bo'lsa o'zbekcha.
+- Ruscha bo'lsa ruscha.
+- Inglizcha bo'lsa inglizcha.
+- Ko'rinadigan narsalarni aniq ayt.
+- Bilmagan narsani fakt sifatida aytma.
 - Keraksiz uzun javob bermagin.
 
-Foydalanuvchi savoli:
+Savol:
 {user_text}
 """
 
-            image_part = (
-                types.Part.from_bytes(
-                    data=bytes(
-                        image_bytes
-                    ),
-                    mime_type="image/jpeg"
-                )
+            image_part = types.Part.from_bytes(
+                data=bytes(image_bytes),
+                mime_type="image/jpeg"
             )
 
             response = (
@@ -2874,34 +2190,28 @@ Foydalanuvchi savoli:
 
             answer = (
                 response.text
+                or
+                "Kechirasiz, rasmni tahlil qila olmadim."
             )
 
-            if not answer:
-                answer = (
-                    "Kechirasiz, rasmni "
-                    "tahlil qila olmadim."
-                )
-
             if len(answer) > 4000:
-                answer = (
-                    answer[:4000]
-                    + "..."
-                )
+                answer = answer[:4000] + "..."
 
-            if update.message.chat.type in [
+            kwargs = {
+                "text": answer
+            }
+
+            if update.message.chat.type in (
                 "group",
                 "supergroup"
-            ]:
-                await update.message.reply_text(
-                    answer,
-                    reply_to_message_id=(
-                        update.message.message_id
-                    )
-                )
-            else:
-                await update.message.reply_text(
-                    answer
-                )
+            ):
+                kwargs[
+                    "reply_to_message_id"
+                ] = update.message.message_id
+
+            await update.message.reply_text(
+                **kwargs
+            )
 
         except Exception as e:
             print(
@@ -2910,16 +2220,10 @@ Foydalanuvchi savoli:
             )
 
             await update.message.reply_text(
-                "Kechirasiz, rasmni "
-                "tahlil qilishda "
-                "texnik xatolik yuz berdi."
+                "Kechirasiz, rasmni tahlil qilishda texnik xatolik yuz berdi."
             )
 
         return
-
-    # -------------------------
-    # ODDIY MATN
-    # -------------------------
 
     if not update.message.text:
         return
@@ -2931,82 +2235,77 @@ Foydalanuvchi savoli:
     if not user_text:
         return
 
-    # -------------------------
-    # MAHSULOT KATALOGI
-    # -------------------------
+    # =========================
+    # CATALOG SEARCH
+    # =========================
 
-    try:
-        products = github_get_products()
+    if likely_product_query(
+        user_text
+    ):
+        try:
+            products = await github_get_products()
 
-        if products:
-            stats[
-                "catalog_queries"
-            ] += 1
+            if products:
+                stats[
+                    "catalog_queries"
+                ] += 1
 
-            local_products = (
-                find_local_products(
-                    user_text,
-                    products
+                # Fast local search first.
+                local_products = (
+                    find_local_products(
+                        user_text,
+                        products
+                    )
                 )
+
+                if local_products:
+                    await send_products_to_message(
+                        context.bot,
+                        update.message,
+                        local_products
+                    )
+                    return
+
+                # Semantic AI only when necessary.
+                ai_products = (
+                    await find_ai_products(
+                        user_text,
+                        products
+                    )
+                )
+
+                if ai_products:
+                    await send_products_to_message(
+                        context.bot,
+                        update.message,
+                        ai_products
+                    )
+                    return
+
+        except Exception as e:
+            print(
+                "KATALOG QIDIRUV XATOSI:",
+                repr(e)
             )
 
-            if local_products:
-                await send_products_to_message(
-                    context.bot,
-                    update.message,
-                    local_products
-                )
-                return
-
-            ai_products = (
-                await find_ai_products(
-                    user_text,
-                    products
-                )
-            )
-
-            if ai_products:
-                await send_products_to_message(
-                    context.bot,
-                    update.message,
-                    ai_products
-                )
-                return
-
-    except Exception as e:
-        print(
-            "KATALOG QIDIRUV XATOSI:",
-            repr(e)
-        )
-
-    # -------------------------
-    # ODDIY GEMINI JAVOBI
-    # -------------------------
+    # =========================
+    # NORMAL AI
+    # =========================
 
     try:
         prompt = f"""
 Sen Telegramdagi AKSO AI yordamchisisan.
 
-Foydalanuvchiga uning xabariga qarab
-tabiiy, foydali va aniq javob ber.
+Foydalanuvchiga tabiiy, foydali va aniq javob ber.
 
 Qoidalar:
-- O'zbek tilida yozilsa,
-  o'zbek tilida javob ber.
-- Rus tilida yozilsa,
-  rus tilida javob ber.
-- Ingliz tilida yozilsa,
-  ingliz tilida javob ber.
-- Javobni tushunarli va foydali qil.
+- O'zbekcha bo'lsa o'zbekcha.
+- Ruscha bo'lsa ruscha.
+- Inglizcha bo'lsa inglizcha.
 - Keraksiz uzun javob bermagin.
-- Oddiy savolga oddiy va aniq
-  javob ber.
-- Salomlashishga odob bilan
-  javob ber.
-- Foydalanuvchi xabarini
-  qayta takrorlama.
+- Oddiy savolga oddiy javob ber.
 
-Foydalanuvchi xabari:
+Foydalanuvchi:
 {user_text}
 """
 
@@ -3019,24 +2318,17 @@ Foydalanuvchi xabari:
 
         answer = (
             response.text
+            or
+            "Kechirasiz, hozir javob bera olmadim."
         )
 
-        if not answer:
-            answer = (
-                "Kechirasiz, hozir javob "
-                "bera olmadim."
-            )
-
         if len(answer) > 4000:
-            answer = (
-                answer[:4000]
-                + "..."
-            )
+            answer = answer[:4000] + "..."
 
-        if update.message.chat.type in [
+        if update.message.chat.type in (
             "group",
             "supergroup"
-        ]:
+        ):
             await update.message.reply_text(
                 answer,
                 reply_to_message_id=(
@@ -3055,13 +2347,12 @@ Foydalanuvchi xabari:
         )
 
         try:
-            if update.message.chat.type in [
+            if update.message.chat.type in (
                 "group",
                 "supergroup"
-            ]:
+            ):
                 await update.message.reply_text(
-                    "Kechirasiz, hozir "
-                    "javob berishda "
+                    "Kechirasiz, hozir javob berishda "
                     "texnik xatolik yuz berdi.",
                     reply_to_message_id=(
                         update.message.message_id
@@ -3069,11 +2360,9 @@ Foydalanuvchi xabari:
                 )
             else:
                 await update.message.reply_text(
-                    "Kechirasiz, hozir "
-                    "javob berishda "
+                    "Kechirasiz, hozir javob berishda "
                     "texnik xatolik yuz berdi."
                 )
-
         except Exception as telegram_error:
             print(
                 "TELEGRAM JAVOB XATOSI:",
@@ -3081,16 +2370,37 @@ Foydalanuvchi xabari:
             )
 
 
-# =========================
+async def send_products_to_message(
+    bot,
+    message,
+    products
+):
+    if not products:
+        return
+
+    stats["catalog_matches"] += len(
+        products
+    )
+
+    for product in products:
+        await send_product_to_chat(
+            bot,
+            message.chat_id,
+            product,
+            reply_to_message_id=(
+                message.message_id
+            ),
+        )
+
+
+# ============================================================
 # COMMAND MENUS
-# =========================
+# ============================================================
 
 async def setup_command_menus(
     application
 ):
-    # Avval eski default va admin-chat komandalarini
-    # tozalaymiz. Bu Telegram klientida eski ro'yxat
-    # qolib ketishining oldini oladi.
+    # Eski default va admin scope'larni tozalaymiz.
     await application.bot.delete_my_commands()
 
     await application.bot.delete_my_commands(
@@ -3099,7 +2409,6 @@ async def setup_command_menus(
         )
     )
 
-    # Oddiy foydalanuvchi uchun umumiy menyu.
     user_commands = [
         BotCommand(
             "start",
@@ -3119,7 +2428,6 @@ async def setup_command_menus(
         user_commands
     )
 
-    # Admin uchun alohida menyu.
     admin_commands = [
         BotCommand(
             "start",
@@ -3163,11 +2471,11 @@ async def setup_command_menus(
         ),
         BotCommand(
             "done",
-            "✅ Rasm kiritishni tugatish"
+            "✅ Rasmlarni tugatish"
         ),
         BotCommand(
             "skip",
-            "⏭ Bosqichni o'tkazish"
+            "⏭ O'tkazib yuborish"
         ),
         BotCommand(
             "cancel",
@@ -3182,39 +2490,29 @@ async def setup_command_menus(
         )
     )
 
-    # O'rnatilgan admin menyusini tekshirish.
-    saved_commands = await application.bot.get_my_commands(
-        scope=BotCommandScopeChat(
-            chat_id=ADMIN_ID
-        )
-    )
-
     print(
         "✅ Telegram command menus o'rnatildi."
     )
 
-    print(
-        "✅ Admin commands:",
-        [command.command for command in saved_commands]
-    )
 
-
-# =========================
+# ============================================================
 # APPLICATION
-# =========================
+# ============================================================
 
 telegram_app = (
     Application
     .builder()
     .token(BOT_TOKEN)
-    .post_init(setup_command_menus)
+    .post_init(
+        setup_command_menus
+    )
     .build()
 )
 
 
-# =========================
+# ============================================================
 # COMMAND HANDLERS
-# =========================
+# ============================================================
 
 telegram_app.add_handler(
     CommandHandler(
@@ -3307,21 +2605,11 @@ telegram_app.add_handler(
     )
 )
 
-
-# =========================
-# CALLBACK HANDLER
-# =========================
-
 telegram_app.add_handler(
     CallbackQueryHandler(
         callback_handler
     )
 )
-
-
-# =========================
-# MESSAGE HANDLER
-# =========================
 
 telegram_app.add_handler(
     MessageHandler(
@@ -3335,20 +2623,13 @@ telegram_app.add_handler(
 )
 
 
-# =========================
+# ============================================================
 # START WEBHOOK
-# =========================
+# ============================================================
 
 if __name__ == "__main__":
-
-    print(
-        "Bot ishga tushmoqda..."
-    )
-
-    print(
-        "Render URL:",
-        BASE_URL
-    )
+    print("Bot ishga tushmoqda...")
+    print("Render URL:", BASE_URL)
 
     telegram_app.run_webhook(
         listen="0.0.0.0",
