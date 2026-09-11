@@ -10,7 +10,13 @@
       "techon",
       "kuller"
     ],
-    "created_at": "2026-09-11 04:57:08"
+    "created_at": "2026-09-11 04:57:08",
+    "images": [
+      "AgACAgIAAxkBAANsaqOJ3g1K6OdRHRv2mlyNajDjp9gAAlUhaxv3GhlJjtr-S7HGYT4BAAMCAAN5AAM9BA"
+    ],
+    "visible": true,
+    "category": "",
+    "description": ""
   },
   {
     "id": "1789102791295",
@@ -24,6 +30,38 @@
       "kuller",
       "10bsb"
     ],
-    "created_at": "2026-09-11 04:59:51"
+    "created_at": "2026-09-11 04:59:51",
+    "images": [
+      "AgACAgIAAxkBAAN3aqOKhGZX4IbziAuPx9Vbil3t0eoAAlohaxv3GhlJPM9OV0mgd14BAAMCAAN5AAM9BA"
+    ],
+    "visible": true,
+    "category": "",
+    "description": ""
+  },
+  {
+    "id": "1789110191966",
+    "name": "Temir kart, oyogʻi balonlik",
+    "price": 6200000,
+    "category": "Kartlar",
+    "description": "Kart",
+    "telegram_file_id": "AgACAgIAAxkBAAPeaqOnXGG_FmHtgtPXh4Sf3fJAfOoAAi8faxv3GiFJQRPA1inwomgBAAMCAAN5AAM9BA",
+    "images": [
+      "AgACAgIAAxkBAAPeaqOnXGG_FmHtgtPXh4Sf3fJAfOoAAi8faxv3GiFJQRPA1inwomgBAAMCAAN5AAM9BA",
+      "AgACAgIAAxkBAAPfaqOnXBWlLjY6CFko0k4uh21JYMYAAjAfaxv3GiFJcS9WZ26JTEABAAMCAAN5AAM9BA"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/temir_kart_oyogi_balonlik_1789110189011_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/temir_kart_oyogi_balonlik_1789110189011_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/temir_kart_oyogi_balonlik_1789110190268_2.jpg"
+    ],
+    "github_path": "products/temir_kart_oyogi_balonlik",
+    "keywords": [
+      "temir",
+      "kart",
+      "oyogi",
+      "balonlik"
+    ],
+    "visible": true,
+    "created_at": "2026-09-11 07:03:11"
   }
 ]
