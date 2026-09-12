@@ -15,6 +15,8 @@ from telegram import (
     BotCommandScopeChat,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
+    KeyboardButton,
+    ReplyKeyboardMarkup,
 )
 from telegram.ext import (
     Application,
@@ -2349,6 +2351,110 @@ async def catalog_command(
 
 
 # ============================================================
+# REPLY KEYBOARDS
+# ============================================================
+
+CUSTOMER_KEYBOARD = ReplyKeyboardMarkup(
+    [
+        [
+            KeyboardButton("🛍 Mahsulotlar"),
+            KeyboardButton("🔎 Mahsulot qidirish"),
+        ],
+        [
+            KeyboardButton("❓ Yordam"),
+        ],
+    ],
+    resize_keyboard=True,
+    is_persistent=True,
+)
+
+ADMIN_KEYBOARD = ReplyKeyboardMarkup(
+    [
+        [
+            KeyboardButton("➕ Mahsulot qo'shish"),
+            KeyboardButton("📦 Mahsulotlar"),
+        ],
+        [
+            KeyboardButton("✏️ Tahrirlash"),
+            KeyboardButton("🗑 O'chirish"),
+        ],
+        [
+            KeyboardButton("🗂 Kategoriyalar"),
+            KeyboardButton("📊 Statistika"),
+        ],
+        [
+            KeyboardButton("🛍 Katalog"),
+            KeyboardButton("❓ Yordam"),
+        ],
+    ],
+    resize_keyboard=True,
+    is_persistent=True,
+)
+
+
+async def show_main_keyboard(
+    update,
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+    keyboard = (
+        ADMIN_KEYBOARD
+        if user and is_admin(user.id)
+        else CUSTOMER_KEYBOARD
+    )
+
+    await update.message.reply_text(
+        "Quyidagi tugmalardan foydalanishingiz mumkin:",
+        reply_markup=keyboard,
+    )
+
+
+async def handle_menu_button(
+    update,
+    context,
+):
+    if not update.message or not update.message.text:
+        return False
+
+    text = update.message.text.strip()
+    user = update.message.from_user
+
+    if user and is_admin(user.id):
+        admin_actions = {
+            "➕ Mahsulot qo'shish": add_product_command,
+            "📦 Mahsulotlar": products_command,
+            "✏️ Tahrirlash": edit_product_command,
+            "🗑 O'chirish": delete_product_command,
+            "🗂 Kategoriyalar": categories_command,
+            "📊 Statistika": stats_command,
+            "🛍 Katalog": catalog_command,
+            "❓ Yordam": help_command,
+        }
+
+        action = admin_actions.get(text)
+
+        if action:
+            await action(update, context)
+            return True
+
+    customer_actions = {
+        "🛍 Mahsulotlar": catalog_command,
+        "🔎 Mahsulot qidirish": help_command,
+        "❓ Yordam": help_command,
+    }
+
+    action = customer_actions.get(text)
+
+    if action:
+        await action(update, context)
+        return True
+
+    return False
+
+
+# ============================================================
 # /HELP /START /ID /CANCEL
 # ============================================================
 
@@ -2382,10 +2488,19 @@ async def start_command(
     if not update.message:
         return
 
+    user = update.message.from_user
+
+    keyboard = (
+        ADMIN_KEYBOARD
+        if user and is_admin(user.id)
+        else CUSTOMER_KEYBOARD
+    )
+
     await update.message.reply_text(
         "👋 Assalomu alaykum! Men AKSO AI botman.\n\n"
         "Sizga kerakli mahsulotni oddiy tilda yozing. "
-        "Men mos mahsulotni topishga harakat qilaman."
+        "Men mos mahsulotni topishga harakat qilaman.",
+        reply_markup=keyboard,
     )
 
 
@@ -2430,8 +2545,15 @@ async def cancel_command(
         update.message.chat_id
     )
 
+    user_keyboard = (
+        ADMIN_KEYBOARD
+        if is_admin(user.id)
+        else CUSTOMER_KEYBOARD
+    )
+
     await update.message.reply_text(
-        "❌ Joriy amal bekor qilindi."
+        "❌ Joriy amal bekor qilindi.",
+        reply_markup=user_keyboard,
     )
 
 
@@ -2564,6 +2686,14 @@ Savol:
     )
 
     if not user_text:
+        return
+
+    # Reply keyboard tugmalari bosilganda ularni oddiy
+    # mahsulot qidiruvi deb qabul qilmaymiz.
+    if await handle_menu_button(
+        update,
+        context,
+    ):
         return
 
     # --------------------------------------------------------
