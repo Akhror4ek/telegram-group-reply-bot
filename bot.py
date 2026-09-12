@@ -15,6 +15,8 @@ from telegram import (
     BotCommandScopeChat,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
+    KeyboardButton,
+    ReplyKeyboardMarkup,
 )
 from telegram.ext import (
     Application,
@@ -83,57 +85,6 @@ stats = {
     "products_deleted": 0,
     "products_hidden": 0,
 }
-
-# ============================================================
-# AKSO KNOWLEDGE BASE
-# ============================================================
-
-AKSO_KNOWLEDGE = {
-    "store_name": "AKSO",
-    "address": "Shersaxiy bozori yoni",
-    "landmark": "Shersaxiy stoyanka oldi",
-    "working_days": "Har kuni, dam olish kunlarisiz",
-    "working_hours": "08:00 - 20:00",
-    "phone": "+998 78 555-17-77",
-    "telegram": "@aksouz",
-    "instagram": "@akso.uz",
-    "website": "akso.uz",
-    "delivery": "Qorako'l va Olot tumanlari bo'ylab bepul, hech qanday shartlarsiz.",
-    "installation": "Barcha mahsulotlarga montaj/o'rnatish bor va bepul.",
-    "payment": "Naqd, karta va bo'lib to'lash mavjud.",
-    "installment_3": "3 oy — 0% ustama.",
-    "installment_6": "6 oy — odatda 18% ustama. Ammo ayrim mahsulotlarda, aksiya vaqtida yoki oldindan to'lov bilan 6 oyga ustamasiz bo'lishi mumkin.",
-    "installment_12": "12 oy — 36% ustama.",
-    "installment_doc": "Bo'lib to'lash uchun pasport talab qilinadi.",
-    "warranty": "Kafolat mavjud, 10 yilgacha. Garantiya taloni saqlangan bo'lishi kerak.",
-    "returns": "Mahsulot shikastlanmagan bo'lsa, 1 oy ichida qaytarish yoki almashtirish mumkin.",
-    "promotions": "Yangi va doimiy mijozlar uchun chegirma va aksiyalar mavjud.",
-    "operator": "+998-94-529-07-07",
-}
-
-
-def akso_knowledge_text():
-    return "\n".join([
-        f"Do'kon: {AKSO_KNOWLEDGE['store_name']}",
-        f"Manzil: {AKSO_KNOWLEDGE['address']}",
-        f"Mo'ljal: {AKSO_KNOWLEDGE['landmark']}",
-        f"Ish vaqti: {AKSO_KNOWLEDGE['working_days']}, {AKSO_KNOWLEDGE['working_hours']}",
-        f"Telefon: {AKSO_KNOWLEDGE['phone']}",
-        f"Telegram: {AKSO_KNOWLEDGE['telegram']}",
-        f"Instagram: {AKSO_KNOWLEDGE['instagram']}",
-        f"Sayt: {AKSO_KNOWLEDGE['website']}",
-        f"Yetkazib berish: {AKSO_KNOWLEDGE['delivery']}",
-        f"Montaj: {AKSO_KNOWLEDGE['installation']}",
-        f"To'lov: {AKSO_KNOWLEDGE['payment']}",
-        f"3 oy: {AKSO_KNOWLEDGE['installment_3']}",
-        f"6 oy: {AKSO_KNOWLEDGE['installment_6']}",
-        f"12 oy: {AKSO_KNOWLEDGE['installment_12']}",
-        f"Hujjat: {AKSO_KNOWLEDGE['installment_doc']}",
-        f"Kafolat: {AKSO_KNOWLEDGE['warranty']}",
-        f"Qaytarish/almashtirish: {AKSO_KNOWLEDGE['returns']}",
-        f"Aksiyalar: {AKSO_KNOWLEDGE['promotions']}",
-        f"Operator: {AKSO_KNOWLEDGE['operator']}",
-    ])
 
 
 # ============================================================
@@ -2400,30 +2351,110 @@ async def catalog_command(
 
 
 # ============================================================
-# ============================================================
-# /STORE
+# REPLY KEYBOARDS
 # ============================================================
 
-async def store_command(update, context):
+CUSTOMER_KEYBOARD = ReplyKeyboardMarkup(
+    [
+        [
+            KeyboardButton("🛍 Mahsulotlar"),
+            KeyboardButton("🔎 Mahsulot qidirish"),
+        ],
+        [
+            KeyboardButton("❓ Yordam"),
+        ],
+    ],
+    resize_keyboard=True,
+    is_persistent=True,
+)
+
+ADMIN_KEYBOARD = ReplyKeyboardMarkup(
+    [
+        [
+            KeyboardButton("➕ Mahsulot qo'shish"),
+            KeyboardButton("📦 Mahsulotlar"),
+        ],
+        [
+            KeyboardButton("✏️ Tahrirlash"),
+            KeyboardButton("🗑 O'chirish"),
+        ],
+        [
+            KeyboardButton("🗂 Kategoriyalar"),
+            KeyboardButton("📊 Statistika"),
+        ],
+        [
+            KeyboardButton("🛍 Katalog"),
+            KeyboardButton("❓ Yordam"),
+        ],
+    ],
+    resize_keyboard=True,
+    is_persistent=True,
+)
+
+
+async def show_main_keyboard(
+    update,
+):
     if not update.message:
         return
 
+    user = update.message.from_user
+    keyboard = (
+        ADMIN_KEYBOARD
+        if user and is_admin(user.id)
+        else CUSTOMER_KEYBOARD
+    )
+
     await update.message.reply_text(
-        "🏪 <b>AKSO do'koni</b>\n\n"
-        f"📍 Manzil: <b>{AKSO_KNOWLEDGE['address']}</b>\n"
-        f"🧭 Mo'ljal: <b>{AKSO_KNOWLEDGE['landmark']}</b>\n"
-        f"🕐 Ish vaqti: <b>{AKSO_KNOWLEDGE['working_days']}, {AKSO_KNOWLEDGE['working_hours']}</b>\n"
-        f"📞 Telefon: <b>{AKSO_KNOWLEDGE['phone']}</b>\n"
-        f"📲 Telegram: <b>{AKSO_KNOWLEDGE['telegram']}</b>\n"
-        f"📸 Instagram: <b>{AKSO_KNOWLEDGE['instagram']}</b>\n"
-        f"🌐 Sayt: <b>{AKSO_KNOWLEDGE['website']}</b>\n\n"
-        "🚚 Qorako'l va Olot bo'ylab yetkazib berish — <b>bepul</b>.\n"
-        "🛠 Barcha mahsulotlarga montaj — <b>bepul</b>.\n"
-        "🛡 Kafolat — <b>10 yilgacha</b>.",
-        parse_mode="HTML",
+        "Quyidagi tugmalardan foydalanishingiz mumkin:",
+        reply_markup=keyboard,
     )
 
 
+async def handle_menu_button(
+    update,
+    context,
+):
+    if not update.message or not update.message.text:
+        return False
+
+    text = update.message.text.strip()
+    user = update.message.from_user
+
+    if user and is_admin(user.id):
+        admin_actions = {
+            "➕ Mahsulot qo'shish": add_product_command,
+            "📦 Mahsulotlar": products_command,
+            "✏️ Tahrirlash": edit_product_command,
+            "🗑 O'chirish": delete_product_command,
+            "🗂 Kategoriyalar": categories_command,
+            "📊 Statistika": stats_command,
+            "🛍 Katalog": catalog_command,
+            "❓ Yordam": help_command,
+        }
+
+        action = admin_actions.get(text)
+
+        if action:
+            await action(update, context)
+            return True
+
+    customer_actions = {
+        "🛍 Mahsulotlar": catalog_command,
+        "🔎 Mahsulot qidirish": help_command,
+        "❓ Yordam": help_command,
+    }
+
+    action = customer_actions.get(text)
+
+    if action:
+        await action(update, context)
+        return True
+
+    return False
+
+
+# ============================================================
 # /HELP /START /ID /CANCEL
 # ============================================================
 
@@ -2457,10 +2488,19 @@ async def start_command(
     if not update.message:
         return
 
+    user = update.message.from_user
+
+    keyboard = (
+        ADMIN_KEYBOARD
+        if user and is_admin(user.id)
+        else CUSTOMER_KEYBOARD
+    )
+
     await update.message.reply_text(
         "👋 Assalomu alaykum! Men AKSO AI botman.\n\n"
         "Sizga kerakli mahsulotni oddiy tilda yozing. "
-        "Men mos mahsulotni topishga harakat qilaman."
+        "Men mos mahsulotni topishga harakat qilaman.",
+        reply_markup=keyboard,
     )
 
 
@@ -2505,8 +2545,15 @@ async def cancel_command(
         update.message.chat_id
     )
 
+    user_keyboard = (
+        ADMIN_KEYBOARD
+        if is_admin(user.id)
+        else CUSTOMER_KEYBOARD
+    )
+
     await update.message.reply_text(
-        "❌ Joriy amal bekor qilindi."
+        "❌ Joriy amal bekor qilindi.",
+        reply_markup=user_keyboard,
     )
 
 
@@ -2639,6 +2686,14 @@ Savol:
     )
 
     if not user_text:
+        return
+
+    # Reply keyboard tugmalari bosilganda ularni oddiy
+    # mahsulot qidiruvi deb qabul qilmaymiz.
+    if await handle_menu_button(
+        update,
+        context,
+    ):
         return
 
     # --------------------------------------------------------
@@ -2782,20 +2837,18 @@ Savol:
 
     try:
         prompt = f"""
-Sen AKSO do'konining virtual sotuvchisi va yordamchisisan.
+Sen Telegramdagi AKSO AI yordamchisisan.
 
-AKSO bo'yicha ishonchli ma'lumotlar:
-{akso_knowledge_text()}
+Foydalanuvchiga tabiiy, foydali va aniq javob ber.
 
-QAT'IY QOIDALAR:
-- AKSO do'koni, manzil, ish vaqti, mahsulot yo'nalishlari, yetkazib berish, montaj, to'lov, bo'lib to'lash, kafolat, qaytarish va aksiya haqidagi savollarga FAQAT yuqoridagi AKSO ma'lumotlariga tayanib javob ber.
-- Bilim bazasida yo'q ma'lumotni o'ylab topma. Ishonching bo'lmasa, operatorga murojaat qilishni tavsiya qil.
-- Oddiy suhbatga mahsulot rasmi yuborma.
-- Mijoz mahsulotni aniq so'ramasa, katalogdagi mahsulotni o'zboshimchalik bilan taklif qilma.
-- Mijozga naqd narx yoki jami bo'lib to'lash summasini aytma.
-- 6 oy odatda 18%, lekin aksiya, ayrim mahsulot yoki oldindan to'lov bilan 6 oyga ustamasiz variant bo'lishi mumkin.
-- O'zbekcha bo'lsa o'zbekcha, ruscha bo'lsa ruscha javob ber.
+Qoidalar:
+- O'zbekcha bo'lsa o'zbekcha.
+- Ruscha bo'lsa ruscha.
+- Inglizcha bo'lsa inglizcha.
 - Keraksiz uzun javob bermagin.
+- Oddiy suhbatga mahsulot rasmi yuborma.
+- Foydalanuvchi mahsulotni aniq so'ramasa,
+  katalogdagi mahsulotlarni o'zboshimchalik bilan tavsiya qilma.
 
 Foydalanuvchi:
 {user_text}
@@ -2888,10 +2941,6 @@ async def setup_command_menus(
             "🛍 Mahsulot katalogi"
         ),
         BotCommand(
-            "store",
-            "🏪 AKSO haqida"
-        ),
-        BotCommand(
             "help",
             "❓ Yordam"
         ),
@@ -2909,10 +2958,6 @@ async def setup_command_menus(
         BotCommand(
             "catalog",
             "🛍 Mahsulot katalogi"
-        ),
-        BotCommand(
-            "store",
-            "🏪 AKSO haqida"
         ),
         BotCommand(
             "help",
@@ -2999,17 +3044,49 @@ telegram_app = (
 # HANDLERS
 # ============================================================
 
+# Reply-keyboard tugmalarini umumiy AI/mahsulot qidiruv handleridan
+# OLDIN ushlaymiz. Shunda "📦 Mahsulotlar", "🗂 Kategoriyalar" kabi
+# tugmalar hech qachon mahsulot qidiruvi sifatida talqin qilinmaydi.
+MENU_BUTTON_PATTERN = (
+    r"^(?:"
+    r"➕ Mahsulot qo\'shish|"
+    r"📦 Mahsulotlar|"
+    r"✏️ Tahrirlash|"
+    r"🗑 O\'chirish|"
+    r"🗂 Kategoriyalar|"
+    r"📊 Statistika|"
+    r"🛍 Katalog|"
+    r"🛍 Mahsulotlar|"
+    r"🔎 Mahsulot qidirish|"
+    r"❓ Yordam"
+    r")$"
+)
+
+
+async def menu_button_message_handler(
+    update,
+    context,
+):
+    await handle_menu_button(
+        update,
+        context,
+    )
+
+
+# Muhim: bu handler umumiy reply_to_message handleridan oldin turadi.
 telegram_app.add_handler(
-    CommandHandler(
-        "start",
-        start_command
+    MessageHandler(
+        filters.TEXT
+        & ~filters.COMMAND
+        & filters.Regex(MENU_BUTTON_PATTERN),
+        menu_button_message_handler,
     )
 )
 
 telegram_app.add_handler(
     CommandHandler(
-        "store",
-        store_command
+        "start",
+        start_command
     )
 )
 
