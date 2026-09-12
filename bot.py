@@ -52,6 +52,7 @@ GITHUB_REPO = "telegram-group-reply-bot"
 GITHUB_BRANCH = "main"
 PRODUCTS_FILE = "products.json"
 PRODUCTS_FOLDER = "products"
+ORDERS_FILE = "orders.json"
 
 
 # ============================================================
@@ -72,6 +73,11 @@ admin_states = {}
 # chat_id -> {user_id, products, created_at}
 pending_product_confirmations = {}
 
+# AI sales memory
+conversation_memory = {}
+last_product_queries = {}
+order_states = {}
+
 products_cache = []
 products_cache_time = 0.0
 PRODUCT_CACHE_TTL = 600  # 10 daqiqa
@@ -84,6 +90,11 @@ stats = {
     "products_edited": 0,
     "products_deleted": 0,
     "products_hidden": 0,
+    "products_viewed": 0,
+    "not_found_queries": 0,
+    "operator_requests": 0,
+    "orders": 0,
+    "recommendation_requests": 0,
 }
 
 # ============================================================
@@ -477,6 +488,132 @@ async def github_save_products(products):
 # ============================================================
 # SAFE PRODUCT INTENT DETECTION
 # ============================================================
+
+# ============================================================
+# AI SALES ASSISTANT V2
+# ============================================================
+
+MAX_MEMORY_TURNS = 12
+
+
+def remember_turn_by_key(key, role, text):
+    if not key or not text:
+        return
+    turns = conversation_memory.setdefault(key, [])
+    turns.append({"role": role, "text": str(text)[:1500]})
+    if len(turns) > MAX_MEMORY_TURNS:
+        del turns[:-MAX_MEMORY_TURNS]
+
+
+def get_memory_key(update):
+    if not update or not update.message or not update.message.from_user:
+        return None
+    return (update.message.chat_id, update.message.from_user.id)
+
+
+def get_conversation_context(key):
+    turns = conversation_memory.get(key, [])
+    lines = []
+    for t in turns[-MAX_MEMORY_TURNS:]:
+        who = "Mijoz" if t.get("role") == "user" else "AKSO"
+        lines.append(f"{who}: {t.get('text', '')}")
+    return "\n".join(lines)
+
+
+def extract_budget(text):
+    q = normalize_text(text)
+    pats = [
+        (r'(\d+(?:[\.,]\d+)?)\s*(mln|million|mlrd|milliard)', 1_000_000),
+        (r'(\d+(?:[\.,]\d+)?)\s*(ming|minglik)', 1_000),
+        (r'(\d+(?:[\.,]\d+)?)\s*(?:som|sum)', 1),
+    ]
+    for pat,m in pats:
+        mm=re.search(pat,q)
+        if mm:
+            try:
+                return int(float(mm.group(1).replace(',','.'))*m)
+            except Exception:
+                pass
+    return None
+
+
+def extract_months(text):
+    q=normalize_text(text)
+    m=re.search(r'\b(3|6|12)\s*(oy|oyga|oylik|month|months)\b',q)
+    return int(m.group(1)) if m else None
+
+
+def extract_monthly_budget(text):
+    q=normalize_text(text)
+    if not any(x in q for x in ("oyiga","oylik","har oy","oy uchun")):
+        return None
+    return extract_budget(text)
+
+
+def extract_colors(text):
+    q=normalize_text(text)
+    return [c for c in ("oq","qora","kulrang","jigarrang","bej","krem","yashil","kok","sariq","qizil","pushti","moviy") if c in q]
+
+
+def extract_dimensions(text):
+    q=normalize_text(text); out=[]
+    for m in re.finditer(r'\b(\d+(?:[\.,]\d+)?)\s*(m|metr|sm|cm)\b',q): out.append(m.group(0))
+    m=re.search(r'\b\d+(?:[\.,]\d+)?\s*[xх×]\s*\d+(?:[\.,]\d+)?\b',q)
+    if m: out.append(m.group(0))
+    return out
+
+
+def monthly_payment(price, months):
+    if months == 3: return round(price/3)
+    if months == 6: return round((price*1.18)/6)
+    if months == 12: return round((price*1.36)/12)
+    return price
+
+
+def filter_products_for_request(products, text):
+    budget=extract_budget(text); monthly=extract_monthly_budget(text); months=extract_months(text) or 3
+    colors=extract_colors(text); dims=extract_dimensions(text)
+    filtered=[]
+    for product in products:
+        try: price=int(product.get("price",0))
+        except Exception: continue
+        searchable=normalize_text(" ".join([product.get("name",""),product.get("category",""),product.get("description","")," ".join(product.get("keywords",[]))]))
+        if monthly is not None and monthly_payment(price,months)>monthly: continue
+        if monthly is None and budget is not None and price>budget: continue
+        if colors and not any(c in searchable for c in colors): continue
+        # Dimensions are a soft constraint because older catalog descriptions may omit them.
+        filtered.append(product)
+    return filtered,{"budget":budget,"monthly":monthly,"months":months,"colors":colors,"dimensions":dims}
+
+
+def build_search_query(key, text):
+    prev=last_product_queries.get(key,"")
+    q=normalize_text(text)
+    ordinary={"ha","xa","albatta","mayli","rahmat","raxmat","ok","okay","yoq","yaxshi","zor","tushunarli"}
+    qualifier=(q not in ordinary) and (len(q.split())<=5 or any(x in q for x in ("uchun","oyiga","oylik","million","mln","ming","oq","qora","kulrang","kupe","detski","bolalar","kiyim")))
+    if prev and qualifier:
+        return f"{prev} {text}"
+    return text
+
+
+def is_guided_need(text, matches):
+    q=normalize_text(text)
+    broad={"shkaf","mebel","divan","stol","stul","karavat","oshxona"}
+    return bool(set(token_list(text)) & broad) and any(x in q for x in ("menga","kerak","izlayapman","qidiryapman")) and not any(x in q for x in ("oq","qora","kupe","detski","bolalar","kiyim","million","mln","ming","oyiga","oylik")) and len(matches)>=4
+
+
+def guided_question(text):
+    q=normalize_text(text)
+    if "shkaf" in q:
+        return "Albatta. 😊 Qaysi turdagi shkaf kerak?\n\n• 👕 Kiyim uchun\n• 🚪 Kupe shkaf\n• 🧸 Bolalar shkafi\n• 🏠 Boshqa turdagi shkaf\n\nByudjetingiz yoki oyiga qulay to'lovingizni ham yozsangiz, variantlarni yanada aniq tanlayman."
+    if "divan" in q:
+        return "Albatta. 😊 Qaysi divan kerak?\n\n• 🛋 Oddiy divan\n• 🛏 Divan-karavot\n• 📐 Burchakli divan\n• 🔄 Transformator divan\n\nByudjetingizni yozing, mos variantlarni ajrataman."
+    if "oshxona" in q:
+        return "Oshxona mebelidan qaysi biri kerak: garnitur, stol-stul yoki boshqa mahsulot? Byudjet yoki taxminiy o'lchamni yozsangiz, tanlovni toraytiraman. 😊"
+    if "stol" in q:
+        return "Stolning qaysi turi kerak: oshxona, ovqatlanish, yozuv yoki kompyuter stoli? Byudjetingizni ham yozing. 😊"
+    return "Sizga mosini topishim uchun mahsulot turi va byudjetingizni yozing. 😊"
+
 
 PRODUCT_INTENT_WORDS = (
     "bormi",
@@ -979,6 +1116,11 @@ async def send_product_to_chat(
 
     caption = "\n".join(parts)
 
+    product_keyboard = InlineKeyboardMarkup([[
+        InlineKeyboardButton("🛒 Buyurtma berish", callback_data=f"order:{product.get('id','')}"),
+        InlineKeyboardButton("👨‍💼 Operator", callback_data="operator"),
+    ]])
+
     images = product_images(
         product
     )
@@ -988,6 +1130,7 @@ async def send_product_to_chat(
             "chat_id": chat_id,
             "text": caption,
             "parse_mode": "HTML",
+            "reply_markup": product_keyboard,
         }
 
         if reply_to_message_id is not None:
@@ -1029,6 +1172,7 @@ async def send_product_to_chat(
             kwargs[
                 "parse_mode"
             ] = "HTML"
+            kwargs["reply_markup"] = product_keyboard
 
             if reply_to_message_id is not None:
                 kwargs[
@@ -1060,6 +1204,7 @@ async def send_product_to_chat(
                     fallback[
                         "parse_mode"
                     ] = "HTML"
+                    fallback["reply_markup"] = product_keyboard
 
                     if reply_to_message_id is not None:
                         fallback[
@@ -1087,6 +1232,7 @@ async def send_pending_products(
         query.message.chat_id
     )
 
+    stats["products_viewed"] += len(products)
     for product in products:
         await send_product_to_chat(
             context.bot,
@@ -1787,7 +1933,11 @@ async def stats_command(
         f"🔎 Katalog so'rovlari: "
         f"<b>{stats['catalog_queries']}</b>\n"
         f"🎯 Topilgan mahsulotlar: "
-        f"<b>{stats['catalog_matches']}</b>\n\n"
+        f"<b>{stats['catalog_matches']}</b>\n"
+        f"👁 Ko'rilgan: <b>{stats['products_viewed']}</b>\n"
+        f"❓ Topilmagan so'rovlar: <b>{stats['not_found_queries']}</b>\n"
+        f"🛒 Buyurtmalar: <b>{stats['orders']}</b>\n"
+        f"👨‍💼 Operator so'rovlari: <b>{stats['operator_requests']}</b>\n\n"
         f"➕ Qo'shilgan: "
         f"<b>{stats['products_added']}</b>\n"
         f"✏️ Tahrirlangan: "
@@ -1796,6 +1946,214 @@ async def stats_command(
         f"<b>{stats['products_deleted']}</b>",
         parse_mode="HTML",
     )
+
+
+# ============================================================
+# ORDERS / OPERATOR
+# ============================================================
+
+async def github_get_orders():
+    try:
+        result=await github_api("GET",f"{ORDERS_FILE}?ref={GITHUB_BRANCH}")
+        content=result.get("content","")
+        if not content: return []
+        data=json.loads(base64.b64decode(content.replace("\n","")).decode("utf-8"))
+        return data if isinstance(data,list) else []
+    except Exception as e:
+        if "404" in str(e): return []
+        raise
+
+
+async def github_save_orders(orders):
+    encoded=base64.b64encode(json.dumps(orders,ensure_ascii=False,indent=2).encode("utf-8")).decode("ascii")
+    sha=None
+    try:
+        sha=(await github_api("GET",f"{ORDERS_FILE}?ref={GITHUB_BRANCH}")).get("sha")
+    except Exception as e:
+        if "404" not in str(e): raise
+    payload={"message":"Update AKSO orders","content":encoded,"branch":GITHUB_BRANCH}
+    if sha: payload["sha"]=sha
+    await github_api("PUT",ORDERS_FILE,payload)
+
+
+async def notify_operator(context, chat_id, user_id, full_name, username, history):
+    stats["operator_requests"] += 1
+    username_text = f"@{username}" if username else "username yo'q"
+    text = (
+        "🔔 <b>OPERATOR SO'ROVI</b>\n\n"
+        f"👤 {full_name}\n"
+        f"🆔 <code>{user_id}</code>\n"
+        f"📲 {username_text}\n"
+        f"💬 Chat ID: <code>{chat_id}</code>\n\n"
+        "🧠 So'nggi suhbat:\n"
+        f"{history[-2500:] if history else "yoq"}"
+    )
+    try:
+        await context.bot.send_message(chat_id=ADMIN_ID, text=text, parse_mode="HTML")
+        return True
+    except Exception as e:
+        print("OPERATOR XATOSI:", repr(e))
+        return False
+
+
+async def operator_request(update, context):
+    if not update.message: return
+    user = update.message.from_user
+    if not user: return
+    key = (update.message.chat_id, user.id)
+    sent = await notify_operator(
+        context, update.message.chat_id, user.id, user.full_name, user.username,
+        get_conversation_context(key)
+    )
+    if sent:
+        await update.message.reply_text(
+            "👨‍💼 So'rovingiz operatorga yuborildi.\n"
+            f"📞 {AKSO_KNOWLEDGE['operator']}"
+        )
+    else:
+        await update.message.reply_text(
+            "⚠️ Operatorga ulanishda vaqtinchalik muammo bo'ldi.\n"
+            f"📞 {AKSO_KNOWLEDGE['operator']} raqamiga murojaat qiling."
+        )
+
+
+async def start_order_from_button(update, context, product_id):
+    query = update.callback_query
+    user = query.from_user
+    products = await github_get_products()
+    product = next((p for p in products if p.get("id") == product_id and visible_product(p)), None)
+    if not product:
+        await query.message.reply_text("❌ Bu mahsulot hozir mavjud emas.")
+        return
+    order_states[user.id] = {
+        "user_id": user.id,
+        "user_name": user.full_name,
+        "username": user.username,
+        "chat_id": query.message.chat_id,
+        "product_id": product_id,
+        "product_name": product.get("name", "Nomsiz"),
+        "step": "name",
+        "created_at": time.time(),
+    }
+    await query.message.reply_text(
+        f"🛒 <b>{product.get('name', 'Mahsulot')}</b> uchun buyurtmani boshlaymiz.\n\n"
+        "1️⃣ Ism-familiyangizni yozing:",
+        parse_mode="HTML",
+    )
+
+
+async def finalize_order_from_state(update, context, state):
+    orders = await github_get_orders()
+    num = 1001 + len(orders)
+    order = {
+        "id": f"AKSO-{num}",
+        "created_at": int(time.time()),
+        "chat_id": state.get("chat_id"),
+        "user_id": state.get("user_id"),
+        "name": state.get("name", ""),
+        "phone": state.get("phone", ""),
+        "location": state.get("location", ""),
+        "product_id": state.get("product_id", ""),
+        "product_name": state.get("product_name", ""),
+        "payment": state.get("payment", ""),
+        "installment_months": state.get("installment_months"),
+        "status": "new",
+    }
+    orders.append(order)
+    try:
+        await github_save_orders(orders)
+    except Exception as e:
+        print("ORDER SAVE XATOSI:", repr(e))
+        await update.message.reply_text(
+            "❌ Buyurtmani saqlashda texnik xatolik yuz berdi. Operatorga murojaat qiling."
+        )
+        return
+    stats["orders"] += 1
+    order_states.pop(state.get("user_id"), None)
+    admin = (
+        "🛍 <b>YANGI BUYURTMA</b>\n\n"
+        f"🔖 <b>{order['id']}</b>\n"
+        f"👤 {order['name']}\n"
+        f"📞 {order['phone']}\n"
+        f"📍 {order['location']}\n"
+        f"📦 {order['product_name']}\n"
+        f"💳 {order['payment']}"
+        + (f"\n📅 {order['installment_months']} oy" if order.get("installment_months") else "")
+        + f"\n🆔 Chat: <code>{order['chat_id']}</code>"
+    )
+    await context.bot.send_message(chat_id=ADMIN_ID, text=admin, parse_mode="HTML")
+    await update.message.reply_text(
+        f"✅ <b>Buyurtmangiz qabul qilindi!</b>\n\n"
+        f"🔖 {order['id']}\n"
+        f"📦 {order['product_name']}\n"
+        "Tez orada operator siz bilan bog'lanadi.",
+        parse_mode="HTML",
+    )
+
+
+async def handle_order_state(update,context):
+    if not update.message or not update.message.text: return False
+    user=update.message.from_user
+    if not user: return False
+    state=order_states.get(user.id)
+    if not state or state.get("chat_id")!=update.message.chat_id: return False
+    if time.time()-state.get("created_at",0)>1800:
+        order_states.pop(user.id,None); await update.message.reply_text("⏳ Buyurtma jarayoni eskirgan. Yangidan boshlang."); return True
+    text=update.message.text.strip(); step=state.get("step")
+    if step=="name":
+        state["name"]=text; state["step"]="phone"; await update.message.reply_text("2️⃣ Telefon raqamingizni yozing.\nMasalan: +998901234567"); return True
+    if step=="phone":
+        if len(re.sub(r"\\D","",text))<9: await update.message.reply_text("📞 Telefon raqam noto'g'ri. Qaytadan yuboring."); return True
+        state["phone"]=text; state["step"]="location"; await update.message.reply_text("3️⃣ Manzil yoki qaysi tumanligini yozing. Qorako'l/Olot bo'lsa yetkazib berish bepul."); return True
+    if step=="location":
+        state["location"]=text; state["step"]="payment"
+        kb=InlineKeyboardMarkup([[InlineKeyboardButton("💵 Naqd",callback_data="pay:cash"),InlineKeyboardButton("💳 Karta",callback_data="pay:card")],[InlineKeyboardButton("📅 Bo'lib to'lash",callback_data="pay:installment")]])
+        await update.message.reply_text("4️⃣ To'lov turini tanlang:",reply_markup=kb); return True
+    if step=="installment_months":
+        months=extract_months(text)
+        if months not in (3,6,12): await update.message.reply_text("📅 3 oy, 6 oy yoki 12 oy deb yozing."); return True
+        state["installment_months"]=months; await finalize_order_from_state(update,context,state); return True
+    return False
+
+
+async def sales_callback_handler(update,context):
+    query=update.callback_query
+    if not query: return
+    data=query.data or ""
+    if data=="operator":
+        await query.answer("👨‍💼 Operatorga yuborilmoqda...")
+        user=query.from_user
+        key=(query.message.chat_id,user.id)
+        sent=await notify_operator(context,query.message.chat_id,user.id,user.full_name,user.username,get_conversation_context(key))
+        if sent:
+            await query.message.reply_text(f"👨‍💼 So'rovingiz operatorga yuborildi.\n📞 {AKSO_KNOWLEDGE['operator']}")
+        else:
+            await query.message.reply_text(f"⚠️ Operatorga ulanishda muammo bo'ldi.\n📞 {AKSO_KNOWLEDGE['operator']}")
+        return
+    if data.startswith("order:"):
+        await query.answer("🛒 Buyurtma boshlandi")
+        await start_order_from_button(update,context,data.split(":",1)[1]); return
+    if data.startswith("pay:"):
+        state=order_states.get(query.from_user.id)
+        if not state or state.get("chat_id")!=query.message.chat_id:
+            await query.answer("⏳ Buyurtma oynasi eskirgan.",show_alert=True); return
+        p=data.split(":",1)[1]; state["payment"]={"cash":"Naqd","card":"Karta","installment":"Bo'lib to'lash"}.get(p,p)
+        await query.answer()
+        if p=="installment":
+            state["step"]="installment_months"; await query.message.reply_text("5️⃣ Necha oyga bo'lib to'lashni xohlaysiz? 3 oy, 6 oy yoki 12 oy deb yozing.")
+        else:
+            fake=type("U",(),{"message":query.message})(); await finalize_order_from_state(fake,context,state)
+
+
+async def orders_command(update,context):
+    if not update.message: return
+    user=update.message.from_user
+    if not user or not is_admin(user.id): await update.message.reply_text("❌ Sizda ruxsat yo'q."); return
+    orders=await github_get_orders()
+    if not orders: await update.message.reply_text("🛒 Hozircha buyurtmalar yo'q."); return
+    lines=["🛒 <b>SO'NGGI BUYURTMALAR</b>\\n"]
+    for o in orders[-20:][::-1]: lines.append(f"🔖 <b>{o.get('id')}</b> — {o.get('status')}\\n👤 {o.get('name')} | 📞 {o.get('phone')}\\n📦 {o.get('product_name')} | 📍 {o.get('location')}\\n")
+    await update.message.reply_text("\\n".join(lines),parse_mode="HTML")
 
 
 # ============================================================
@@ -2414,6 +2772,10 @@ CUSTOMER_KEYBOARD = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton("🏪 AKSO haqida"),
+            KeyboardButton("🛒 Buyurtma berish"),
+        ],
+        [
+            KeyboardButton("👨‍💼 Operator"),
             KeyboardButton("❓ Yordam"),
         ],
     ],
@@ -2440,6 +2802,7 @@ ADMIN_KEYBOARD = ReplyKeyboardMarkup(
             KeyboardButton("🏪 AKSO haqida"),
         ],
         [
+            KeyboardButton("🛒 Buyurtmalar"),
             KeyboardButton("❓ Yordam"),
         ],
     ],
@@ -2465,6 +2828,8 @@ async def handle_menu_button(update, context):
             "📊 Statistika": stats_command,
             "🛍 Katalog": catalog_command,
             "🏪 AKSO haqida": store_command,
+            "🛒 Buyurtmalar": orders_command,
+            "👨‍💼 Operator": operator_request,
             "❓ Yordam": help_command,
         }
         action = admin_actions.get(text)
@@ -2476,6 +2841,8 @@ async def handle_menu_button(update, context):
         "🛍 Mahsulotlar": catalog_command,
         "🔎 Mahsulot qidirish": help_command,
         "🏪 AKSO haqida": store_command,
+        "🛒 Buyurtma berish": help_command,
+        "👨‍💼 Operator": operator_request,
         "❓ Yordam": help_command,
     }
     action = customer_actions.get(text)
@@ -2652,6 +3019,10 @@ async def reply_to_message(
     if await handle_menu_button(update, context):
         return
 
+    # Buyurtma jarayoni birinchi o'rinda.
+    if await handle_order_state(update, context):
+        return
+
     # Admin jarayonlari birinchi o'rinda.
     if await handle_edit_state(
         update,
@@ -2763,6 +3134,15 @@ Savol:
     if not user_text:
         return
 
+    key = get_memory_key(update)
+    remember_turn_by_key(key, "user", user_text)
+    search_query = build_search_query(key, user_text)
+
+    normalized_operator = normalize_text(user_text)
+    if any(x in normalized_operator for x in ("operator", "odam bilan gaplash", "konsultant bilan gaplash", "sotuvchi bilan gaplash")):
+        await operator_request(update, context)
+        return
+
     # --------------------------------------------------------
     # PENDING CONFIRMATION: "ha", "xa", "albatta", "yubor"
     # --------------------------------------------------------
@@ -2841,61 +3221,34 @@ Savol:
     # PRODUCT CATALOG SEARCH
     # --------------------------------------------------------
 
-    if likely_product_query(
-        user_text
-    ):
+    if likely_product_query(search_query):
         try:
             products = await github_get_products()
-
             if products:
-                stats[
-                    "catalog_queries"
-                ] += 1
-
-                # 1. Qat'iy local/fuzzy.
-                matches = find_local_products(
-                    user_text,
-                    products,
-                )
-
-                # 2. Topilmasa, faqat savdo maqsadli so'rovga AI.
+                stats["catalog_queries"] += 1
+                matches = find_local_products(search_query, products)
                 if not matches:
-                    matches = await find_ai_products(
-                        user_text,
-                        products,
-                    )
-
+                    matches = await find_ai_products(search_query, products)
                 if matches:
-                    await ask_product_confirmation(
-                        update.message,
-                        update.message.from_user.id
-                        if update.message.from_user
-                        else 0,
-                        matches,
-                    )
+                    filtered, constraints = filter_products_for_request(matches, search_query)
+                    if constraints["budget"] is not None or constraints["monthly"] is not None or constraints["colors"]:
+                        matches = filtered
+                if matches:
+                    last_product_queries[key] = search_query
+                    if is_guided_need(search_query, matches):
+                        stats["recommendation_requests"] += 1
+                        answer = guided_question(search_query)
+                        remember_turn_by_key(key, "assistant", answer)
+                        await update.message.reply_text(answer)
+                        return
+                    await ask_product_confirmation(update.message, update.message.from_user.id if update.message.from_user else 0, matches)
                     return
-
-                # Mahsulot so'rovi bo'lib,
-                # mos tovar topilmagan bo'lsa,
-                # "bizda yo'q" deb keskin xulosa qilmaymiz.
-                await update.message.reply_text(
-                    "🔎 So'rovingizni tushundim, "
-                    "lekin katalogdan aynan mos mahsulotni "
-                    "aniq topa olmadim.\n\n"
-                    "Mahsulot nomini yoki turini biroz boshqacharoq yozib ko'ring."
-                )
+                stats["not_found_queries"] += 1
+                await update.message.reply_text("🔎 So'rovingizni tushundim, lekin aynan mos mahsulotni topa olmadim.\n\nMahsulot turi, rang, o'lcham, qancha pulgacha yoki oyiga qancha to'lov qulayligini yozing.")
                 return
-
         except Exception as e:
-            print(
-                "KATALOG QIDIRUV XATOSI:",
-                repr(e)
-            )
-
-            await update.message.reply_text(
-                "🔎 Mahsulot katalogini tekshirishda "
-                "vaqtinchalik texnik muammo yuz berdi."
-            )
+            print("KATALOG QIDIRUV XATOSI:",repr(e))
+            await update.message.reply_text("🔎 Katalogni tekshirishda vaqtinchalik texnik muammo yuz berdi.")
             return
 
     # --------------------------------------------------------
@@ -2918,6 +3271,9 @@ QAT'IY QOIDALAR:
 - 6 oy odatda 18%, lekin aksiya, ayrim mahsulot yoki oldindan to'lov bilan 6 oyga ustamasiz variant bo'lishi mumkin.
 - O'zbekcha bo'lsa o'zbekcha, ruscha bo'lsa ruscha javob ber.
 - Keraksiz uzun javob bermagin.
+
+Suhbat konteksti:
+{get_conversation_context(key)}
 
 Foydalanuvchi:
 {user_text}
@@ -2952,6 +3308,7 @@ Foydalanuvchi:
         await update.message.reply_text(
             **kwargs
         )
+        remember_turn_by_key(key, "assistant", answer)
 
     except Exception as e:
         print(
@@ -3069,6 +3426,10 @@ async def setup_command_menus(
             "📊 Statistika"
         ),
         BotCommand(
+            "orders",
+            "🛒 Buyurtmalar"
+        ),
+        BotCommand(
             "done",
             "✅ Rasmlarni tugatish"
         ),
@@ -3132,6 +3493,13 @@ telegram_app.add_handler(
     CommandHandler(
         "store",
         store_command
+    )
+)
+
+telegram_app.add_handler(
+    CommandHandler(
+        "orders",
+        orders_command
     )
 )
 
@@ -3216,6 +3584,13 @@ telegram_app.add_handler(
     CommandHandler(
         "cancel",
         cancel_command
+    )
+)
+
+telegram_app.add_handler(
+    CallbackQueryHandler(
+        sales_callback_handler,
+        pattern=r"^(order:|pay:|operator$)"
     )
 )
 
