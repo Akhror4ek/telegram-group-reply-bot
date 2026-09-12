@@ -12,5 +12,19 @@
     "payment": "Bo'lib to'lash",
     "installment_months": 6,
     "status": "new"
+  },
+  {
+    "id": "AKSO-1002",
+    "created_at": 1789218978,
+    "chat_id": 510631409,
+    "user_id": 510631409,
+    "name": "Sobir Mansurov",
+    "phone": "883957777",
+    "location": "Qorakoʻl",
+    "product_id": "1789110191966",
+    "product_name": "Temir kart, oyogʻi balonlik",
+    "payment": "Naqd",
+    "installment_months": null,
+    "status": "new"
   }
 ]
