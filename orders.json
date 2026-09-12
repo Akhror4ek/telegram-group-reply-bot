@@ -68,5 +68,19 @@
     "payment": "Naqd",
     "installment_months": null,
     "status": "new"
+  },
+  {
+    "id": "AKSO-1006",
+    "created_at": 1789226612,
+    "chat_id": 1032127085,
+    "user_id": 1032127085,
+    "name": "shshsh shshhs",
+    "phone": "+998927262662",
+    "location": "olot",
+    "product_id": "1789110191966",
+    "product_name": "Temir kart, oyogʻi balonlik",
+    "payment": "Naqd",
+    "installment_months": null,
+    "status": "new"
   }
 ]
