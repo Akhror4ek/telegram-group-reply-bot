@@ -96,5 +96,19 @@
     "payment": "Naqd",
     "installment_months": null,
     "status": "new"
+  },
+  {
+    "id": "AKSO-1008",
+    "created_at": 1789285304,
+    "chat_id": 8299847513,
+    "user_id": 8299847513,
+    "name": "BILOL MUKHTOROV",
+    "phone": "+998501760999",
+    "location": "Qorakoʻl tumani Buxoro koʻchasi",
+    "product_id": "1789102628479",
+    "product_name": "TechOn kuller",
+    "payment": "Naqd",
+    "installment_months": null,
+    "status": "new"
   }
 ]
