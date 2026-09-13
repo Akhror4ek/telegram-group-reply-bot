@@ -63,5 +63,30 @@
     ],
     "visible": true,
     "created_at": "2026-09-11 07:03:11"
+  },
+  {
+    "id": "1789286363285",
+    "name": "LG televizor 43 dyum",
+    "price": 3980000,
+    "category": "Televizorlar (43 dyum)",
+    "description": "Lg 43 dyumlik smart televizor.",
+    "telegram_file_id": "AgACAgIAAxkBAAID5WqmVzScxk0u85_S1mUbxM53vp78AAIHIWsbQbk4SXaNbgHWLVCPAQADAgADeQADPQQ",
+    "images": [
+      "AgACAgIAAxkBAAID5WqmVzScxk0u85_S1mUbxM53vp78AAIHIWsbQbk4SXaNbgHWLVCPAQADAgADeQADPQQ"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/lg_televizor_43_dyum_1789286361458_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/lg_televizor_43_dyum_1789286361458_1.jpg"
+    ],
+    "keywords": [
+      "lg",
+      "televizor",
+      "43",
+      "dyum",
+      "dyumlik",
+      "smart"
+    ],
+    "visible": true,
+    "created_at": "2026-09-13 07:59:23"
   }
 ]
