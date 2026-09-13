@@ -645,6 +645,30 @@ PRODUCT_INTENT_WORDS = (
 )
 
 
+def is_akso_knowledge_question(text):
+    """AKSO do\'koni haqidagi savollarni mahsulot qidiruvidan ajratadi."""
+    q = normalize_text(text)
+    if not q:
+        return False
+
+    # Mijoz mahsulot emas, do\'kon xizmati/shartlari haqida so\'rasa,
+    # katalog qidiruvi umuman ishga tushmasligi kerak.
+    knowledge_phrases = (
+        "hujjat", "dokument", "pasport",
+        "muddatli tolov", "bolib tolash", "bolibtolash",
+        "tolov sharti", "tolov turi", "ustama",
+        "yetkazib berish", "dostavka",
+        "montaj", "ornatib ber", "ornatish",
+        "kafolat", "garantiya", "qaytarish", "almashtirish",
+        "ish vaqti", "nechigacha ishl", "soat nech",
+        "manzil", "qayerda", "qayerda joylash",
+        "telefon raqam", "telefon",
+        "operator", "aksiya", "chegirma",
+    )
+
+    return any(phrase in q for phrase in knowledge_phrases)
+
+
 def likely_product_query(text):
     q = normalize_text(text)
 
@@ -3218,10 +3242,18 @@ Savol:
             return
 
     # --------------------------------------------------------
+    # AKSO KNOWLEDGE QUESTIONS
+    # --------------------------------------------------------
+    # Masalan: "Bo\'lib to\'lashga qanday hujjat kerak?"
+    # Bu yerda "kerak" so\'zi borligi uchun savol katalogga tushib
+    # ketmasligi kerak. Avval bilim bazasi savoli sifatida ko\'ramiz.
+    knowledge_question = is_akso_knowledge_question(user_text)
+
+    # --------------------------------------------------------
     # PRODUCT CATALOG SEARCH
     # --------------------------------------------------------
 
-    if likely_product_query(search_query):
+    if not knowledge_question and likely_product_query(search_query):
         try:
             products = await github_get_products()
             if products:
@@ -3249,6 +3281,24 @@ Savol:
         except Exception as e:
             print("KATALOG QIDIRUV XATOSI:",repr(e))
             await update.message.reply_text("🔎 Katalogni tekshirishda vaqtinchalik texnik muammo yuz berdi.")
+            return
+
+    # --------------------------------------------------------
+    # AKSO FAQ FAST ANSWERS
+    # --------------------------------------------------------
+    # Eng muhim FAQ savollariga AI chaqirmasdan aniq javob beramiz.
+    # Bu Gemini xatosi yoki katalog qidiruvi sabab noto\'g\'ri javob chiqishini oldini oladi.
+    if knowledge_question:
+        q = normalize_text(user_text)
+        if any(x in q for x in ("hujjat", "dokument", "pasport")) and any(
+            x in q for x in ("bolib tolash", "muddatli tolov", "tolov")
+        ):
+            answer = (
+                "📄 Bo\'lib to\'lash uchun <b>pasport</b> talab qilinadi.\n\n"
+                "Agar bo\'lib to\'lash shartlari haqida boshqa savolingiz bo\'lsa, yozavering. 😊"
+            )
+            remember_turn_by_key(key, "assistant", answer)
+            await update.message.reply_text(answer, parse_mode="HTML")
             return
 
     # --------------------------------------------------------
@@ -3639,3 +3689,4 @@ if __name__ == "__main__":
         ],
         drop_pending_updates=True,
     )
+
