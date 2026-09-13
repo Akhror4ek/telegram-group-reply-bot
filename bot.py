@@ -5,6 +5,8 @@ import re
 import time
 import unicodedata
 import asyncio
+import threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from difflib import SequenceMatcher
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
@@ -3690,29 +3692,108 @@ telegram_app.add_handler(
 
 
 # ============================================================
-# WEBHOOK
+# WEBHOOK + HEALTH CHECK
 # ============================================================
 
-if __name__ == "__main__":
-    print(
-        "Bot ishga tushmoqda..."
-    )
-    print(
-        "Render URL:",
-        BASE_URL
-    )
+class HealthWebhookHandler(BaseHTTPRequestHandler):
+    def log_message(self, format, *args):
+        # Render/UptimeRobot health so'rovlari logni ortiqcha to'ldirmasin.
+        return
 
-    telegram_app.run_webhook(
-        listen="0.0.0.0",
-        port=PORT,
-        url_path="webhook",
-        webhook_url=(
-            f"{BASE_URL}/webhook"
-        ),
+    def _send(self, status, body, content_type="text/plain; charset=utf-8"):
+        data = body.encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+    def do_GET(self):
+        if self.path == "/health" or self.path == "/health/":
+            self._send(200, "OK")
+            return
+
+        self._send(404, "Not Found")
+
+    def do_POST(self):
+        if self.path.rstrip("/") != "/webhook":
+            self._send(404, "Not Found")
+            return
+
+        secret = self.headers.get("X-Telegram-Bot-Api-Secret-Token")
+        if secret != WEBHOOK_SECRET:
+            self._send(403, "Forbidden")
+            return
+
+        try:
+            length = int(self.headers.get("Content-Length", "0"))
+            raw = self.rfile.read(length)
+            payload = json.loads(raw.decode("utf-8"))
+            update = Update.de_json(payload, telegram_app.bot)
+
+            loop = TELEGRAM_LOOP
+            if loop is None or loop.is_closed():
+                self._send(503, "Service Unavailable")
+                return
+
+            future = asyncio.run_coroutine_threadsafe(
+                telegram_app.update_queue.put(update),
+                loop,
+            )
+            future.result(timeout=5)
+            self._send(200, "OK")
+        except Exception as e:
+            print("WEBHOOK UPDATE XATOSI:", repr(e))
+            self._send(500, "Internal Server Error")
+
+
+TELEGRAM_LOOP = None
+
+
+async def run_application():
+    global TELEGRAM_LOOP
+    TELEGRAM_LOOP = asyncio.get_running_loop()
+
+    await telegram_app.initialize()
+
+    # post_init() avtomatik chaqirilmagani uchun command menyusini qo'lda o'rnatamiz.
+    await setup_command_menus(telegram_app)
+
+    await telegram_app.start()
+
+    await telegram_app.bot.set_webhook(
+        url=f"{BASE_URL}/webhook",
         secret_token=WEBHOOK_SECRET,
-        allowed_updates=[
-            "message",
-            "callback_query",
-        ],
+        allowed_updates=["message", "callback_query"],
         drop_pending_updates=True,
     )
+
+    server = ThreadingHTTPServer(("0.0.0.0", PORT), HealthWebhookHandler)
+    server_thread = threading.Thread(
+        target=server.serve_forever,
+        name="health-webhook-server",
+        daemon=True,
+    )
+    server_thread.start()
+
+    print("✅ AKSO webhook server ishga tushdi.")
+    print("✅ Health URL:", f"{BASE_URL}/health")
+    print("✅ Webhook URL:", f"{BASE_URL}/webhook")
+
+    try:
+        await asyncio.Event().wait()
+    finally:
+        server.shutdown()
+        server.server_close()
+        try:
+            await telegram_app.bot.delete_webhook(drop_pending_updates=False)
+        except Exception as e:
+            print("WEBHOOK O'CHIRISH XATOSI:", repr(e))
+        await telegram_app.stop()
+        await telegram_app.shutdown()
+
+
+if __name__ == "__main__":
+    print("Bot ishga tushmoqda...")
+    print("Render URL:", BASE_URL)
+    asyncio.run(run_application())
