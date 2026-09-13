@@ -3038,16 +3038,30 @@ async def reply_to_message(
 
     # Guruhda Telegram adminlari yozgan oddiy xabarlarga bot javob bermaydi.
     # Private chatdagi admin yozishmalari esa odatdagidek ishlaydi.
+    # Adminni faqat get_chat_member orqali tekshirish ba'zi holatlarda yetarli
+    # bo'lmaydi, shuning uchun guruh administratorlari ro'yxatini ham tekshiramiz.
     if update.message.chat.type in ("group", "supergroup") and update.message.from_user:
+        chat_id = update.message.chat_id
+        user_id = update.message.from_user.id
+
         try:
-            member = await context.bot.get_chat_member(
-                update.message.chat_id,
-                update.message.from_user.id,
-            )
-            if member.status in ("administrator", "creator"):
+            administrators = await context.bot.get_chat_administrators(chat_id)
+            admin_ids = {member.user.id for member in administrators if member.user}
+            if user_id in admin_ids:
                 return
         except Exception as e:
-            print("GROUP ADMIN TEKSHIRUV XATOSI:", repr(e))
+            print("GROUP ADMIN LIST TEKSHIRUV XATOSI:", repr(e))
+
+            # Zaxira tekshiruv.
+            try:
+                member = await context.bot.get_chat_member(chat_id, user_id)
+                if getattr(member, "status", "") in ("administrator", "creator", "owner"):
+                    return
+            except Exception as inner_e:
+                print("GROUP ADMIN MEMBER TEKSHIRUV XATOSI:", repr(inner_e))
+                # Adminni aniqlay olmasak, guruhdagi xabarga javob bermaymiz.
+                # Bu admin xabariga tasodifan javob berishning oldini oladi.
+                return
 
     stats["messages"] += 1
 
