@@ -3036,6 +3036,19 @@ async def reply_to_message(
     ):
         return
 
+    # Guruhda Telegram adminlari yozgan oddiy xabarlarga bot javob bermaydi.
+    # Private chatdagi admin yozishmalari esa odatdagidek ishlaydi.
+    if update.message.chat.type in ("group", "supergroup") and update.message.from_user:
+        try:
+            member = await context.bot.get_chat_member(
+                update.message.chat_id,
+                update.message.from_user.id,
+            )
+            if member.status in ("administrator", "creator"):
+                return
+        except Exception as e:
+            print("GROUP ADMIN TEKSHIRUV XATOSI:", repr(e))
+
     stats["messages"] += 1
 
     # Reply keyboard tugmalari hech qachon mahsulot qidiruvi sifatida
@@ -3689,4 +3702,3 @@ if __name__ == "__main__":
         ],
         drop_pending_updates=True,
     )
-
