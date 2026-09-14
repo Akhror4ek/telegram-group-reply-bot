@@ -6,6 +6,7 @@ import time
 import unicodedata
 import asyncio
 import threading
+from html import escape
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from difflib import SequenceMatcher
 from urllib.request import Request, urlopen
@@ -55,6 +56,7 @@ GITHUB_BRANCH = "main"
 PRODUCTS_FILE = "products.json"
 PRODUCTS_FOLDER = "products"
 ORDERS_FILE = "orders.json"
+CHAT_HISTORY_FILE = "chat_history.json"
 
 
 # ============================================================
@@ -79,6 +81,15 @@ pending_product_confirmations = {}
 conversation_memory = {}
 last_product_queries = {}
 order_states = {}
+
+# Persistent customer chat history for the bot owner only.
+# The history is intentionally capped so the file cannot grow without limit.
+chat_history = {}
+HISTORY_MAX_MESSAGES = 200
+HISTORY_PAGE_SIZE = 25
+history_save_task = None
+history_dirty = False
+history_save_lock = asyncio.Lock()
 
 products_cache = []
 products_cache_time = 0.0
@@ -498,13 +509,178 @@ async def github_save_products(products):
 MAX_MEMORY_TURNS = 12
 
 
+def _history_key(key):
+    if not key:
+        return None
+    try:
+        return f"{key[0]}:{key[1]}"
+    except Exception:
+        return str(key)
+
+
+def _mark_history_dirty():
+    global history_dirty, history_save_task
+    history_dirty = True
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        return
+    if history_save_task is None or history_save_task.done():
+        history_save_task = loop.create_task(_history_save_worker())
+
+
+def record_history_user(update):
+    if not update or not update.message or not update.message.from_user:
+        return None
+    user = update.message.from_user
+    key = _history_key((update.message.chat_id, user.id))
+    if not key:
+        return None
+    item = chat_history.setdefault(key, {
+        "chat_id": update.message.chat_id,
+        "user_id": user.id,
+        "full_name": user.full_name or "Noma'lum",
+        "username": user.username or "",
+        "messages": [],
+        "last_activity": int(time.time()),
+    })
+    item["full_name"] = user.full_name or item.get("full_name") or "Noma'lum"
+    item["username"] = user.username or ""
+    item["last_activity"] = int(time.time())
+    return key
+
+
 def remember_turn_by_key(key, role, text):
     if not key or not text:
         return
+
+    clean_text = str(text)[:4000]
+
     turns = conversation_memory.setdefault(key, [])
-    turns.append({"role": role, "text": str(text)[:1500]})
+    turns.append({"role": role, "text": clean_text[:1500]})
     if len(turns) > MAX_MEMORY_TURNS:
         del turns[:-MAX_MEMORY_TURNS]
+
+    # Separate persistent history is used for the owner-facing history viewer.
+    hkey = _history_key(key)
+    if hkey:
+        item = chat_history.setdefault(hkey, {
+            "chat_id": key[0],
+            "user_id": key[1],
+            "full_name": "Noma'lum",
+            "username": "",
+            "messages": [],
+            "last_activity": int(time.time()),
+        })
+        item["last_activity"] = int(time.time())
+        item["messages"].append({
+            "role": role,
+            "text": clean_text,
+            "time": int(time.time()),
+        })
+        if len(item["messages"]) > HISTORY_MAX_MESSAGES:
+            del item["messages"][:-HISTORY_MAX_MESSAGES]
+        _mark_history_dirty()
+
+
+async def github_get_chat_history():
+    try:
+        result = await github_api(
+            "GET",
+            f"{CHAT_HISTORY_FILE}?ref={GITHUB_BRANCH}",
+        )
+        content = result.get("content", "")
+        if not content:
+            return {}
+        data = json.loads(
+            base64.b64decode(
+                content.replace("\n", "")
+            ).decode("utf-8")
+        )
+        return data if isinstance(data, dict) else {}
+    except Exception as e:
+        if "404" in str(e):
+            return {}
+        raise
+
+
+async def github_save_chat_history(history):
+    encoded = base64.b64encode(
+        json.dumps(
+            history,
+            ensure_ascii=False,
+            indent=2,
+        ).encode("utf-8")
+    ).decode("ascii")
+
+    sha = None
+    try:
+        result = await github_api(
+            "GET",
+            f"{CHAT_HISTORY_FILE}?ref={GITHUB_BRANCH}",
+        )
+        sha = result.get("sha")
+    except Exception as e:
+        if "404" not in str(e):
+            raise
+
+    payload = {
+        "message": "Update AKSO chat history",
+        "content": encoded,
+        "branch": GITHUB_BRANCH,
+    }
+    if sha:
+        payload["sha"] = sha
+
+    await github_api(
+        "PUT",
+        CHAT_HISTORY_FILE,
+        payload,
+    )
+
+
+async def _history_save_worker():
+    global history_dirty, history_save_task
+    # Debounce frequent messages so we do not write to GitHub on every turn.
+    await asyncio.sleep(5)
+    while True:
+        async with history_save_lock:
+            if not history_dirty:
+                history_save_task = None
+                return
+            snapshot = json.loads(
+                json.dumps(chat_history, ensure_ascii=False)
+            )
+            history_dirty = False
+            try:
+                await github_save_chat_history(snapshot)
+            except Exception as e:
+                print("CHAT HISTORY SAQLASH XATOSI:", repr(e))
+                history_dirty = True
+        if not history_dirty:
+            history_save_task = None
+            return
+        await asyncio.sleep(5)
+
+
+async def flush_chat_history():
+    global history_dirty, history_save_task
+    if history_save_task is not None and not history_save_task.done():
+        try:
+            await history_save_task
+        except Exception as e:
+            print("CHAT HISTORY WORKER XATOSI:", repr(e))
+    if history_dirty:
+        async with history_save_lock:
+            snapshot = json.loads(
+                json.dumps(chat_history, ensure_ascii=False)
+            )
+            history_dirty = False
+            try:
+                await github_save_chat_history(snapshot)
+            except Exception as e:
+                history_dirty = True
+                print("CHAT HISTORY YAKUNIY SAQLASH XATOSI:", repr(e))
 
 
 def get_memory_key(update):
@@ -2851,6 +3027,9 @@ ADMIN_KEYBOARD = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton("🛒 Buyurtmalar"),
+            KeyboardButton("👥 Foydalanuvchilar"),
+        ],
+        [
             KeyboardButton("❓ Yordam"),
         ],
     ],
@@ -2877,6 +3056,7 @@ async def handle_menu_button(update, context):
             "🛍 Katalog": catalog_command,
             "🏪 AKSO haqida": store_command,
             "🛒 Buyurtmalar": orders_command,
+            "👥 Foydalanuvchilar": users_command,
             "👨‍💼 Operator": operator_request,
             "❓ Yordam": help_command,
         }
@@ -3006,6 +3186,254 @@ async def my_id_command(
         f"<code>{user.id}</code>",
         parse_mode="HTML",
     )
+
+
+async def users_command(update, context):
+    if not update.message:
+        return
+    user = update.message.from_user
+    if not user or not is_admin(user.id):
+        await update.message.reply_text("❌ Sizda bu komandadan foydalanish huquqi yo'q.")
+        return
+    await show_users_page(update, context, 0, edit=False)
+
+
+def _sorted_history_users():
+    items = []
+    for key, item in chat_history.items():
+        try:
+            uid = int(item.get("user_id"))
+        except Exception:
+            continue
+        if uid == ADMIN_ID:
+            continue
+        if not item.get("messages"):
+            continue
+        items.append((key, item))
+    items.sort(key=lambda x: x[1].get("last_activity", 0), reverse=True)
+    return items
+
+
+async def show_users_page(update, context, page=0, edit=False):
+    users = _sorted_history_users()
+    total_pages = max(1, (len(users) + 7) // 8)
+    page = max(0, min(page, total_pages - 1))
+    chunk = users[page * 8:(page + 1) * 8]
+
+    if not chunk:
+        text = (
+            "👥 <b>Foydalanuvchilar</b>\n\n"
+            "Hozircha yozishma tarixi mavjud emas."
+        )
+        keyboard = [[
+            InlineKeyboardButton(
+                "🔄 Yangilash",
+                callback_data="hist:list:0",
+            )
+        ]]
+    else:
+        lines = [
+            f"👥 <b>Foydalanuvchilar</b> — {len(users)} ta",
+            "",
+            "Kerakli foydalanuvchini tanlang:",
+        ]
+        keyboard = []
+        for index, (_, item) in enumerate(chunk, start=1):
+            name = item.get("full_name") or "Noma'lum"
+            username = item.get("username")
+            label = f"{index}. {name}"
+            if username:
+                label += f" (@{username})"
+            keyboard.append([
+                InlineKeyboardButton(
+                    label[:60],
+                    callback_data=(
+                        f"hist:user:{item.get('chat_id')}"
+                        f":{item.get('user_id')}:0"
+                    ),
+                )
+            ])
+        text = "\n".join(lines)
+        nav = []
+        if page > 0:
+            nav.append(
+                InlineKeyboardButton(
+                    "⬅️ Oldingi",
+                    callback_data=f"hist:list:{page - 1}",
+                )
+            )
+        if page < total_pages - 1:
+            nav.append(
+                InlineKeyboardButton(
+                    "Keyingi ➡️",
+                    callback_data=f"hist:list:{page + 1}",
+                )
+            )
+        if nav:
+            keyboard.append(nav)
+
+    markup = InlineKeyboardMarkup(keyboard)
+    if edit and update.callback_query:
+        await update.callback_query.edit_message_text(
+            text=text,
+            parse_mode="HTML",
+            reply_markup=markup,
+        )
+    else:
+        await update.message.reply_text(
+            text,
+            parse_mode="HTML",
+            reply_markup=markup,
+        )
+
+
+def _history_item_by_ids(chat_id, user_id):
+    return chat_history.get(f"{chat_id}:{user_id}")
+
+
+async def show_history_page(update, context, chat_id, user_id, page=0):
+    query = update.callback_query
+    item = _history_item_by_ids(chat_id, user_id)
+    if not item:
+        await query.edit_message_text(
+            "❌ Bu foydalanuvchi uchun tarix topilmadi."
+        )
+        return
+
+    messages = item.get("messages") or []
+    total_pages = max(
+        1,
+        (len(messages) + HISTORY_PAGE_SIZE - 1)
+        // HISTORY_PAGE_SIZE,
+    )
+    page = max(0, min(page, total_pages - 1))
+    start = page * HISTORY_PAGE_SIZE
+    chunk = messages[start:start + HISTORY_PAGE_SIZE]
+
+    name = escape(item.get("full_name") or "Noma'lum")
+    username = item.get("username")
+    username_text = (
+        f"@{escape(username)}"
+        if username
+        else "username yo'q"
+    )
+
+    header = (
+        "👤 <b>Foydalanuvchi tarixi</b>\n\n"
+        f"Ism: <b>{name}</b>\n"
+        f"Username: <b>{username_text}</b>\n"
+        f"ID: <code>{user_id}</code>\n"
+        f"Chat ID: <code>{chat_id}</code>\n\n"
+    )
+
+    lines = []
+    for entry in chunk:
+        role = entry.get("role")
+        who = "👤 Mijoz" if role == "user" else "🤖 AKSO"
+        stamp = entry.get("time")
+        if stamp:
+            tm = time.strftime(
+                "%d.%m.%Y %H:%M",
+                time.localtime(stamp),
+            )
+            stamp_text = f" [{tm}]"
+        else:
+            stamp_text = ""
+
+        msg = escape(str(entry.get("text", "")))
+        if len(msg) > 700:
+            msg = msg[:700] + "…"
+        lines.append(
+            f"{who}{stamp_text}:\n{msg}"
+        )
+
+    body = (
+        "\n\n".join(lines)
+        if lines
+        else "Tarix bo'sh."
+    )
+    text = header + body
+    if len(text) > 3900:
+        text = text[:3900] + "\n…"
+
+    keyboard = []
+    nav_row = []
+    if page > 0:
+        nav_row.append(
+            InlineKeyboardButton(
+                "⬅️ Oldingi",
+                callback_data=(
+                    f"hist:user:{chat_id}:{user_id}:{page - 1}"
+                ),
+            )
+        )
+    if page < total_pages - 1:
+        nav_row.append(
+            InlineKeyboardButton(
+                "Keyingi ➡️",
+                callback_data=(
+                    f"hist:user:{chat_id}:{user_id}:{page + 1}"
+                ),
+            )
+        )
+    if nav_row:
+        keyboard.append(nav_row)
+    keyboard.append([
+        InlineKeyboardButton(
+            "👥 Foydalanuvchilar",
+            callback_data="hist:list:0",
+        )
+    ])
+
+    await query.edit_message_text(
+        text=text,
+        parse_mode="HTML",
+        reply_markup=InlineKeyboardMarkup(keyboard),
+    )
+
+
+async def history_callback_handler(update, context):
+    query = update.callback_query
+    if not query:
+        return
+
+    if query.from_user.id != ADMIN_ID:
+        await query.answer(
+            "⛔ Faqat bot egasi foydalanishi mumkin.",
+            show_alert=True,
+        )
+        return
+
+    await query.answer()
+    data = query.data or ""
+    parts = data.split(":")
+    try:
+        if len(parts) >= 3 and parts[1] == "list":
+            await show_users_page(
+                update,
+                context,
+                int(parts[2]),
+                edit=True,
+            )
+            return
+
+        if len(parts) >= 5 and parts[1] == "user":
+            chat_id = int(parts[2])
+            user_id = int(parts[3])
+            page = int(parts[4])
+            await show_history_page(
+                update,
+                context,
+                chat_id,
+                user_id,
+                page,
+            )
+            return
+    except Exception as e:
+        print("HISTORY CALLBACK XATOSI:", repr(e))
+        await query.edit_message_text(
+            "❌ Tarixni ochishda xatolik yuz berdi."
+        )
 
 
 async def cancel_command(
@@ -3210,6 +3638,7 @@ Savol:
         return
 
     key = get_memory_key(update)
+    record_history_user(update)
     remember_turn_by_key(key, "user", user_text)
     search_query = build_search_query(key, user_text)
 
@@ -3531,6 +3960,10 @@ async def setup_command_menus(
             "🛒 Buyurtmalar"
         ),
         BotCommand(
+            "users",
+            "👥 Foydalanuvchilar va chat tarixi"
+        ),
+        BotCommand(
             "done",
             "✅ Rasmlarni tugatish"
         ),
@@ -3689,6 +4122,20 @@ telegram_app.add_handler(
 )
 
 telegram_app.add_handler(
+    CommandHandler(
+        "users",
+        users_command
+    )
+)
+
+telegram_app.add_handler(
+    CallbackQueryHandler(
+        history_callback_handler,
+        pattern=r"^hist:"
+    )
+)
+
+telegram_app.add_handler(
     CallbackQueryHandler(
         sales_callback_handler,
         pattern=r"^(order:|pay:|operator$)"
@@ -3785,6 +4232,14 @@ async def run_application():
 
     await telegram_app.initialize()
 
+    global chat_history
+    try:
+        chat_history = await github_get_chat_history()
+        print(f"✅ Chat history yuklandi: {len(chat_history)} ta foydalanuvchi")
+    except Exception as e:
+        chat_history = {}
+        print("CHAT HISTORY YUKLASH XATOSI:", repr(e))
+
     # post_init() avtomatik chaqirilmagani uchun command menyusini qo'lda o'rnatamiz.
     await setup_command_menus(telegram_app)
 
@@ -3812,6 +4267,7 @@ async def run_application():
     try:
         await asyncio.Event().wait()
     finally:
+        await flush_chat_history()
         server.shutdown()
         server.server_close()
         try:
