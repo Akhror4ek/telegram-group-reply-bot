@@ -239,8 +239,18 @@
         "role": "assistant",
         "text": "Mahsulotlarimizni ko'rish va tanlash uchun saytimizga o'tishingiz yoki telegram sahifamizga yozishingiz mumkin:\nSayt: akso.uz\nTelegram: @aksouz\nOperator: +998-94-529-07-07",
         "time": 1789405605
+      },
+      {
+        "role": "user",
+        "text": "Ок",
+        "time": 1789405644
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli! Sizga qanday yordam bera olaman?",
+        "time": 1789405646
       }
     ],
-    "last_activity": 1789405605
+    "last_activity": 1789405646
   }
 }
