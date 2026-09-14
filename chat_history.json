@@ -204,8 +204,18 @@
         "role": "assistant",
         "text": "Ва alaykum assalom! \n\nIltimos, savolingizni aniqroq yozing: qanday mahsulotning uzunligi sizni qiziqtirmoqda? \n\nAgar savolingiz bo'yicha aniqlik kiritish kerak bo'lsa, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1789405469
+      },
+      {
+        "role": "user",
+        "text": "Мана шундан борми усти бе ойнасиз",
+        "time": 1789405507
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli, siz ko'rsatayotgan mahsulot haqida so'rayapsiz, lekin hozircha rasm yoki aniq nomini ko'rmayapman. \n\nAgar mahsulotimiz haqida aniq ma'lumot olmoqchi bo'lsangiz, operatorimizga murojaat qilishingiz mumkin: \n📞 +998 94 529-07-07 yoki +998 78 555-17-77. \n\nYoki Telegram orqali yozishingiz mumkin: @aksouz",
+        "time": 1789405509
       }
     ],
-    "last_activity": 1789405469
+    "last_activity": 1789405509
   }
 }
