@@ -44,9 +44,19 @@
         "role": "user",
         "text": "Rasmda ochiq havoda (hovlida yoki beton qoplangan maydonda) oq marmar naqshli, sariq va jigarrang chiziqli to‘rtburchak stol va uning atrofida jigarrang o‘rindiqli stullar joylashgan. \n\nOrqa fonda eshik, oq pechka va ustiga pushtirang mato yopilgan stol ko‘rinib turibdi. Shuningdek, o‘ng tomonda oq rangdagi mashinaning bir qismi ko‘rinadi.",
         "time": 1789391545
+      },
+      {
+        "role": "user",
+        "text": "98+272772",
+        "time": 1789403526
+      },
+      {
+        "role": "assistant",
+        "text": "Salom! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman? Mahsulotlarimiz, yetkazib berish yoki bo'lib to'lash shartlari bo'yicha savollaringiz bo'lsa, bemalol murojaat qilishingiz mumkin.",
+        "time": 1789403528
       }
     ],
-    "last_activity": 1789391545
+    "last_activity": 1789403528
   },
   "8520907481:8520907481": {
     "chat_id": 8520907481,
