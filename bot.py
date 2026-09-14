@@ -617,34 +617,59 @@ def guided_question(text):
     return "Sizga mosini topishim uchun mahsulot turi va byudjetingizni yozing. 😊"
 
 
-PRODUCT_INTENT_WORDS = (
-    "bormi",
-    "bormi?",
-    "kerak",
-    "qidiryapman",
-    "qidiraman",
-    "izlayapman",
-    "korsat",
-    "korsating",
-    "topib ber",
-    "bering",
-    "sotuvda",
-    "mavjud",
-    "mahsulot",
-    "mebel",
-    "shkaf",
-    "kuller",
-    "kuler",
-    "sandiq",
-    "stol",
-    "stul",
-    "divan",
-    "karavat",
-    "yotoq",
-    "oshxona",
-    "spalni",
-    "spalnya",
+# Mahsulotga oid aniq mavzular. "kerak", "bormi", "bering" kabi umumiy
+# so'zlar yolg'iz o'zi katalog qidiruvini ishga tushirmaydi.
+PRODUCT_TOPIC_TERMS = (
+    "muzlatgich", "holodilnik", "kir yuvish", "kiryuvish", "konditsioner",
+    "gaz plita", "tok plita", "mikrovolnovka", "duxovka", "changyutgich",
+    "pylesos", "kuller", "kuler", "sharbat siqgich", "go'sht maydalagich",
+    "televizor", "televizr", "smart tv", "smarttv", "tv", "shkaf", "kupe",
+    "komod", "tumbochka", "yotoqxona", "spalnya", "spalni", "divan",
+    "kreslo", "karavot", "krovat", "sandiq", "matras", "stol", "stul",
+    "oshxona", "mehmonxona", "ugolok", "stelaj", "polka", "vitrina",
+    "gilam", "kovyor", "velosiped", "skuter", "elektro skuter",
+    "o'yinchoq", "o'yinchoqlar", "kartlar",
 )
+PRODUCT_TOPIC_ALIASES = {
+    "tv": "televizor", "smart tv": "televizor", "smarttv": "televizor",
+    "televizr": "televizor", "kuler": "kuller", "holodilnik": "muzlatgich",
+    "pylesos": "changyutgich", "krovat": "karavot", "kovyor": "gilam",
+    "spalnya": "yotoqxona", "spalni": "yotoqxona",
+}
+
+def product_topics(text):
+    q = normalize_text(text)
+    out = set()
+    for term in PRODUCT_TOPIC_TERMS:
+        nt = normalize_text(term)
+        if nt in q:
+            out.add(PRODUCT_TOPIC_ALIASES.get(nt, nt))
+    for token in token_list(text):
+        if len(token) < 5:
+            continue
+        for term in PRODUCT_TOPIC_TERMS:
+            nt = normalize_text(term)
+            if " " not in nt and len(nt) >= 5 and SequenceMatcher(None, token, nt).ratio() >= 0.92:
+                out.add(PRODUCT_TOPIC_ALIASES.get(nt, nt))
+                break
+    return out
+
+def product_topic_matches(user_text, product):
+    topics = product_topics(user_text)
+    if not topics:
+        return False
+    text = normalize_text(" ".join([str(product.get("name", "")), str(product.get("category", "")), str(product.get("description", "")), " ".join(product.get("keywords", []) or [])]))
+    return any(topic in text for topic in topics)
+
+def likely_product_query(text):
+    q = normalize_text(text)
+    if not q:
+        return False
+    ordinary = {"salom", "assalomu alaykum", "rahmat", "raxmat", "ok", "okay", "ha", "yoq", "xayr", "mayli", "boladi", "tushunarli", "juda yaxshi", "juda zor", "yaxshi", "zor"}
+    if q in ordinary:
+        return False
+    # Faqat aniq mahsulot mavzusi bo'lsa katalogga o'tamiz.
+    return bool(product_topics(text))
 
 
 def is_akso_knowledge_question(text):
@@ -794,6 +819,9 @@ def find_local_products(
 
     for product in products:
         if not visible_product(product):
+            continue
+
+        if not product_topic_matches(user_text, product):
             continue
 
         score = local_product_score(
@@ -970,6 +998,9 @@ Mos kelmasa:
 
             if 0 <= index < len(candidates):
                 product = candidates[index]
+
+                if not product_topic_matches(user_text, product):
+                    continue
 
                 if product not in selected:
                     selected.append(product)
@@ -3709,6 +3740,13 @@ class HealthWebhookHandler(BaseHTTPRequestHandler):
         self.wfile.write(data)
 
     def do_GET(self):
+        if self.path == "/health" or self.path == "/health/":
+            self._send(200, "OK")
+            return
+
+        self._send(404, "Not Found")
+
+    def do_HEAD(self):
         if self.path == "/health" or self.path == "/health/":
             self._send(200, "OK")
             return
