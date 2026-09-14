@@ -24,8 +24,13 @@
         "role": "assistant",
         "text": "Tushunarli. Biz naqd pul bermaymiz, lekin AKSO do'konida barcha turdagi mahsulotlarni qulay bo'lib to'lash asosida (pasportning o'zi bilan) xarid qilishingiz mumkin. \n\nSizni qanday mahsulot qiziqtirmoqda?",
         "time": 1789391307
+      },
+      {
+        "role": "user",
+        "text": "Manashu stoldan bormi",
+        "time": 1789391347
       }
     ],
-    "last_activity": 1789391307
+    "last_activity": 1789391347
   }
 }
