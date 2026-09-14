@@ -130,8 +130,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman? Mahsulotlarimiz, manzilimiz yoki xizmatlarimiz bo'yicha savollaringiz bormi?",
         "time": 1789397633
+      },
+      {
+        "role": "user",
+        "text": "Mebil oldim dastavka qilamizdegantila",
+        "time": 1789397675
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! \n\nHa, albatta. AKSO do'konidan xarid qilgan bo'lsangiz, Qorako'l va Olot tumanlari bo'ylab yetkazib berish (dastavka) mutlaqo bepul va hech qanday shartlarsiz amalga oshiriladi. Shuningdek, barcha mahsulotlarni o'rnatish (montaj qilish) ham bepul bajariladi. \n\nYetkazib berish vaqtini aniqlashtirish yoki boshqa savollar uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1789397677
       }
     ],
-    "last_activity": 1789397633
+    "last_activity": 1789397677
   }
 }
