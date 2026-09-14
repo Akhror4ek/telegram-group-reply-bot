@@ -120,8 +120,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
         "time": 1789397617
+      },
+      {
+        "role": "user",
+        "text": "Man aksadan",
+        "time": 1789397632
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman? Mahsulotlarimiz, manzilimiz yoki xizmatlarimiz bo'yicha savollaringiz bormi?",
+        "time": 1789397633
       }
     ],
-    "last_activity": 1789397617
+    "last_activity": 1789397633
   }
 }
