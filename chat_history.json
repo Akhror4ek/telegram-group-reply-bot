@@ -184,8 +184,13 @@
         "role": "assistant",
         "text": "Tushunarli, siz o'lchamlari bo'yicha mahsulot qidirayotganga o'xshaysiz. Biroq, bu ma'lumot bo'yicha aniq qaysi mahsulot haqida ketayotganini topa olmadim. \n\nIltimos, kerakli mahsulot turini aniqroq yozing yoki batafsil ma'lumot olish uchun operatorimizga murojaat qiling:\n📞 +998 78 555-17-77 yoki +998 94 529-07-07\nTelegram: @aksouz",
         "time": 1789405362
+      },
+      {
+        "role": "user",
+        "text": "Манашунака лнанинг тагига шкафи кк",
+        "time": 1789405433
       }
     ],
-    "last_activity": 1789405362
+    "last_activity": 1789405433
   }
 }
