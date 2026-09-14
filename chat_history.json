@@ -219,8 +219,18 @@
         "role": "user",
         "text": "Тримони шкафи кк",
         "time": 1789405531
+      },
+      {
+        "role": "user",
+        "text": "КАМОДЛАРДАН БОРМИ",
+        "time": 1789405586
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! Ha, kamodlarimiz mavjud. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki Telegram: @aksouz",
+        "time": 1789405588
       }
     ],
-    "last_activity": 1789405531
+    "last_activity": 1789405588
   }
 }
