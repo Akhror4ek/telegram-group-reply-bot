@@ -75,5 +75,19 @@
       }
     ],
     "last_activity": 1789391934
+  },
+  "7619954195:7619954195": {
+    "chat_id": 7619954195,
+    "user_id": 7619954195,
+    "full_name": "Akso",
+    "username": "akso_admin",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Ona ichib olgan qizini do'pposladi. Savol : bu yerda kim mast ?",
+        "time": 1789392086
+      }
+    ],
+    "last_activity": 1789392086
   }
 }
