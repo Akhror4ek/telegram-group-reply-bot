@@ -86,8 +86,23 @@
         "role": "user",
         "text": "Ona ichib olgan qizini do'pposladi. Savol : bu yerda kim mast ?",
         "time": 1789392086
+      },
+      {
+        "role": "assistant",
+        "text": "Kechirasiz, men AKSO do'konining virtual yordamchisiman va faqat do'konimiz mahsulotlari, xizmatlari hamda shartlari bo'yicha savollarga javob bera olaman. Bu mavzu bo'yicha sizga yordam bera olmayman. \n\nAgar AKSO do'koni, yetkazib berish, bo'lib to'lash yoki mahsulotlarimiz haqida savollaringiz bo'lsa, mamnuniyat bilan javob beraman!",
+        "time": 1789392100
+      },
+      {
+        "role": "user",
+        "text": "Ona ichib olgan qizini do'pposladi. Savol : bu yerda kim mast ?",
+        "time": 1789392100
+      },
+      {
+        "role": "assistant",
+        "text": "Kechirasiz, men AKSO do'konining virtual yordamchisiman va faqat do'konimiz mahsulotlari, xizmatlari hamda shartlari bo'yicha savollarga javob bera olaman. Bu mavzu bo'yicha sizga yordam bera olmayman. \n\nAgar AKSO do'koni, yetkazib berish, bo'lib to'lash yoki mahsulotlarimiz haqida savollaringiz bo'lsa, mamnuniyat bilan javob beraman!",
+        "time": 1789392101
       }
     ],
-    "last_activity": 1789392086
+    "last_activity": 1789392101
   }
 }
