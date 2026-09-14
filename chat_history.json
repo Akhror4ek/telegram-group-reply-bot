@@ -187,10 +187,15 @@
       },
       {
         "role": "user",
-        "text": "Манашунака лнанинг тагига шкафи кк",
-        "time": 1789405433
+        "text": "140",
+        "time": 1789405460
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
+        "time": 1789405461
       }
     ],
-    "last_activity": 1789405433
+    "last_activity": 1789405461
   }
 }
