@@ -229,8 +229,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! Ha, kamodlarimiz mavjud. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki Telegram: @aksouz",
         "time": 1789405588
+      },
+      {
+        "role": "user",
+        "text": "Расмларидан ташаб беринг",
+        "time": 1789405603
+      },
+      {
+        "role": "assistant",
+        "text": "Mahsulotlarimizni ko'rish va tanlash uchun saytimizga o'tishingiz yoki telegram sahifamizga yozishingiz mumkin:\nSayt: akso.uz\nTelegram: @aksouz\nOperator: +998-94-529-07-07",
+        "time": 1789405605
       }
     ],
-    "last_activity": 1789405588
+    "last_activity": 1789405605
   }
 }
