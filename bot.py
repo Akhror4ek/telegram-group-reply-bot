@@ -589,12 +589,42 @@ def filter_products_for_request(products, text):
 
 
 def build_search_query(key, text):
-    prev=last_product_queries.get(key,"")
-    q=normalize_text(text)
-    ordinary={"ha","xa","albatta","mayli","rahmat","raxmat","ok","okay","yoq","yaxshi","zor","tushunarli"}
-    qualifier=(q not in ordinary) and (len(q.split())<=5 or any(x in q for x in ("uchun","oyiga","oylik","million","mln","ming","oq","qora","kulrang","kupe","detski","bolalar","kiyim")))
+    prev = last_product_queries.get(key, "")
+    q = normalize_text(text)
+
+    ordinary = {
+        "ha", "xa", "albatta", "mayli", "rahmat", "raxmat",
+        "ok", "okay", "yoq", "yaxshi", "zor", "tushunarli",
+    }
+
+    # Agar mijoz yangi mahsulot nomini aniq aytsa, avvalgi mahsulot
+    # kontekstini aralashtirmaymiz. Masalan:
+    #   "kuller" -> keyin "divan"
+    # natijada "kuller divan" bo'lmasligi kerak.
+    current_topics = product_topics(text)
+    if current_topics:
+        return text
+
+    # Mahsulot aytilmagan qisqa davomiy savollar avvalgi mahsulotga tegishli
+    # bo'lishi mumkin: "oq", "oyiga 500 ming", "kupe" va hokazo.
+    qualifier = (
+        q not in ordinary
+        and (
+            len(q.split()) <= 5
+            or any(
+                x in q
+                for x in (
+                    "uchun", "oyiga", "oylik", "million", "mln",
+                    "ming", "oq", "qora", "kulrang", "kupe",
+                    "detski", "bolalar", "kiyim",
+                )
+            )
+        )
+    )
+
     if prev and qualifier:
         return f"{prev} {text}"
+
     return text
 
 
