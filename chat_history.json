@@ -32,5 +32,19 @@
       }
     ],
     "last_activity": 1789391347
+  },
+  "8520907481:8520907481": {
+    "chat_id": 8520907481,
+    "user_id": 8520907481,
+    "full_name": "ODAM",
+    "username": "Oq_odam1",
+    "messages": [
+      {
+        "role": "user",
+        "text": "stul bormi",
+        "time": 1789391440
+      }
+    ],
+    "last_activity": 1789391440
   }
 }
