@@ -194,8 +194,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
         "time": 1789405461
+      },
+      {
+        "role": "user",
+        "text": "Узунликда",
+        "time": 1789405468
+      },
+      {
+        "role": "assistant",
+        "text": "Ва alaykum assalom! \n\nIltimos, savolingizni aniqroq yozing: qanday mahsulotning uzunligi sizni qiziqtirmoqda? \n\nAgar savolingiz bo'yicha aniqlik kiritish kerak bo'lsa, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1789405469
       }
     ],
-    "last_activity": 1789405461
+    "last_activity": 1789405469
   }
 }
