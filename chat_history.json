@@ -164,8 +164,13 @@
         "role": "user",
         "text": "АССАЛОМУ АЛЕЙКУМ",
         "time": 1789405254
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! \n\nAKSO do'koniga xush kelibsiz! Sizga qanday yordam bera olaman?",
+        "time": 1789405271
       }
     ],
-    "last_activity": 1789405254
+    "last_activity": 1789405271
   }
 }
