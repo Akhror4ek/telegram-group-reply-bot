@@ -696,45 +696,6 @@ def is_akso_knowledge_question(text):
     return any(phrase in q for phrase in knowledge_phrases)
 
 
-def likely_product_query(text):
-    q = normalize_text(text)
-
-    if not q:
-        return False
-
-    # Oddiy suhbatlar hech qachon katalogga yuborilmaydi.
-    ordinary = {
-        "salom",
-        "assalomu alaykum",
-        "rahmat",
-        "raxmat",
-        "ok",
-        "okay",
-        "ha",
-        "yoq",
-        "xayr",
-        "mayli",
-        "boladi",
-        "tushunarli",
-        "juda yaxshi",
-        "juda zor",
-        "yaxshi",
-        "zor",
-    }
-
-    if q in ordinary:
-        return False
-
-    if any(
-        word in q
-        for word in PRODUCT_INTENT_WORDS
-    ):
-        return True
-
-    # Yakka so'z faqat keyingi qat'iy fuzzy tekshiruv uchun o'tadi.
-    # "juda", "yaxshi" kabi so'zlar keyin mahsulotga moslashtirilmaydi.
-    return len(q.split()) == 1 and len(q) >= 4
-
 
 # ============================================================
 # STRICT LOCAL SEARCH
