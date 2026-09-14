@@ -104,5 +104,24 @@
       }
     ],
     "last_activity": 1789392101
+  },
+  "-1001865736985:7234117264": {
+    "chat_id": -1001865736985,
+    "user_id": 7234117264,
+    "full_name": "Lochin 837++236",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Salom",
+        "time": 1789397616
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
+        "time": 1789397617
+      }
+    ],
+    "last_activity": 1789397617
   }
 }
