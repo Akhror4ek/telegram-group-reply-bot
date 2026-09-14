@@ -14,8 +14,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
         "time": 1789391299
+      },
+      {
+        "role": "user",
+        "text": "Menga pul kerqk",
+        "time": 1789391305
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli. Biz naqd pul bermaymiz, lekin AKSO do'konida barcha turdagi mahsulotlarni qulay bo'lib to'lash asosida (pasportning o'zi bilan) xarid qilishingiz mumkin. \n\nSizni qanday mahsulot qiziqtirmoqda?",
+        "time": 1789391307
       }
     ],
-    "last_activity": 1789391299
+    "last_activity": 1789391307
   }
 }
