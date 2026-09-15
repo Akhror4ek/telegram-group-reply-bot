@@ -263,8 +263,13 @@
         "role": "user",
         "text": "Assalomu alaykum yaxshimisizlarDushavoy kabenasotib olmaqchiman",
         "time": 1789482508
+      },
+      {
+        "role": "user",
+        "text": "Xoʼp raxmat oldindan",
+        "time": 1789485104
       }
     ],
-    "last_activity": 1789482508
+    "last_activity": 1789485104
   }
 }
