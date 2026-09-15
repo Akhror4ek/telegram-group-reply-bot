@@ -252,5 +252,19 @@
       }
     ],
     "last_activity": 1789405646
+  },
+  "-1001865736985:7134087328": {
+    "chat_id": -1001865736985,
+    "user_id": 7134087328,
+    "full_name": "🍀 Dilshod🍀",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum yaxshimisizlarDushavoy kabenasotib olmaqchiman",
+        "time": 1789482508
+      }
+    ],
+    "last_activity": 1789482508
   }
 }
