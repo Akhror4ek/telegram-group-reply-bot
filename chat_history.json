@@ -290,5 +290,19 @@
       }
     ],
     "last_activity": 1789561927
+  },
+  "-1001865736985:1219329338": {
+    "chat_id": -1001865736985,
+    "user_id": 1219329338,
+    "full_name": "🍀🍀Husniya Egamberdiyeva🍀🍀",
+    "username": "Egamberdiyeva_9095",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum. Suvi pastdan qo'yiladigan kullerlar bormi narxi qancha",
+        "time": 1789563328
+      }
+    ],
+    "last_activity": 1789563328
   }
 }
