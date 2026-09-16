@@ -138,5 +138,19 @@
     "payment": "Bo'lib to'lash",
     "installment_months": 12,
     "status": "new"
+  },
+  {
+    "id": "AKSO-1011",
+    "created_at": 1789564815,
+    "chat_id": 1181854379,
+    "user_id": 1181854379,
+    "name": "Nodir Muminov",
+    "phone": "+998990734262",
+    "location": "Qorako'l",
+    "product_id": "1789286363285",
+    "product_name": "LG televizor 43 dyum",
+    "payment": "Bo'lib to'lash",
+    "installment_months": 3,
+    "status": "new"
   }
 ]
