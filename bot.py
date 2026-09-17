@@ -58,6 +58,7 @@ PRODUCTS_FILE = "products.json"
 PRODUCTS_FOLDER = "products"
 ORDERS_FILE = "orders.json"
 CHAT_HISTORY_FILE = "chat_history.json"
+ADMIN_DRAFTS_FILE = "admin_drafts.json"
 
 
 # ============================================================
@@ -74,6 +75,7 @@ ai_client = genai.Client(
 # ============================================================
 
 admin_states = {}
+admin_draft_checked_users = set()
 
 # chat_id -> {user_id, products, created_at}
 pending_product_confirmations = {}
@@ -451,6 +453,148 @@ async def github_get_products(
             return []
 
         raise
+
+
+async def github_get_admin_drafts():
+    """GitHub'dagi aktiv admin mahsulot qo'shish draftlarini o'qiydi."""
+    try:
+        result = await github_api(
+            "GET",
+            f"{ADMIN_DRAFTS_FILE}?ref={GITHUB_BRANCH}",
+        )
+        content = result.get("content", "")
+        if not content:
+            return {}
+
+        decoded = base64.b64decode(
+            content.replace("\n", "")
+        ).decode("utf-8")
+        data = json.loads(decoded)
+        return data if isinstance(data, dict) else {}
+
+    except Exception as e:
+        if "404" in str(e):
+            return {}
+        raise
+
+
+async def github_save_admin_drafts(drafts):
+    """Admin draftlarini GitHub'da kichik JSON fayl sifatida saqlaydi."""
+    content = json.dumps(
+        drafts,
+        ensure_ascii=False,
+        indent=2,
+    ).encode("utf-8")
+
+    encoded = base64.b64encode(content).decode("ascii")
+    sha = None
+
+    try:
+        current = await github_api(
+            "GET",
+            f"{ADMIN_DRAFTS_FILE}?ref={GITHUB_BRANCH}",
+        )
+        sha = current.get("sha")
+    except Exception as e:
+        if "404" not in str(e):
+            raise
+
+    data = {
+        "message": "Update admin product draft",
+        "content": encoded,
+        "branch": GITHUB_BRANCH,
+    }
+
+    if sha:
+        data["sha"] = sha
+
+    await github_api(
+        "PUT",
+        ADMIN_DRAFTS_FILE,
+        data,
+    )
+
+
+async def persist_admin_draft(user_id):
+    """Faqat JSONga sig'adigan admin mahsulot qo'shish holatini saqlaydi."""
+    state = admin_states.get(user_id)
+    if not state or state.get("mode") != "add":
+        return
+
+    draft = {
+        "mode": "add",
+        "step": state.get("step", "photos"),
+        "pending_images": list(state.get("pending_images", [])),
+        "image_kinds": list(state.get("image_kinds", [])),
+        "image_extensions": list(state.get("image_extensions", [])),
+        "name": state.get("name", ""),
+        "price": state.get("price"),
+        "category": state.get("category", ""),
+        "description": state.get("description", ""),
+        "admin_id": int(user_id),
+        "updated_at": int(time.time()),
+    }
+
+    drafts = await github_get_admin_drafts()
+    drafts[str(user_id)] = draft
+    await github_save_admin_drafts(drafts)
+
+
+def _draft_to_state(draft):
+    if not isinstance(draft, dict):
+        return None
+    if draft.get("mode") != "add":
+        return None
+
+    return {
+        "mode": "add",
+        "step": draft.get("step", "photos"),
+        "pending_images": list(draft.get("pending_images", [])),
+        "image_bytes_list": [],
+        "image_kinds": list(draft.get("image_kinds", [])),
+        "image_extensions": list(draft.get("image_extensions", [])),
+        "name": draft.get("name", ""),
+        "price": draft.get("price"),
+        "category": draft.get("category", ""),
+        "description": draft.get("description", ""),
+        "admin_id": int(draft.get("admin_id") or ADMIN_ID),
+    }
+
+
+async def restore_admin_draft(user_id):
+    """Agar Render qayta ishga tushgan bo'lsa, aktiv add-product holatini tiklaydi."""
+    if user_id in admin_draft_checked_users:
+        return admin_states.get(user_id)
+
+    admin_draft_checked_users.add(user_id)
+
+    try:
+        drafts = await github_get_admin_drafts()
+        draft = drafts.get(str(user_id))
+        state = _draft_to_state(draft)
+        if state:
+            admin_states[user_id] = state
+            print(
+                f"✅ Admin mahsulot drafti tiklandi: user={user_id}, step={state.get('step')}"
+            )
+            return state
+    except Exception as e:
+        print("ADMIN DRAFT RESTORE XATOSI:", repr(e))
+
+    return None
+
+
+async def clear_admin_draft(user_id):
+    admin_states.pop(user_id, None)
+    admin_draft_checked_users.add(user_id)
+
+    try:
+        drafts = await github_get_admin_drafts()
+        if str(user_id) in drafts:
+            drafts.pop(str(user_id), None)
+            await github_save_admin_drafts(drafts)
+    except Exception as e:
+        print("ADMIN DRAFT CLEAR XATOSI:", repr(e))
 
 
 async def github_save_products(products):
@@ -1545,6 +1689,8 @@ async def add_product_command(
         "image_extensions": [],
         "admin_id": user.id,
     }
+    admin_draft_checked_users.add(user.id)
+    await persist_admin_draft(user.id)
 
     await update.message.reply_text(
         "➕ <b>Yangi mahsulot qo'shish</b>\n\n"
@@ -1573,13 +1719,27 @@ async def save_new_product(
         category = state.get("category", "")
         description = state.get("description", "")
 
-        image_bytes_list = state[
-            "image_bytes_list"
-        ]
+        image_bytes_list = state.get(
+            "image_bytes_list",
+            [],
+        )
 
-        telegram_ids = state[
-            "pending_images"
-        ]
+        telegram_ids = state.get(
+            "pending_images",
+            [],
+        )
+
+        # Draft Render restart/deploydan keyin tiklangan bo'lsa,
+        # image_bytes_list bo'sh bo'ladi. Telegram file_id orqali rasmlarni
+        # qayta yuklab olamiz.
+        if len(image_bytes_list) < len(telegram_ids):
+            restored_bytes = []
+            for file_id in telegram_ids:
+                tg_file = await context.bot.get_file(file_id)
+                data = await tg_file.download_as_bytearray()
+                restored_bytes.append(bytes(data))
+            image_bytes_list = restored_bytes
+            state["image_bytes_list"] = restored_bytes
         image_kinds = state.get(
             "image_kinds",
             [],
@@ -1672,11 +1832,11 @@ async def save_new_product(
             products
         )
 
-        admin_states.pop(
+        owner_id = (
             state.get("admin_id")
-            or update.message.from_user.id,
-            None,
+            or update.message.from_user.id
         )
+        await clear_admin_draft(owner_id)
 
         stats[
             "products_added"
@@ -1706,14 +1866,18 @@ async def save_new_product(
             repr(e)
         )
 
-        admin_states.pop(
-            state.get("admin_id")
-            or update.message.from_user.id,
-            None
-        )
+        try:
+            await persist_admin_draft(
+                state.get("admin_id")
+                or update.message.from_user.id
+            )
+        except Exception as persist_error:
+            print("ADMIN DRAFT PERSIST XATOSI:", repr(persist_error))
 
         await update.message.reply_text(
-            "❌ Mahsulotni saqlashda xatolik yuz berdi."
+            "❌ Mahsulotni saqlashda xatolik yuz berdi.\n"
+            "✅ Mahsulot qo'shish jarayoni saqlab qolindi. "
+            "Muammoni tuzatgach qayta davom etishingiz mumkin."
         )
 
 
@@ -1780,6 +1944,13 @@ async def handle_admin_state(
     )
 
     if not state:
+        state = await restore_admin_draft(user.id)
+
+    if not state:
+        return False
+
+    # Add-product jarayonida boshqa handlerlarga umuman o'tmaymiz.
+    if state.get("mode") != "add":
         return False
 
     step = state.get("step")
@@ -1862,6 +2033,8 @@ async def handle_admin_state(
                 else "fayl sifatidagi rasm"
             )
 
+            await persist_admin_draft(user.id)
+
             await update.message.reply_text(
                 f"✅ {count}-rasm qabul qilindi ({source_text}).\n"
                 "Yana rasm yuboring yoki /done bosing."
@@ -1896,6 +2069,7 @@ async def handle_admin_state(
 
         state["name"] = name
         state["step"] = "price"
+        await persist_admin_draft(user.id)
 
         await update.message.reply_text(
             "✅ Nom saqlandi.\n\n"
@@ -1924,6 +2098,7 @@ async def handle_admin_state(
 
         state["price"] = price
         state["step"] = "description"
+        await persist_admin_draft(user.id)
 
         await update.message.reply_text(
             "✅ Narx saqlandi.\n\n"
@@ -1944,6 +2119,7 @@ async def handle_admin_state(
             update.message.text.strip()
         )
         state["step"] = "category_selection"
+        await persist_admin_draft(user.id)
 
         await show_add_category_selector(
             update,
@@ -1968,6 +2144,7 @@ async def handle_admin_state(
             return True
 
         state["category"] = category
+        await persist_admin_draft(user.id)
         await save_new_product(
             update,
             context,
@@ -2003,6 +2180,9 @@ async def done_command(
     )
 
     if not state:
+        state = await restore_admin_draft(user.id)
+
+    if not state:
         await update.message.reply_text(
             "ℹ️ Hozir mahsulot qo'shish jarayoni yo'q."
         )
@@ -2023,6 +2203,7 @@ async def done_command(
         return
 
     state["step"] = "name"
+    await persist_admin_draft(user.id)
 
     await update.message.reply_text(
         "✅ Rasmlar qabul qilindi.\n\n"
@@ -2057,6 +2238,7 @@ async def skip_command(
         # Eski holat bilan moslik: agar shu bosqich qolib ketgan bo'lsa, kategoriyasiz o'tamiz.
         state["category"] = ""
         state["step"] = "description"
+        await persist_admin_draft(user.id)
 
         await update.message.reply_text(
             "✅ Kategoriya o'tkazildi.\n\n"
@@ -2067,6 +2249,7 @@ async def skip_command(
     if step == "description":
         state["description"] = ""
         state["step"] = "category_selection"
+        await persist_admin_draft(user.id)
 
         await show_add_category_selector(
             update,
@@ -2660,6 +2843,8 @@ async def callback_handler(
             return
 
         state = admin_states.get(query.from_user.id)
+        if not state:
+            state = await restore_admin_draft(query.from_user.id)
         if not state or state.get("mode") != "add" or state.get("step") != "category_selection":
             await query.answer(
                 "⏳ Bu mahsulot qo'shish oynasi eskirgan.",
@@ -2672,6 +2857,7 @@ async def callback_handler(
         if action == "new":
             await query.answer()
             state["step"] = "category_new"
+            await persist_admin_draft(query.from_user.id)
             await query.message.reply_text(
                 "➕ <b>Yangi kategoriya</b>\n\n"
                 "🗂 Yangi kategoriya nomini yozing.",
@@ -2682,6 +2868,7 @@ async def callback_handler(
         if action == "skip":
             await query.answer("Kategoriyasiz saqlanmoqda...")
             state["category"] = ""
+            await persist_admin_draft(query.from_user.id)
             await save_new_product(query, context, state)
             return
 
@@ -2706,6 +2893,7 @@ async def callback_handler(
             return
 
         state["category"] = categories[index]
+        await persist_admin_draft(query.from_user.id)
         await query.answer("✅ Kategoriya tanlandi")
         await save_new_product(query, context, state)
         return
@@ -3709,10 +3897,7 @@ async def cancel_command(
         return
 
     if is_admin(user.id):
-        admin_states.pop(
-            user.id,
-            None
-        )
+        await clear_admin_draft(user.id)
 
     clear_pending_confirmation(
         update.message.chat_id
@@ -3777,16 +3962,41 @@ async def reply_to_message(
 
     stats["messages"] += 1
 
+    # --------------------------------------------------------
+    # ADMIN WORKFLOW — MUTLAQ USTUVORLIK
+    # --------------------------------------------------------
+    # Admin /addproduct yoki /editproduct jarayonida turgan bo'lsa,
+    # uning matni HECH QACHON mijoz mahsulot qidiruviga tushmaydi.
+    if update.message.from_user and is_admin(update.message.from_user.id):
+        owner_id = update.message.from_user.id
+        admin_state = admin_states.get(owner_id)
+
+        if not admin_state:
+            admin_state = await restore_admin_draft(owner_id)
+
+        if admin_state and admin_state.get("mode") == "add":
+            if await handle_admin_state(update, context):
+                return
+            await update.message.reply_text(
+                "⏳ Mahsulot qo'shish jarayoni davom etmoqda. "
+                "Iltimos, bot so'ragan ma'lumotni yuboring yoki /cancel bosing."
+            )
+            return
+
+        if admin_state and admin_state.get("mode") == "edit":
+            if await handle_edit_state(update, context):
+                return
+
     # Reply keyboard tugmalari hech qachon mahsulot qidiruvi sifatida
-    # qabul qilinmasin. Ularni umumiy handlerdan oldin ushlaymiz.
+    # qabul qilinmasin.
     if await handle_menu_button(update, context):
         return
 
-    # Buyurtma jarayoni birinchi o'rinda.
+    # Buyurtma jarayoni.
     if await handle_order_state(update, context):
         return
 
-    # Admin jarayonlari birinchi o'rinda.
+    # Admin tahrirlash/add jarayonlari uchun zaxira tekshiruv.
     if await handle_edit_state(
         update,
         context,
