@@ -123,9 +123,14 @@
         "role": "assistant",
         "text": "Albatta. 😊 Qaysi divan kerak?\n\n• 🛋 Oddiy divan\n• 🛏 Divan-karavot\n• 📐 Burchakli divan\n• 🔄 Transformator divan\n\nByudjetingizni yozing, mos variantlarni ajrataman.",
         "time": 1789654730
+      },
+      {
+        "role": "user",
+        "text": "Karavot",
+        "time": 1789654742
       }
     ],
-    "last_activity": 1789654730
+    "last_activity": 1789654742
   },
   "605965757:605965757": {
     "chat_id": 605965757,
