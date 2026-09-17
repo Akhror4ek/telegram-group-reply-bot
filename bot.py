@@ -1543,6 +1543,7 @@ async def add_product_command(
         # GitHub raw URL orqali yuboriladi.
         "image_kinds": [],
         "image_extensions": [],
+        "admin_id": user.id,
     }
 
     await update.message.reply_text(
@@ -1672,7 +1673,8 @@ async def save_new_product(
         )
 
         admin_states.pop(
-            update.message.from_user.id,
+            state.get("admin_id")
+            or update.message.from_user.id,
             None,
         )
 
@@ -1705,13 +1707,58 @@ async def save_new_product(
         )
 
         admin_states.pop(
-            update.message.from_user.id,
+            state.get("admin_id")
+            or update.message.from_user.id,
             None
         )
 
         await update.message.reply_text(
             "❌ Mahsulotni saqlashda xatolik yuz berdi."
         )
+
+
+async def show_add_category_selector(update, context, state):
+    """Yangi mahsulot uchun mavjud kategoriyani tanlash yoki yangi kategoriya yaratish."""
+    products = await github_get_products(force_refresh=True)
+
+    categories = sorted(
+        {
+            (p.get("category", "") or "").strip()
+            for p in products
+            if (p.get("category", "") or "").strip()
+        },
+        key=lambda value: value.lower(),
+    )
+
+    keyboard = []
+    for index, category in enumerate(categories):
+        keyboard.append([
+            InlineKeyboardButton(
+                f"📁 {category}",
+                callback_data=f"addcat:{index}",
+            )
+        ])
+
+    keyboard.append([
+        InlineKeyboardButton(
+            "➕ Yangi kategoriya yaratish",
+            callback_data="addcat:new",
+        )
+    ])
+    keyboard.append([
+        InlineKeyboardButton(
+            "⏭ Kategoriyasiz saqlash",
+            callback_data="addcat:skip",
+        )
+    ])
+
+    await update.message.reply_text(
+        "✅ Mahsulot ma'lumotlari tayyor.\n\n"
+        "🗂 <b>Kategoriyani tanlang:</b>\n"
+        "Quyidagi mavjud kategoriyalardan birini tanlang yoki yangi kategoriya yarating.",
+        parse_mode="HTML",
+        reply_markup=InlineKeyboardMarkup(keyboard),
+    )
 
 
 async def handle_admin_state(
@@ -1876,32 +1923,10 @@ async def handle_admin_state(
             return True
 
         state["price"] = price
-        state["step"] = "category"
-
-        await update.message.reply_text(
-            "✅ Narx saqlandi.\n\n"
-            "🗂 Kategoriya yozing.\n"
-            "Masalan: Kullerlar\n\n"
-            "Kerak bo'lmasa: /skip"
-        )
-
-        return True
-
-    if step == "category":
-        if not update.message.text:
-            await update.message.reply_text(
-                "🗂 Kategoriya yozing yoki /skip bosing."
-            )
-            return True
-
-        state["category"] = (
-            update.message.text.strip()
-        )
-
         state["step"] = "description"
 
         await update.message.reply_text(
-            "✅ Kategoriya saqlandi.\n\n"
+            "✅ Narx saqlandi.\n\n"
             "📄 Mahsulot tavsifini yozing.\n"
             "Kerak bo'lmasa: /skip"
         )
@@ -1918,13 +1943,42 @@ async def handle_admin_state(
         state["description"] = (
             update.message.text.strip()
         )
+        state["step"] = "category_selection"
 
-        await save_new_product(
+        await show_add_category_selector(
             update,
             context,
             state,
         )
 
+        return True
+
+    if step == "category_new":
+        if not update.message.text:
+            await update.message.reply_text(
+                "🗂 Yangi kategoriya nomini yozing."
+            )
+            return True
+
+        category = update.message.text.strip()
+        if not category:
+            await update.message.reply_text(
+                "❌ Kategoriya nomi bo'sh bo'lishi mumkin emas."
+            )
+            return True
+
+        state["category"] = category
+        await save_new_product(
+            update,
+            context,
+            state,
+        )
+        return True
+
+    if step == "category_selection":
+        await update.message.reply_text(
+            "🗂 Kategoriya tanlash uchun quyidagi tugmalardan foydalaning."
+        )
         return True
 
     return False
@@ -2000,6 +2054,7 @@ async def skip_command(
     step = state.get("step")
 
     if step == "category":
+        # Eski holat bilan moslik: agar shu bosqich qolib ketgan bo'lsa, kategoriyasiz o'tamiz.
         state["category"] = ""
         state["step"] = "description"
 
@@ -2011,7 +2066,26 @@ async def skip_command(
 
     if step == "description":
         state["description"] = ""
+        state["step"] = "category_selection"
 
+        await show_add_category_selector(
+            update,
+            context,
+            state,
+        )
+        return
+
+    if step == "category_selection":
+        state["category"] = ""
+        await save_new_product(
+            update,
+            context,
+            state,
+        )
+        return
+
+    if step == "category_new":
+        state["category"] = ""
         await save_new_product(
             update,
             context,
@@ -2573,6 +2647,67 @@ async def callback_handler(
         await query.message.reply_text(
             "Mayli. 📌 Boshqa mahsulotni so'rashingiz mumkin."
         )
+        return
+
+    # -------- add product category callbacks --------
+
+    if data.startswith("addcat:"):
+        if not is_admin(query.from_user.id):
+            await query.answer(
+                "❌ Sizda ruxsat yo'q.",
+                show_alert=True,
+            )
+            return
+
+        state = admin_states.get(query.from_user.id)
+        if not state or state.get("mode") != "add" or state.get("step") != "category_selection":
+            await query.answer(
+                "⏳ Bu mahsulot qo'shish oynasi eskirgan.",
+                show_alert=True,
+            )
+            return
+
+        action = data.split(":", 1)[1]
+
+        if action == "new":
+            await query.answer()
+            state["step"] = "category_new"
+            await query.message.reply_text(
+                "➕ <b>Yangi kategoriya</b>\n\n"
+                "🗂 Yangi kategoriya nomini yozing.",
+                parse_mode="HTML",
+            )
+            return
+
+        if action == "skip":
+            await query.answer("Kategoriyasiz saqlanmoqda...")
+            state["category"] = ""
+            await save_new_product(query, context, state)
+            return
+
+        try:
+            index = int(action)
+        except ValueError:
+            await query.answer("❌ Noto'g'ri kategoriya.", show_alert=True)
+            return
+
+        products = await github_get_products(force_refresh=True)
+        categories = sorted(
+            {
+                (p.get("category", "") or "").strip()
+                for p in products
+                if (p.get("category", "") or "").strip()
+            },
+            key=lambda value: value.lower(),
+        )
+
+        if not 0 <= index < len(categories):
+            await query.answer("❌ Kategoriya topilmadi.", show_alert=True)
+            return
+
+        state["category"] = categories[index]
+        await query.answer("✅ Kategoriya tanlandi")
+        await save_new_product(query, context, state)
         return
 
     # -------- admin callbacks --------
