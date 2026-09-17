@@ -222,5 +222,54 @@
     ],
     "visible": true,
     "created_at": "2026-09-17 11:14:57"
+  },
+  {
+    "id": "1789652787554",
+    "name": "1 kishilik mexanizmli divan",
+    "price": 1900000,
+    "category": "1 kishilik divanlar",
+    "description": "Ko‘k-krem rangli hashamatli divan-krovat\n\nKapitoneli boshqismi, kristalli tugmalar va yumshoq matosi bilan ajralib turadi. Ichida keng saqlash joyi mavjud. Uyingizga zamonaviy va qulay ko‘rinish bag‘ishlaydi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652782435_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652782435_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652785172_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652782435_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652782435_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652785172_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "mexanizmli",
+      "divan",
+      "kok",
+      "krem",
+      "rangli",
+      "hashamatli",
+      "krovat",
+      "kapitoneli",
+      "boshqis",
+      "kristalli",
+      "tugma",
+      "va",
+      "yumshoq",
+      "matosi",
+      "bilan",
+      "ajralib",
+      "turadi",
+      "ichi",
+      "keng",
+      "saqlash",
+      "joyi",
+      "mavjud",
+      "uyingiz",
+      "zamonaviy",
+      "qulay",
+      "korinish",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-17 13:46:27"
   }
 ]
