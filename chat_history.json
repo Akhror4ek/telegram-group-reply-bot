@@ -304,5 +304,24 @@
       }
     ],
     "last_activity": 1789563328
+  },
+  "-1001865736985:8693753004": {
+    "chat_id": -1001865736985,
+    "user_id": 8693753004,
+    "full_name": "23✨",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alekum bolachalaga mowincha bormi akumlatorlik",
+        "time": 1789614285
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! \n\nAfsuski, menda bolalar uchun akkumulyatorli mashinalar mavjudligi yoki yo'qligi haqida aniq ma'lumot yo'q. \n\nIltimos, aniqroq ma'lumot olish uchun operatorimizga murojaat qiling: \n📞 +998 94 529-07-07 yoki +998 78 555-17-77.",
+        "time": 1789614287
+      }
+    ],
+    "last_activity": 1789614287
   }
 }
