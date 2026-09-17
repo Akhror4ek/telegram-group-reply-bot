@@ -461,8 +461,13 @@
         "role": "user",
         "text": "1 metrdan 5 metrgacha",
         "time": 1789660955
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunmadim, iltimos savolingizni aniqroq yozing yoki qanday mahsulot qidirayotganingizni ayting. Yordam berishdan mamnun bo'lamiz! \n\nAgar qo'shimcha savollaringiz bo'lsa, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki +998 78 555-17-77.",
+        "time": 1789660997
       }
     ],
-    "last_activity": 1789660955
+    "last_activity": 1789660997
   }
 }
