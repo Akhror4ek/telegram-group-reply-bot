@@ -68,9 +68,14 @@
         "role": "user",
         "text": "stul bormi",
         "time": 1789391440
+      },
+      {
+        "role": "user",
+        "text": "1 kishilik divan (romashka eni 1.10m)",
+        "time": 1789652905
       }
     ],
-    "last_activity": 1789391440
+    "last_activity": 1789652905
   },
   "605965757:605965757": {
     "chat_id": 605965757,
