@@ -348,8 +348,18 @@
         "role": "user",
         "text": "Assalomu aleykum yosh bolalarga shkaflarizdan bormi oʻgʻil bolaga",
         "time": 1789642301
+      },
+      {
+        "role": "user",
+        "text": "Ha rasmlari boʻlsa tawlab bering",
+        "time": 1789643211
+      },
+      {
+        "role": "assistant",
+        "text": "Qanday mahsulotning rasmlarini ko'rsatishni istaysiz? Iltimos, qiziqtirgan mahsulot nomini yozib yuboring.",
+        "time": 1789643212
       }
     ],
-    "last_activity": 1789642301
+    "last_activity": 1789643212
   }
 }
