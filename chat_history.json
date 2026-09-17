@@ -450,5 +450,19 @@
       }
     ],
     "last_activity": 1789659530
+  },
+  "-1001865736985:8520907481": {
+    "chat_id": -1001865736985,
+    "user_id": 8520907481,
+    "full_name": "ODAM",
+    "username": "Oq_odam1",
+    "messages": [
+      {
+        "role": "user",
+        "text": "1 metrdan 5 metrgacha",
+        "time": 1789660955
+      }
+    ],
+    "last_activity": 1789660955
   }
 }
