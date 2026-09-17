@@ -337,5 +337,19 @@
       }
     ],
     "last_activity": 1789617421
+  },
+  "-1001865736985:8278516967": {
+    "chat_id": -1001865736985,
+    "user_id": 8278516967,
+    "full_name": "❤️‍🔥 FARANGIZ ❤️‍🔥",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu aleykum yosh bolalarga shkaflarizdan bormi oʻgʻil bolaga",
+        "time": 1789642301
+      }
+    ],
+    "last_activity": 1789642301
   }
 }
