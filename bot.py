@@ -4234,6 +4234,7 @@ telegram_app.add_handler(
         (
             filters.TEXT
             | filters.PHOTO
+            | filters.Document.ALL
         )
         & ~filters.COMMAND,
         reply_to_message
