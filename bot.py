@@ -18,6 +18,7 @@ from telegram import (
     BotCommandScopeChat,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
+    InputMediaPhoto,
     KeyboardButton,
     ReplyKeyboardMarkup,
 )
@@ -1345,9 +1346,7 @@ async def send_product_to_chat(
         InlineKeyboardButton("👨‍💼 Operator", callback_data="operator"),
     ]])
 
-    images = product_images(
-        product
-    )
+    images = product_images(product)
 
     if not images:
         kwargs = {
@@ -1367,67 +1366,105 @@ async def send_product_to_chat(
         )
         return
 
-    raw_urls = product.get(
-        "raw_urls",
-        []
-    )
-
-    if not isinstance(raw_urls, list):
-        raw_urls = []
-
-    if not raw_urls and product.get("raw_url"):
-        raw_urls = [
-            product["raw_url"]
-        ]
-
-    for index, image in enumerate(
-        images
-    ):
+    # Bitta rasm bo'lsa eski ko'rinishni saqlaymiz.
+    if len(images) == 1:
         kwargs = {
             "chat_id": chat_id,
-            "photo": image,
+            "photo": images[0],
+            "caption": caption,
+            "parse_mode": "HTML",
+            "reply_markup": product_keyboard,
         }
 
-        if index == 0:
+        if reply_to_message_id is not None:
             kwargs[
-                "caption"
-            ] = caption
-
-            kwargs[
-                "parse_mode"
-            ] = "HTML"
-            kwargs["reply_markup"] = product_keyboard
-
-            if reply_to_message_id is not None:
-                kwargs[
-                    "reply_to_message_id"
-                ] = reply_to_message_id
+                "reply_to_message_id"
+            ] = reply_to_message_id
 
         try:
-            await bot.send_photo(
-                **kwargs
-            )
-
+            await bot.send_photo(**kwargs)
+            return
         except Exception as e:
             print(
                 "PRODUCT PHOTO XATOSI:",
                 repr(e)
             )
 
-            if index < len(raw_urls):
+            raw_urls = product.get("raw_urls", [])
+            if not isinstance(raw_urls, list):
+                raw_urls = []
+
+            if not raw_urls and product.get("raw_url"):
+                raw_urls = [product["raw_url"]]
+
+            if raw_urls:
                 fallback = {
                     "chat_id": chat_id,
-                    "photo": raw_urls[index],
+                    "photo": raw_urls[0],
+                    "caption": caption,
+                    "parse_mode": "HTML",
+                    "reply_markup": product_keyboard,
+                }
+                if reply_to_message_id is not None:
+                    fallback[
+                        "reply_to_message_id"
+                    ] = reply_to_message_id
+                await bot.send_photo(**fallback)
+                return
+
+            raise
+
+    # Bir nechta rasm bo'lsa Telegram media album sifatida yuboriladi.
+    # Telegram bitta media guruhida ko'pi bilan 10 ta media qabul qiladi.
+    # Ko'proq rasm bo'lsa, ketma-ket albomlarga bo'lib yuboramiz.
+    for chunk_start in range(0, len(images), 10):
+        chunk = images[chunk_start:chunk_start + 10]
+        media = []
+
+        for local_index, image in enumerate(chunk):
+            media_kwargs = {
+                "media": image,
+            }
+
+            if chunk_start == 0 and local_index == 0:
+                media_kwargs["caption"] = caption
+                media_kwargs["parse_mode"] = "HTML"
+
+            media.append(
+                InputMediaPhoto(**media_kwargs)
+            )
+
+        try:
+            send_kwargs = {
+                "chat_id": chat_id,
+                "media": media,
+            }
+
+            if reply_to_message_id is not None and chunk_start == 0:
+                send_kwargs[
+                    "reply_to_message_id"
+                ] = reply_to_message_id
+
+            await bot.send_media_group(
+                **send_kwargs
+            )
+
+        except Exception as e:
+            print(
+                "PRODUCT ALBUM XATOSI:",
+                repr(e)
+            )
+
+            # Album yuborilmasa, oldingi xavfsiz usulga qaytamiz.
+            for fallback_index, image in enumerate(chunk):
+                fallback = {
+                    "chat_id": chat_id,
+                    "photo": image,
                 }
 
-                if index == 0:
-                    fallback[
-                        "caption"
-                    ] = caption
-
-                    fallback[
-                        "parse_mode"
-                    ] = "HTML"
+                if chunk_start == 0 and fallback_index == 0:
+                    fallback["caption"] = caption
+                    fallback["parse_mode"] = "HTML"
                     fallback["reply_markup"] = product_keyboard
 
                     if reply_to_message_id is not None:
@@ -1438,8 +1475,15 @@ async def send_product_to_chat(
                 await bot.send_photo(
                     **fallback
                 )
-            else:
-                raise
+
+    # Media groupning o'ziga inline tugmalar biriktirib bo'lmaydi.
+    # Tugmalarni albomdan keyin alohida yuboramiz.
+    await bot.send_message(
+        chat_id=chat_id,
+        text="🛒 <b>Mahsulot bo'yicha buyurtma yoki operator bilan bog'lanish:</b>",
+        parse_mode="HTML",
+        reply_markup=product_keyboard,
+    )
 
 
 async def send_pending_products(
