@@ -129,5 +129,49 @@
     ],
     "visible": true,
     "created_at": "2026-09-17 09:19:25"
+  },
+  {
+    "id": "1789639914756",
+    "name": "HItech divan 1 kishilik",
+    "price": 2700000,
+    "category": "1 kishilik divanlar",
+    "description": "Oq marmar naqshli zamonaviy divan-krovat\n\nOltin chiziqli hashamatli dizayn, yumshoq mato va katta saqlash joyi. Uyingizga nafislik va qulaylik olib keladi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/hitech_divan_1_kishilik_1789639909887_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/hitech_divan_1_kishilik_1789639909887_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/hitech_divan_1_kishilik_1789639912204_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/hitech_divan_1_kishilik_1789639909887_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/hitech_divan_1_kishilik_1789639909887_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/hitech_divan_1_kishilik_1789639912204_2.jpg"
+    ],
+    "keywords": [
+      "hitech",
+      "divan",
+      "kishilik",
+      "oq",
+      "marmar",
+      "naqshli",
+      "zamonaviy",
+      "krovat",
+      "oltin",
+      "chiziqli",
+      "hashamatli",
+      "dizayn",
+      "yumshoq",
+      "mato",
+      "va",
+      "katta",
+      "saqlash",
+      "joyi",
+      "uyingiz",
+      "nafislik",
+      "qulaylik",
+      "olib",
+      "keladi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-17 10:11:54"
   }
 ]
