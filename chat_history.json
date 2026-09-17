@@ -78,9 +78,19 @@
         "role": "user",
         "text": "1 kishilik divan (romashka eni 1.10m)",
         "time": 1789652924
+      },
+      {
+        "role": "user",
+        "text": "Romashka",
+        "time": 1789654478
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alumm! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
+        "time": 1789654480
       }
     ],
-    "last_activity": 1789652924
+    "last_activity": 1789654480
   },
   "605965757:605965757": {
     "chat_id": 605965757,
