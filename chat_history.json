@@ -106,16 +106,16 @@
       },
       {
         "role": "user",
-        "text": "9",
-        "time": 1789654691
+        "text": "Romashka endi 1.10",
+        "time": 1789654707
       },
       {
         "role": "assistant",
-        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
-        "time": 1789654693
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. \n\nSavolingiz yoki murojaatingiz to'liq tushunarsizroq chiqdi. \"Romashka endi 1.10\" deganda nimani nazarda tutayotganingizni aniqroq yozib yuborsangiz, mamnuniyat bilan yordam beraman. \n\nAgar qo'shimcha savollaringiz bo'lsa yoki mahsulot bo'yicha aniq ma'lumot kerak bo'lsa, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1789654709
       }
     ],
-    "last_activity": 1789654693
+    "last_activity": 1789654709
   },
   "605965757:605965757": {
     "chat_id": 605965757,
