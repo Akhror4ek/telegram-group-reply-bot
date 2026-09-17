@@ -128,9 +128,14 @@
         "role": "user",
         "text": "Karavot",
         "time": 1789654742
+      },
+      {
+        "role": "user",
+        "text": "Divan",
+        "time": 1789654749
       }
     ],
-    "last_activity": 1789654742
+    "last_activity": 1789654749
   },
   "605965757:605965757": {
     "chat_id": 605965757,
