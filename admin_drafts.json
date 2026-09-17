@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "name",
+    "step": "price",
     "pending_images": [
       "BQACAgIAAxkBAAIG3Wqr72cmtYd5WRGkRDktohbxRvQ9AAIbnAACT7NhSdOOJSY2_nShPQQ",
       "BQACAgIAAxkBAAIG3mqr72eIME5JNfRlaBmKbFSlnVUjAAIcnAACT7NhSW32UTwmtHeyPQQ"
@@ -14,11 +14,11 @@
       ".jpg",
       ".jpg"
     ],
-    "name": "",
+    "name": "1 kishilik divan (romashka eni 1.10m)",
     "price": null,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789653517
+    "updated_at": 1789653530
   }
 }
