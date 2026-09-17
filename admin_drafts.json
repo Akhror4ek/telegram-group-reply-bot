@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIG3Wqr72cmtYd5WRGkRDktohbxRvQ9AAIbnAACT7NhSdOOJSY2_nShPQQ",
       "BQACAgIAAxkBAAIG3mqr72eIME5JNfRlaBmKbFSlnVUjAAIcnAACT7NhSW32UTwmtHeyPQQ"
@@ -17,8 +17,8 @@
     "name": "1 kishilik divan (romashka eni 1.10m)",
     "price": 3500000,
     "category": "",
-    "description": "",
+    "description": "Pushti rangli original divan-krovat\n\nQobiq shaklidagi chiroyli boshqismi va yumshoq velvet matosi bilan ajralib turadi. Ichida keng saqlash joyi mavjud. Uyingizga nafislik va zamonaviy ko‘rinish bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789653565
+    "updated_at": 1789653630
   }
 }
