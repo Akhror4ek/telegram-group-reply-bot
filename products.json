@@ -322,5 +322,56 @@
     ],
     "visible": true,
     "created_at": "2026-09-17 14:00:45"
+  },
+  {
+    "id": "1789654454778",
+    "name": "1 kishilik divan (romashka eni 1.10m)",
+    "price": 3500000,
+    "category": "1 kishilik divanlar",
+    "description": "Pushti rangli original divan-krovat\n\nQobiq shaklidagi chiroyli boshqismi va yumshoq velvet matosi bilan ajralib turadi. Ichida keng saqlash joyi mavjud. Uyingizga nafislik va zamonaviy ko‘rinish bag‘ishlaydi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789654445291_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789654445291_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789654451752_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789654445291_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789654445291_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789654451752_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "divan",
+      "romashka",
+      "eni",
+      "10m",
+      "pushti",
+      "rangli",
+      "original",
+      "krovat",
+      "qobiq",
+      "shakli",
+      "chiroyli",
+      "boshqis",
+      "va",
+      "yumshoq",
+      "velvet",
+      "matosi",
+      "bilan",
+      "ajralib",
+      "turadi",
+      "ichi",
+      "keng",
+      "saqlash",
+      "joyi",
+      "mavjud",
+      "uyingiz",
+      "nafislik",
+      "zamonaviy",
+      "korinish",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-17 14:14:14"
   }
 ]
