@@ -173,5 +173,54 @@
     ],
     "visible": true,
     "created_at": "2026-09-17 10:11:54"
+  },
+  {
+    "id": "1789643697733",
+    "name": "1 kishilik qoplama divan,  mexanizmlik eni katta",
+    "price": 2250000,
+    "category": "1 kishilik divanlar",
+    "description": "Ko‘k-krem rangli zamonaviy divan-krovat\n\nKapitoneli boshqismi va kristalli bezaklari bilan hashamatli ko‘rinish. Yumshoq mato, keng saqlash joyi. Uyingizga nafislik va qulaylik qo‘shadi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643691772_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643691772_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643694704_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643691772_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643691772_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643694704_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "qoplama",
+      "divan",
+      "mexanizmlik",
+      "eni",
+      "katta",
+      "kok",
+      "krem",
+      "rangli",
+      "zamonaviy",
+      "krovat",
+      "kapitoneli",
+      "boshqis",
+      "va",
+      "kristalli",
+      "bezaklari",
+      "bilan",
+      "hashamatli",
+      "korinish",
+      "yumshoq",
+      "mato",
+      "keng",
+      "saqlash",
+      "joyi",
+      "uyingiz",
+      "nafislik",
+      "qulaylik",
+      "qoshadi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-17 11:14:57"
   }
 ]
