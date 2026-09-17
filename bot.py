@@ -1494,6 +1494,11 @@ async def add_product_command(
         "step": "photos",
         "pending_images": [],
         "image_bytes_list": [],
+        # Har bir rasmning manbasi saqlanadi: photo yoki document.
+        # Fayl sifatida yuborilgan rasmlar keyinchalik Telegram file_id emas,
+        # GitHub raw URL orqali yuboriladi.
+        "image_kinds": [],
+        "image_extensions": [],
     }
 
     await update.message.reply_text(
@@ -1530,6 +1535,14 @@ async def save_new_product(
         telegram_ids = state[
             "pending_images"
         ]
+        image_kinds = state.get(
+            "image_kinds",
+            [],
+        )
+        image_extensions = state.get(
+            "image_extensions",
+            [],
+        )
 
         raw_urls = []
 
@@ -1537,10 +1550,21 @@ async def save_new_product(
             image_bytes_list,
             start=1,
         ):
+            ext = ".jpg"
+            if index - 1 < len(image_extensions):
+                candidate_ext = image_extensions[index - 1]
+                if candidate_ext in (
+                    ".jpg",
+                    ".jpeg",
+                    ".png",
+                    ".webp",
+                ):
+                    ext = candidate_ext
+
             filename = (
                 f"{slugify(name)}_"
                 f"{int(time.time() * 1000)}_"
-                f"{index}.jpg"
+                f"{index}{ext}"
             )
 
             github_path = (
@@ -1563,6 +1587,19 @@ async def save_new_product(
             force_refresh=True
         )
 
+        # Oddiy Telegram rasmi uchun file_id ishlatiladi.
+        # "File" sifatida yuborilgan rasm uchun esa Telegram file_id ni
+        # send_photo qabul qilmaydi, shuning uchun GitHub raw URL ishlatiladi.
+        product_images_list = []
+        for index, telegram_id in enumerate(telegram_ids):
+            kind = image_kinds[index] if index < len(image_kinds) else "photo"
+            if kind == "document" and index < len(raw_urls):
+                product_images_list.append(raw_urls[index])
+            else:
+                product_images_list.append(telegram_id)
+
+        first_image = product_images_list[0] if product_images_list else ""
+
         product = {
             "id": str(
                 int(time.time() * 1000)
@@ -1571,8 +1608,8 @@ async def save_new_product(
             "price": price,
             "category": category,
             "description": description,
-            "telegram_file_id": telegram_ids[0],
-            "images": telegram_ids,
+            "telegram_file_id": first_image,
+            "images": product_images_list,
             "raw_url": raw_urls[0] if raw_urls else "",
             "raw_urls": raw_urls,
             "keywords": [],
@@ -1657,18 +1694,44 @@ async def handle_admin_state(
     step = state.get("step")
 
     if step == "photos":
-        if not update.message.photo:
+        photo_file_id = None
+        document_file_id = None
+        document_ext = ".jpg"
+
+        if update.message.photo:
+            photo_file_id = update.message.photo[-1].file_id
+        elif update.message.document:
+            document = update.message.document
+            mime_type = (document.mime_type or "").lower()
+            file_name = (document.file_name or "").lower()
+
+            allowed_exts = (
+                ".jpg",
+                ".jpeg",
+                ".png",
+                ".webp",
+            )
+            guessed_ext = next(
+                (ext for ext in allowed_exts if file_name.endswith(ext)),
+                ".jpg",
+            )
+
+            if mime_type.startswith("image/") or file_name.endswith(allowed_exts):
+                document_file_id = document.file_id
+                document_ext = guessed_ext
+
+        if not photo_file_id and not document_file_id:
             await update.message.reply_text(
-                "📸 Rasm yuboring yoki /done bosing."
+                "📸 Rasm yuboring (oddiy rasm yoki <b>File</b> sifatida) yoki /done bosing.",
+                parse_mode="HTML",
             )
             return True
 
-        photo = update.message.photo[-1]
+        file_id = photo_file_id or document_file_id
+        kind = "photo" if photo_file_id else "document"
 
         try:
-            tg_file = await context.bot.get_file(
-                photo.file_id
-            )
+            tg_file = await context.bot.get_file(file_id)
 
             image_bytes = (
                 await tg_file.download_as_bytearray()
@@ -1677,7 +1740,7 @@ async def handle_admin_state(
             state[
                 "pending_images"
             ].append(
-                photo.file_id
+                file_id
             )
 
             state[
@@ -1686,18 +1749,36 @@ async def handle_admin_state(
                 bytes(image_bytes)
             )
 
+            state[
+                "image_kinds"
+            ].append(
+                kind
+            )
+
+            state[
+                "image_extensions"
+            ].append(
+                document_ext if kind == "document" else ".jpg"
+            )
+
             count = len(
                 state["pending_images"]
             )
 
+            source_text = (
+                "oddiy rasm"
+                if kind == "photo"
+                else "fayl sifatidagi rasm"
+            )
+
             await update.message.reply_text(
-                f"✅ {count}-rasm qabul qilindi.\n"
+                f"✅ {count}-rasm qabul qilindi ({source_text}).\n"
                 "Yana rasm yuboring yoki /done bosing."
             )
 
         except Exception as e:
             print(
-                "ADMIN PHOTO XATOSI:",
+                "ADMIN IMAGE XATOSI:",
                 repr(e)
             )
 
