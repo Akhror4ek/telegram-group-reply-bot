@@ -650,8 +650,13 @@
         "role": "user",
         "text": "Rasmlarini tashay olaszmi bir korsam",
         "time": 1789753959
+      },
+      {
+        "role": "assistant",
+        "text": "Albatta! Qaysi turdagi mahsulotning rasmlarini ko'rmoqchisiz? Iltimos, mahsulot yo'nalishini yozib yuboring.",
+        "time": 1789753982
       }
     ],
-    "last_activity": 1789753959
+    "last_activity": 1789753982
   }
 }
