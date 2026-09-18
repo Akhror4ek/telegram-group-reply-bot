@@ -552,5 +552,24 @@
       }
     ],
     "last_activity": 1789724867
+  },
+  "-1001865736985:8122528405": {
+    "chat_id": -1001865736985,
+    "user_id": 8122528405,
+    "full_name": "Mavluda Achilova Ne'matovna",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum.Menga sandiqlarni rasmlari bolsa tashang narxlari bilan.bolib tolashga",
+        "time": 1789726902
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! \n\nSandiqlar bo'yicha ma'lumot olishingiz mumkin, biroq hozirda sizga aniq narx va rasmlarni taqdim eta olmayman. \n\nBo'lib to'lash imkoniyatlarimiz mavjud (3 oy — 0% ustama, shuningdek 6 va 12 oylik muddatli to'lovlar bor, buning uchun faqat pasport talab qilinadi).\n\nBatafsil ma'lumot olish va narxlarni bilish uchun operatorimizga murojaat qilishingizni tavsiya qilaman: \n📞 +998 94 529-07-07 yoki +998 78 555-17-77.",
+        "time": 1789726904
+      }
+    ],
+    "last_activity": 1789726904
   }
 }
