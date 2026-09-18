@@ -494,5 +494,24 @@
       }
     ],
     "last_activity": 1789660997
+  },
+  "-1001865736985:6819727263": {
+    "chat_id": -1001865736985,
+    "user_id": 6819727263,
+    "full_name": "﷽Aใhล๓dนใเใใลh﷽",
+    "username": "begiyeva_sh",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalom qancha ekan bular",
+        "time": 1789719765
+      },
+      {
+        "role": "assistant",
+        "text": "Wa alaykum assalom! \n\nQaysi mahsulotning narxi bilan qiziqayotgan edingiz? Iltimos, mahsulot nomini yozib yuboring yoki uning rasmini yuboring. \n\nBatafsil ma'lumot olish uchun operatorimizga ham murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1789719767
+      }
+    ],
+    "last_activity": 1789719767
   }
 }
