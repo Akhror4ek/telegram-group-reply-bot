@@ -587,8 +587,18 @@
         "role": "assistant",
         "text": "Va alaykum assalom! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
         "time": 1789733647
+      },
+      {
+        "role": "user",
+        "text": "Кандай богланса булади",
+        "time": 1789733657
+      },
+      {
+        "role": "assistant",
+        "text": "Biz bilan quyidagi usullar orqali bog'lanishingiz mumkin:\n\n* **Telefon:** +998 78 555-17-77 yoki operator: +998 94 529-07-07\n* **Telegram:** @aksouz\n* **Instagram:** @akso.uz\n* **Manzilimiz:** Shersaxiy bozori yoni (Shersaxiy stoyanka oldi)\n\nYana qanday savollaringiz bor?",
+        "time": 1789733658
       }
     ],
-    "last_activity": 1789733647
+    "last_activity": 1789733658
   }
 }
