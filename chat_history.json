@@ -448,9 +448,19 @@
         "role": "assistant",
         "text": "Qanday mahsulotning rasmlarini ko'rsatishni istaysiz? Iltimos, qiziqtirgan mahsulot nomini yozib yuboring.",
         "time": 1789643212
+      },
+      {
+        "role": "user",
+        "text": "Rasmi boʻlsa tawlab bering",
+        "time": 1789716699
+      },
+      {
+        "role": "assistant",
+        "text": "Tushundim. Oddiy suhbatda mahsulot rasmini yubormaymiz. \n\nSizga qanday mahsulot kerak edi? Agar aniq bir mahsulotni qidirayotgan bo'lsangiz, batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07",
+        "time": 1789716701
       }
     ],
-    "last_activity": 1789643212
+    "last_activity": 1789716701
   },
   "-1001865736985:6744476031": {
     "chat_id": -1001865736985,
