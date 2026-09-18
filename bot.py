@@ -12,6 +12,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from difflib import SequenceMatcher
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
+from urllib.parse import unquote
 
 from telegram import (
     Update,
@@ -279,17 +280,68 @@ def visible_product(product):
 
 
 def product_images(product):
-    images = product.get("images")
+    """Return every known image source, including legacy product records."""
+    sources = []
 
-    if isinstance(images, list) and images:
-        return images
+    # Current format.
+    current = product.get("images")
+    if isinstance(current, list):
+        sources.extend(x for x in current if isinstance(x, str) and x.strip())
 
-    file_id = product.get("telegram_file_id")
-    return [file_id] if file_id else []
+    # Legacy / alternate formats used by earlier bot versions.
+    for key in (
+        "telegram_file_ids",
+        "raw_urls",
+        "image_urls",
+        "photos",
+    ):
+        value = product.get(key)
+        if isinstance(value, list):
+            sources.extend(x for x in value if isinstance(x, str) and x.strip())
+
+    for key in ("telegram_file_id", "raw_url", "image_url"):
+        value = product.get(key)
+        if isinstance(value, str) and value.strip():
+            sources.append(value)
+
+    # Keep order but remove duplicates.
+    result = []
+    seen = set()
+    for source in sources:
+        if source not in seen:
+            seen.add(source)
+            result.append(source)
+    return result
 
 
 async def _download_http_image_bytes(image):
-    """Download a product image from an HTTP(S) URL on the bot server."""
+    """Download a product image, using GitHub API for our own raw files."""
+    raw_prefix = (
+        f"https://raw.githubusercontent.com/"
+        f"{GITHUB_OWNER}/{GITHUB_REPO}/{GITHUB_BRANCH}/"
+    )
+
+    # Our own GitHub raw URLs are fetched through the GitHub Contents API first.
+    # This avoids intermittent Telegram/raw.githubusercontent.com fetch issues.
+    if image.startswith(raw_prefix):
+        relative_path = unquote(image[len(raw_prefix):]).split("?", 1)[0]
+        try:
+            result = await github_api(
+                "GET",
+                f"{relative_path}?ref={GITHUB_BRANCH}",
+            )
+            content = result.get("content", "")
+            if content:
+                data = base64.b64decode(content.replace("\n", ""))
+                if not data:
+                    raise ValueError("empty GitHub image content")
+                if len(data) > 20 * 1024 * 1024:
+                    raise ValueError("image is larger than 20 MB")
+                return data
+        except Exception as e:
+            print("GITHUB IMAGE DOWNLOAD XATOSI:", repr(e), image)
+            # Fallback to direct HTTP below.
+
     def _download():
         request = Request(
             image,
