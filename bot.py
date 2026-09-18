@@ -7,6 +7,7 @@ import unicodedata
 import asyncio
 import threading
 from html import escape
+from io import BytesIO
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from difflib import SequenceMatcher
 from urllib.request import Request, urlopen
@@ -19,6 +20,7 @@ from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     InputMediaPhoto,
+    InputFile,
     KeyboardButton,
     ReplyKeyboardMarkup,
 )
@@ -284,6 +286,45 @@ def product_images(product):
 
     file_id = product.get("telegram_file_id")
     return [file_id] if file_id else []
+
+
+async def prepare_telegram_photo_source(image, index=1):
+    """
+    Telegram ba'zan tashqi HTTP/HTTPS URL'ni (ayniqsa GitHub raw URL)
+    o'zi yuklay olmaydi va "Failed to get http url content" qaytaradi.
+    Bunday URL'larni bot serverining o'zi yuklab, Telegram'ga fayl sifatida
+    beradi. Telegram file_id bo'lsa, uni to'g'ridan-to'g'ri ishlatamiz.
+    """
+    if not isinstance(image, str):
+        return image
+
+    if not image.startswith(("http://", "https://")):
+        return image
+
+    try:
+        def _download():
+            request = Request(
+                image,
+                headers={
+                    "User-Agent": "AKSO-Telegram-Bot/1.0",
+                    "Accept": "image/*,*/*;q=0.8",
+                },
+            )
+            with urlopen(request, timeout=30) as response:
+                data = response.read()
+            if not data:
+                raise ValueError("empty image response")
+            if len(data) > 20 * 1024 * 1024:
+                raise ValueError("image is larger than 20 MB")
+            return data
+
+        data = await asyncio.to_thread(_download)
+        stream = BytesIO(data)
+        stream.name = f"product_{index}.jpg"
+        return InputFile(stream, filename=stream.name)
+    except Exception as e:
+        print("PRODUCT IMAGE URL DOWNLOAD XATOSI:", repr(e), image)
+        raise
 
 
 def refresh_product_keywords(product):
@@ -1512,9 +1553,10 @@ async def send_product_to_chat(
 
     # Bitta rasm bo'lsa eski ko'rinishni saqlaymiz.
     if len(images) == 1:
+        prepared_image = await prepare_telegram_photo_source(images[0], 1)
         kwargs = {
             "chat_id": chat_id,
-            "photo": images[0],
+            "photo": prepared_image,
             "caption": caption,
             "parse_mode": "HTML",
             "reply_markup": product_keyboard,
@@ -1533,29 +1575,6 @@ async def send_product_to_chat(
                 "PRODUCT PHOTO XATOSI:",
                 repr(e)
             )
-
-            raw_urls = product.get("raw_urls", [])
-            if not isinstance(raw_urls, list):
-                raw_urls = []
-
-            if not raw_urls and product.get("raw_url"):
-                raw_urls = [product["raw_url"]]
-
-            if raw_urls:
-                fallback = {
-                    "chat_id": chat_id,
-                    "photo": raw_urls[0],
-                    "caption": caption,
-                    "parse_mode": "HTML",
-                    "reply_markup": product_keyboard,
-                }
-                if reply_to_message_id is not None:
-                    fallback[
-                        "reply_to_message_id"
-                    ] = reply_to_message_id
-                await bot.send_photo(**fallback)
-                return
-
             raise
 
     # Bir nechta rasm bo'lsa Telegram media album sifatida yuboriladi.
@@ -1566,8 +1585,12 @@ async def send_product_to_chat(
         media = []
 
         for local_index, image in enumerate(chunk):
+            prepared_image = await prepare_telegram_photo_source(
+                image,
+                chunk_start + local_index + 1,
+            )
             media_kwargs = {
-                "media": image,
+                "media": prepared_image,
             }
 
             if chunk_start == 0 and local_index == 0:
@@ -1599,11 +1622,15 @@ async def send_product_to_chat(
                 repr(e)
             )
 
-            # Album yuborilmasa, oldingi xavfsiz usulga qaytamiz.
+            # Album yuborilmasa, rasmlarni bittalab yuborishga urinib ko'ramiz.
             for fallback_index, image in enumerate(chunk):
+                prepared_image = await prepare_telegram_photo_source(
+                    image,
+                    chunk_start + fallback_index + 1,
+                )
                 fallback = {
                     "chat_id": chat_id,
-                    "photo": image,
+                    "photo": prepared_image,
                 }
 
                 if chunk_start == 0 and fallback_index == 0:
