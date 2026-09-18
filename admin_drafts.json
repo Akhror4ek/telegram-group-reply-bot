@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIH3WqsuPrGC5zeJ-ZmCp5dG27qFaitAAIXnAACT7NhSSQ8LBrkleDfPQQ",
       "BQACAgIAAxkBAAIH3mqsuPpX7sMCHZwGWQ8OT1qADcuZAAIYnAACT7NhSVnrsoZ3Oyr0PQQ"
@@ -15,10 +15,10 @@
       ".jpg"
     ],
     "name": "1 kishilik divan mexanizmli eni 1.10 m",
-    "price": null,
+    "price": 2250000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789704528
+    "updated_at": 1789704535
   }
 }
