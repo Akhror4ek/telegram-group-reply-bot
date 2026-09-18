@@ -624,5 +624,29 @@
       }
     ],
     "last_activity": 1789733802
+  },
+  "-1001865736985:8214561265": {
+    "chat_id": -1001865736985,
+    "user_id": 8214561265,
+    "full_name": "Nargiza",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum",
+        "time": 1789753387
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! \n\nAKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
+        "time": 1789753388
+      },
+      {
+        "role": "user",
+        "text": "Ikki kishilik spalniylar narxi qanchadan boshlanadi",
+        "time": 1789753389
+      }
+    ],
+    "last_activity": 1789753389
   }
 }
