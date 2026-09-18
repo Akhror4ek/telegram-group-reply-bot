@@ -1630,6 +1630,47 @@ async def send_product_to_chat(
     )
 
 
+async def send_product_text_fallback(bot, chat_id, product, reply_to_message_id=None):
+    """Mahsulot rasmini yuborishda xato bo'lsa, hech bo'lmaganda ma'lumotini yuboramiz."""
+    try:
+        price = int(product.get("price", 0))
+    except Exception:
+        price = 0
+
+    month_3, month_6, month_12 = calculate_monthly(price)
+    parts = [f"🛍 <b>{escape(str(product.get('name', 'Nomsiz')))}</b>"]
+    if product.get("category"):
+        parts.append(f"🗂 {escape(str(product.get('category')))}")
+    if product.get("description"):
+        parts.append(f"\n{escape(str(product.get('description')))}")
+    if price:
+        parts.append(
+            "\n📅 <b>Bo'lib to'lash:</b>\n"
+            f"• 3 oy — <b>{format_money(month_3)}/oy</b>\n"
+            f"• 6 oy — <b>{format_money(month_6)}/oy</b>\n"
+            f"• 12 oy — <b>{format_money(month_12)}/oy</b>"
+        )
+
+    kwargs = {
+        "chat_id": chat_id,
+        "text": "\n".join(parts),
+        "parse_mode": "HTML",
+        "reply_markup": InlineKeyboardMarkup([[
+            InlineKeyboardButton(
+                "🛒 Buyurtma berish",
+                callback_data=f"order:{product.get('id', '')}",
+            ),
+            InlineKeyboardButton(
+                "👨‍💼 Operator",
+                callback_data="operator",
+            ),
+        ]]),
+    }
+    if reply_to_message_id is not None:
+        kwargs["reply_to_message_id"] = reply_to_message_id
+    await bot.send_message(**kwargs)
+
+
 async def send_pending_products(
     query,
     context,
@@ -1645,15 +1686,62 @@ async def send_pending_products(
     )
 
     stats["products_viewed"] += len(products)
-    for product in products:
-        await send_product_to_chat(
-            context.bot,
-            query.message.chat_id,
-            product,
-            reply_to_message_id=(
-                query.message.message_id
-            ),
-        )
+    failed = 0
+
+    # Har bir mahsulot alohida himoyalangan: bitta mahsulotdagi rasm/API xatosi
+    # qolgan mahsulotlarni yuborishni to'xtatmasligi kerak.
+    for index, product in enumerate(products):
+        if index:
+            # Telegram API rate-limitiga yaqinlashmaslik uchun juda kichik tanaffus.
+            await asyncio.sleep(0.35)
+
+        try:
+            await send_product_to_chat(
+                context.bot,
+                query.message.chat_id,
+                product,
+                reply_to_message_id=(
+                    query.message.message_id
+                    if index == 0 else None
+                ),
+            )
+        except Exception as e:
+            failed += 1
+            print(
+                "PRODUCT SEND XATOSI:",
+                repr(e),
+                "product_id=",
+                product.get("id"),
+                "name=",
+                product.get("name"),
+            )
+            try:
+                await send_product_text_fallback(
+                    context.bot,
+                    query.message.chat_id,
+                    product,
+                    reply_to_message_id=(
+                        query.message.message_id
+                        if index == 0 else None
+                    ),
+                )
+            except Exception as fallback_error:
+                print(
+                    "PRODUCT TEXT FALLBACK XATOSI:",
+                    repr(fallback_error),
+                )
+
+    if failed:
+        try:
+            await context.bot.send_message(
+                chat_id=query.message.chat_id,
+                text=(
+                    f"ℹ️ {failed} ta mahsulot rasmi yuborishda texnik xatolik yuz berdi. "
+                    "Qolgan mos mahsulotlar yuborildi."
+                ),
+            )
+        except Exception as e:
+            print("PRODUCT ERROR NOTICE XATOSI:", repr(e))
 
 
 # ============================================================
@@ -3244,7 +3332,7 @@ async def callback_handler(
         await ask_product_confirmation(
             query.message,
             query.from_user.id,
-            categories[category][:10],
+            categories[category],
         )
         return
 
