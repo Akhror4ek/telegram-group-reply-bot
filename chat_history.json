@@ -600,5 +600,24 @@
       }
     ],
     "last_activity": 1789733658
+  },
+  "-1001865736985:1400169141": {
+    "chat_id": -1001865736985,
+    "user_id": 1400169141,
+    "full_name": "Bobur",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Farg'ona rishtondan\n\n\n Qashqadaryo shahrisbazga \n\n\n25 tonna\n\n96 kuba fura kerak\n  \nYulkra 8mln \n\n+998882588008",
+        "time": 1789733800
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nAKSO do'koni maishiy texnika va boshqa mahsulotlar savdosi bilan shug'ullanadi. Bizda yuk tashish (fura) xizmatlari mavjud emas. \n\nAgar sizga maishiy texnikalar yoki boshqa mahsulotlar kerak bo'lsa, mamnuniyat bilan yordam beramiz! Murojaat uchun: +998 78 555-17-77.",
+        "time": 1789733802
+      }
+    ],
+    "last_activity": 1789733802
   }
 }
