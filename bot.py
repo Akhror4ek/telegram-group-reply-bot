@@ -315,32 +315,45 @@ def product_images(product):
 
 
 async def _download_http_image_bytes(image):
-    """Download a product image, using GitHub API for our own raw files."""
+    """Download a product image reliably, especially our own GitHub files."""
     raw_prefix = (
         f"https://raw.githubusercontent.com/"
         f"{GITHUB_OWNER}/{GITHUB_REPO}/{GITHUB_BRANCH}/"
     )
 
-    # Our own GitHub raw URLs are fetched through the GitHub Contents API first.
-    # This avoids intermittent Telegram/raw.githubusercontent.com fetch issues.
+    # For our own GitHub images use the authenticated GitHub Contents endpoint
+    # with the RAW media type. Unlike the JSON Contents response, this works
+    # for large files too (including the 3-5 MB product photos in the catalog).
     if image.startswith(raw_prefix):
         relative_path = unquote(image[len(raw_prefix):]).split("?", 1)[0]
-        try:
-            result = await github_api(
-                "GET",
-                f"{relative_path}?ref={GITHUB_BRANCH}",
+        api_url = (
+            f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/"
+            f"contents/{relative_path}?ref={GITHUB_BRANCH}"
+        )
+
+        def _download_github():
+            request = Request(
+                api_url,
+                headers={
+                    "Authorization": f"Bearer {GITHUB_TOKEN}",
+                    "Accept": "application/vnd.github.raw",
+                    "X-GitHub-Api-Version": "2022-11-28",
+                    "User-Agent": "AKSO-Telegram-Bot/1.0",
+                },
             )
-            content = result.get("content", "")
-            if content:
-                data = base64.b64decode(content.replace("\n", ""))
-                if not data:
-                    raise ValueError("empty GitHub image content")
-                if len(data) > 20 * 1024 * 1024:
-                    raise ValueError("image is larger than 20 MB")
-                return data
+            with urlopen(request, timeout=30) as response:
+                data = response.read()
+            if not data:
+                raise ValueError("empty GitHub image response")
+            if len(data) > 20 * 1024 * 1024:
+                raise ValueError("image is larger than 20 MB")
+            return data
+
+        try:
+            return await asyncio.to_thread(_download_github)
         except Exception as e:
-            print("GITHUB IMAGE DOWNLOAD XATOSI:", repr(e), image)
-            # Fallback to direct HTTP below.
+            print("GITHUB RAW IMAGE DOWNLOAD XATOSI:", repr(e), image)
+            # Fallback to the public raw URL below.
 
     def _download():
         request = Request(
