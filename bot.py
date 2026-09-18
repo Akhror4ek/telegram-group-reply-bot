@@ -288,43 +288,65 @@ def product_images(product):
     return [file_id] if file_id else []
 
 
-async def prepare_telegram_photo_source(image, index=1):
+async def _download_http_image_bytes(image):
+    """Download a product image from an HTTP(S) URL on the bot server."""
+    def _download():
+        request = Request(
+            image,
+            headers={
+                "User-Agent": "AKSO-Telegram-Bot/1.0",
+                "Accept": "image/*,*/*;q=0.8",
+            },
+        )
+        with urlopen(request, timeout=30) as response:
+            data = response.read()
+        if not data:
+            raise ValueError("empty image response")
+        if len(data) > 20 * 1024 * 1024:
+            raise ValueError("image is larger than 20 MB")
+        return data
+
+    return await asyncio.to_thread(_download)
+
+
+async def prepare_telegram_photo_source(image, index=1, bot=None, force_upload=False):
     """
-    Telegram ba'zan tashqi HTTP/HTTPS URL'ni (ayniqsa GitHub raw URL)
-    o'zi yuklay olmaydi va "Failed to get http url content" qaytaradi.
-    Bunday URL'larni bot serverining o'zi yuklab, Telegram'ga fayl sifatida
-    beradi. Telegram file_id bo'lsa, uni to'g'ridan-to'g'ri ishlatamiz.
+    Prepare a single image for Telegram.
+
+    URL images are downloaded by the bot instead of asking Telegram to fetch
+    the URL itself. When force_upload=True, even existing Telegram file_ids
+    are downloaded and re-uploaded as fresh files. This is used for albums so
+    every media item is handled consistently by send_media_group().
     """
     if not isinstance(image, str):
         return image
 
-    if not image.startswith(("http://", "https://")):
-        return image
+    if image.startswith(("http://", "https://")):
+        try:
+            data = await _download_http_image_bytes(image)
+            stream = BytesIO(data)
+            stream.name = f"product_{index}.jpg"
+            return InputFile(stream, filename=stream.name)
+        except Exception as e:
+            print("PRODUCT IMAGE URL DOWNLOAD XATOSI:", repr(e), image)
+            raise
 
-    try:
-        def _download():
-            request = Request(
-                image,
-                headers={
-                    "User-Agent": "AKSO-Telegram-Bot/1.0",
-                    "Accept": "image/*,*/*;q=0.8",
-                },
-            )
-            with urlopen(request, timeout=30) as response:
-                data = response.read()
+    if force_upload and bot and image:
+        try:
+            tg_file = await bot.get_file(image)
+            data = bytes(await tg_file.download_as_bytearray())
             if not data:
-                raise ValueError("empty image response")
+                raise ValueError("empty Telegram file response")
             if len(data) > 20 * 1024 * 1024:
                 raise ValueError("image is larger than 20 MB")
-            return data
+            stream = BytesIO(data)
+            stream.name = f"product_{index}.jpg"
+            return InputFile(stream, filename=stream.name)
+        except Exception as e:
+            print("PRODUCT TELEGRAM FILE DOWNLOAD XATOSI:", repr(e), image)
+            raise
 
-        data = await asyncio.to_thread(_download)
-        stream = BytesIO(data)
-        stream.name = f"product_{index}.jpg"
-        return InputFile(stream, filename=stream.name)
-    except Exception as e:
-        print("PRODUCT IMAGE URL DOWNLOAD XATOSI:", repr(e), image)
-        raise
+    return image
 
 
 def refresh_product_keywords(product):
@@ -1494,44 +1516,36 @@ async def send_product_to_chat(
     product,
     reply_to_message_id=None,
 ):
-    price = int(
-        product["price"]
-    )
+    price = int(product.get("price", 0))
+    month_3, month_6, month_12 = calculate_monthly(price)
 
-    month_3, month_6, month_12 = calculate_monthly(
-        price
-    )
-
-    parts = [
-        f"🛍 <b>{product['name']}</b>"
-    ]
+    parts = [f"🛍 <b>{escape(str(product.get('name', 'Nomsiz')))}</b>"]
 
     if product.get("category"):
-        parts.append(
-            f"🗂 {product['category']}"
-        )
-
+        parts.append(f"🗂 {escape(str(product['category']))}")
     if product.get("description"):
-        parts.append(
-            f"\n{product['description']}"
-        )
+        parts.append(f"\n{escape(str(product['description']))}")
 
-    # Naqd narx ataylab ko'rsatilmaydi.
     parts.append(
         "\n📅 <b>Bo'lib to'lash:</b>\n"
         f"• 3 oy — <b>{format_money(month_3)}/oy</b>\n"
         f"• 6 oy — <b>{format_money(month_6)}/oy</b>\n"
         f"• 12 oy — <b>{format_money(month_12)}/oy</b>"
     )
-
     caption = "\n".join(parts)
 
     product_keyboard = InlineKeyboardMarkup([[
-        InlineKeyboardButton("🛒 Buyurtma berish", callback_data=f"order:{product.get('id','')}"),
-        InlineKeyboardButton("👨‍💼 Operator", callback_data="operator"),
+        InlineKeyboardButton(
+            "🛒 Buyurtma berish",
+            callback_data=f"order:{product.get('id', '')}",
+        ),
+        InlineKeyboardButton(
+            "👨‍💼 Operator",
+            callback_data="operator",
+        ),
     ]])
 
-    images = product_images(product)
+    images = [img for img in product_images(product) if img]
 
     if not images:
         kwargs = {
@@ -1540,115 +1554,85 @@ async def send_product_to_chat(
             "parse_mode": "HTML",
             "reply_markup": product_keyboard,
         }
-
         if reply_to_message_id is not None:
-            kwargs[
-                "reply_to_message_id"
-            ] = reply_to_message_id
-
-        await bot.send_message(
-            **kwargs
-        )
+            kwargs["reply_to_message_id"] = reply_to_message_id
+        await bot.send_message(**kwargs)
         return
 
-    # Bitta rasm bo'lsa eski ko'rinishni saqlaymiz.
-    if len(images) == 1:
-        prepared_image = await prepare_telegram_photo_source(images[0], 1)
-        kwargs = {
-            "chat_id": chat_id,
-            "photo": prepared_image,
-            "caption": caption,
-            "parse_mode": "HTML",
-            "reply_markup": product_keyboard,
-        }
-
-        if reply_to_message_id is not None:
-            kwargs[
-                "reply_to_message_id"
-            ] = reply_to_message_id
-
-        try:
-            await bot.send_photo(**kwargs)
-            return
-        except Exception as e:
-            print(
-                "PRODUCT PHOTO XATOSI:",
-                repr(e)
-            )
-            raise
-
-    # Bir nechta rasm bo'lsa Telegram media album sifatida yuboriladi.
-    # Telegram bitta media guruhida ko'pi bilan 10 ta media qabul qiladi.
-    # Ko'proq rasm bo'lsa, ketma-ket albomlarga bo'lib yuboramiz.
+    # Har bir mahsulotning barcha rasmlari bitta Telegram albomida yuboriladi.
+    # Telegram limitlari sabab 10 tadan ortiq rasm kerak bo'lsa, bir nechta
+    # albomga bo'linadi. Muhim: album xato bersa, rasmlarni bittalab yubormaymiz;
+    # butun albumni fresh upload bilan qayta urinib ko'ramiz.
     for chunk_start in range(0, len(images), 10):
         chunk = images[chunk_start:chunk_start + 10]
         media = []
 
         for local_index, image in enumerate(chunk):
+            # Albomning barcha elementlarini fresh upload qilamiz. Bu aralash
+            # file_id + GitHub URL kombinatsiyasidan keladigan muammolarni yo'q qiladi.
             prepared_image = await prepare_telegram_photo_source(
                 image,
                 chunk_start + local_index + 1,
+                bot=bot,
+                force_upload=True,
             )
-            media_kwargs = {
-                "media": prepared_image,
-            }
-
+            media_kwargs = {"media": prepared_image}
             if chunk_start == 0 and local_index == 0:
                 media_kwargs["caption"] = caption
                 media_kwargs["parse_mode"] = "HTML"
+            media.append(InputMediaPhoto(**media_kwargs))
 
-            media.append(
-                InputMediaPhoto(**media_kwargs)
-            )
+        send_kwargs = {
+            "chat_id": chat_id,
+            "media": media,
+        }
+        if reply_to_message_id is not None and chunk_start == 0:
+            send_kwargs["reply_to_message_id"] = reply_to_message_id
 
         try:
-            send_kwargs = {
-                "chat_id": chat_id,
-                "media": media,
-            }
+            await bot.send_media_group(**send_kwargs)
+        except Exception as first_error:
+            print("PRODUCT ALBUM XATOSI (1-urinish):", repr(first_error))
 
-            if reply_to_message_id is not None and chunk_start == 0:
-                send_kwargs[
-                    "reply_to_message_id"
-                ] = reply_to_message_id
-
-            await bot.send_media_group(
-                **send_kwargs
-            )
-
-        except Exception as e:
-            print(
-                "PRODUCT ALBUM XATOSI:",
-                repr(e)
-            )
-
-            # Album yuborilmasa, rasmlarni bittalab yuborishga urinib ko'ramiz.
-            for fallback_index, image in enumerate(chunk):
+            # Fresh uploadlar bilan yana bir marta urinib ko'ramiz.
+            # Bu ayniqsa vaqtinchalik Telegram/GitHub yuklash xatolarida yordam beradi.
+            await asyncio.sleep(1)
+            retry_media = []
+            for local_index, image in enumerate(chunk):
                 prepared_image = await prepare_telegram_photo_source(
                     image,
-                    chunk_start + fallback_index + 1,
+                    chunk_start + local_index + 1,
+                    bot=bot,
+                    force_upload=True,
                 )
-                fallback = {
-                    "chat_id": chat_id,
-                    "photo": prepared_image,
-                }
+                media_kwargs = {"media": prepared_image}
+                if chunk_start == 0 and local_index == 0:
+                    media_kwargs["caption"] = caption
+                    media_kwargs["parse_mode"] = "HTML"
+                retry_media.append(InputMediaPhoto(**media_kwargs))
 
-                if chunk_start == 0 and fallback_index == 0:
-                    fallback["caption"] = caption
-                    fallback["parse_mode"] = "HTML"
-                    fallback["reply_markup"] = product_keyboard
+            retry_kwargs = {"chat_id": chat_id, "media": retry_media}
+            if reply_to_message_id is not None and chunk_start == 0:
+                retry_kwargs["reply_to_message_id"] = reply_to_message_id
 
-                    if reply_to_message_id is not None:
-                        fallback[
-                            "reply_to_message_id"
-                        ] = reply_to_message_id
+            try:
+                await bot.send_media_group(**retry_kwargs)
+            except Exception as second_error:
+                print("PRODUCT ALBUM XATOSI (2-urinish):", repr(second_error))
+                # Albumni saqlab qolish imkoni bo'lmasa, rasmlarni alohida yubormaymiz.
+                # Foydalanuvchiga mahsulot ma'lumoti yuboriladi va keyingi mahsulotlar
+                # ishlashda davom etadi.
+                if chunk_start == 0:
+                    await send_product_text_fallback(
+                        bot,
+                        chat_id,
+                        product,
+                        reply_to_message_id=reply_to_message_id,
+                    )
+                continue
 
-                await bot.send_photo(
-                    **fallback
-                )
-
-    # Media groupning o'ziga inline tugmalar biriktirib bo'lmaydi.
-    # Tugmalarni albomdan keyin alohida yuboramiz.
+    # Media groupga inline tugmalar biriktirib bo'lmaydi, shuning uchun
+    # mahsulot tugmalari albomdan keyin bitta alohida xabarda chiqadi.
     await bot.send_message(
         chat_id=chat_id,
         text="🛒 <b>Mahsulot bo'yicha buyurtma yoki operator bilan bog'lanish:</b>",
