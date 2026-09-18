@@ -315,23 +315,60 @@ def product_images(product):
 
 
 async def _download_http_image_bytes(image):
-    """Download a product image reliably, especially our own GitHub files."""
+    """Download a product image to bytes before uploading it to Telegram."""
     raw_prefix = (
         f"https://raw.githubusercontent.com/"
         f"{GITHUB_OWNER}/{GITHUB_REPO}/{GITHUB_BRANCH}/"
     )
 
-    # For our own GitHub images use the authenticated GitHub Contents endpoint
-    # with the RAW media type. Unlike the JSON Contents response, this works
-    # for large files too (including the 3-5 MB product photos in the catalog).
+    def _download(url):
+        request = Request(
+            url,
+            headers={
+                "User-Agent": "AKSO-Telegram-Bot/1.0",
+                "Accept": "image/*,*/*;q=0.8",
+            },
+        )
+        with urlopen(request, timeout=30) as response:
+            content_type = (response.headers.get("Content-Type") or "").lower()
+            data = response.read()
+        if not data:
+            raise ValueError("empty image response")
+        if len(data) > 20 * 1024 * 1024:
+            raise ValueError("image is larger than 20 MB")
+        # GitHub/raw should never return an HTML error page as an image.
+        if "text/html" in content_type:
+            raise ValueError(f"unexpected content type: {content_type}")
+        return data
+
+    # For our own public GitHub files, try raw.githubusercontent.com first.
+    # This avoids dependence on the GitHub Contents API/token for image reads.
+    urls = [image]
     if image.startswith(raw_prefix):
+        urls.append(
+            "https://github.com/"
+            f"{GITHUB_OWNER}/{GITHUB_REPO}/raw/refs/heads/"
+            f"{GITHUB_BRANCH}/"
+            f"{unquote(image[len(raw_prefix):]).split('?', 1)[0]}"
+        )
+
+    last_error = None
+    for url in urls:
+        try:
+            return await asyncio.to_thread(_download, url)
+        except Exception as e:
+            last_error = e
+            print("PRODUCT IMAGE DOWNLOAD ATTEMPT XATOSI:", repr(e), url)
+
+    # Last fallback: GitHub Contents API with the RAW media type.
+    if image.startswith(raw_prefix) and GITHUB_TOKEN:
         relative_path = unquote(image[len(raw_prefix):]).split("?", 1)[0]
         api_url = (
             f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/"
             f"contents/{relative_path}?ref={GITHUB_BRANCH}"
         )
 
-        def _download_github():
+        def _download_github_api():
             request = Request(
                 api_url,
                 headers={
@@ -350,51 +387,22 @@ async def _download_http_image_bytes(image):
             return data
 
         try:
-            return await asyncio.to_thread(_download_github)
+            return await asyncio.to_thread(_download_github_api)
         except Exception as e:
+            last_error = e
             print("GITHUB RAW IMAGE DOWNLOAD XATOSI:", repr(e), image)
-            # Fallback to the public raw URL below.
 
-    def _download():
-        request = Request(
-            image,
-            headers={
-                "User-Agent": "AKSO-Telegram-Bot/1.0",
-                "Accept": "image/*,*/*;q=0.8",
-            },
-        )
-        with urlopen(request, timeout=30) as response:
-            data = response.read()
-        if not data:
-            raise ValueError("empty image response")
-        if len(data) > 20 * 1024 * 1024:
-            raise ValueError("image is larger than 20 MB")
-        return data
-
-    return await asyncio.to_thread(_download)
+    raise last_error or ValueError("image download failed")
 
 
 async def prepare_telegram_photo_source(image, index=1, bot=None, force_upload=False):
-    """
-    Prepare a single image for Telegram.
-
-    URL images are downloaded by the bot instead of asking Telegram to fetch
-    the URL itself. When force_upload=True, even existing Telegram file_ids
-    are downloaded and re-uploaded as fresh files. This is used for albums so
-    every media item is handled consistently by send_media_group().
-    """
+    """Prepare a Telegram photo source. HTTP URLs are converted to bytes."""
     if not isinstance(image, str):
         return image
 
     if image.startswith(("http://", "https://")):
-        try:
-            data = await _download_http_image_bytes(image)
-            stream = BytesIO(data)
-            stream.name = f"product_{index}.jpg"
-            return InputFile(stream, filename=stream.name)
-        except Exception as e:
-            print("PRODUCT IMAGE URL DOWNLOAD XATOSI:", repr(e), image)
-            raise
+        data = await _download_http_image_bytes(image)
+        return data
 
     if force_upload and bot and image:
         try:
@@ -404,9 +412,7 @@ async def prepare_telegram_photo_source(image, index=1, bot=None, force_upload=F
                 raise ValueError("empty Telegram file response")
             if len(data) > 20 * 1024 * 1024:
                 raise ValueError("image is larger than 20 MB")
-            stream = BytesIO(data)
-            stream.name = f"product_{index}.jpg"
-            return InputFile(stream, filename=stream.name)
+            return data
         except Exception as e:
             print("PRODUCT TELEGRAM FILE DOWNLOAD XATOSI:", repr(e), image)
             raise
@@ -1631,6 +1637,8 @@ async def send_product_to_chat(
             prepared = await prepare_telegram_photo_source(
                 images[0], 1, bot=bot, force_upload=False
             )
+            if isinstance(prepared, (bytes, bytearray)):
+                prepared = InputFile(bytes(prepared), filename=f"product_1.jpg")
             kwargs = {
                 "chat_id": chat_id,
                 "photo": prepared,
@@ -1664,6 +1672,8 @@ async def send_product_to_chat(
                         force_upload=False,
                     )
                     media_kwargs = {"media": prepared_image}
+                    if isinstance(prepared_image, (bytes, bytearray)):
+                        media_kwargs["filename"] = f"product_{chunk_start + local_index + 1}.jpg"
                     if chunk_start == 0 and local_index == 0:
                         media_kwargs["caption"] = caption
                         media_kwargs["parse_mode"] = "HTML"
