@@ -458,9 +458,19 @@
         "role": "assistant",
         "text": "Tushundim. Oddiy suhbatda mahsulot rasmini yubormaymiz. \n\nSizga qanday mahsulot kerak edi? Agar aniq bir mahsulotni qidirayotgan bo'lsangiz, batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07",
         "time": 1789716701
+      },
+      {
+        "role": "user",
+        "text": "....",
+        "time": 1789726509
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
+        "time": 1789726511
       }
     ],
-    "last_activity": 1789716701
+    "last_activity": 1789726511
   },
   "-1001865736985:6744476031": {
     "chat_id": -1001865736985,
