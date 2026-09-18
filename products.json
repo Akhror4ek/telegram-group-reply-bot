@@ -322,5 +322,53 @@
     ],
     "visible": true,
     "created_at": "2026-09-17 14:00:45"
+  },
+  {
+    "id": "1789704629400",
+    "name": "1 kishilik divan mexanizmli eni 1.10 m",
+    "price": 2250000,
+    "category": "1 kishilik divanlar",
+    "description": "Ko‘k-krem rangli zamonaviy divan-krovat\n\nKapitoneli boshqismi va kristalli bezaklari bilan hashamatli ko‘rinish. Yumshoq mato, keng saqlash joyi. Uyingizga nafislik va qulaylik qo‘shadi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mexanizmli_eni_1_10_m_1789704623549_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mexanizmli_eni_1_10_m_1789704623549_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mexanizmli_eni_1_10_m_1789704626904_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mexanizmli_eni_1_10_m_1789704623549_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mexanizmli_eni_1_10_m_1789704623549_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mexanizmli_eni_1_10_m_1789704626904_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "divan",
+      "mexanizmli",
+      "eni",
+      "10",
+      "kok",
+      "krem",
+      "rangli",
+      "zamonaviy",
+      "krovat",
+      "kapitoneli",
+      "boshqis",
+      "va",
+      "kristalli",
+      "bezaklari",
+      "bilan",
+      "hashamatli",
+      "korinish",
+      "yumshoq",
+      "mato",
+      "keng",
+      "saqlash",
+      "joyi",
+      "uyingiz",
+      "nafislik",
+      "qulaylik",
+      "qoshadi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-18 04:10:29"
   }
 ]
