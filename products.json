@@ -370,5 +370,49 @@
     ],
     "visible": true,
     "created_at": "2026-09-18 04:10:29"
+  },
+  {
+    "id": "1789709545716",
+    "name": "1 kishilik divan hitech",
+    "price": 2600000,
+    "category": "1 kishilik divanlar",
+    "description": "Bej rangli yumshoq divan-krovat\n\nTeksturali matosi va zamonaviy oq ramkali dizayni bilan ajralib turadi. Juda qulay va chiroyli. Uyingizga nafislik bag‘ishlaydi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709539842_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709539842_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709542697_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709539842_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709539842_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709542697_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "divan",
+      "hitech",
+      "bej",
+      "rangli",
+      "yumshoq",
+      "krovat",
+      "teksturali",
+      "matosi",
+      "va",
+      "zamonaviy",
+      "oq",
+      "ramkali",
+      "dizay",
+      "bilan",
+      "ajralib",
+      "turadi",
+      "juda",
+      "qulay",
+      "chiroyli",
+      "uyingiz",
+      "nafislik",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-18 05:32:25"
   }
 ]
