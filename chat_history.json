@@ -529,8 +529,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
         "time": 1789724829
+      },
+      {
+        "role": "user",
+        "text": "shunaqa kravatlardan bormi yoki yasatsa boladimi",
+        "time": 1789724866
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nMahsulotlarimiz va ularning turlari bo'yicha aniq ma'lumot olish uchun operatorimizga murojaat qilishingizni so'raymiz. Operatorimiz sizga bu borada to'liq ma'lumot beradi:\n📞 Telefon: +998 94 529-07-07",
+        "time": 1789724867
       }
     ],
-    "last_activity": 1789724829
+    "last_activity": 1789724867
   }
 }
