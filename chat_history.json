@@ -54,9 +54,14 @@
         "role": "assistant",
         "text": "Salom! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman? Mahsulotlarimiz, yetkazib berish yoki bo'lib to'lash shartlari bo'yicha savollaringiz bo'lsa, bemalol murojaat qilishingiz mumkin.",
         "time": 1789403528
+      },
+      {
+        "role": "user",
+        "text": "Divan bormi",
+        "time": 1789716672
       }
     ],
-    "last_activity": 1789403528
+    "last_activity": 1789716672
   },
   "8520907481:8520907481": {
     "chat_id": 8520907481,
