@@ -571,5 +571,24 @@
       }
     ],
     "last_activity": 1789726904
+  },
+  "-1001865736985:7103340119": {
+    "chat_id": -1001865736985,
+    "user_id": 7103340119,
+    "full_name": "ДИЛМУРОД РАХМАТОВ",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Ассалому алейкум",
+        "time": 1789733645
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
+        "time": 1789733647
+      }
+    ],
+    "last_activity": 1789733647
   }
 }
