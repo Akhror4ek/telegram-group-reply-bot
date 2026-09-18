@@ -513,5 +513,24 @@
       }
     ],
     "last_activity": 1789719767
+  },
+  "-1001865736985:7113674494": {
+    "chat_id": -1001865736985,
+    "user_id": 7113674494,
+    "full_name": "Jahongirovna_🌸",
+    "username": "ShO3025",
+    "messages": [
+      {
+        "role": "user",
+        "text": "assalomu aleykum",
+        "time": 1789724828
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
+        "time": 1789724829
+      }
+    ],
+    "last_activity": 1789724829
   }
 }
