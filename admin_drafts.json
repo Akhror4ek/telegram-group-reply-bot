@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIJBGqszFNhDnjv0veOQZE6211OnGm-AAIenAACT7NhSROYwlXQDcXqPQQ",
       "BQACAgIAAxkBAAIJBWqszFOs8O_Cx1xZMYMmhCXJKKa1AAIfnAACT7NhSToUrcjTaeG3PQQ"
@@ -15,10 +15,10 @@
       ".jpg"
     ],
     "name": "1 kishilik divan hitech",
-    "price": null,
+    "price": 2600000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789709450
+    "updated_at": 1789709458
   }
 }
