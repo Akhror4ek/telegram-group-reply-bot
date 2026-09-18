@@ -645,8 +645,13 @@
         "role": "user",
         "text": "Ikki kishilik spalniylar narxi qanchadan boshlanadi",
         "time": 1789753389
+      },
+      {
+        "role": "user",
+        "text": "Rasmlarini tashay olaszmi bir korsam",
+        "time": 1789753959
       }
     ],
-    "last_activity": 1789753389
+    "last_activity": 1789753959
   }
 }
