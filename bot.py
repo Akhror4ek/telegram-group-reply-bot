@@ -1559,77 +1559,93 @@ async def send_product_to_chat(
         await bot.send_message(**kwargs)
         return
 
-    # Har bir mahsulotning barcha rasmlari bitta Telegram albomida yuboriladi.
-    # Telegram limitlari sabab 10 tadan ortiq rasm kerak bo'lsa, bir nechta
-    # albomga bo'linadi. Muhim: album xato bersa, rasmlarni bittalab yubormaymiz;
-    # butun albumni fresh upload bilan qayta urinib ko'ramiz.
-    for chunk_start in range(0, len(images), 10):
-        chunk = images[chunk_start:chunk_start + 10]
-        media = []
-
-        for local_index, image in enumerate(chunk):
-            # Albomning barcha elementlarini fresh upload qilamiz. Bu aralash
-            # file_id + GitHub URL kombinatsiyasidan keladigan muammolarni yo'q qiladi.
-            prepared_image = await prepare_telegram_photo_source(
-                image,
-                chunk_start + local_index + 1,
-                bot=bot,
-                force_upload=True,
-            )
-            media_kwargs = {"media": prepared_image}
-            if chunk_start == 0 and local_index == 0:
-                media_kwargs["caption"] = caption
-                media_kwargs["parse_mode"] = "HTML"
-            media.append(InputMediaPhoto(**media_kwargs))
-
-        send_kwargs = {
-            "chat_id": chat_id,
-            "media": media,
-        }
-        if reply_to_message_id is not None and chunk_start == 0:
-            send_kwargs["reply_to_message_id"] = reply_to_message_id
-
+    # Telegram media group 2-10 ta media qabul qiladi.
+    # Bitta rasm bo'lsa send_photo ishlatamiz.
+    if len(images) == 1:
         try:
-            await bot.send_media_group(**send_kwargs)
-        except Exception as first_error:
-            print("PRODUCT ALBUM XATOSI (1-urinish):", repr(first_error))
-
-            # Fresh uploadlar bilan yana bir marta urinib ko'ramiz.
-            # Bu ayniqsa vaqtinchalik Telegram/GitHub yuklash xatolarida yordam beradi.
-            await asyncio.sleep(1)
-            retry_media = []
-            for local_index, image in enumerate(chunk):
-                prepared_image = await prepare_telegram_photo_source(
-                    image,
-                    chunk_start + local_index + 1,
-                    bot=bot,
-                    force_upload=True,
-                )
-                media_kwargs = {"media": prepared_image}
-                if chunk_start == 0 and local_index == 0:
-                    media_kwargs["caption"] = caption
-                    media_kwargs["parse_mode"] = "HTML"
-                retry_media.append(InputMediaPhoto(**media_kwargs))
-
-            retry_kwargs = {"chat_id": chat_id, "media": retry_media}
-            if reply_to_message_id is not None and chunk_start == 0:
-                retry_kwargs["reply_to_message_id"] = reply_to_message_id
+            prepared = await prepare_telegram_photo_source(
+                images[0], 1, bot=bot, force_upload=False
+            )
+            kwargs = {
+                "chat_id": chat_id,
+                "photo": prepared,
+                "caption": caption,
+                "parse_mode": "HTML",
+            }
+            if reply_to_message_id is not None:
+                kwargs["reply_to_message_id"] = reply_to_message_id
+            await bot.send_photo(**kwargs)
+        except Exception as e:
+            print("PRODUCT SINGLE IMAGE XATOSI:", repr(e))
+            await send_product_text_fallback(
+                bot, chat_id, product, reply_to_message_id=reply_to_message_id
+            )
+            return
+    else:
+        # 2-10 ta rasm: Telegram albumi.
+        # Avval Telegram file_id'larni to'g'ridan-to'g'ri ishlatamiz,
+        # GitHub URL'larni esa botning o'zi yuklab InputFile qiladi.
+        # Bu usul ortiqcha Telegram->Telegram download/re-uploadni oldini oladi.
+        for chunk_start in range(0, len(images), 10):
+            chunk = images[chunk_start:chunk_start + 10]
+            media = []
 
             try:
-                await bot.send_media_group(**retry_kwargs)
-            except Exception as second_error:
-                print("PRODUCT ALBUM XATOSI (2-urinish):", repr(second_error))
-                # Albumni saqlab qolish imkoni bo'lmasa, rasmlarni alohida yubormaymiz.
-                # Foydalanuvchiga mahsulot ma'lumoti yuboriladi va keyingi mahsulotlar
-                # ishlashda davom etadi.
-                if chunk_start == 0:
-                    await send_product_text_fallback(
-                        bot,
-                        chat_id,
-                        product,
-                        reply_to_message_id=reply_to_message_id,
+                for local_index, image in enumerate(chunk):
+                    prepared_image = await prepare_telegram_photo_source(
+                        image,
+                        chunk_start + local_index + 1,
+                        bot=bot,
+                        force_upload=False,
                     )
-                continue
+                    media_kwargs = {"media": prepared_image}
+                    if chunk_start == 0 and local_index == 0:
+                        media_kwargs["caption"] = caption
+                        media_kwargs["parse_mode"] = "HTML"
+                    media.append(InputMediaPhoto(**media_kwargs))
+
+                send_kwargs = {"chat_id": chat_id, "media": media}
+                if reply_to_message_id is not None and chunk_start == 0:
+                    send_kwargs["reply_to_message_id"] = reply_to_message_id
+
+                await bot.send_media_group(**send_kwargs)
+
+            except Exception as first_error:
+                print("PRODUCT ALBUM XATOSI (direct):", repr(first_error))
+
+                # Ikkinchi urinish: hamma media'ni yangi fayl sifatida yuklaymiz.
+                # Bu eski/nomos Telegram file_id yoki aralash media manbalarida yordam beradi.
+                try:
+                    await asyncio.sleep(0.5)
+                    retry_media = []
+                    for local_index, image in enumerate(chunk):
+                        prepared_image = await prepare_telegram_photo_source(
+                            image,
+                            chunk_start + local_index + 1,
+                            bot=bot,
+                            force_upload=True,
+                        )
+                        media_kwargs = {"media": prepared_image}
+                        if chunk_start == 0 and local_index == 0:
+                            media_kwargs["caption"] = caption
+                            media_kwargs["parse_mode"] = "HTML"
+                        retry_media.append(InputMediaPhoto(**media_kwargs))
+
+                    retry_kwargs = {"chat_id": chat_id, "media": retry_media}
+                    if reply_to_message_id is not None and chunk_start == 0:
+                        retry_kwargs["reply_to_message_id"] = reply_to_message_id
+                    await bot.send_media_group(**retry_kwargs)
+
+                except Exception as second_error:
+                    print("PRODUCT ALBUM XATOSI (upload retry):", repr(second_error))
+                    if chunk_start == 0:
+                        await send_product_text_fallback(
+                            bot,
+                            chat_id,
+                            product,
+                            reply_to_message_id=reply_to_message_id,
+                        )
+                    continue
 
     # Media groupga inline tugmalar biriktirib bo'lmaydi, shuning uchun
     # mahsulot tugmalari albomdan keyin bitta alohida xabarda chiqadi.
