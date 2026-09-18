@@ -2276,6 +2276,95 @@ async def handle_admin_state(
     return False
 
 
+async def save_edited_product_images(
+    update,
+    context,
+    state,
+):
+    if not update.message:
+        return
+
+    user = update.message.from_user
+    if not user or not is_admin(user.id):
+        return
+
+    image_bytes_list = state.get("edit_image_bytes_list", [])
+    image_extensions = state.get("edit_image_extensions", [])
+
+    if not image_bytes_list:
+        await update.message.reply_text(
+            "📸 Kamida 1 ta yangi rasm yuboring."
+        )
+        return
+
+    product_id = state.get("product_id")
+    products = await github_get_products(force_refresh=True)
+    product = next(
+        (p for p in products if p.get("id") == product_id),
+        None,
+    )
+
+    if not product:
+        admin_states.pop(user.id, None)
+        await update.message.reply_text("❌ Mahsulot topilmadi.")
+        return
+
+    name = str(product.get("name", "product"))
+    await update.message.reply_text("⏳ Yangi rasmlar GitHub'ga yuklanmoqda...")
+
+    raw_urls = []
+    timestamp = int(time.time() * 1000)
+
+    try:
+        for index, image_bytes in enumerate(image_bytes_list, start=1):
+            ext = ".jpg"
+            if index - 1 < len(image_extensions):
+                candidate = image_extensions[index - 1]
+                if candidate in (".jpg", ".jpeg", ".png", ".webp"):
+                    ext = candidate
+
+            filename = f"{slugify(name)}_edit_{timestamp}_{index}{ext}"
+            github_path = f"{PRODUCTS_FOLDER}/{filename}"
+
+            await github_upload_file(
+                github_path,
+                image_bytes,
+                f"Update product images: {name}",
+            )
+
+            raw_urls.append(
+                "https://raw.githubusercontent.com/"
+                f"{GITHUB_OWNER}/{GITHUB_REPO}/"
+                f"{GITHUB_BRANCH}/{github_path}"
+            )
+
+        if not raw_urls:
+            raise ValueError("new image URLs were not created")
+
+        product["images"] = raw_urls
+        product["raw_urls"] = raw_urls
+        product["raw_url"] = raw_urls[0]
+        product["telegram_file_id"] = raw_urls[0]
+
+        await github_save_products(products)
+        stats["products_edited"] += 1
+        admin_states.pop(user.id, None)
+
+        await update.message.reply_text(
+            "✅ <b>Mahsulot rasmlari muvaffaqiyatli o\'zgartirildi!</b>\n\n"
+            f"🛍 <b>{escape(name)}</b>\n"
+            f"🖼 Yangi rasmlar: <b>{len(raw_urls)} ta</b>\n"
+            "📦 Eski rasmlar o\'rniga yangi rasmlar saqlandi.",
+            parse_mode="HTML",
+        )
+    except Exception as e:
+        print("EDIT PRODUCT IMAGES XATOSI:", repr(e))
+        await update.message.reply_text(
+            "❌ Yangi rasmlarni saqlashda xatolik yuz berdi.\n"
+            "Eski rasmlar o\'zgartirilmagan."
+        )
+
+
 async def done_command(
     update,
     context,
@@ -2299,8 +2388,12 @@ async def done_command(
 
     if not state:
         await update.message.reply_text(
-            "ℹ️ Hozir mahsulot qo'shish jarayoni yo'q."
+            "ℹ️ Hozir mahsulot qo'shish yoki tahrirlash jarayoni yo'q."
         )
+        return
+
+    if state.get("mode") == "edit" and state.get("step") == "edit_images":
+        await save_edited_product_images(update, context, state)
         return
 
     if state.get("step") != "photos":
@@ -3095,6 +3188,14 @@ async def callback_handler(
             ],
             [
                 InlineKeyboardButton(
+                    f"🖼 Rasmlarini o\'zgartirish ({len(product_images(product))} ta)",
+                    callback_data=(
+                        f"edfield:{product_id}:images"
+                    )
+                )
+            ],
+            [
+                InlineKeyboardButton(
                     (
                         "🚫 Yashirish"
                         if visible_product(product)
@@ -3135,6 +3236,27 @@ async def callback_handler(
 
         product_id = parts[1]
         field = parts[2]
+
+        if field == "images":
+            admin_states[query.from_user.id] = {
+                "mode": "edit",
+                "step": "edit_images",
+                "product_id": product_id,
+                "field": field,
+                "edit_image_bytes_list": [],
+                "edit_image_extensions": [],
+            }
+
+            await query.message.reply_text(
+                "🖼 <b>Mahsulot rasmlarini o\'zgartirish</b>\n\n"
+                f"Hozirgi rasmlar: <b>{len(product_images(product))} ta</b>.\n\n"
+                "📸 Yangi 1 yoki bir nechta rasm yuboring.\n"
+                "✅ Saqlanganda eski rasmlar yangi rasmlar bilan to\'liq almashtiriladi.\n\n"
+                "Rasmlar tugagach: /done\n"
+                "Bekor qilish: /cancel",
+                parse_mode="HTML",
+            )
+            return
 
         prompts = {
             "name":
@@ -3390,6 +3512,54 @@ async def handle_edit_state(
         return False
 
     step = state.get("step")
+
+    if step == "edit_images":
+        photo_file_id = None
+        document_file_id = None
+        document_ext = ".jpg"
+
+        if update.message.photo:
+            photo_file_id = update.message.photo[-1].file_id
+        elif update.message.document:
+            document = update.message.document
+            mime_type = (document.mime_type or "").lower()
+            file_name = (document.file_name or "").lower()
+            allowed_exts = (".jpg", ".jpeg", ".png", ".webp")
+            guessed_ext = next(
+                (ext for ext in allowed_exts if file_name.endswith(ext)),
+                ".jpg",
+            )
+            if mime_type.startswith("image/") or file_name.endswith(allowed_exts):
+                document_file_id = document.file_id
+                document_ext = guessed_ext
+
+        if not photo_file_id and not document_file_id:
+            await update.message.reply_text(
+                "📸 Rasm yuboring (oddiy rasm yoki File sifatida).\n"
+                "Rasmlar tugagach /done bosing."
+            )
+            return True
+
+        file_id = photo_file_id or document_file_id
+        try:
+            tg_file = await context.bot.get_file(file_id)
+            image_bytes = await tg_file.download_as_bytearray()
+            state.setdefault("edit_image_bytes_list", []).append(bytes(image_bytes))
+            state.setdefault("edit_image_extensions", []).append(
+                ".jpg" if photo_file_id else document_ext
+            )
+            count = len(state["edit_image_bytes_list"])
+            source_text = "oddiy rasm" if photo_file_id else "fayl sifatidagi rasm"
+            await update.message.reply_text(
+                f"✅ {count}-rasm qabul qilindi ({source_text}).\n"
+                "Yana rasm yuboring yoki /done bosing."
+            )
+        except Exception as e:
+            print("EDIT IMAGE RECEIVE XATOSI:", repr(e))
+            await update.message.reply_text(
+                "❌ Rasmni qabul qilishda xatolik yuz berdi. Yana bir bor yuboring."
+            )
+        return True
 
     if step not in {
         "edit_name",
