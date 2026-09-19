@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "name",
+    "step": "price",
     "pending_images": [
       "BQACAgIAAxkBAAIKmmquQfL3zQjeq5blr87LsN5cAT5mAAIgnAACT7NhSXiQj_ids-OrPQQ",
       "BQACAgIAAxkBAAIKm2quQfIDffPDTK2apQcd5zxbePJPAAIhnAACT7NhSTwoiWIcJV23PQQ"
@@ -14,11 +14,11 @@
       ".jpg",
       ".jpg"
     ],
-    "name": "",
+    "name": "1 kishilik divan (mdf yog'ochli)",
     "price": null,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789805052
+    "updated_at": 1789805105
   }
 }
