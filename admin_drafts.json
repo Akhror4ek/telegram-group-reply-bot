@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAILDWquRm55eq9SC5j6N43_7W-jujOrAAIonAACT7NhSbBQrscp8l9MPQQ",
       "BQACAgIAAxkBAAILDmquRm5t_yfgaqFnHETzOsfQjY1VAAIpnAACT7NhSWWwnMa35It5PQQ"
@@ -17,8 +17,8 @@
     "name": "1 kishilik hitech divan laminat",
     "price": 2700000,
     "category": "",
-    "description": "",
+    "description": "Bej rangli zamonaviy matrasli divan\n\nVertikal kanal bezakli boshqismi va nafis dizayni bilan ajralib turadi. Qulay matras. Uyingizga zamonaviy ko‘rinish bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789807302
+    "updated_at": 1789807418
   }
 }
