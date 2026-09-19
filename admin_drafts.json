@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "AgACAgIAAxkBAAILtWquV7ba340KF5rC3j-lq8kvBr0bAAIoG2sbFd1xSbh3XBPsAAGJAgEAAwIAA3cAAz0E",
       "AgACAgIAAxkBAAILtmquV7a3sBlcF6MmlBpglEPinBncAAIpG2sbFd1xSWnCnvNZimgCAQADAgADdwADPQQ"
@@ -15,10 +15,10 @@
       ".jpg"
     ],
     "name": "1 kishilik divan (5 machalka)",
-    "price": null,
+    "price": 980000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789810648
+    "updated_at": 1789810654
   }
 }
