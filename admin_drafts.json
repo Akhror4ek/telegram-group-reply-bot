@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIMImquYs3-LQ8bPUTHcHw_zh2fKEl7AAKdoAACFd1xSQZu106zRHISPQQ",
       "BQACAgIAAxkBAAIMI2quYs29TDA6m7drYI8FZtjinwVCAAKeoAACFd1xSdSBTgzbk_e7PQQ",
@@ -20,8 +20,8 @@
     "name": "2 kishilik yotoqxona divan to'plami (classic) mebel rang.",
     "price": 10800000,
     "category": "",
-    "description": "",
+    "description": "To‘q yog‘och rangli klassik yotoq mebeli to‘plami\n\nNafis o‘yma bezaklari va hashamatli dizayni bilan ajralib turadi. To‘liq komplekt. Uyingizga solobat va qulaylik bag‘ishlaydi! Matrasi 7 yil kafolatli ortopedik premium matrasdan bo'ladi",
     "admin_id": 8520907481,
-    "updated_at": 1789813599
+    "updated_at": 1789813693
   }
 }
