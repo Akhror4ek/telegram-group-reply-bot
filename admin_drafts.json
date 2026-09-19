@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "name",
+    "step": "price",
     "pending_images": [
       "BQACAgIAAxkBAAIK7WquRVJDw4UCAyNLGPFVGNRlh37CAAIjnAACT7NhSejQ6i6jrR0cPQQ"
     ],
@@ -11,11 +11,11 @@
     "image_extensions": [
       ".jpg"
     ],
-    "name": "",
+    "name": "1 kishilik matrasli (qora rang) divan",
     "price": null,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789805912
+    "updated_at": 1789805941
   }
 }
