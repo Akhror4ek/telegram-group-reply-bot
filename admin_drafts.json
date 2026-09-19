@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIKmmquQfL3zQjeq5blr87LsN5cAT5mAAIgnAACT7NhSXiQj_ids-OrPQQ",
       "BQACAgIAAxkBAAIKm2quQfIDffPDTK2apQcd5zxbePJPAAIhnAACT7NhSTwoiWIcJV23PQQ"
@@ -17,8 +17,8 @@
     "name": "1 kishilik divan (mdf yog'ochli)",
     "price": 2700000,
     "category": "",
-    "description": "",
+    "description": "Bej rangli klassik divan-krovat\n\nYog‘och bezaklari va yumshoq matosi bilan hashamatli ko‘rinish. Ichida keng saqlash joyi bor. Uyingizga qulaylik va nafislik bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789805114
+    "updated_at": 1789805200
   }
 }
