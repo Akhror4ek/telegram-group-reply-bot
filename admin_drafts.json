@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIK32quQzUzwSbng0vQUluUlzicbw1lAAIinAACT7NhSaE4m-KEPeEJPQQ"
     ],
@@ -12,10 +12,10 @@
       ".jpg"
     ],
     "name": "1 kishilik matrasli (tilla rang) divan",
-    "price": null,
+    "price": 2590000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789805823
+    "updated_at": 1789805831
   }
 }
