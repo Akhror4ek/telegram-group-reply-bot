@@ -689,9 +689,19 @@
         "role": "user",
         "text": "2 kishilik spalni",
         "time": 1789804164
+      },
+      {
+        "role": "user",
+        "text": "Tashab berasizmi rasmini narxi bilan iloji bo'lsa",
+        "time": 1789804773
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nQanday mahsulot qidirayotgan edingiz? Aniqroq yozib yuborsangiz, tanlovda yordam beramiz. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: +998 94 529-07-07.",
+        "time": 1789804775
       }
     ],
-    "last_activity": 1789804164
+    "last_activity": 1789804775
   },
   "-1001865736985:6156401666": {
     "chat_id": -1001865736985,
