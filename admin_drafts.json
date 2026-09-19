@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIMBGquYOVYepHfm67yNylyKZsbhkP1AAKaoAACFd1xSV2rZwpoz8IbPQQ",
       "BQACAgIAAxkBAAIMBWquYOWHPXK61MxFkpXaLy3CZ8bBAAKboAACFd1xSc8fzN5LgwJrPQQ",
@@ -20,8 +20,8 @@
     "name": "2 kishilik yotoqxona divan to'plami (classic) tilla rang.",
     "price": 10800000,
     "category": "",
-    "description": "",
+    "description": "Klassik uslubdagi hashamatli yotoq mebeli to‘plami\n\nOltin bezakli nafis dizayn, kapitoneli boshqism va qulay matras. To‘liq komplekt. Uyingizga hashamat bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789813228
+    "updated_at": 1789813278
   }
 }
