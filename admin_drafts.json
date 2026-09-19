@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAILpmquVzu5_E1NYOWQHW-fBnvJO1OJAAIynAACT7NhScObGYdJcKkEPQQ"
     ],
@@ -12,10 +12,10 @@
       ".jpg"
     ],
     "name": "1 kishilik divan panda (vodiy) kulrang",
-    "price": null,
+    "price": 2500000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789810547
+    "updated_at": 1789810557
   }
 }
