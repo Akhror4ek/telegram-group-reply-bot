@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAILdmquU0YYbfF45PPtPabYXpHd5uMiAAIsnAACT7NhSZMcAAEkXQfyrz0E",
       "BQACAgIAAxkBAAILd2quU0ZmYVTRIX3u2TaxbCX-6DS-AAItnAACT7NhSaKkkVndg6miPQQ"
@@ -15,10 +15,10 @@
       ".jpg"
     ],
     "name": "1 kishilik divan Foton machalkalik",
-    "price": null,
+    "price": 1900000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789809515
+    "updated_at": 1789809557
   }
 }
