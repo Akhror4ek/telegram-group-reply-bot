@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIK-2quRecSeEHkrpG0HcA7Gt6u2_LzAAIknAACT7NhScG3mgUfhYQAAT0E",
       "BQACAgIAAxkBAAIK_GquRee-vsG6k6appKM-7u7l_x64AAIlnAACT7NhSbHAPgGkRLWEPQQ",
@@ -20,8 +20,8 @@
     "name": "1 kishilik matrasli (oq rang) divan",
     "price": 2590000,
     "category": "",
-    "description": "",
+    "description": "Oq-oltin rangli hashamatli matrasli divan\n\nKapitoneli boshqismi va kristalli bezaklari bilan ajralib turadi. Qulay matras va nafis dizayn. Uyingizga hashamat bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789806099
+    "updated_at": 1789806139
   }
 }
