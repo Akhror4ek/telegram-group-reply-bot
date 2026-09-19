@@ -414,5 +414,51 @@
     ],
     "visible": true,
     "created_at": "2026-09-18 05:32:25"
+  },
+  {
+    "id": "1789805215157",
+    "name": "1 kishilik divan (mdf yog'ochli)",
+    "price": 2700000,
+    "category": "1 kishilik divanlar",
+    "description": "Bej rangli klassik divan-krovat\n\nYog‘och bezaklari va yumshoq matosi bilan hashamatli ko‘rinish. Ichida keng saqlash joyi bor. Uyingizga qulaylik va nafislik bag‘ishlaydi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mdf_yogochli_1789805209110_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mdf_yogochli_1789805209110_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mdf_yogochli_1789805212074_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mdf_yogochli_1789805209110_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mdf_yogochli_1789805209110_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_mdf_yogochli_1789805212074_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "divan",
+      "mdf",
+      "yogochli",
+      "bej",
+      "rangli",
+      "klassik",
+      "krovat",
+      "yogoch",
+      "bezaklari",
+      "va",
+      "yumshoq",
+      "matosi",
+      "bilan",
+      "hashamatli",
+      "korinish",
+      "ichi",
+      "keng",
+      "saqlash",
+      "joyi",
+      "bor",
+      "uyingiz",
+      "qulaylik",
+      "nafislik",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-19 08:06:55"
   }
 ]
