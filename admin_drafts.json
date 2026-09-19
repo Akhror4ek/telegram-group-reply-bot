@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIMu2qudAABVpauG-ikEz5M-kQGXydSegACrKAAAhXdcUncNoKfPhGdFz0E",
       "BQACAgIAAxkBAAIMvGqudAABXgTnxE8xPiYhrzXUnMryzAACraAAAhXdcUnI56ok2O8O_D0E",
@@ -21,10 +21,10 @@
       ".jpg"
     ],
     "name": "2 kishilik yotoqxona divan to'plami (SHoxona komplekt)",
-    "price": null,
+    "price": 23000000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789817927
+    "updated_at": 1789818059
   }
 }
