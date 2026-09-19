@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAILlmquVnYV9uB0SqHqGwXNqhG28rftAAIwnAACT7NhSZLj_3ax9U9rPQQ",
       "BQACAgIAAxkBAAILl2quVnZZ3d0-ylSizAscS-05FeedAAIxnAACT7NhSVB3ZzMk21bIPQQ"
@@ -15,10 +15,10 @@
       ".jpg"
     ],
     "name": "1 kishilik divan panda (vodiy)",
-    "price": null,
+    "price": 2500000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789810365
+    "updated_at": 1789810377
   }
 }
