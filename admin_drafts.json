@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIK32quQzUzwSbng0vQUluUlzicbw1lAAIinAACT7NhSaE4m-KEPeEJPQQ"
     ],
@@ -14,8 +14,8 @@
     "name": "1 kishilik matrasli (tilla rang) divan",
     "price": 2590000,
     "category": "",
-    "description": "",
+    "description": "Oltin bezakli hashamatli dizayni va qulay matras bilan ajralib turadi. Uyingizga nafislik va qulaylik bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789805831
+    "updated_at": 1789805873
   }
 }
