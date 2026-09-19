@@ -1418,5 +1418,33 @@
     ],
     "visible": true,
     "created_at": "2026-09-19 11:57:38"
+  },
+  {
+    "id": "1789819179109",
+    "name": "2 kishilik yotoqxona divan to'plami (faqat divan va tremo)",
+    "price": 4500000,
+    "category": "Yotoqxona divanlar to'plami",
+    "description": "",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819173571_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819173571_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819176160_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819173571_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819173571_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819176160_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "yotoqxona",
+      "divan",
+      "topla",
+      "faqat",
+      "va",
+      "tremo"
+    ],
+    "visible": true,
+    "created_at": "2026-09-19 11:59:39"
   }
 ]
