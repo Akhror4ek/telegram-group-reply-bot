@@ -934,5 +934,54 @@
     ],
     "visible": true,
     "created_at": "2026-09-19 09:38:38"
+  },
+  {
+    "id": "1789813389334",
+    "name": "2 kishilik yotoqxona divan to'plami (classic) tilla rang.",
+    "price": 10800000,
+    "category": "Yotoqxona divanlar to'plami",
+    "description": "Klassik uslubdagi hashamatli yotoq mebeli to‘plami\n\nOltin bezakli nafis dizayn, kapitoneli boshqism va qulay matras. To‘liq komplekt. Uyingizga hashamat bag‘ishlaydi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_tilla_rang_1789813380288_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_tilla_rang_1789813380288_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_tilla_rang_1789813383095_2.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_tilla_rang_1789813385862_3.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_tilla_rang_1789813380288_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_tilla_rang_1789813380288_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_tilla_rang_1789813383095_2.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_tilla_rang_1789813385862_3.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "yotoqxona",
+      "divan",
+      "topla",
+      "classic",
+      "tilla",
+      "rang",
+      "klassik",
+      "uslub",
+      "hashamatli",
+      "yotoq",
+      "mebeli",
+      "oltin",
+      "bezakli",
+      "nafis",
+      "dizayn",
+      "kapitoneli",
+      "boshqism",
+      "va",
+      "qulay",
+      "matras",
+      "toliq",
+      "komplekt",
+      "uyingiz",
+      "hashamat",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-19 10:23:09"
   }
 ]
