@@ -687,5 +687,19 @@
       }
     ],
     "last_activity": 1789804082
+  },
+  "-1001865736985:6156401666": {
+    "chat_id": -1001865736985,
+    "user_id": 6156401666,
+    "full_name": "ᴀxʀᴏʀʙᴇᴋ",
+    "username": "Mr_Akhror4ek",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Divan",
+        "time": 1789804117
+      }
+    ],
+    "last_activity": 1789804117
   }
 }
