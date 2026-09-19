@@ -584,5 +584,49 @@
     ],
     "visible": true,
     "created_at": "2026-09-19 08:22:37"
+  },
+  {
+    "id": "1789807435519",
+    "name": "1 kishilik hitech divan laminat",
+    "price": 2700000,
+    "category": "1 kishilik divanlar",
+    "description": "Bej rangli zamonaviy matrasli divan\n\nVertikal kanal bezakli boshqismi va nafis dizayni bilan ajralib turadi. Qulay matras. Uyingizga zamonaviy ko‘rinish bag‘ishlaydi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807430761_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807430761_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807433088_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807430761_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807430761_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807433088_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "hitech",
+      "divan",
+      "laminat",
+      "bej",
+      "rangli",
+      "zamonaviy",
+      "matrasli",
+      "vertikal",
+      "kanal",
+      "bezakli",
+      "boshqis",
+      "va",
+      "nafis",
+      "dizay",
+      "bilan",
+      "ajralib",
+      "turadi",
+      "qulay",
+      "matras",
+      "uyingiz",
+      "korinish",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-19 08:43:55"
   }
 ]
