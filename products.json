@@ -893,5 +893,46 @@
     ],
     "visible": true,
     "created_at": "2026-09-19 09:36:30"
+  },
+  {
+    "id": "1789810718781",
+    "name": "1 kishilik divan (5 machalka)",
+    "price": 980000,
+    "category": "1 kishilik divanlar",
+    "description": "Jigarrang naqshli matrasli divan\n\nOltin bargli naqshi va marmar bezaklari bilan hashamatli ko‘rinish. Qulay va chiroyli. Uyingizga nafislik bag‘ishlaydi!",
+    "telegram_file_id": "AgACAgIAAxkBAAILtWquV7ba340KF5rC3j-lq8kvBr0bAAIoG2sbFd1xSbh3XBPsAAGJAgEAAwIAA3cAAz0E",
+    "images": [
+      "AgACAgIAAxkBAAILtWquV7ba340KF5rC3j-lq8kvBr0bAAIoG2sbFd1xSbh3XBPsAAGJAgEAAwIAA3cAAz0E",
+      "AgACAgIAAxkBAAILtmquV7a3sBlcF6MmlBpglEPinBncAAIpG2sbFd1xSWnCnvNZimgCAQADAgADdwADPQQ"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_5_machalka_1789810714726_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_5_machalka_1789810714726_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_5_machalka_1789810716585_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "divan",
+      "machalka",
+      "jigarrang",
+      "naqshli",
+      "matrasli",
+      "oltin",
+      "bargli",
+      "naqshi",
+      "va",
+      "marmar",
+      "bezaklari",
+      "bilan",
+      "hashamatli",
+      "korinish",
+      "qulay",
+      "chiroyli",
+      "uyingiz",
+      "nafislik",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-19 09:38:38"
   }
 ]
