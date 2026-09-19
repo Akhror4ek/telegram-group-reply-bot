@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "photos",
+    "step": "name",
     "pending_images": [
       "BQACAgIAAxkBAAILdmquU0YYbfF45PPtPabYXpHd5uMiAAIsnAACT7NhSZMcAAEkXQfyrz0E",
       "BQACAgIAAxkBAAILd2quU0ZmYVTRIX3u2TaxbCX-6DS-AAItnAACT7NhSaKkkVndg6miPQQ"
@@ -19,6 +19,6 @@
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789809483
+    "updated_at": 1789809487
   }
 }
