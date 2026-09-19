@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIK7WquRVJDw4UCAyNLGPFVGNRlh37CAAIjnAACT7NhSejQ6i6jrR0cPQQ"
     ],
@@ -14,8 +14,8 @@
     "name": "1 kishilik matrasli (qora rang) divan",
     "price": 2590000,
     "category": "",
-    "description": "",
+    "description": "Qora-oltin rangli klassik matrasli divan\n\nHashamatli o‘yma bezaklari va qulay matras bilan ajralib turadi. Uyingizga nafislik va qulaylik bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789805948
+    "updated_at": 1789805987
   }
 }
