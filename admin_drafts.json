@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAINNWquen_2la8wmQ-n4XVS_N59qU4HAAK5oAACFd1xSUCRTG64v6NmPQQ",
       "BQACAgIAAxkBAAINNmquen-oows1d0wtw0Ipq7-Z2bq6AAK6oAACFd1xSRyDrEGFjWJkPQQ",
@@ -23,8 +23,8 @@
     "name": "2 kishilik yotoqxona divan to'plami (classic)",
     "price": 10800000,
     "category": "",
-    "description": "",
+    "description": "Qora rangli hashamatli klassik krovat\n\nOq marmar naqshli kapitoneli boshqismi va oltin bezaklari bilan ko‘zni quvontiradi. Matrasi ortopedik, 7 yil kafolati bor. Uyingizga solobat olib kiradi!",
     "admin_id": 8520907481,
-    "updated_at": 1789819594
+    "updated_at": 1789819637
   }
 }
