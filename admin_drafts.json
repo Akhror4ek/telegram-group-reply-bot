@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAILpmquVzu5_E1NYOWQHW-fBnvJO1OJAAIynAACT7NhScObGYdJcKkEPQQ"
     ],
@@ -14,8 +14,8 @@
     "name": "1 kishilik divan panda (vodiy) kulrang",
     "price": 2500000,
     "category": "",
-    "description": "",
+    "description": "Kul rangli zamonaviy divan-krovat\nYog‘och bezakli boshqismi va yumshoq teksturali matosi bilan ajralib turadi. Qulay va chiroyli. Uyingizga nafislik bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789810557
+    "updated_at": 1789810580
   }
 }
