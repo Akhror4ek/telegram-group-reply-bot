@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAILdmquU0YYbfF45PPtPabYXpHd5uMiAAIsnAACT7NhSZMcAAEkXQfyrz0E",
       "BQACAgIAAxkBAAILd2quU0ZmYVTRIX3u2TaxbCX-6DS-AAItnAACT7NhSaKkkVndg6miPQQ"
@@ -17,8 +17,8 @@
     "name": "1 kishilik divan Foton machalkalik",
     "price": 1900000,
     "category": "",
-    "description": "",
+    "description": "Ko‘k naqshli zamonaviy divan-krovat\n\nChiroyli geometrik naqshi va yog‘och korpusi bilan ajralib turadi. Qulay va ko‘rkam. Uyingizga zamonaviy ko‘rinish bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789809557
+    "updated_at": 1789809561
   }
 }
