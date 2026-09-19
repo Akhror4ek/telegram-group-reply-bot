@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIMemqubg1TXp5DlqapE0zt1YMpjGV2AAKmoAACFd1xSd5gXvsmAu5pPQQ",
       "BQACAgIAAxkBAAIMe2qubg1In1NYXhEuMnNwlNo7MGyoAAKnoAACFd1xSeBDac6wlu-yPQQ",
@@ -18,10 +18,10 @@
       ".jpg"
     ],
     "name": "2 kishilik yotoqxona divan to'plami (cobra) tilla rang.",
-    "price": null,
+    "price": 13800000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789816542
+    "updated_at": 1789816551
   }
 }
