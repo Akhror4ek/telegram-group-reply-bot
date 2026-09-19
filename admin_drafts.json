@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "name",
+    "step": "price",
     "pending_images": [
       "BQACAgIAAxkBAAINJWqueNu748VO_Rni1xtfQskbycxIAAK3oAACFd1xSTtkjNah2MJBPQQ",
       "BQACAgIAAxkBAAINJmqueNuv8K0fqxbSUFec3UIx59sXAAK4oAACFd1xSRK-H_ohBG74PQQ"
@@ -14,11 +14,11 @@
       ".jpg",
       ".jpg"
     ],
-    "name": "",
+    "name": "2 kishilik yotoqxona divan to'plami (faqat divan va tremo)",
     "price": null,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789819110
+    "updated_at": 1789819153
   }
 }
