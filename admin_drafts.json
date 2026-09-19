@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "name",
+    "step": "price",
     "pending_images": [
       "BQACAgIAAxkBAAILhmquU8SChR3b72P4MI7DkZFhrrCvAAIunAACT7NhScsK2JOQVvC-PQQ",
       "BQACAgIAAxkBAAILh2quU8Q1UI6VljFTGTYQ5d_Ro62cAAIvnAACT7NhSXFnuvKkrlemPQQ"
@@ -14,11 +14,11 @@
       ".jpg",
       ".jpg"
     ],
-    "name": "",
+    "name": "1 kishilik divan (jigarrang) eni 1.10 metr",
     "price": null,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789809870
+    "updated_at": 1789810160
   }
 }
