@@ -658,5 +658,34 @@
       }
     ],
     "last_activity": 1789753982
+  },
+  "-1001865736985:8048456423": {
+    "chat_id": -1001865736985,
+    "user_id": 8048456423,
+    "full_name": "🤍Nozima🤍",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalom aleykum manga ham splanilarni narxlari bn rasmi kerakti",
+        "time": 1789804078
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! \n\nSplanyonlar (oshxona mebellari yoki shkaflar) bo'yicha narxlar va rasmlarni taqdim etishimiz uchun sizga to'g'ri ma'lumot berishimiz kerak. Aniq narx va mahsulot turlarini bilish uchun operatorimizga murojaat qilishingizni tavsiya qilaman.\n\nMurojaat uchun telefon: **+998 78 555-17-77** yoki **+998-94-529-07-07**\nTelegram: **@aksouz**",
+        "time": 1789804080
+      },
+      {
+        "role": "user",
+        "text": "Tashab bering",
+        "time": 1789804081
+      },
+      {
+        "role": "assistant",
+        "text": "Iltimos, ma'lumotlarni o'zingiz quyidagi aloqa kanallari orqali olsangiz bo'ladi:\n\nTelegram: **@aksouz**\nTelefon: **+998 78 555-17-77** yoki **+998-94-529-07-07**",
+        "time": 1789804082
+      }
+    ],
+    "last_activity": 1789804082
   }
 }
