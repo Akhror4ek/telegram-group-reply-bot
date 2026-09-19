@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "name",
+    "step": "price",
     "pending_images": [
       "BQACAgIAAxkBAAINBmqud7BXFgSyR_t2-aqRp262BKm-AAK0oAACFd1xSWv5AoR3877sPQQ",
       "BQACAgIAAxkBAAINB2qud7D12lWtAX3zZ80MxTVviCKlAAK1oAACFd1xSRsDD7szCF98PQQ",
@@ -17,11 +17,11 @@
       ".jpg",
       ".jpg"
     ],
-    "name": "",
+    "name": "13800000",
     "price": null,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789818827
+    "updated_at": 1789818851
   }
 }
