@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "name",
+    "step": "price",
     "pending_images": [
       "BQACAgIAAxkBAAINNWquen_2la8wmQ-n4XVS_N59qU4HAAK5oAACFd1xSUCRTG64v6NmPQQ",
       "BQACAgIAAxkBAAINNmquen-oows1d0wtw0Ipq7-Z2bq6AAK6oAACFd1xSRyDrEGFjWJkPQQ",
@@ -20,11 +20,11 @@
       ".jpg",
       ".jpg"
     ],
-    "name": "",
+    "name": "2 kishilik yotoqxona divan to'plami (classic)",
     "price": null,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789819545
+    "updated_at": 1789819574
   }
 }
