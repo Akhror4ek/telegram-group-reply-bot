@@ -713,8 +713,18 @@
         "role": "user",
         "text": "Divan",
         "time": 1789804117
+      },
+      {
+        "role": "user",
+        "text": "Albatta",
+        "time": 1789804849
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alomat! Sizga qanday yordam bera olaman? AKSO do'koni bo'yicha savollaringiz bo'lsa, mamnuniyat bilan javob beraman.",
+        "time": 1789804851
       }
     ],
-    "last_activity": 1789804117
+    "last_activity": 1789804851
   }
 }
