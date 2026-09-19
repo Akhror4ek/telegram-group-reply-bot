@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "category_selection",
+    "step": "category_new",
     "pending_images": [
       "BQACAgIAAxkBAAIMBGquYOVYepHfm67yNylyKZsbhkP1AAKaoAACFd1xSV2rZwpoz8IbPQQ",
       "BQACAgIAAxkBAAIMBWquYOWHPXK61MxFkpXaLy3CZ8bBAAKboAACFd1xSc8fzN5LgwJrPQQ",
@@ -22,6 +22,6 @@
     "category": "",
     "description": "Klassik uslubdagi hashamatli yotoq mebeli to‘plami\n\nOltin bezakli nafis dizayn, kapitoneli boshqism va qulay matras. To‘liq komplekt. Uyingizga hashamat bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789813278
+    "updated_at": 1789813283
   }
 }
