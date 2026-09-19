@@ -718,5 +718,48 @@
     ],
     "visible": true,
     "created_at": "2026-09-19 09:17:20"
+  },
+  {
+    "id": "1789809575971",
+    "name": "1 kishilik divan Foton machalkalik",
+    "price": 1900000,
+    "category": "1 kishilik divanlar",
+    "description": "Ko‘k naqshli zamonaviy divan-krovat\n\nChiroyli geometrik naqshi va yog‘och korpusi bilan ajralib turadi. Qulay va ko‘rkam. Uyingizga zamonaviy ko‘rinish bag‘ishlaydi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_foton_machalkalik_1789809570326_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_foton_machalkalik_1789809570326_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_foton_machalkalik_1789809573163_2.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_foton_machalkalik_1789809570326_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_foton_machalkalik_1789809570326_1.jpg",
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_foton_machalkalik_1789809573163_2.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "divan",
+      "foton",
+      "machalkalik",
+      "kok",
+      "naqshli",
+      "zamonaviy",
+      "krovat",
+      "chiroyli",
+      "geometrik",
+      "naqshi",
+      "va",
+      "yogoch",
+      "korpusi",
+      "bilan",
+      "ajralib",
+      "turadi",
+      "qulay",
+      "korkam",
+      "uyingiz",
+      "korinish",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-19 09:19:35"
   }
 ]
