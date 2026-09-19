@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIMBGquYOVYepHfm67yNylyKZsbhkP1AAKaoAACFd1xSV2rZwpoz8IbPQQ",
       "BQACAgIAAxkBAAIMBWquYOWHPXK61MxFkpXaLy3CZ8bBAAKboAACFd1xSc8fzN5LgwJrPQQ",
@@ -18,10 +18,10 @@
       ".jpg"
     ],
     "name": "2 kishilik yotoqxona divan to'plami (classic) tilla rang.",
-    "price": null,
+    "price": 10800000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789813212
+    "updated_at": 1789813228
   }
 }
