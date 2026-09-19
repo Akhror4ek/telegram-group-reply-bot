@@ -850,5 +850,48 @@
     ],
     "visible": true,
     "created_at": "2026-09-19 09:34:00"
+  },
+  {
+    "id": "1789810590470",
+    "name": "1 kishilik divan panda (vodiy) kulrang",
+    "price": 2500000,
+    "category": "1 kishilik divanlar",
+    "description": "Kul rangli zamonaviy divan-krovat\nYog‘och bezakli boshqismi va yumshoq teksturali matosi bilan ajralib turadi. Qulay va chiroyli. Uyingizga nafislik bag‘ishlaydi!",
+    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_panda_vodiy_kulrang_1789810587671_1.jpg",
+    "images": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_panda_vodiy_kulrang_1789810587671_1.jpg"
+    ],
+    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_panda_vodiy_kulrang_1789810587671_1.jpg",
+    "raw_urls": [
+      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_panda_vodiy_kulrang_1789810587671_1.jpg"
+    ],
+    "keywords": [
+      "kishilik",
+      "divan",
+      "pan",
+      "vodiy",
+      "kulrang",
+      "kul",
+      "rangli",
+      "zamonaviy",
+      "krovat",
+      "yogoch",
+      "bezakli",
+      "boshqis",
+      "va",
+      "yumshoq",
+      "teksturali",
+      "matosi",
+      "bilan",
+      "ajralib",
+      "turadi",
+      "qulay",
+      "chiroyli",
+      "uyingiz",
+      "nafislik",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-19 09:36:30"
   }
 ]
