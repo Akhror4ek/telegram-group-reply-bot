@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIMu2qudAABVpauG-ikEz5M-kQGXydSegACrKAAAhXdcUncNoKfPhGdFz0E",
       "BQACAgIAAxkBAAIMvGqudAABXgTnxE8xPiYhrzXUnMryzAACraAAAhXdcUnI56ok2O8O_D0E",
@@ -23,8 +23,8 @@
     "name": "2 kishilik yotoqxona divan to'plami (SHoxona komplekt)",
     "price": 23000000,
     "category": "",
-    "description": "",
+    "description": "Krem-oltin rangli klassik yotoq mebeli to‘plami\n\nKapitoneli boshqismi va hashamatli oltin bezaklari bilan ajralib turadi. To‘liq komplekt. Matrasi ortopedik, 7 yil kafolati bor. Uyingizga solobat bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789818059
+    "updated_at": 1789818133
   }
 }
