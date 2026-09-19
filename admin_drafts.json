@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAILHWquS1yoNZh9Oz1CAAHuDMaVwkNXGwACKpwAAk-zYUmDnkLrzTmQTz0E",
       "BQACAgIAAxkBAAILHmquS1wT6Pn7Tp1PewABiG7mjyrtfAACK5wAAk-zYUksgvbhnnDwjj0E"
@@ -17,8 +17,8 @@
     "name": "1 kishilik divan hitech yashil divan",
     "price": 2600000,
     "category": "",
-    "description": "",
+    "description": "Yashil rangli qalin matrasli divan\n\nKanal bezakli boshqismi va yumshoq matosi bilan ajralib turadi. Qalin matras qulay uyqu ta’minlaydi. Uyingizga zamonaviy ko‘rinish bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789809409
+    "updated_at": 1789809423
   }
 }
