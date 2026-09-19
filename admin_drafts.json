@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIMemqubg1TXp5DlqapE0zt1YMpjGV2AAKmoAACFd1xSd5gXvsmAu5pPQQ",
       "BQACAgIAAxkBAAIMe2qubg1In1NYXhEuMnNwlNo7MGyoAAKnoAACFd1xSeBDac6wlu-yPQQ",
@@ -20,8 +20,8 @@
     "name": "2 kishilik yotoqxona divan to'plami (cobra) tilla rang.",
     "price": 13800000,
     "category": "",
-    "description": "",
+    "description": "Oltin-jigarrang klassik yotoq mebeli to‘plami\nKapitoneli boshqismi va hashamatli oltin bezaklari bilan ajralib turadi. To‘liq komplekt. Matrasi ortopedik, 7 yil kafolati bor. Uyingizga solobat bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1789816551
+    "updated_at": 1789816613
   }
 }
