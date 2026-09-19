@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIK-2quRecSeEHkrpG0HcA7Gt6u2_LzAAIknAACT7NhScG3mgUfhYQAAT0E",
       "BQACAgIAAxkBAAIK_GquRee-vsG6k6appKM-7u7l_x64AAIlnAACT7NhSbHAPgGkRLWEPQQ",
@@ -18,10 +18,10 @@
       ".jpg"
     ],
     "name": "1 kishilik matrasli (oq rang) divan",
-    "price": null,
+    "price": 2590000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1789806093
+    "updated_at": 1789806099
   }
 }
