@@ -766,8 +766,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz.\n\nStol-stullarimiz narxlari va turlari bilan tanishish hamda o'zingizga mos variantni tanlash uchun operatorimizga bog'lanishingizni tavsiya qilaman:\n📞 +998-94-529-07-07 yoki +998 78 555-17-77\n\nShuningdek, barcha mahsulotlarimizga yetkazib berish va o'rnatish (montaj) xizmati Qorako'l va Olot tumanlari bo'ylab mutlaqo bepul!",
         "time": 1789915924
+      },
+      {
+        "role": "user",
+        "text": "Narxi qanca",
+        "time": 1789916064
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nQaysi mahsulotning narxi bilan qiziqayotgan edingiz? Aniqroq yozib yuborsangiz, ma'lumot beramiz yoki operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1789916066
       }
     ],
-    "last_activity": 1789915924
+    "last_activity": 1789916066
   }
 }
