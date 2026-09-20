@@ -779,5 +779,24 @@
       }
     ],
     "last_activity": 1789916066
+  },
+  "-1001865736985:6743946389": {
+    "chat_id": -1001865736985,
+    "user_id": 6743946389,
+    "full_name": "Ozodaxon Anvarovna",
+    "username": "Islombek_1711",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum Immer kulyerni narxi qanchq",
+        "time": 1789921553
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nMahsulotlarimizning naqd narxlari yoki jami bo'lib to'lash summasini onlayn tarzda ko'rsatmaymiz. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 94 529-07-07 yoki +998 78 555-17-77\nTelegram: @aksouz",
+        "time": 1789921555
+      }
+    ],
+    "last_activity": 1789921555
   }
 }
