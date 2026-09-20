@@ -726,5 +726,24 @@
       }
     ],
     "last_activity": 1789804851
+  },
+  "-1004452523372:519150987": {
+    "chat_id": -1004452523372,
+    "user_id": 519150987,
+    "full_name": "47 maktab Jumayeva Lola",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "👍👍👍👍👍",
+        "time": 1789877738
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! 😊 AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
+        "time": 1789877740
+      }
+    ],
+    "last_activity": 1789877740
   }
 }
