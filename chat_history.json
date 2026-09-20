@@ -745,5 +745,19 @@
       }
     ],
     "last_activity": 1789877740
+  },
+  "-1001865736985:6368687334": {
+    "chat_id": -1001865736985,
+    "user_id": 6368687334,
+    "full_name": "Toirova Lola",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu aleykum stol stulni arzoni qancha",
+        "time": 1789915856
+      }
+    ],
+    "last_activity": 1789915856
   }
 }
