@@ -206,9 +206,19 @@
         "role": "assistant",
         "text": "Operator raqami: +998-94-529-07-07",
         "time": 1789967165
+      },
+      {
+        "role": "user",
+        "text": "Call sentr",
+        "time": 1789967173
+      },
+      {
+        "role": "assistant",
+        "text": "Operator raqami: +998-94-529-07-07",
+        "time": 1789967174
       }
     ],
-    "last_activity": 1789967165
+    "last_activity": 1789967174
   },
   "-1001865736985:7234117264": {
     "chat_id": -1001865736985,
