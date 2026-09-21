@@ -796,9 +796,14 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nQaysi mahsulotning narxi bilan qiziqayotgan edingiz? Aniqroq yozib yuborsangiz, ma'lumot beramiz yoki operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1789916066
+      },
+      {
+        "role": "user",
+        "text": "6 stol stulla neci pyl",
+        "time": 1789974581
       }
     ],
-    "last_activity": 1789916066
+    "last_activity": 1789974581
   },
   "-1001865736985:6743946389": {
     "chat_id": -1001865736985,
