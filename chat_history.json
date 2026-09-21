@@ -839,8 +839,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! \n\nHa, AKSO do'konida mahsulotlar mavjud. To'liq ma'lumot olish yoki sizni qiziqtirgan mahsulot bo'yicha operatorimiz bilan bog'lanishingiz mumkin: \n📞 +998 78 555-17-77 yoki +998-94-529-07-07\nTelegram: @aksouz",
         "time": 1789988121
+      },
+      {
+        "role": "user",
+        "text": "Narxi qancha",
+        "time": 1789988170
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! \n\nMahsulotlarimizning naqd narxini yoki jami bo'lib to'lash summasini bu yerda yozib bo'lmaydi. Aniq narxini bilish va batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin:\n\n📞 +998 78 555-17-77 yoki +998-94-529-07-07\nTelegram: @aksouz",
+        "time": 1789988171
       }
     ],
-    "last_activity": 1789988121
+    "last_activity": 1789988171
   }
 }
