@@ -574,9 +574,19 @@
         "role": "assistant",
         "text": "Assalomu alaykum! \n\nMahsulotlarimiz va ularning turlari bo'yicha aniq ma'lumot olish uchun operatorimizga murojaat qilishingizni so'raymiz. Operatorimiz sizga bu borada to'liq ma'lumot beradi:\n📞 Telefon: +998 94 529-07-07",
         "time": 1789724867
+      },
+      {
+        "role": "user",
+        "text": "assalomu aleykum shu belanchakdan bormi",
+        "time": 1790012085
+      },
+      {
+        "role": "assistant",
+        "text": "Vaalaykum assalom! \n\nMahsulotlarimiz haqida to'liq ma'lumot olish yoki aniqlashtirish uchun operatorimizga murojaat qilishingizni so'raymiz: \n📞 +998 94 529-07-07\n📱 Telegram: @aksouz",
+        "time": 1790012090
       }
     ],
-    "last_activity": 1789724867
+    "last_activity": 1790012090
   },
   "-1001865736985:8122528405": {
     "chat_id": -1001865736985,
