@@ -872,5 +872,24 @@
       }
     ],
     "last_activity": 1789988171
+  },
+  "-1001865736985:555758124": {
+    "chat_id": -1001865736985,
+    "user_id": 555758124,
+    "full_name": "U.P.A......",
+    "username": "rosso8383",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Ассалому алайкум кандисанер нархлари билан ташлаб беринг",
+        "time": 1790050140
+      },
+      {
+        "role": "assistant",
+        "text": "Ваалайкум ассалом! \n\nKonditsionerlarimiz narxlari va turlari bilan batafsil tanishish hamda o'zingizga mos modelni tanlash uchun operatorimizga murojaat qilishingizni tavsiya qilaman. \n\n📞 **Operator:** +998 94 529-07-07\n📱 **Telegram:** @aksouz",
+        "time": 1790050142
+      }
+    ],
+    "last_activity": 1790050142
   }
 }
