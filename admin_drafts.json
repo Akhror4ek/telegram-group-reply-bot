@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIOhWqySm6sZ5zCK399w82fYQJPayyQAAK-oAACFd1xSTTpPDcBHhKrPQQ",
       "BQACAgIAAxkBAAIOhmqySm4LV6Uej-V5VOD9SsDvrte_AAK_oAACFd1xSbbMdFl9yxhKPQQ",
@@ -21,10 +21,10 @@
       ".jpg"
     ],
     "name": "2 kishilik yotoqxona divan to'plami (sofasi qora)",
-    "price": null,
+    "price": 15800000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790069484
+    "updated_at": 1790069493
   }
 }
