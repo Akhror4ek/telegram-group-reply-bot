@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIPV2qyUZu2G-CUzwhwpKyRg1YveN93AALdoAACFd1xSRPKjptpLgABmj0E",
       "BQACAgIAAxkBAAIPWGqyUZvCi1p73N1-TzuM_s_N6-e3AALeoAACFd1xScHKeuRifTsGPQQ",
@@ -21,10 +21,10 @@
       ".jpg"
     ],
     "name": "2 kishilik yotoqxona divan to'plami ( Hitech oq, 2 oynalik tremo)",
-    "price": null,
+    "price": 13500000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790071288
+    "updated_at": 1790071296
   }
 }
