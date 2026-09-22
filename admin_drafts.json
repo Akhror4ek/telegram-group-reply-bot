@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIPAWqyTn1WarXtl0VTz7O81L723MlsAALJoAACFd1xSbNPB_MrSBV2PQQ",
       "BQACAgIAAxkBAAIPAmqyTn1LhCHhzlrwMkmvWDHh2qqHAALKoAACFd1xSde6J12atCYiPQQ",
@@ -29,8 +29,8 @@
     "name": "2 kishilik yotoqxona divan to'plami ( floor )",
     "price": 16400000,
     "category": "",
-    "description": "",
+    "description": "Zamonaviy och rangli yotoqxona mebeli\n\nGeometrik shakldagi boshqism, sirg‘aluvchi shkaf va qora shisha detallar bilan. Juda sodda va chiroyli dizayn. Matrasi ortopedik, 7 yil kafolati bor. Kichik xonalarga ham mos keladi.",
     "admin_id": 8520907481,
-    "updated_at": 1790070451
+    "updated_at": 1790070493
   }
 }
