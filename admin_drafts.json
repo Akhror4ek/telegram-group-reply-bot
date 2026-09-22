@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIPL2qyUD_H4zYqICmpPjFX1MakI1GbAALUoAACFd1xSeoSArCqUA9KPQQ",
       "BQACAgIAAxkBAAIPMGqyUD-P1wZKiWTO7JAOq3EicUcAA9WgAAIV3XFJS-hT2hxkHKY9BA",
@@ -26,8 +26,8 @@
     "name": "2 kishilik yotoqxona divan to'plami ( oq  hitech svetilnikli)",
     "price": 12800000,
     "category": "",
-    "description": "",
+    "description": "Yog‘och va oq rangli zamonaviy yotoqxona mebeli\n\nYumshoq oq boshqism, yon tomonlarida chiroqlar bor. Katta shkaf va tualet stoli bilan to‘liq. Matrasi ortopedik, 7 yil kafolati bor. Sodda, yorug‘ va qulay dizayn.",
     "admin_id": 8520907481,
-    "updated_at": 1790070894
+    "updated_at": 1790070937
   }
 }
