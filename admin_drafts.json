@@ -3,12 +3,15 @@
     "mode": "add",
     "step": "photos",
     "pending_images": [
-      "BQACAgIAAxkBAAIPV2qyUZu2G-CUzwhwpKyRg1YveN93AALdoAACFd1xSRPKjptpLgABmj0E"
+      "BQACAgIAAxkBAAIPV2qyUZu2G-CUzwhwpKyRg1YveN93AALdoAACFd1xSRPKjptpLgABmj0E",
+      "BQACAgIAAxkBAAIPWGqyUZvCi1p73N1-TzuM_s_N6-e3AALeoAACFd1xScHKeuRifTsGPQQ"
     ],
     "image_kinds": [
+      "document",
       "document"
     ],
     "image_extensions": [
+      ".jpg",
       ".jpg"
     ],
     "name": "",
@@ -16,6 +19,6 @@
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790071198
+    "updated_at": 1790071201
   }
 }
