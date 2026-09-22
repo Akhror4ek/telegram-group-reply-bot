@@ -89,9 +89,14 @@
         "role": "user",
         "text": "Maya",
         "time": 1790054311
+      },
+      {
+        "role": "user",
+        "text": "Kuller",
+        "time": 1790054842
       }
     ],
-    "last_activity": 1790054311
+    "last_activity": 1790054842
   },
   "8520907481:8520907481": {
     "chat_id": 8520907481,
