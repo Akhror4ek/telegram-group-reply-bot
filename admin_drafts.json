@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "name",
+    "step": "price",
     "pending_images": [
       "BQACAgIAAxkBAAIPRWqyUONmAAEZl9hnHg5GQQvJ9EeLdgAC2aAAAhXdcUmYZvOt47GlOj0E",
       "BQACAgIAAxkBAAIPRmqyUONyGDRwm0KsVCd8Yint_vtcAALaoAACFd1xSfukTboUJIdpPQQ",
@@ -17,11 +17,11 @@
       ".jpg",
       ".jpg"
     ],
-    "name": "",
+    "name": "2 kishilik yotoqxona divan to'plami ( oq  Maya lux)",
     "price": null,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790071045
+    "updated_at": 1790071074
   }
 }
