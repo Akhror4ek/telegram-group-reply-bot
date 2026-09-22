@@ -6,15 +6,18 @@
       "BQACAgIAAxkBAAIPL2qyUD_H4zYqICmpPjFX1MakI1GbAALUoAACFd1xSeoSArCqUA9KPQQ",
       "BQACAgIAAxkBAAIPMGqyUD-P1wZKiWTO7JAOq3EicUcAA9WgAAIV3XFJS-hT2hxkHKY9BA",
       "BQACAgIAAxkBAAIPMWqyUD-hL8B-AAFbxTY2G13kjSwo4QAC1qAAAhXdcUn0-TiGa2YUnz0E",
-      "BQACAgIAAxkBAAIPMmqyUD-St41qc20SJ3uE8n2U-YD4AALXoAACFd1xSdTPIadvzLeYPQQ"
+      "BQACAgIAAxkBAAIPMmqyUD-St41qc20SJ3uE8n2U-YD4AALXoAACFd1xSdTPIadvzLeYPQQ",
+      "BQACAgIAAxkBAAIPM2qyUD-0VlImSbL5hnGSLWD_eTTiAALYoAACFd1xSYJSHJkVvOWxPQQ"
     ],
     "image_kinds": [
+      "document",
       "document",
       "document",
       "document",
       "document"
     ],
     "image_extensions": [
+      ".jpg",
       ".jpg",
       ".jpg",
       ".jpg",
@@ -25,6 +28,6 @@
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790070860
+    "updated_at": 1790070863
   }
 }
