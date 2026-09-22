@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIOmWqyTBPd8TcyXoO91W9nNItSU4vMAALCoAACFd1xSSg5cASx0gN0PQQ",
       "BQACAgIAAxkBAAIOmmqyTBNRu5ZkvP_v5aLkWqwKEeNXAALDoAACFd1xSaOUinCJfyYWPQQ",
@@ -20,8 +20,8 @@
     "name": "2 kishilik yotoqxona divan to'plami (qora cobra)",
     "price": 13800000,
     "category": "",
-    "description": "",
+    "description": "Qora va oltin rangdagi to‘liq yotoqxona mebeli\n\nYirik shkaf, ikki tumbochka va katta oynali tualet stoli bilan. Krovatning boshqismi va oyoq qismi yumshoq kapitone qilingan, marmar naqshli. Matrasi ortopedik, 7 yil kafolati bor. Juda ko‘rkam va qulay to‘plam.",
     "admin_id": 8520907481,
-    "updated_at": 1790069827
+    "updated_at": 1790069910
   }
 }
