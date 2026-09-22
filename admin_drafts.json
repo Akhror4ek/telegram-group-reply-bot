@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIOhWqySm6sZ5zCK399w82fYQJPayyQAAK-oAACFd1xSTTpPDcBHhKrPQQ",
       "BQACAgIAAxkBAAIOhmqySm4LV6Uej-V5VOD9SsDvrte_AAK_oAACFd1xSbbMdFl9yxhKPQQ",
@@ -23,8 +23,8 @@
     "name": "2 kishilik yotoqxona divan to'plami (sofasi qora)",
     "price": 15800000,
     "category": "",
-    "description": "",
+    "description": "Zamonaviy qora-oltin yotoq mebeli to‘plami\n\nMarmar naqshli boshqism va oyoq qismi, qora-oltin kombinatsiya. Krovat ostida keng saqlash joyi bor. Matrasi ortopedik, 7 yil kafolati bor. Uyingizga zamonaviy va qulay ko‘rinish bag‘ishlaydi!",
     "admin_id": 8520907481,
-    "updated_at": 1790069493
+    "updated_at": 1790069709
   }
 }
