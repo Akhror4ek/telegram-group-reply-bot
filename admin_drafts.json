@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIPAWqyTn1WarXtl0VTz7O81L723MlsAALJoAACFd1xSbNPB_MrSBV2PQQ",
       "BQACAgIAAxkBAAIPAmqyTn1LhCHhzlrwMkmvWDHh2qqHAALKoAACFd1xSde6J12atCYiPQQ",
@@ -27,10 +27,10 @@
       ".jpg"
     ],
     "name": "2 kishilik yotoqxona divan to'plami ( floor )",
-    "price": null,
+    "price": 16400000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790070442
+    "updated_at": 1790070451
   }
 }
