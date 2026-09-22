@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIOmWqyTBPd8TcyXoO91W9nNItSU4vMAALCoAACFd1xSSg5cASx0gN0PQQ",
       "BQACAgIAAxkBAAIOmmqyTBNRu5ZkvP_v5aLkWqwKEeNXAALDoAACFd1xSaOUinCJfyYWPQQ",
@@ -18,10 +18,10 @@
       ".jpg"
     ],
     "name": "2 kishilik yotoqxona divan to'plami (qora cobra)",
-    "price": null,
+    "price": 13800000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790069817
+    "updated_at": 1790069827
   }
 }
