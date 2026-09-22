@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIPgWqyVLT7GRB0XD3045ME4EnR4ySOAALmoAACFd1xSYtGW2yOEPPNPQQ",
       "BQACAgIAAxkBAAIPgmqyVLQlf3wXgg5iqnYgy2xeU9H_AALnoAACFd1xSXiac9RxysM4PQQ",
@@ -18,10 +18,10 @@
       ".jpg"
     ],
     "name": "2 kishilik yotoqxona divan to'plami ( Hitech oq eco narh)",
-    "price": null,
+    "price": 10800000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790072019
+    "updated_at": 1790072029
   }
 }
