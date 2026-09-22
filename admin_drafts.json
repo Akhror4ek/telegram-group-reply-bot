@@ -5,14 +5,17 @@
     "pending_images": [
       "BQACAgIAAxkBAAIOhWqySm6sZ5zCK399w82fYQJPayyQAAK-oAACFd1xSTTpPDcBHhKrPQQ",
       "BQACAgIAAxkBAAIOhmqySm4LV6Uej-V5VOD9SsDvrte_AAK_oAACFd1xSbbMdFl9yxhKPQQ",
-      "BQACAgIAAxkBAAIOh2qySm5-FHzJfz-KG3ZUbouNCHMGAALAoAACFd1xSarNQuH-NUiyPQQ"
+      "BQACAgIAAxkBAAIOh2qySm5-FHzJfz-KG3ZUbouNCHMGAALAoAACFd1xSarNQuH-NUiyPQQ",
+      "BQACAgIAAxkBAAIOiGqySm7C9Wkyhd_M7qhsoTNpq88sAALBoAACFd1xSXsIwVCfyqEiPQQ"
     ],
     "image_kinds": [
+      "document",
       "document",
       "document",
       "document"
     ],
     "image_extensions": [
+      ".jpg",
       ".jpg",
       ".jpg",
       ".jpg"
@@ -22,6 +25,6 @@
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790069368
+    "updated_at": 1790069371
   }
 }
