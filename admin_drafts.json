@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "price",
+    "step": "description",
     "pending_images": [
       "BQACAgIAAxkBAAIPGWqyT0XvCra9KJIxe9iTh-oKKTmnAALPoAACFd1xSYCKg37deVbVPQQ",
       "BQACAgIAAxkBAAIPGmqyT0Ubsq3wvuSX55PM9iuUw56NAALQoAACFd1xSfWTKnSpCGrhPQQ",
@@ -24,10 +24,10 @@
       ".jpg"
     ],
     "name": "2 kishilik yotoqxona divan to'plami ( qora hitech svetilnikli)",
-    "price": null,
+    "price": 12800000,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790070668
+    "updated_at": 1790070680
   }
 }
