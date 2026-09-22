@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "description",
+    "step": "category_selection",
     "pending_images": [
       "BQACAgIAAxkBAAIPRWqyUONmAAEZl9hnHg5GQQvJ9EeLdgAC2aAAAhXdcUmYZvOt47GlOj0E",
       "BQACAgIAAxkBAAIPRmqyUONyGDRwm0KsVCd8Yint_vtcAALaoAACFd1xSfukTboUJIdpPQQ",
@@ -20,8 +20,8 @@
     "name": "2 kishilik yotoqxona divan to'plami ( oq  Maya lux)",
     "price": 13800000,
     "category": "",
-    "description": "",
+    "description": "Oq Maya Lux yotoqxona mebeli to‘plami\n\nOq rangda, oltin bezakli klassik uslub. Kapitoneli yumshoq boshqism, katta shkaf, tualet stoli va tumbochkalar bilan. Matrasi ortopedik, 7 yil kafolati bor. Nafis va hashamatli ko‘rinish.",
     "admin_id": 8520907481,
-    "updated_at": 1790071081
+    "updated_at": 1790071126
   }
 }
