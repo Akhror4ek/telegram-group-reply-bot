@@ -74,9 +74,14 @@
         "role": "user",
         "text": "Divan bormi",
         "time": 1789745144
+      },
+      {
+        "role": "user",
+        "text": "Yotoqxona",
+        "time": 1790054239
       }
     ],
-    "last_activity": 1789745144
+    "last_activity": 1790054239
   },
   "8520907481:8520907481": {
     "chat_id": 8520907481,
