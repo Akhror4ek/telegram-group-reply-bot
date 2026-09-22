@@ -916,5 +916,19 @@
       }
     ],
     "last_activity": 1790050142
+  },
+  "8784293522:8784293522": {
+    "chat_id": 8784293522,
+    "user_id": 8784293522,
+    "full_name": "U Olimov",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Detski shkaf bormi",
+        "time": 1790099784
+      }
+    ],
+    "last_activity": 1790099784
   }
 }
