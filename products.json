@@ -1349,19 +1349,12 @@
     "price": 23000000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Krem-oltin rangli klassik yotoq mebeli to‘plami\n\nKapitoneli boshqismi va hashamatli oltin bezaklari bilan ajralib turadi. To‘liq komplekt. Matrasi ortopedik, 7 yil kafolati bor. Uyingizga solobat bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818158146_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarN_8UALSG_F6_6Qr-nayfjSb6IAAnUhaxv4h5lJyZhsDsFC6ScBAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818158146_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818160861_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818163397_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818165616_4.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818158146_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818158146_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818160861_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818163397_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_shoxona_komplekt_1789818165616_4.jpg"
+      "AgACAgIAAxUHarN_8UALSG_F6_6Qr-nayfjSb6IAAnUhaxv4h5lJyZhsDsFC6ScBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_8Uan8c3H99A06MSJPyVOH_sAAnghaxv4h5lJpN4TTrvMiOYBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_8T7-Z3hthWjrp081ujjv2F0AAnYhaxv4h5lJFOL9ViivuI4BAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_8TCLfil-kGo1tQNF3BeCHDQAAnchaxv4h5lJkpgkd2UT6bsBAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -1395,7 +1388,32 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 11:42:47"
+    "created_at": "2026-09-19 11:42:47",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_8UALSG_F6_6Qr-nayfjSb6IAAnUhaxv4h5lJyZhsDsFC6ScBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_8Uan8c3H99A06MSJPyVOH_sAAnghaxv4h5lJpN4TTrvMiOYBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_8T7-Z3hthWjrp081ujjv2F0AAnYhaxv4h5lJFOL9ViivuI4BAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_8TCLfil-kGo1tQNF3BeCHDQAAnchaxv4h5lJkpgkd2UT6bsBAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarN_8UALSG_F6_6Qr-nayfjSb6IAAnUhaxv4h5lJyZhsDsFC6ScBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_8Uan8c3H99A06MSJPyVOH_sAAnghaxv4h5lJpN4TTrvMiOYBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_8T7-Z3hthWjrp081ujjv2F0AAnYhaxv4h5lJFOL9ViivuI4BAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_8TCLfil-kGo1tQNF3BeCHDQAAnchaxv4h5lJkpgkd2UT6bsBAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789818568694",
