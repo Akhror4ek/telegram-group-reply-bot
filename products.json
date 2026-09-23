@@ -1662,19 +1662,12 @@
     "price": 15800000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Zamonaviy qora-oltin yotoq mebeli to‘plami\n\nMarmar naqshli boshqism va oyoq qismi, qora-oltin kombinatsiya. Krovat ostida keng saqlash joyi bor. Matrasi ortopedik, 7 yil kafolati bor. Uyingizga zamonaviy va qulay ko‘rinish bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069738461_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarOABbNowKdbhTN8BroR_YPZ1t4AAoQhaxv4h5lJ9cIWg4hCNPUBAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069738461_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069741501_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069744254_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069747113_4.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069738461_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069738461_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069741501_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069744254_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_sofasi_qora_1790069747113_4.jpg"
+      "AgACAgIAAxUHarOABbNowKdbhTN8BroR_YPZ1t4AAoQhaxv4h5lJ9cIWg4hCNPUBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOABVDC0vmnFWvF8ERJVyr4TcMAAochaxv4h5lJtwpASKsPDegBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOABZKicgTEIS57ifh_-26A_k4AAoYhaxv4h5lJazmccYWTaqgBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOABf4V1R6pDMCLRT-CmG9rDqgAAoUhaxv4h5lJMAnzKSxgJt4BAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -1710,7 +1703,32 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-22 09:35:49"
+    "created_at": "2026-09-22 09:35:49",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOABbNowKdbhTN8BroR_YPZ1t4AAoQhaxv4h5lJ9cIWg4hCNPUBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOABVDC0vmnFWvF8ERJVyr4TcMAAochaxv4h5lJtwpASKsPDegBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOABZKicgTEIS57ifh_-26A_k4AAoYhaxv4h5lJazmccYWTaqgBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOABf4V1R6pDMCLRT-CmG9rDqgAAoUhaxv4h5lJMAnzKSxgJt4BAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarOABbNowKdbhTN8BroR_YPZ1t4AAoQhaxv4h5lJ9cIWg4hCNPUBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOABVDC0vmnFWvF8ERJVyr4TcMAAochaxv4h5lJtwpASKsPDegBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOABZKicgTEIS57ifh_-26A_k4AAoYhaxv4h5lJazmccYWTaqgBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOABf4V1R6pDMCLRT-CmG9rDqgAAoUhaxv4h5lJMAnzKSxgJt4BAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1790069928894",
