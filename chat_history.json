@@ -188,9 +188,14 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'konining virtual yordamchiman. Sizga qanday yordam bera olaman?",
         "time": 1790146144
+      },
+      {
+        "role": "user",
+        "text": "DIVAN",
+        "time": 1790171063
       }
     ],
-    "last_activity": 1790146144
+    "last_activity": 1790171063
   },
   "605965757:605965757": {
     "chat_id": 605965757,
