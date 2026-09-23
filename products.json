@@ -1886,19 +1886,12 @@
     "price": 13800000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Oq va oltin rangdagi nafis yotoqxona to‘plami\n\nKrovatning boshqismi va pastki qismi yumshoq kapitone qilingan, ichida kristalli tugmalar bor. Katta shkaf, tualet stoli va tumbochkalar bilan to‘liq. Matrasi ortopedik, 7 yil kafolati bor. Juda yorqin va hashamatli ko‘rinish.",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070347070_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarOAEHy8syGGVSaOduTaeLzrVJAAAoshaxv4h5lJgfynWiZZjUwBAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070347070_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070349800_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070352821_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070356366_4.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070347070_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070347070_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070349800_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070352821_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_cobra_1790070356366_4.jpg"
+      "AgACAgIAAxUHarOAEHy8syGGVSaOduTaeLzrVJAAAoshaxv4h5lJgfynWiZZjUwBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAECqjF4lRbImRhib0unDYl_oAAowhaxv4h5lJcpHg0VM3FFIBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAEM81VgGzAtOQd2uM9eREtuUAAo0haxv4h5lJ-AWkL8BeTGoBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAECth5JyGn4f2Ph0vKcx_DOUAAo4haxv4h5lJ3q43NZRZ2AMBAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -1939,7 +1932,32 @@
       "korinish"
     ],
     "visible": true,
-    "created_at": "2026-09-22 09:45:59"
+    "created_at": "2026-09-22 09:45:59",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAEHy8syGGVSaOduTaeLzrVJAAAoshaxv4h5lJgfynWiZZjUwBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAECqjF4lRbImRhib0unDYl_oAAowhaxv4h5lJcpHg0VM3FFIBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAEM81VgGzAtOQd2uM9eREtuUAAo0haxv4h5lJ-AWkL8BeTGoBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAECth5JyGn4f2Ph0vKcx_DOUAAo4haxv4h5lJ3q43NZRZ2AMBAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarOAEHy8syGGVSaOduTaeLzrVJAAAoshaxv4h5lJgfynWiZZjUwBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAECqjF4lRbImRhib0unDYl_oAAowhaxv4h5lJcpHg0VM3FFIBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAEM81VgGzAtOQd2uM9eREtuUAAo0haxv4h5lJ-AWkL8BeTGoBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAECth5JyGn4f2Ph0vKcx_DOUAAo4haxv4h5lJ3q43NZRZ2AMBAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1790070515190",
