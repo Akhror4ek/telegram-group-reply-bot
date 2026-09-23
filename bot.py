@@ -483,9 +483,10 @@ async def _prepare_product_photo_media(bot, source, index):
 
 async def persist_product_telegram_images(product_id, sources):
     """Persist Telegram photo file_ids and remove legacy image URLs from the record."""
+    normalized = _dedupe_image_sources(sources)
     photo_ids = [
         source["value"]
-        for source in sources
+        for source in normalized
         if source.get("type") == "photo" and source.get("value")
     ]
 
@@ -497,17 +498,128 @@ async def persist_product_telegram_images(product_id, sources):
     if not product:
         return False
 
-    product["image_sources"] = _dedupe_image_sources(sources)
+    # Only remove legacy URL fields when every stored image has successfully
+    # become a Telegram photo file_id.  This prevents partial migrations from
+    # losing their remaining legacy sources.
+    all_photos = bool(normalized) and all(
+        source.get("type") == "photo"
+        for source in normalized
+    )
+    if not all_photos:
+        return False
+
+    product["image_sources"] = normalized
     product["telegram_file_ids"] = photo_ids
     product["images"] = photo_ids
     product["telegram_file_id"] = photo_ids[0] if photo_ids else ""
     product["image_storage"] = "telegram"
-    # New format intentionally does not retain GitHub image paths.
     product.pop("raw_url", None)
     product.pop("raw_urls", None)
+    product.pop("github_path", None)
 
     await github_save_products(products)
     return True
+
+
+async def _migrate_legacy_source_to_photo_id(bot, source, index):
+    """Upload one legacy image to Telegram once and return its reusable photo file_id."""
+    prepared = await _prepare_product_photo_media(bot, source, index)
+    temp_message = await bot.send_photo(
+        chat_id=ADMIN_ID,
+        photo=prepared.media,
+    )
+
+    try:
+        if not temp_message or not temp_message.photo:
+            raise ValueError("Telegram file_id olinmadi")
+        return temp_message.photo[-1].file_id
+    finally:
+        if temp_message:
+            try:
+                await bot.delete_message(
+                    chat_id=ADMIN_ID,
+                    message_id=temp_message.message_id,
+                )
+            except Exception as cleanup_error:
+                print(
+                    "IMAGE MIGRATION CLEANUP XATOSI:",
+                    repr(cleanup_error),
+                )
+
+
+async def ensure_product_telegram_photo_ids(bot, product):
+    """Resolve legacy URL/document image sources into Telegram photo IDs.
+
+    The conversion is done only once.  After a successful migration the
+    product is stored with Telegram file_ids, so normal customer views no
+    longer make Render download and upload the original image again.
+    """
+    sources = product_image_sources(product)
+    if not sources:
+        return []
+
+    if all(source.get("type") == "photo" for source in sources):
+        return sources
+
+    resolved = []
+    changed = False
+
+    for index, source in enumerate(sources, start=1):
+        if source.get("type") == "photo":
+            resolved.append(source)
+            continue
+
+        try:
+            file_id = await _migrate_legacy_source_to_photo_id(
+                bot,
+                source,
+                index,
+            )
+            resolved.append({
+                "type": "photo",
+                "value": file_id,
+            })
+            changed = True
+        except Exception as error:
+            print(
+                "LEGACY IMAGE MIGRATION XATOSI:",
+                repr(error),
+                "product_id=",
+                product.get("id"),
+                "image_index=",
+                index,
+                "source=",
+                source.get("type"),
+            )
+            # Keep already resolved images so the customer still receives any
+            # valid images instead of losing the whole product response.
+
+    if changed and len(resolved) == len(sources):
+        try:
+            if await persist_product_telegram_images(
+                product.get("id"),
+                resolved,
+            ):
+                product["image_sources"] = resolved
+                product["telegram_file_ids"] = [
+                    source["value"] for source in resolved
+                ]
+                product["images"] = [
+                    source["value"] for source in resolved
+                ]
+                product["telegram_file_id"] = resolved[0]["value"]
+                product["image_storage"] = "telegram"
+                product.pop("raw_url", None)
+                product.pop("raw_urls", None)
+                product.pop("github_path", None)
+        except Exception as error:
+            print(
+                "PRODUCT IMAGE MIGRATION SAVE XATOSI:",
+                repr(error),
+            )
+        return resolved
+
+    return resolved
 
 
 async def _download_http_image_bytes(image):
@@ -1801,7 +1913,10 @@ async def send_product_to_chat(
         ),
     ]])
 
-    sources = product_image_sources(product)
+    sources = await ensure_product_telegram_photo_ids(
+        bot,
+        product,
+    )
 
     if not sources:
         kwargs = {
