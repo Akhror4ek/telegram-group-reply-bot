@@ -1489,15 +1489,10 @@
     "price": 13800000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Qora-oltin rangli zamonaviy klassik krovat\n\nOq kapitoneli boshqism va nafis oltin chiziqlari bilan ajralib turadi. Matrasi ortopedik, 7 yil kafolati bor. Uyingizga hashamat va qulaylik olib keladi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_maya_lux_qora_1789819053867_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarN_-CRR7YAXY7Sl7MP2tTBWLiUAAnwhaxv4h5lJREaKJ4pWzRoBAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_maya_lux_qora_1789819053867_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_maya_lux_qora_1789819056391_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_maya_lux_qora_1789819053867_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_maya_lux_qora_1789819053867_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_maya_lux_qora_1789819056391_2.jpg"
+      "AgACAgIAAxUHarN_-CRR7YAXY7Sl7MP2tTBWLiUAAnwhaxv4h5lJREaKJ4pWzRoBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_-D-eZyqzZHTUKVX5jVhVUnYAAn0haxv4h5lJGiCAa0vWYYoBAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -1533,7 +1528,22 @@
       "keladi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 11:57:38"
+    "created_at": "2026-09-19 11:57:38",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_-CRR7YAXY7Sl7MP2tTBWLiUAAnwhaxv4h5lJREaKJ4pWzRoBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_-D-eZyqzZHTUKVX5jVhVUnYAAn0haxv4h5lJGiCAa0vWYYoBAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarN_-CRR7YAXY7Sl7MP2tTBWLiUAAnwhaxv4h5lJREaKJ4pWzRoBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_-D-eZyqzZHTUKVX5jVhVUnYAAn0haxv4h5lJGiCAa0vWYYoBAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789819179109",
