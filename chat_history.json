@@ -871,9 +871,14 @@
         "role": "assistant",
         "text": "Assalomu qulay! Qaysi mahsulotimizning narxi bilan qiziqayotgan edingiz? \n\nAgar savollaringiz bo'lsa yoki aniq mahsulotni tanlashda yordam kerak bo'lsa, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1790172488
+      },
+      {
+        "role": "user",
+        "text": "Mana bu bilan",
+        "time": 1790172515
       }
     ],
-    "last_activity": 1790172488
+    "last_activity": 1790172515
   },
   "-1001865736985:6743946389": {
     "chat_id": -1001865736985,
