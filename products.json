@@ -2053,21 +2053,13 @@
     "price": 12800000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Qora va bej rangli zamonaviy yotoqxona to‘plami\n\nBoshqismida yumshoq kvadrat yostiqchalar va yorug‘lik chiroqlari bor. Katta shkaf, tualet stoli va tumbochkalar bilan. Matrasi ortopedik, 7 yil kafolati bor. Juda zamonaviy va qulay dizayn.",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070792747_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarOAG_VOguIxEMc-UnrQE6GBUiwAApUhaxv4h5lJQdObNl1DircBAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070792747_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070795522_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070797638_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070800340_4.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070802582_5.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070792747_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070792747_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070795522_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070797638_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070800340_4.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_hitech_svetilnikli_1790070802582_5.jpg"
+      "AgACAgIAAxUHarOAG_VOguIxEMc-UnrQE6GBUiwAApUhaxv4h5lJQdObNl1DircBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAGzIjRVN15F7qtGTuH_TYTPQAApkhaxv4h5lJ9oH6wMUx0k4BAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAGzmu7XyZiKw6Zv072KL08QMAApghaxv4h5lJ-otWrxWj_kABAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAGxKWpao6_L97bbXwcp8QDCQAApYhaxv4h5lJB-pHRe23c4ABAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAG9zXPJT3LKo8AAHeydxM2mv2AAKXIWsb-IeZSfa81IFbXhYIAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -2103,7 +2095,37 @@
       "dizayn"
     ],
     "visible": true,
-    "created_at": "2026-09-22 09:53:26"
+    "created_at": "2026-09-22 09:53:26",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAG_VOguIxEMc-UnrQE6GBUiwAApUhaxv4h5lJQdObNl1DircBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAGzIjRVN15F7qtGTuH_TYTPQAApkhaxv4h5lJ9oH6wMUx0k4BAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAGzmu7XyZiKw6Zv072KL08QMAApghaxv4h5lJ-otWrxWj_kABAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAGxKWpao6_L97bbXwcp8QDCQAApYhaxv4h5lJB-pHRe23c4ABAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAG9zXPJT3LKo8AAHeydxM2mv2AAKXIWsb-IeZSfa81IFbXhYIAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarOAG_VOguIxEMc-UnrQE6GBUiwAApUhaxv4h5lJQdObNl1DircBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAGzIjRVN15F7qtGTuH_TYTPQAApkhaxv4h5lJ9oH6wMUx0k4BAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAGzmu7XyZiKw6Zv072KL08QMAApghaxv4h5lJ-otWrxWj_kABAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAGxKWpao6_L97bbXwcp8QDCQAApYhaxv4h5lJB-pHRe23c4ABAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAG9zXPJT3LKo8AAHeydxM2mv2AAKXIWsb-IeZSfa81IFbXhYIAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1790070966442",
