@@ -2214,17 +2214,11 @@
     "price": 13800000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Oq Maya Lux yotoqxona mebeli to‘plami\n\nOq rangda, oltin bezakli klassik uslub. Kapitoneli yumshoq boshqism, katta shkaf, tualet stoli va tumbochkalar bilan. Matrasi ortopedik, 7 yil kafolati bor. Nafis va hashamatli ko‘rinish.",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_maya_lux_1790071137036_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarOAJHuWJSESc_GOWcolSYcxG74AAqAhaxv4h5lJIlx6_4sNVbkBAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_maya_lux_1790071137036_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_maya_lux_1790071141123_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_maya_lux_1790071144371_3.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_maya_lux_1790071137036_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_maya_lux_1790071137036_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_maya_lux_1790071141123_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_oq_maya_lux_1790071144371_3.jpg"
+      "AgACAgIAAxUHarOAJHuWJSESc_GOWcolSYcxG74AAqAhaxv4h5lJIlx6_4sNVbkBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAJLQJUjI3QFfvhN8Q072pmMgAAp8haxv4h5lJRtrJ9homgm0BAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAJC1FEoT6_ZWQoObz_Sk1A9IAAqEhaxv4h5lJTsCcXXmk2oIBAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -2260,7 +2254,27 @@
       "korinish"
     ],
     "visible": true,
-    "created_at": "2026-09-22 09:59:07"
+    "created_at": "2026-09-22 09:59:07",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAJHuWJSESc_GOWcolSYcxG74AAqAhaxv4h5lJIlx6_4sNVbkBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAJLQJUjI3QFfvhN8Q072pmMgAAp8haxv4h5lJRtrJ9homgm0BAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAJC1FEoT6_ZWQoObz_Sk1A9IAAqEhaxv4h5lJTsCcXXmk2oIBAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarOAJHuWJSESc_GOWcolSYcxG74AAqAhaxv4h5lJIlx6_4sNVbkBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAJLQJUjI3QFfvhN8Q072pmMgAAp8haxv4h5lJRtrJ9homgm0BAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAJC1FEoT6_ZWQoObz_Sk1A9IAAqEhaxv4h5lJTsCcXXmk2oIBAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1790071382742",
