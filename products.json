@@ -1811,17 +1811,11 @@
     "price": 13800000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Qora va oltin rangdagi to‘liq yotoqxona mebeli\n\nYirik shkaf, ikki tumbochka va katta oynali tualet stoli bilan. Krovatning boshqismi va oyoq qismi yumshoq kapitone qilingan, marmar naqshli. Matrasi ortopedik, 7 yil kafolati bor. Juda ko‘rkam va qulay to‘plam.",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_cobra_1790069965815_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarOACKbR88O_hZYpChF-shjmhHgAAoghaxv4h5lJoMIXXuOtP0UBAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_cobra_1790069965815_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_cobra_1790069969168_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_cobra_1790069971552_3.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_cobra_1790069965815_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_cobra_1790069965815_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_cobra_1790069969168_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_qora_cobra_1790069971552_3.jpg"
+      "AgACAgIAAxUHarOACKbR88O_hZYpChF-shjmhHgAAoghaxv4h5lJoMIXXuOtP0UBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOACPMv7YtA8xRtgi1UcZFdyGYAAokhaxv4h5lJD2vXnEV5-hYBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOACeIoYlFznjz0GsJXBif71roAAoohaxv4h5lJuLUHGxUuWacBAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -1864,7 +1858,27 @@
       "toplam"
     ],
     "visible": true,
-    "created_at": "2026-09-22 09:39:34"
+    "created_at": "2026-09-22 09:39:34",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOACKbR88O_hZYpChF-shjmhHgAAoghaxv4h5lJoMIXXuOtP0UBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOACPMv7YtA8xRtgi1UcZFdyGYAAokhaxv4h5lJD2vXnEV5-hYBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOACeIoYlFznjz0GsJXBif71roAAoohaxv4h5lJuLUHGxUuWacBAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarOACKbR88O_hZYpChF-shjmhHgAAoghaxv4h5lJoMIXXuOtP0UBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOACPMv7YtA8xRtgi1UcZFdyGYAAokhaxv4h5lJD2vXnEV5-hYBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOACeIoYlFznjz0GsJXBif71roAAoohaxv4h5lJuLUHGxUuWacBAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1790070359281",
