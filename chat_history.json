@@ -940,5 +940,24 @@
       }
     ],
     "last_activity": 1790099784
+  },
+  "-1001865736985:8598275374": {
+    "chat_id": -1001865736985,
+    "user_id": 8598275374,
+    "full_name": "Shaxzod Najimov",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Ассаломалекум манашу мебелдан заказ килсак буладими",
+        "time": 1790161285
+      },
+      {
+        "role": "assistant",
+        "text": "Ваалайкум ассалом! \n\nAKSO do'koniga xush kelibsiz! \n\nBatafsil ma'lumot olish va buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
+        "time": 1790161286
+      }
+    ],
+    "last_activity": 1790161286
   }
 }
