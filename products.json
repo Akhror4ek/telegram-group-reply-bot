@@ -1589,19 +1589,12 @@
     "price": 10800000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Qora rangli hashamatli klassik krovat\n\nOq marmar naqshli kapitoneli boshqismi va oltin bezaklari bilan ko‘zni quvontiradi. Matrasi ortopedik, 7 yil kafolati bor. Uyingizga solobat olib kiradi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819645095_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarOAAAGVZzQb3AKmyC0wfg6npL_gAAKAIWsb-IeZSWSoRgE7vIN_AQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819645095_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819647582_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819650074_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819653892_4.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819645095_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819645095_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819647582_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819650074_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_1789819653892_4.jpg"
+      "AgACAgIAAxUHarOAAAGVZzQb3AKmyC0wfg6npL_gAAKAIWsb-IeZSWSoRgE7vIN_AQADAgADdwADPQQ",
+      "AgACAgIAAxUHarOAAAF-9nTxU6nQg5NQO25BrzmMAAKCIWsb-IeZSWKHZjZhdJjrAQADAgADdwADPQQ",
+      "AgACAgIAAxUHarOAAAGJ2UN7xyTlXmimTOoCS9pYAAKDIWsb-IeZSQxylZ0U_rNcAQADAgADdwADPQQ",
+      "AgACAgIAAxUHarOAAAFk_5hec94xRUaZziocHiFnAAKBIWsb-IeZSSjHi0hd1xgdAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -1636,7 +1629,32 @@
       "kiradi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 12:07:36"
+    "created_at": "2026-09-19 12:07:36",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAAAGVZzQb3AKmyC0wfg6npL_gAAKAIWsb-IeZSWSoRgE7vIN_AQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAAAF-9nTxU6nQg5NQO25BrzmMAAKCIWsb-IeZSWKHZjZhdJjrAQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAAAGJ2UN7xyTlXmimTOoCS9pYAAKDIWsb-IeZSQxylZ0U_rNcAQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAAAFk_5hec94xRUaZziocHiFnAAKBIWsb-IeZSSjHi0hd1xgdAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarOAAAGVZzQb3AKmyC0wfg6npL_gAAKAIWsb-IeZSWSoRgE7vIN_AQADAgADdwADPQQ",
+      "AgACAgIAAxUHarOAAAF-9nTxU6nQg5NQO25BrzmMAAKCIWsb-IeZSWKHZjZhdJjrAQADAgADdwADPQQ",
+      "AgACAgIAAxUHarOAAAGJ2UN7xyTlXmimTOoCS9pYAAKDIWsb-IeZSQxylZ0U_rNcAQADAgADdwADPQQ",
+      "AgACAgIAAxUHarOAAAFk_5hec94xRUaZziocHiFnAAKBIWsb-IeZSSjHi0hd1xgdAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1790069749985",
