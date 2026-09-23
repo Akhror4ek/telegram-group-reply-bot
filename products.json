@@ -4,19 +4,33 @@
     "name": "TechOn kuller",
     "price": 1380000,
     "telegram_file_id": "AgACAgIAAxkBAANsaqOJ3g1K6OdRHRv2mlyNajDjp9gAAlUhaxv3GhlJjtr-S7HGYT4BAAMCAAN5AAM9BA",
-    "github_path": "products/techon_kuller_1789102627.jpg",
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/techon_kuller_1789102627.jpg",
     "keywords": [
       "techon",
       "kuller"
     ],
     "created_at": "2026-09-11 04:57:08",
     "images": [
-      "AgACAgIAAxkBAANsaqOJ3g1K6OdRHRv2mlyNajDjp9gAAlUhaxv3GhlJjtr-S7HGYT4BAAMCAAN5AAM9BA"
+      "AgACAgIAAxkBAANsaqOJ3g1K6OdRHRv2mlyNajDjp9gAAlUhaxv3GhlJjtr-S7HGYT4BAAMCAAN5AAM9BA",
+      "AgACAgIAAxkDAAIR2Wqz2jrPOfwxrWpC8U4_yDuY0GwuAAIJH2sbrt6gSZ220gAB40s47gEAAwIAA3kAAz0E"
     ],
     "visible": true,
     "category": "",
-    "description": ""
+    "description": "",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkBAANsaqOJ3g1K6OdRHRv2mlyNajDjp9gAAlUhaxv3GhlJjtr-S7HGYT4BAAMCAAN5AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAIR2Wqz2jrPOfwxrWpC8U4_yDuY0GwuAAIJH2sbrt6gSZ220gAB40s47gEAAwIAA3kAAz0E"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkBAANsaqOJ3g1K6OdRHRv2mlyNajDjp9gAAlUhaxv3GhlJjtr-S7HGYT4BAAMCAAN5AAM9BA",
+      "AgACAgIAAxkDAAIR2Wqz2jrPOfwxrWpC8U4_yDuY0GwuAAIJH2sbrt6gSZ220gAB40s47gEAAwIAA3kAAz0E"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789102791295",
