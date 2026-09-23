@@ -362,39 +362,152 @@ def visible_product(product):
     return product.get("visible", True) is not False
 
 
-def product_images(product):
-    """Return every known image source, including legacy product records."""
+def product_image_sources(product):
+    """Return normalized product image sources.
+
+    New products use Telegram-hosted photo file_ids. Legacy products may still
+    contain GitHub/raw HTTP URLs or document file_ids; those are migrated lazily
+    after a successful send.
+    """
     sources = []
 
-    # Current format.
-    current = product.get("images")
-    if isinstance(current, list):
-        sources.extend(x for x in current if isinstance(x, str) and x.strip())
+    explicit = product.get("image_sources")
+    if isinstance(explicit, list):
+        for item in explicit:
+            if isinstance(item, dict):
+                kind = str(item.get("type", "")).strip().lower()
+                value = str(item.get("value", "")).strip()
+                if kind in {"photo", "document", "url"} and value:
+                    sources.append({"type": kind, "value": value})
+            elif isinstance(item, str) and item.strip():
+                value = item.strip()
+                kind = "url" if value.startswith(("http://", "https://")) else "photo"
+                sources.append({"type": kind, "value": value})
 
-    # Legacy / alternate formats used by earlier bot versions.
-    for key in (
-        "telegram_file_ids",
-        "raw_urls",
-        "image_urls",
-        "photos",
-    ):
+    if sources:
+        return _dedupe_image_sources(sources)
+
+    # Preferred persistent Telegram photo IDs.
+    for key in ("telegram_file_ids", "images"):
         value = product.get(key)
         if isinstance(value, list):
-            sources.extend(x for x in value if isinstance(x, str) and x.strip())
+            for item in value:
+                if not isinstance(item, str) or not item.strip():
+                    continue
+                item = item.strip()
+                kind = "url" if item.startswith(("http://", "https://")) else "photo"
+                sources.append({"type": kind, "value": item})
+
+    for key in ("raw_urls", "photos"):
+        value = product.get(key)
+        if isinstance(value, list):
+            for item in value:
+                if isinstance(item, str) and item.strip():
+                    item = item.strip()
+                    kind = "url" if item.startswith(("http://", "https://")) else "photo"
+                    sources.append({"type": kind, "value": item})
 
     for key in ("telegram_file_id", "raw_url", "image_url"):
         value = product.get(key)
         if isinstance(value, str) and value.strip():
-            sources.append(value)
+            value = value.strip()
+            kind = "url" if value.startswith(("http://", "https://")) else "photo"
+            sources.append({"type": kind, "value": value})
 
-    # Keep order but remove duplicates.
+    return _dedupe_image_sources(sources)
+
+
+def _dedupe_image_sources(sources):
     result = []
     seen = set()
     for source in sources:
-        if source not in seen:
-            seen.add(source)
-            result.append(source)
+        key = (source.get("type"), source.get("value"))
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append({"type": key[0], "value": key[1]})
     return result
+
+
+def product_images(product):
+    """Backward-compatible list of current image source strings."""
+    return [source["value"] for source in product_image_sources(product)]
+
+
+def product_has_legacy_images(product):
+    return any(
+        source.get("type") != "photo"
+        for source in product_image_sources(product)
+    )
+
+
+async def _download_telegram_file_bytes(bot, file_id):
+    tg_file = await bot.get_file(file_id)
+    data = await tg_file.download_as_bytearray()
+    data = bytes(data)
+    if not data:
+        raise ValueError("empty Telegram file response")
+    if len(data) > 20 * 1024 * 1024:
+        raise ValueError("image is larger than 20 MB")
+    return data
+
+
+async def _prepare_product_photo_media(bot, source, index):
+    """Convert a normalized image source into InputMediaPhoto media."""
+    kind = source.get("type")
+    value = source.get("value")
+
+    if kind == "photo":
+        return InputMediaPhoto(media=value)
+
+    if kind == "document":
+        data = await _download_telegram_file_bytes(bot, value)
+        return InputMediaPhoto(
+            media=InputFile(
+                BytesIO(data),
+                filename=f"product_{index}.jpg",
+            )
+        )
+
+    if kind == "url":
+        data = await _download_http_image_bytes(value)
+        return InputMediaPhoto(
+            media=InputFile(
+                BytesIO(data),
+                filename=f"product_{index}.jpg",
+            )
+        )
+
+    raise ValueError(f"unknown image source type: {kind}")
+
+
+async def persist_product_telegram_images(product_id, sources):
+    """Persist Telegram photo file_ids and remove legacy image URLs from the record."""
+    photo_ids = [
+        source["value"]
+        for source in sources
+        if source.get("type") == "photo" and source.get("value")
+    ]
+
+    products = await github_get_products(force_refresh=True)
+    product = next(
+        (p for p in products if str(p.get("id")) == str(product_id)),
+        None,
+    )
+    if not product:
+        return False
+
+    product["image_sources"] = _dedupe_image_sources(sources)
+    product["telegram_file_ids"] = photo_ids
+    product["images"] = photo_ids
+    product["telegram_file_id"] = photo_ids[0] if photo_ids else ""
+    product["image_storage"] = "telegram"
+    # New format intentionally does not retain GitHub image paths.
+    product.pop("raw_url", None)
+    product.pop("raw_urls", None)
+
+    await github_save_products(products)
+    return True
 
 
 async def _download_http_image_bytes(image):
@@ -479,27 +592,16 @@ async def _download_http_image_bytes(image):
 
 
 async def prepare_telegram_photo_source(image, index=1, bot=None, force_upload=False):
-    """Prepare a Telegram photo source. HTTP URLs are converted to bytes."""
+    """Compatibility helper for older call sites.
+
+    New image sending uses product_image_sources/_prepare_product_photo_media.
+    This helper remains for backward compatibility with any legacy code path.
+    """
     if not isinstance(image, str):
         return image
-
     if image.startswith(("http://", "https://")):
         data = await _download_http_image_bytes(image)
-        return data
-
-    if force_upload and bot and image:
-        try:
-            tg_file = await bot.get_file(image)
-            data = bytes(await tg_file.download_as_bytearray())
-            if not data:
-                raise ValueError("empty Telegram file response")
-            if len(data) > 20 * 1024 * 1024:
-                raise ValueError("image is larger than 20 MB")
-            return data
-        except Exception as e:
-            print("PRODUCT TELEGRAM FILE DOWNLOAD XATOSI:", repr(e), image)
-            raise
-
+        return InputFile(BytesIO(data), filename=f"product_{index}.jpg")
     return image
 
 
@@ -1699,9 +1801,9 @@ async def send_product_to_chat(
         ),
     ]])
 
-    images = [img for img in product_images(product) if img]
+    sources = product_image_sources(product)
 
-    if not images:
+    if not sources:
         kwargs = {
             "chat_id": chat_id,
             "text": caption,
@@ -1713,100 +1815,119 @@ async def send_product_to_chat(
         await bot.send_message(**kwargs)
         return
 
-    # Telegram media group 2-10 ta media qabul qiladi.
-    # Bitta rasm bo'lsa send_photo ishlatamiz.
-    if len(images) == 1:
+    resolved_sources = list(sources)
+    migration_needed = False
+    delivered_any_image = False
+
+    # One photo must use send_photo; sendMediaGroup requires 2-10 items.
+    if len(sources) == 1:
+        source = sources[0]
         try:
-            prepared = await prepare_telegram_photo_source(
-                images[0], 1, bot=bot, force_upload=False
+            prepared = await _prepare_product_photo_media(bot, source, 1)
+            sent = await bot.send_photo(
+                chat_id=chat_id,
+                photo=prepared.media,
+                caption=caption,
+                parse_mode="HTML",
+                reply_to_message_id=reply_to_message_id,
             )
-            if isinstance(prepared, (bytes, bytearray)):
-                prepared = InputFile(bytes(prepared), filename=f"product_1.jpg")
-            kwargs = {
-                "chat_id": chat_id,
-                "photo": prepared,
-                "caption": caption,
-                "parse_mode": "HTML",
-            }
-            if reply_to_message_id is not None:
-                kwargs["reply_to_message_id"] = reply_to_message_id
-            await bot.send_photo(**kwargs)
+            delivered_any_image = True
+
+            if source.get("type") != "photo" and sent and sent.photo:
+                resolved_sources[0] = {
+                    "type": "photo",
+                    "value": sent.photo[-1].file_id,
+                }
+                migration_needed = True
+
         except Exception as e:
             print("PRODUCT SINGLE IMAGE XATOSI:", repr(e))
             await send_product_text_fallback(
-                bot, chat_id, product, reply_to_message_id=reply_to_message_id
+                bot,
+                chat_id,
+                product,
+                reply_to_message_id=reply_to_message_id,
             )
-            return
+
     else:
-        # 2-10 ta rasm: Telegram albumi.
-        # Avval Telegram file_id'larni to'g'ridan-to'g'ri ishlatamiz,
-        # GitHub URL'larni esa botning o'zi yuklab InputFile qiladi.
-        # Bu usul ortiqcha Telegram->Telegram download/re-uploadni oldini oladi.
-        for chunk_start in range(0, len(images), 10):
-            chunk = images[chunk_start:chunk_start + 10]
+        # Telegram media groups support 2-10 items. Each product's images are
+        # intentionally kept together as one album (unless it has >10 images).
+        for chunk_start in range(0, len(sources), 10):
+            chunk = sources[chunk_start:chunk_start + 10]
             media = []
 
             try:
-                for local_index, image in enumerate(chunk):
-                    prepared_image = await prepare_telegram_photo_source(
-                        image,
-                        chunk_start + local_index + 1,
-                        bot=bot,
-                        force_upload=False,
+                for local_index, source in enumerate(chunk):
+                    global_index = chunk_start + local_index
+                    prepared = await _prepare_product_photo_media(
+                        bot,
+                        source,
+                        global_index + 1,
                     )
-                    media_kwargs = {"media": prepared_image}
-                    if isinstance(prepared_image, (bytes, bytearray)):
-                        media_kwargs["filename"] = f"product_{chunk_start + local_index + 1}.jpg"
-                    if chunk_start == 0 and local_index == 0:
+                    media_kwargs = {"media": prepared.media}
+                    if global_index == 0:
                         media_kwargs["caption"] = caption
                         media_kwargs["parse_mode"] = "HTML"
                     media.append(InputMediaPhoto(**media_kwargs))
 
-                send_kwargs = {"chat_id": chat_id, "media": media}
+                send_kwargs = {
+                    "chat_id": chat_id,
+                    "media": media,
+                }
                 if reply_to_message_id is not None and chunk_start == 0:
                     send_kwargs["reply_to_message_id"] = reply_to_message_id
 
-                await bot.send_media_group(**send_kwargs)
+                sent_messages = await bot.send_media_group(**send_kwargs)
+                delivered_any_image = True
 
-            except Exception as first_error:
-                print("PRODUCT ALBUM XATOSI (direct):", repr(first_error))
+                for local_index, source in enumerate(chunk):
+                    global_index = chunk_start + local_index
+                    message = sent_messages[local_index] if local_index < len(sent_messages) else None
+                    if source.get("type") != "photo" and message and message.photo:
+                        resolved_sources[global_index] = {
+                            "type": "photo",
+                            "value": message.photo[-1].file_id,
+                        }
+                        migration_needed = True
 
-                # Ikkinchi urinish: hamma media'ni yangi fayl sifatida yuklaymiz.
-                # Bu eski/nomos Telegram file_id yoki aralash media manbalarida yordam beradi.
-                try:
-                    await asyncio.sleep(0.5)
-                    retry_media = []
-                    for local_index, image in enumerate(chunk):
-                        prepared_image = await prepare_telegram_photo_source(
-                            image,
-                            chunk_start + local_index + 1,
-                            bot=bot,
-                            force_upload=True,
-                        )
-                        media_kwargs = {"media": prepared_image}
-                        if chunk_start == 0 and local_index == 0:
-                            media_kwargs["caption"] = caption
-                            media_kwargs["parse_mode"] = "HTML"
-                        retry_media.append(InputMediaPhoto(**media_kwargs))
+            except Exception as e:
+                print("PRODUCT ALBUM XATOSI:", repr(e))
+                if chunk_start == 0:
+                    await send_product_text_fallback(
+                        bot,
+                        chat_id,
+                        product,
+                        reply_to_message_id=reply_to_message_id,
+                    )
+                continue
 
-                    retry_kwargs = {"chat_id": chat_id, "media": retry_media}
-                    if reply_to_message_id is not None and chunk_start == 0:
-                        retry_kwargs["reply_to_message_id"] = reply_to_message_id
-                    await bot.send_media_group(**retry_kwargs)
+    # Legacy GitHub URLs and Telegram document IDs are migrated only after the
+    # image is successfully delivered. This makes future sends use file_id only.
+    if migration_needed and all(
+        source.get("type") == "photo" for source in resolved_sources
+    ):
+        try:
+            await persist_product_telegram_images(
+                product.get("id"),
+                resolved_sources,
+            )
+            product["image_sources"] = resolved_sources
+            product["images"] = [s["value"] for s in resolved_sources]
+            product["telegram_file_ids"] = list(product["images"])
+            product["telegram_file_id"] = (
+                product["images"][0] if product["images"] else ""
+            )
+            product["image_storage"] = "telegram"
+            product.pop("raw_url", None)
+            product.pop("raw_urls", None)
+        except Exception as e:
+            print("PRODUCT IMAGE MIGRATION SAVE XATOSI:", repr(e))
 
-                except Exception as second_error:
-                    print("PRODUCT ALBUM XATOSI (upload retry):", repr(second_error))
-                    if chunk_start == 0:
-                        await send_product_text_fallback(
-                            bot,
-                            chat_id,
-                            product,
-                            reply_to_message_id=reply_to_message_id,
-                        )
-                    continue
+    # Always keep the order flow available, even if an individual image failed.
+    if not delivered_any_image:
+        # send_product_text_fallback above already sent the product details.
+        pass
 
-    # Media groupga inline tugmalar biriktirib bo'lmaydi, shuning uchun
-    # mahsulot tugmalari albomdan keyin bitta alohida xabarda chiqadi.
     await bot.send_message(
         chat_id=chat_id,
         text="🛒 <b>Mahsulot bo'yicha buyurtma yoki operator bilan bog'lanish:</b>",
@@ -1942,9 +2063,7 @@ async def add_product_command(
 
     user = update.message.from_user
 
-    if not user or not is_admin(
-        user.id
-    ):
+    if not user or not is_admin(user.id):
         await update.message.reply_text(
             "❌ Sizda bu komandadan foydalanish huquqi yo'q."
         )
@@ -1954,10 +2073,7 @@ async def add_product_command(
         "mode": "add",
         "step": "photos",
         "pending_images": [],
-        "image_bytes_list": [],
-        # Har bir rasmning manbasi saqlanadi: photo yoki document.
-        # Fayl sifatida yuborilgan rasmlar keyinchalik Telegram file_id emas,
-        # GitHub raw URL orqali yuboriladi.
+        "image_bytes_list": [],  # kept only for backward compatibility with old drafts
         "image_kinds": [],
         "image_extensions": [],
         "admin_id": user.id,
@@ -1967,7 +2083,9 @@ async def add_product_command(
 
     await update.message.reply_text(
         "➕ <b>Yangi mahsulot qo'shish</b>\n\n"
-        "📸 1 yoki bir nechta rasm yuboring.\n\n"
+        "📸 1 yoki bir nechta rasm yuboring.\n"
+        "Oddiy rasm yuborsangiz Telegram <b>file_id</b>si saqlanadi.\n"
+        "File ko'rinishidagi rasm ham qabul qilinadi; u birinchi ko'rsatilganda Telegram foto sifatida bir marta optimallashtiriladi.\n\n"
         "Rasmlar tugagach: /done\n"
         "Bekor qilish: /cancel",
         parse_mode="HTML",
@@ -1983,7 +2101,7 @@ async def save_new_product(
         return
 
     await update.message.reply_text(
-        "⏳ Mahsulot GitHub'ga saqlanmoqda..."
+        "⏳ Mahsulot ma'lumotlari GitHub'ga saqlanmoqda..."
     )
 
     try:
@@ -1992,165 +2110,78 @@ async def save_new_product(
         category = state.get("category", "")
         description = state.get("description", "")
 
-        image_bytes_list = state.get(
-            "image_bytes_list",
-            [],
-        )
+        telegram_ids = list(state.get("pending_images", []))
+        image_kinds = list(state.get("image_kinds", []))
 
-        telegram_ids = state.get(
-            "pending_images",
-            [],
-        )
-
-        # Draft Render restart/deploydan keyin tiklangan bo'lsa,
-        # image_bytes_list bo'sh bo'ladi. Telegram file_id orqali rasmlarni
-        # qayta yuklab olamiz.
-        if len(image_bytes_list) < len(telegram_ids):
-            restored_bytes = []
-            for file_id in telegram_ids:
-                tg_file = await context.bot.get_file(file_id)
-                data = await tg_file.download_as_bytearray()
-                restored_bytes.append(bytes(data))
-            image_bytes_list = restored_bytes
-            state["image_bytes_list"] = restored_bytes
-        image_kinds = state.get(
-            "image_kinds",
-            [],
-        )
-        image_extensions = state.get(
-            "image_extensions",
-            [],
-        )
-
-        raw_urls = []
-
-        for index, image_bytes in enumerate(
-            image_bytes_list,
-            start=1,
-        ):
-            ext = ".jpg"
-            if index - 1 < len(image_extensions):
-                candidate_ext = image_extensions[index - 1]
-                if candidate_ext in (
-                    ".jpg",
-                    ".jpeg",
-                    ".png",
-                    ".webp",
-                ):
-                    ext = candidate_ext
-
-            filename = (
-                f"{slugify(name)}_"
-                f"{int(time.time() * 1000)}_"
-                f"{index}{ext}"
-            )
-
-            github_path = (
-                f"{PRODUCTS_FOLDER}/{filename}"
-            )
-
-            await github_upload_file(
-                github_path,
-                image_bytes,
-                f"Add product image: {name}",
-            )
-
-            raw_urls.append(
-                "https://raw.githubusercontent.com/"
-                f"{GITHUB_OWNER}/{GITHUB_REPO}/"
-                f"{GITHUB_BRANCH}/{github_path}"
-            )
-
-        products = await github_get_products(
-            force_refresh=True
-        )
-
-        # Oddiy Telegram rasmi uchun file_id ishlatiladi.
-        # "File" sifatida yuborilgan rasm uchun esa Telegram file_id ni
-        # send_photo qabul qilmaydi, shuning uchun GitHub raw URL ishlatiladi.
-        product_images_list = []
-        for index, telegram_id in enumerate(telegram_ids):
+        image_sources = []
+        for index, file_id in enumerate(telegram_ids):
             kind = image_kinds[index] if index < len(image_kinds) else "photo"
-            if kind == "document" and index < len(raw_urls):
-                product_images_list.append(raw_urls[index])
-            else:
-                product_images_list.append(telegram_id)
+            image_sources.append({
+                "type": "document" if kind == "document" else "photo",
+                "value": file_id,
+            })
 
-        first_image = product_images_list[0] if product_images_list else ""
+        image_sources = _dedupe_image_sources(image_sources)
+        photo_ids = [
+            source["value"]
+            for source in image_sources
+            if source["type"] == "photo"
+        ]
+
+        products = await github_get_products(force_refresh=True)
 
         product = {
-            "id": str(
-                int(time.time() * 1000)
-            ),
+            "id": str(int(time.time() * 1000)),
             "name": name,
             "price": price,
             "category": category,
             "description": description,
-            "telegram_file_id": first_image,
-            "images": product_images_list,
-            "raw_url": raw_urls[0] if raw_urls else "",
-            "raw_urls": raw_urls,
+            "telegram_file_id": photo_ids[0] if photo_ids else "",
+            "telegram_file_ids": photo_ids,
+            "images": photo_ids,
+            "image_sources": image_sources,
+            "image_storage": "telegram",
             "keywords": [],
             "visible": True,
-            "created_at": time.strftime(
-                "%Y-%m-%d %H:%M:%S"
-            ),
+            "created_at": time.strftime("%Y-%m-%d %H:%M:%S"),
         }
 
         refresh_product_keywords(product)
-
         products.append(product)
+        await github_save_products(products)
 
-        await github_save_products(
-            products
-        )
-
-        owner_id = (
-            state.get("admin_id")
-            or update.message.from_user.id
-        )
+        owner_id = state.get("admin_id") or update.message.from_user.id
         await clear_admin_draft(owner_id)
+        stats["products_added"] += 1
 
-        stats[
-            "products_added"
-        ] += 1
-
-        month_3, month_6, month_12 = calculate_monthly(
-            price
-        )
+        month_3, month_6, month_12 = calculate_monthly(price)
 
         await update.message.reply_text(
             "✅ <b>Mahsulot muvaffaqiyatli saqlandi!</b>\n\n"
             f"🛍 <b>{name}</b>\n"
-            f"🗂 Kategoriya: "
-            f"<b>{category or 'Kategoriyasiz'}</b>\n"
+            f"🗂 Kategoriya: <b>{category or 'Kategoriyasiz'}</b>\n"
             f"💵 Naqd: <b>{format_money(price)}</b>\n\n"
             f"📅 3 oy — <b>{format_money(month_3)}/oy</b>\n"
             f"📅 6 oy — <b>{format_money(month_6)}/oy</b>\n"
             f"📅 12 oy — <b>{format_money(month_12)}/oy</b>\n\n"
-            f"📸 Rasmlar: <b>{len(telegram_ids)} ta</b>\n"
-            "📦 Ma'lumotlar GitHub'ga saqlandi.",
+            f"📸 Rasmlar: <b>{len(image_sources)} ta</b>\n"
+            "☁️ Rasmlar Telegram serverida saqlandi.\n"
+            "📦 GitHub'da mahsulot ma'lumotlari saqlandi.",
             parse_mode="HTML",
         )
 
     except Exception as e:
-        print(
-            "ADD PRODUCT XATOSI:",
-            repr(e)
-        )
-
+        print("ADD PRODUCT XATOSI:", repr(e))
         try:
             await persist_admin_draft(
-                state.get("admin_id")
-                or update.message.from_user.id
+                state.get("admin_id") or update.message.from_user.id
             )
         except Exception as persist_error:
             print("ADMIN DRAFT PERSIST XATOSI:", repr(persist_error))
 
         await update.message.reply_text(
             "❌ Mahsulotni saqlashda xatolik yuz berdi.\n"
-            "✅ Mahsulot qo'shish jarayoni saqlab qolindi. "
-            "Muammoni tuzatgach qayta davom etishingiz mumkin."
+            "✅ Mahsulot qo'shish jarayoni saqlab qolindi."
         )
 
 
@@ -2239,18 +2270,11 @@ async def handle_admin_state(
             document = update.message.document
             mime_type = (document.mime_type or "").lower()
             file_name = (document.file_name or "").lower()
-
-            allowed_exts = (
-                ".jpg",
-                ".jpeg",
-                ".png",
-                ".webp",
-            )
+            allowed_exts = (".jpg", ".jpeg", ".png", ".webp")
             guessed_ext = next(
                 (ext for ext in allowed_exts if file_name.endswith(ext)),
                 ".jpg",
             )
-
             if mime_type.startswith("image/") or file_name.endswith(allowed_exts):
                 document_file_id = document.file_id
                 document_ext = guessed_ext
@@ -2265,64 +2289,18 @@ async def handle_admin_state(
         file_id = photo_file_id or document_file_id
         kind = "photo" if photo_file_id else "document"
 
-        try:
-            tg_file = await context.bot.get_file(file_id)
+        state["pending_images"].append(file_id)
+        state.setdefault("image_kinds", []).append(kind)
+        state.setdefault("image_extensions", []).append(document_ext if kind == "document" else ".jpg")
 
-            image_bytes = (
-                await tg_file.download_as_bytearray()
-            )
+        await persist_admin_draft(user.id)
 
-            state[
-                "pending_images"
-            ].append(
-                file_id
-            )
-
-            state[
-                "image_bytes_list"
-            ].append(
-                bytes(image_bytes)
-            )
-
-            state[
-                "image_kinds"
-            ].append(
-                kind
-            )
-
-            state[
-                "image_extensions"
-            ].append(
-                document_ext if kind == "document" else ".jpg"
-            )
-
-            count = len(
-                state["pending_images"]
-            )
-
-            source_text = (
-                "oddiy rasm"
-                if kind == "photo"
-                else "fayl sifatidagi rasm"
-            )
-
-            await persist_admin_draft(user.id)
-
-            await update.message.reply_text(
-                f"✅ {count}-rasm qabul qilindi ({source_text}).\n"
-                "Yana rasm yuboring yoki /done bosing."
-            )
-
-        except Exception as e:
-            print(
-                "ADMIN IMAGE XATOSI:",
-                repr(e)
-            )
-
-            await update.message.reply_text(
-                "❌ Rasmni qabul qilishda xatolik yuz berdi."
-            )
-
+        count = len(state["pending_images"])
+        source_text = "oddiy rasm" if kind == "photo" else "fayl sifatidagi rasm"
+        await update.message.reply_text(
+            f"✅ {count}-rasm qabul qilindi ({source_text}).\n"
+            "Yana rasm yuboring yoki /done bosing."
+        )
         return True
 
     if step == "name":
@@ -2446,13 +2424,9 @@ async def save_edited_product_images(
     if not user or not is_admin(user.id):
         return
 
-    image_bytes_list = state.get("edit_image_bytes_list", [])
-    image_extensions = state.get("edit_image_extensions", [])
-
-    if not image_bytes_list:
-        await update.message.reply_text(
-            "📸 Kamida 1 ta yangi rasm yuboring."
-        )
+    image_sources = list(state.get("edit_image_sources", []))
+    if not image_sources:
+        await update.message.reply_text("📸 Kamida 1 ta yangi rasm yuboring.")
         return
 
     product_id = state.get("product_id")
@@ -2468,58 +2442,40 @@ async def save_edited_product_images(
         return
 
     name = str(product.get("name", "product"))
-    await update.message.reply_text("⏳ Yangi rasmlar GitHub'ga yuklanmoqda...")
-
-    raw_urls = []
-    timestamp = int(time.time() * 1000)
 
     try:
-        for index, image_bytes in enumerate(image_bytes_list, start=1):
-            ext = ".jpg"
-            if index - 1 < len(image_extensions):
-                candidate = image_extensions[index - 1]
-                if candidate in (".jpg", ".jpeg", ".png", ".webp"):
-                    ext = candidate
+        normalized = _dedupe_image_sources(image_sources)
+        photo_ids = [
+            source["value"]
+            for source in normalized
+            if source["type"] == "photo"
+        ]
 
-            filename = f"{slugify(name)}_edit_{timestamp}_{index}{ext}"
-            github_path = f"{PRODUCTS_FOLDER}/{filename}"
-
-            await github_upload_file(
-                github_path,
-                image_bytes,
-                f"Update product images: {name}",
-            )
-
-            raw_urls.append(
-                "https://raw.githubusercontent.com/"
-                f"{GITHUB_OWNER}/{GITHUB_REPO}/"
-                f"{GITHUB_BRANCH}/{github_path}"
-            )
-
-        if not raw_urls:
-            raise ValueError("new image URLs were not created")
-
-        product["images"] = raw_urls
-        product["raw_urls"] = raw_urls
-        product["raw_url"] = raw_urls[0]
-        product["telegram_file_id"] = raw_urls[0]
+        product["image_sources"] = normalized
+        product["telegram_file_ids"] = photo_ids
+        product["images"] = photo_ids
+        product["telegram_file_id"] = photo_ids[0] if photo_ids else ""
+        product["image_storage"] = "telegram"
+        product.pop("raw_url", None)
+        product.pop("raw_urls", None)
 
         await github_save_products(products)
         stats["products_edited"] += 1
         admin_states.pop(user.id, None)
 
         await update.message.reply_text(
-            "✅ <b>Mahsulot rasmlari muvaffaqiyatli o\'zgartirildi!</b>\n\n"
+            "✅ <b>Mahsulot rasmlari muvaffaqiyatli o'zgartirildi!</b>\n\n"
             f"🛍 <b>{escape(name)}</b>\n"
-            f"🖼 Yangi rasmlar: <b>{len(raw_urls)} ta</b>\n"
-            "📦 Eski rasmlar o\'rniga yangi rasmlar saqlandi.",
+            f"🖼 Yangi rasmlar: <b>{len(normalized)} ta</b>\n"
+            "☁️ Rasmlar Telegram serverida saqlandi.\n"
+            "📦 GitHub'da faqat mahsulot ma'lumotlari saqlandi.",
             parse_mode="HTML",
         )
     except Exception as e:
         print("EDIT PRODUCT IMAGES XATOSI:", repr(e))
         await update.message.reply_text(
             "❌ Yangi rasmlarni saqlashda xatolik yuz berdi.\n"
-            "Eski rasmlar o\'zgartirilmagan."
+            "Eski rasmlar o'zgartirilmagan."
         )
 
 
@@ -3384,6 +3340,30 @@ async def callback_handler(
 
     data = query.data or ""
 
+    if data.startswith("migrateimg:"):
+        if not is_owner(query.from_user.id):
+            await query.answer("❌ Faqat bot egasi.", show_alert=True)
+            return
+        product_id = data.split(":", 1)[1]
+        products = await github_get_products(force_refresh=True)
+        product = next((p for p in products if str(p.get("id")) == str(product_id)), None)
+        if not product:
+            await query.answer("❌ Mahsulot topilmadi.", show_alert=True)
+            return
+        await query.answer("⏳ Rasm ko'chirilmoqda...")
+        try:
+            ok, message = await migrate_product_images_to_telegram(
+                product, context.bot, query.message.chat_id
+            )
+            await query.message.reply_text(("✅ " if ok else "ℹ️ ") + message)
+        except Exception as e:
+            print("MIGRATE IMAGE XATOSI:", repr(e))
+            await query.message.reply_text(
+                "❌ Rasm ko'chirishda xatolik yuz berdi.\n"
+                "Render bandwidthini tejash uchun keyingi urinishni keyin qilishingiz mumkin."
+            )
+        return
+
     # -------- admin orders UI --------
     if data in {"ordnoop"} or data.startswith(("ordpage:", "ordview:", "ordback:")):
         if not is_admin(query.from_user.id):
@@ -3675,8 +3655,7 @@ async def callback_handler(
                 "step": "edit_images",
                 "product_id": product_id,
                 "field": field,
-                "edit_image_bytes_list": [],
-                "edit_image_extensions": [],
+                "edit_image_sources": [],
             }
 
             await query.message.reply_text(
@@ -3948,7 +3927,6 @@ async def handle_edit_state(
     if step == "edit_images":
         photo_file_id = None
         document_file_id = None
-        document_ext = ".jpg"
 
         if update.message.photo:
             photo_file_id = update.message.photo[-1].file_id
@@ -3957,13 +3935,8 @@ async def handle_edit_state(
             mime_type = (document.mime_type or "").lower()
             file_name = (document.file_name or "").lower()
             allowed_exts = (".jpg", ".jpeg", ".png", ".webp")
-            guessed_ext = next(
-                (ext for ext in allowed_exts if file_name.endswith(ext)),
-                ".jpg",
-            )
             if mime_type.startswith("image/") or file_name.endswith(allowed_exts):
                 document_file_id = document.file_id
-                document_ext = guessed_ext
 
         if not photo_file_id and not document_file_id:
             await update.message.reply_text(
@@ -3973,24 +3946,18 @@ async def handle_edit_state(
             return True
 
         file_id = photo_file_id or document_file_id
-        try:
-            tg_file = await context.bot.get_file(file_id)
-            image_bytes = await tg_file.download_as_bytearray()
-            state.setdefault("edit_image_bytes_list", []).append(bytes(image_bytes))
-            state.setdefault("edit_image_extensions", []).append(
-                ".jpg" if photo_file_id else document_ext
-            )
-            count = len(state["edit_image_bytes_list"])
-            source_text = "oddiy rasm" if photo_file_id else "fayl sifatidagi rasm"
-            await update.message.reply_text(
-                f"✅ {count}-rasm qabul qilindi ({source_text}).\n"
-                "Yana rasm yuboring yoki /done bosing."
-            )
-        except Exception as e:
-            print("EDIT IMAGE RECEIVE XATOSI:", repr(e))
-            await update.message.reply_text(
-                "❌ Rasmni qabul qilishda xatolik yuz berdi. Yana bir bor yuboring."
-            )
+        source = {
+            "type": "photo" if photo_file_id else "document",
+            "value": file_id,
+        }
+        state.setdefault("edit_image_sources", []).append(source)
+
+        count = len(state["edit_image_sources"])
+        source_text = "oddiy rasm" if photo_file_id else "fayl sifatidagi rasm"
+        await update.message.reply_text(
+            f"✅ {count}-rasm qabul qilindi ({source_text}).\n"
+            "Yana rasm yuboring yoki /done bosing."
+        )
         return True
 
     if step not in {
@@ -5066,6 +5033,125 @@ Foydalanuvchi:
 
 
 # ============================================================
+# IMAGE STORAGE MIGRATION (OWNER CONTROLLED)
+# ============================================================
+
+async def migrate_product_images_to_telegram(product, bot, target_chat_id):
+    """Migrate one legacy product's URLs/documents to Telegram photo file_ids."""
+    sources = product_image_sources(product)
+    if not sources or not product_has_legacy_images(product):
+        return False, "Bu mahsulot allaqachon Telegram rasmlaridan foydalanmoqda."
+
+    resolved = list(sources)
+    legacy_indexes = [
+        i for i, source in enumerate(sources)
+        if source.get("type") != "photo"
+    ]
+
+    temp_messages = []
+    try:
+        for chunk_start in range(0, len(legacy_indexes), 10):
+            index_chunk = legacy_indexes[chunk_start:chunk_start + 10]
+            if len(index_chunk) == 1:
+                source_index = index_chunk[0]
+                prepared = await _prepare_product_photo_media(
+                    bot,
+                    sources[source_index],
+                    source_index + 1,
+                )
+                sent = await bot.send_photo(
+                    chat_id=target_chat_id,
+                    photo=prepared.media,
+                )
+                temp_messages.append(sent)
+                if not sent or not sent.photo:
+                    raise ValueError("Telegram photo file_id olinmadi")
+                resolved[source_index] = {
+                    "type": "photo",
+                    "value": sent.photo[-1].file_id,
+                }
+                continue
+
+            media = []
+            for source_index in index_chunk:
+                prepared = await _prepare_product_photo_media(
+                    bot,
+                    sources[source_index],
+                    source_index + 1,
+                )
+                media.append(InputMediaPhoto(media=prepared.media))
+
+            sent = await bot.send_media_group(
+                chat_id=target_chat_id,
+                media=media,
+            )
+            temp_messages.extend(sent)
+
+            for local_index, source_index in enumerate(index_chunk):
+                message = sent[local_index] if local_index < len(sent) else None
+                if not message or not message.photo:
+                    raise ValueError("Telegram photo file_id olinmadi")
+                resolved[source_index] = {
+                    "type": "photo",
+                    "value": message.photo[-1].file_id,
+                }
+
+        await persist_product_telegram_images(
+            product.get("id"),
+            resolved,
+        )
+        return True, f"{len(legacy_indexes)} ta rasm Telegram saqlashiga ko'chirildi."
+    finally:
+        for message in temp_messages:
+            try:
+                await bot.delete_message(
+                    chat_id=target_chat_id,
+                    message_id=message.message_id,
+                )
+            except Exception:
+                pass
+
+
+async def migrate_images_command(update, context):
+    if not update.message:
+        return
+    user = update.message.from_user
+    if not user or not is_owner(user.id):
+        await update.message.reply_text(
+            "❌ Rasmlarni ko'chirishni faqat bot egasi amalga oshira oladi."
+        )
+        return
+
+    products = await github_get_products(force_refresh=True)
+    legacy = [p for p in products if product_has_legacy_images(p)]
+    if not legacy:
+        await update.message.reply_text(
+            "✅ Barcha mahsulot rasmlari allaqachon Telegram serverida saqlangan."
+        )
+        return
+
+    keyboard = []
+    for product in legacy[:30]:
+        keyboard.append([
+            InlineKeyboardButton(
+                f"♻️ {product.get('name', 'Nomsiz')}"[:55],
+                callback_data=f"migrateimg:{product.get('id', '')}",
+            )
+        ])
+
+    await update.message.reply_text(
+        "♻️ <b>Rasmlarni Telegram saqlashiga ko'chirish</b>\n\n"
+        f"📦 Eski formatdagi mahsulotlar: <b>{len(legacy)} ta</b>\n\n"
+        "⚠️ Ko'chirish bir mahsulot bo'yicha amalga oshiriladi.\n"
+        "Bu jarayon legacy rasmlarni Render orqali bir marta yuklab, Telegramga qayta yuklaydi.\n"
+        "Shuning uchun bandwidthni nazorat qilish uchun 'hammasini bir yo'la' qilinmaydi.\n\n"
+        "Kerakli mahsulotni tanlang:",
+        parse_mode="HTML",
+        reply_markup=InlineKeyboardMarkup(keyboard),
+    )
+
+
+# ============================================================
 # COMMAND MENUS
 # ============================================================
 
@@ -5090,6 +5176,7 @@ async def get_admin_commands():
         BotCommand("addadmin", "👑 Admin tayinlash (faqat egasi)"),
         BotCommand("removeadmin", "🗑 Adminni olib tashlash (faqat egasi)"),
         BotCommand("admins", "👑 Adminlar ro'yxati (faqat egasi)"),
+        BotCommand("migrateimages", "♻️ Eski rasmlarni Telegramga ko'chirish"),
     ]
 
 
@@ -5271,6 +5358,13 @@ telegram_app.add_handler(
     CommandHandler(
         "admins",
         admins_command
+    )
+)
+
+telegram_app.add_handler(
+    CommandHandler(
+        "migrateimages",
+        migrate_images_command
     )
 )
 
