@@ -861,9 +861,14 @@
         "role": "user",
         "text": "6 stol stulla neci pyl",
         "time": 1789974581
+      },
+      {
+        "role": "user",
+        "text": "Neci pul",
+        "time": 1790172406
       }
     ],
-    "last_activity": 1789974581
+    "last_activity": 1790172406
   },
   "-1001865736985:6743946389": {
     "chat_id": -1001865736985,
