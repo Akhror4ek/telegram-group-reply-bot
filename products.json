@@ -2362,19 +2362,12 @@
     "price": 13500000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Yog‘och va oq rangli zamonaviy yotoqxona to‘plami\n\nYumshoq oq boshqism, yonida yorug‘lik chiroqlari o‘rnatilgan. Katta shkaf va LED oynali tualet stoli bilan. Matrasi ortopedik, 7 yil kafolati bor. Yengil va zamonaviy ko‘rinish.",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071370475_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarOAKcQPFg9tsn1BU2FR2zUkUxEAAqIhaxv4h5lJmc1yZzhGSNUBAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071370475_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071373424_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071376382_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071378863_4.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071370475_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071370475_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071373424_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071376382_3.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_2_oynalik_tremo_1790071378863_4.jpg"
+      "AgACAgIAAxUHarOAKcQPFg9tsn1BU2FR2zUkUxEAAqIhaxv4h5lJmc1yZzhGSNUBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAKex0HE_Q0-Tu9PGtH-FwzJQAAqQhaxv4h5lJqLR59xvK5bQBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAKWN4PWOyKtvPRkEVzosxuDYAAqUhaxv4h5lJivGxy7-hTGsBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAKe1ItHJ3KVKUv4VKsWd2z5wAAqMhaxv4h5lJlnUY6SXFCmIBAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -2411,7 +2404,32 @@
       "korinish"
     ],
     "visible": true,
-    "created_at": "2026-09-22 10:03:02"
+    "created_at": "2026-09-22 10:03:02",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAKcQPFg9tsn1BU2FR2zUkUxEAAqIhaxv4h5lJmc1yZzhGSNUBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAKex0HE_Q0-Tu9PGtH-FwzJQAAqQhaxv4h5lJqLR59xvK5bQBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAKWN4PWOyKtvPRkEVzosxuDYAAqUhaxv4h5lJivGxy7-hTGsBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAKe1ItHJ3KVKUv4VKsWd2z5wAAqMhaxv4h5lJlnUY6SXFCmIBAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarOAKcQPFg9tsn1BU2FR2zUkUxEAAqIhaxv4h5lJmc1yZzhGSNUBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAKex0HE_Q0-Tu9PGtH-FwzJQAAqQhaxv4h5lJqLR59xvK5bQBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAKWN4PWOyKtvPRkEVzosxuDYAAqUhaxv4h5lJivGxy7-hTGsBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAKe1ItHJ3KVKUv4VKsWd2z5wAAqMhaxv4h5lJlnUY6SXFCmIBAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1790071964515",
