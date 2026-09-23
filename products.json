@@ -299,15 +299,10 @@
     "price": 1900000,
     "category": "1 kishilik divanlar",
     "description": "Ko‘k-krem rangli hashamatli divan-krovat\n\nKapitoneli boshqismi, kristalli tugmalar va yumshoq matosi bilan ajralib turadi. Ichida keng saqlash joyi mavjud. Uyingizga zamonaviy va qulay ko‘rinish bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652782435_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAISAmqz3ca9fay93Fk2MOPQgwrb1uEUAAIeH2sbrt6gSXEOd-YgL8NmAQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652782435_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652785172_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652782435_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652782435_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_mexanizmli_divan_1789652785172_2.jpg"
+      "AgACAgIAAxkDAAISAmqz3ca9fay93Fk2MOPQgwrb1uEUAAIeH2sbrt6gSXEOd-YgL8NmAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISA2qz3chQph7-WVP5aV6Ii-_hmNDzAAIfH2sbrt6gSSCO4h7xCRmQAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -340,7 +335,22 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-17 13:46:27"
+    "created_at": "2026-09-17 13:46:27",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISAmqz3ca9fay93Fk2MOPQgwrb1uEUAAIeH2sbrt6gSXEOd-YgL8NmAQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISA2qz3chQph7-WVP5aV6Ii-_hmNDzAAIfH2sbrt6gSSCO4h7xCRmQAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAISAmqz3ca9fay93Fk2MOPQgwrb1uEUAAIeH2sbrt6gSXEOd-YgL8NmAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISA2qz3chQph7-WVP5aV6Ii-_hmNDzAAIfH2sbrt6gSSCO4h7xCRmQAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789653645325",
