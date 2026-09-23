@@ -1063,13 +1063,9 @@
     "price": 2500000,
     "category": "1 kishilik divanlar",
     "description": "Kul rangli zamonaviy divan-krovat\nYog‘och bezakli boshqismi va yumshoq teksturali matosi bilan ajralib turadi. Qulay va chiroyli. Uyingizga nafislik bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_panda_vodiy_kulrang_1789810587671_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAISzGqz5aO9MQo9FtVfiF5-TiCVTnOJAAJcH2sbrt6gSTjvkRyNCg4iAQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_panda_vodiy_kulrang_1789810587671_1.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_panda_vodiy_kulrang_1789810587671_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_panda_vodiy_kulrang_1789810587671_1.jpg"
+      "AgACAgIAAxkDAAISzGqz5aO9MQo9FtVfiF5-TiCVTnOJAAJcH2sbrt6gSTjvkRyNCg4iAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -1098,7 +1094,17 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 09:36:30"
+    "created_at": "2026-09-19 09:36:30",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISzGqz5aO9MQo9FtVfiF5-TiCVTnOJAAJcH2sbrt6gSTjvkRyNCg4iAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAISzGqz5aO9MQo9FtVfiF5-TiCVTnOJAAJcH2sbrt6gSTjvkRyNCg4iAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789810718781",
