@@ -1145,17 +1145,11 @@
     "price": 10800000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Oq-oltin rangli klassik yotoq mebeli to‘plami\n\nHashamatli o‘yma bezaklari va nafis dizayni bilan ajralib turadi. To‘liq komplekt. Matrasi ortopedik, 7 yil kafolati bor. Uyingizga solobat bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_oq_rang_1789816266382_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarN_5GevQhExlasAAbmAsxstuGH-AAJsIWsb-IeZSRL9Xfc0KPpuAQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_oq_rang_1789816266382_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_oq_rang_1789816269685_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_oq_rang_1789816272502_3.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_oq_rang_1789816266382_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_oq_rang_1789816266382_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_oq_rang_1789816269685_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_classic_oq_rang_1789816272502_3.jpg"
+      "AgACAgIAAxUHarN_5GevQhExlasAAbmAsxstuGH-AAJsIWsb-IeZSRL9Xfc0KPpuAQADAgADdwADPQQ",
+      "AgACAgIAAxUHarN_5B20EYD175Vv5aqyglRPVXIAAm0haxv4h5lJRxFq3h4vzrUBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_5C-6s14kkNAkkks2qHANnQgAAm4haxv4h5lJCUgmkC63IvwBAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -1191,7 +1185,27 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 11:11:15"
+    "created_at": "2026-09-19 11:11:15",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_5GevQhExlasAAbmAsxstuGH-AAJsIWsb-IeZSRL9Xfc0KPpuAQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_5B20EYD175Vv5aqyglRPVXIAAm0haxv4h5lJRxFq3h4vzrUBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_5C-6s14kkNAkkks2qHANnQgAAm4haxv4h5lJCUgmkC63IvwBAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarN_5GevQhExlasAAbmAsxstuGH-AAJsIWsb-IeZSRL9Xfc0KPpuAQADAgADdwADPQQ",
+      "AgACAgIAAxUHarN_5B20EYD175Vv5aqyglRPVXIAAm0haxv4h5lJRxFq3h4vzrUBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_5C-6s14kkNAkkks2qHANnQgAAm4haxv4h5lJCUgmkC63IvwBAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789816630210",
