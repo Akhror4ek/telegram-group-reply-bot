@@ -178,9 +178,19 @@
         "role": "user",
         "text": "Yotoqxona divanlar to'plami",
         "time": 1790070079
+      },
+      {
+        "role": "user",
+        "text": "6156401666",
+        "time": 1790146142
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchiman. Sizga qanday yordam bera olaman?",
+        "time": 1790146144
       }
     ],
-    "last_activity": 1790070079
+    "last_activity": 1790146144
   },
   "605965757:605965757": {
     "chat_id": 605965757,
