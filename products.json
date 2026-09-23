@@ -1551,15 +1551,10 @@
     "price": 4500000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819173571_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarN_-w3LAxlruQI4P5TDg9txQ58AAn8haxv4h5lJ10eEXU4qL10BAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819173571_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819176160_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819173571_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819173571_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_faqat_divan_va_tremo_1789819176160_2.jpg"
+      "AgACAgIAAxUHarN_-w3LAxlruQI4P5TDg9txQ58AAn8haxv4h5lJ10eEXU4qL10BAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_-5DQTaHqZQJZmpyqVtQQ7MQAAn4haxv4h5lJ9m7_d-BwrG0BAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -1571,7 +1566,22 @@
       "tremo"
     ],
     "visible": true,
-    "created_at": "2026-09-19 11:59:39"
+    "created_at": "2026-09-19 11:59:39",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_-w3LAxlruQI4P5TDg9txQ58AAn8haxv4h5lJ10eEXU4qL10BAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarN_-5DQTaHqZQJZmpyqVtQQ7MQAAn4haxv4h5lJ9m7_d-BwrG0BAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarN_-w3LAxlruQI4P5TDg9txQ58AAn8haxv4h5lJ10eEXU4qL10BAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarN_-5DQTaHqZQJZmpyqVtQQ7MQAAn4haxv4h5lJ9m7_d-BwrG0BAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789819656860",
