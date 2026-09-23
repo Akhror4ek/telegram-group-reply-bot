@@ -3236,15 +3236,137 @@ async def sales_callback_handler(update,context):
             fake=type("U",(),{"message":query.message})(); await finalize_order_from_state(fake,context,state)
 
 
-async def orders_command(update,context):
-    if not update.message: return
-    user=update.message.from_user
-    if not user or not is_admin(user.id): await update.message.reply_text("❌ Sizda ruxsat yo'q."); return
-    orders=await github_get_orders()
-    if not orders: await update.message.reply_text("🛒 Hozircha buyurtmalar yo'q."); return
-    lines=["🛒 <b>SO'NGGI BUYURTMALAR</b>\\n"]
-    for o in orders[-20:][::-1]: lines.append(f"🔖 <b>{o.get('id')}</b> — {o.get('status')}\\n👤 {o.get('name')} | 📞 {o.get('phone')}\\n📦 {o.get('product_name')} | 📍 {o.get('location')}\\n")
-    await update.message.reply_text("\\n".join(lines),parse_mode="HTML")
+def format_order_date(timestamp):
+    try:
+        from datetime import datetime, timezone, timedelta
+        tz = timezone(timedelta(hours=5))
+        return datetime.fromtimestamp(int(timestamp), tz=tz).strftime("%d.%m.%Y %H:%M")
+    except Exception:
+        return "—"
+
+
+def order_status_label(status):
+    status = str(status or "new").strip().lower()
+    return {
+        "new": "🆕 Yangi",
+        "processing": "⚙️ Jarayonda",
+        "confirmed": "✅ Tasdiqlangan",
+        "completed": "📦 Yakunlangan",
+        "cancelled": "❌ Bekor qilingan",
+    }.get(status, f"📌 {status}")
+
+
+def build_orders_list_markup(orders, page=0, per_page=8):
+    total = len(orders)
+    total_pages = max(1, (total + per_page - 1) // per_page)
+    page = max(0, min(page, total_pages - 1))
+    start = page * per_page
+    items = list(reversed(orders))[start:start + per_page]
+
+    keyboard = []
+    for o in items:
+        oid = str(o.get("id", "NOMA'LUM"))
+        product = str(o.get("product_name", "Mahsulot"))
+        customer = str(o.get("name", "Mijoz"))
+        label_product = product[:26] + ("…" if len(product) > 26 else "")
+        label_customer = customer[:18] + ("…" if len(customer) > 18 else "")
+        keyboard.append([
+            InlineKeyboardButton(
+                f"🔖 {oid} | 👤 {label_customer}",
+                callback_data=f"ordview:{oid}"
+            )
+        ])
+
+    nav = []
+    if page > 0:
+        nav.append(InlineKeyboardButton("⬅️ Oldingi", callback_data=f"ordpage:{page-1}"))
+    nav.append(InlineKeyboardButton(f"📄 {page+1}/{total_pages}", callback_data="ordnoop"))
+    if page < total_pages - 1:
+        nav.append(InlineKeyboardButton("Keyingi ➡️", callback_data=f"ordpage:{page+1}"))
+    keyboard.append(nav)
+    return InlineKeyboardMarkup(keyboard)
+
+
+def build_orders_list_text(orders, page=0, per_page=8):
+    total = len(orders)
+    counts = {}
+    for o in orders:
+        key = str(o.get("status", "new")).lower()
+        counts[key] = counts.get(key, 0) + 1
+
+    total_pages = max(1, (total + per_page - 1) // per_page)
+    page = max(0, min(page, total_pages - 1))
+    items = list(reversed(orders))[page * per_page:(page + 1) * per_page]
+
+    text = (
+        "🛒 <b>AKSO BUYURTMALARI</b>\n\n"
+        f"📦 Jami: <b>{total}</b> ta\n"
+        f"🆕 Yangi: <b>{counts.get('new', 0)}</b>  |  "
+        f"⚙️ Jarayonda: <b>{counts.get('processing', 0)}</b>  |  "
+        f"✅ Yakunlangan: <b>{counts.get('completed', 0)}</b>\n\n"
+        "👇 Buyurtmani batafsil ko‘rish uchun tugmani bosing.\n"
+    )
+
+    for idx, o in enumerate(items, 1):
+        text += (
+            f"\n<b>{idx}.</b> 🔖 <b>{escape(str(o.get('id', '—')))}</b> "
+            f"— {order_status_label(o.get('status'))}\n"
+            f"   👤 {escape(str(o.get('name', '—')))}\n"
+            f"   📦 {escape(str(o.get('product_name', '—')))}\n"
+            f"   🕐 {format_order_date(o.get('created_at'))}"
+        )
+
+    return text
+
+
+async def send_orders_page(target, orders, page=0):
+    text = build_orders_list_text(orders, page=page)
+    markup = build_orders_list_markup(orders, page=page)
+    if hasattr(target, "edit_message_text"):
+        await target.edit_message_text(text, parse_mode="HTML", reply_markup=markup)
+    else:
+        await target.reply_text(text, parse_mode="HTML", reply_markup=markup)
+
+
+async def orders_command(update, context):
+    if not update.message:
+        return
+    user = update.message.from_user
+    if not user or not is_admin(user.id):
+        await update.message.reply_text("❌ Sizda ruxsat yo‘q.")
+        return
+
+    orders = await github_get_orders()
+    if not orders:
+        await update.message.reply_text(
+            "🛒 <b>Buyurtmalar</b>\n\nHozircha buyurtmalar yo‘q.",
+            parse_mode="HTML"
+        )
+        return
+
+    await send_orders_page(update.message, orders, page=0)
+
+
+async def show_order_detail(query, order):
+    text = (
+        "🔖 <b>BUYURTMA MA’LUMOTLARI</b>\n\n"
+        f"🆔 Buyurtma: <b>{escape(str(order.get('id', '—')))}</b>\n"
+        f"📌 Holati: {order_status_label(order.get('status'))}\n"
+        f"🕐 Sana: <b>{format_order_date(order.get('created_at'))}</b>\n\n"
+        f"👤 <b>Mijoz:</b> {escape(str(order.get('name', '—')))}\n"
+        f"📞 <b>Telefon:</b> {escape(str(order.get('phone', '—')))}\n"
+        f"📍 <b>Manzil:</b> {escape(str(order.get('location', '—')))}\n\n"
+        f"📦 <b>Mahsulot:</b> {escape(str(order.get('product_name', '—')))}\n"
+        f"💳 <b>To‘lov:</b> {escape(str(order.get('payment', '—')))}"
+    )
+    if order.get("installment_months"):
+        text += f"\n📅 <b>Muddat:</b> {escape(str(order.get('installment_months')))} oy"
+    text += f"\n🆔 <b>Chat ID:</b> <code>{escape(str(order.get('chat_id', '—')))}</code>"
+
+    markup = InlineKeyboardMarkup([[
+        InlineKeyboardButton("⬅️ Buyurtmalar ro‘yxati", callback_data="ordback:0")
+    ]])
+    await query.edit_message_text(text, parse_mode="HTML", reply_markup=markup)
 
 
 # ============================================================
@@ -3261,6 +3383,39 @@ async def callback_handler(
         return
 
     data = query.data or ""
+
+    # -------- admin orders UI --------
+    if data in {"ordnoop"} or data.startswith(("ordpage:", "ordview:", "ordback:")):
+        if not is_admin(query.from_user.id):
+            await query.answer("❌ Sizda ruxsat yo‘q.", show_alert=True)
+            return
+
+        orders = await github_get_orders()
+        if data == "ordnoop":
+            await query.answer()
+            return
+
+        if data.startswith("ordpage:") or data.startswith("ordback:"):
+            try:
+                page = int(data.split(":", 1)[1])
+            except ValueError:
+                page = 0
+            if not orders:
+                await query.edit_message_text("🛒 Hozircha buyurtmalar yo‘q.")
+                await query.answer()
+                return
+            await query.answer()
+            await send_orders_page(query, orders, page=page)
+            return
+
+        oid = data.split(":", 1)[1]
+        order = next((o for o in orders if str(o.get("id")) == str(oid)), None)
+        if not order:
+            await query.answer("❌ Buyurtma topilmadi.", show_alert=True)
+            return
+        await query.answer()
+        await show_order_detail(query, order)
+        return
 
     # -------- confirmation buttons --------
 
