@@ -240,15 +240,10 @@
     "price": 2250000,
     "category": "1 kishilik divanlar",
     "description": "Ko‘k-krem rangli zamonaviy divan-krovat\n\nKapitoneli boshqismi va kristalli bezaklari bilan hashamatli ko‘rinish. Yumshoq mato, keng saqlash joyi. Uyingizga nafislik va qulaylik qo‘shadi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643691772_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAISAAFqs929L9kqpSfdkwi2rzrAmJFWNwACHB9rG67eoEmO-ea6fl-TqgEAAwIAA3cAAz0E",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643691772_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643694704_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643691772_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643691772_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_qoplama_divan_mexanizmlik_eni_katta_1789643694704_2.jpg"
+      "AgACAgIAAxkDAAISAAFqs929L9kqpSfdkwi2rzrAmJFWNwACHB9rG67eoEmO-ea6fl-TqgEAAwIAA3cAAz0E",
+      "AgACAgIAAxkDAAISAWqz3b-dZYjf3iFU_BZaZ-c-inTsAAIdH2sbrt6gSSFkIoWjtBqRAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -281,7 +276,22 @@
       "qoshadi"
     ],
     "visible": true,
-    "created_at": "2026-09-17 11:14:57"
+    "created_at": "2026-09-17 11:14:57",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISAAFqs929L9kqpSfdkwi2rzrAmJFWNwACHB9rG67eoEmO-ea6fl-TqgEAAwIAA3cAAz0E"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISAWqz3b-dZYjf3iFU_BZaZ-c-inTsAAIdH2sbrt6gSSFkIoWjtBqRAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAISAAFqs929L9kqpSfdkwi2rzrAmJFWNwACHB9rG67eoEmO-ea6fl-TqgEAAwIAA3cAAz0E",
+      "AgACAgIAAxkDAAISAWqz3b-dZYjf3iFU_BZaZ-c-inTsAAIdH2sbrt6gSSFkIoWjtBqRAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789652787554",
