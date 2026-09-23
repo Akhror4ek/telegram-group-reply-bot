@@ -358,15 +358,10 @@
     "price": 3500000,
     "category": "1 kishilik divanlar",
     "description": "Pushti rangli original divan-krovat\n\nQobiq shaklidagi chiroyli boshqismi va yumshoq velvet matosi bilan ajralib turadi. Ichida keng saqlash joyi mavjud. Uyingizga nafislik va zamonaviy ko‘rinish bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789653639575_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAISfWqz5Q-WTSmSRXwiKwipboKhcB9mAAI8H2sbrt6gSf1eILumnsI6AQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789653639575_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789653642178_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789653639575_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789653639575_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_romashka_eni_1_10m_1789653642178_2.jpg"
+      "AgACAgIAAxkDAAISfWqz5Q-WTSmSRXwiKwipboKhcB9mAAI8H2sbrt6gSf1eILumnsI6AQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISfmqz5RDsSgwBihcVSXYgAQO37uheAAI9H2sbrt6gSePcwN8kfJ2bAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -401,7 +396,22 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-17 14:00:45"
+    "created_at": "2026-09-17 14:00:45",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISfWqz5Q-WTSmSRXwiKwipboKhcB9mAAI8H2sbrt6gSf1eILumnsI6AQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISfmqz5RDsSgwBihcVSXYgAQO37uheAAI9H2sbrt6gSePcwN8kfJ2bAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAISfWqz5Q-WTSmSRXwiKwipboKhcB9mAAI8H2sbrt6gSf1eILumnsI6AQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISfmqz5RDsSgwBihcVSXYgAQO37uheAAI9H2sbrt6gSePcwN8kfJ2bAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789704629400",
