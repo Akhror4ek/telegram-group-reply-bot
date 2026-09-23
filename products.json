@@ -135,15 +135,10 @@
     "price": 2200000,
     "category": "1 kishilik divanlar",
     "description": "Zamonaviy yashil divan-krovat  \nYaltiroq mato, katta saqlash joyi, juda qulay va chiroyli. Uyingiz uchun ideal tanlov!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_panda_tasmali_divan_edit_1789709313056_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAIR_Gqz3a76ig4Es-lIKYXT4JAXGpZnAAIVH2sbrt6gSbSjb0R7uSAFAQADAgADeAADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_panda_tasmali_divan_edit_1789709313056_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_panda_tasmali_divan_edit_1789709313056_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_panda_tasmali_divan_edit_1789709313056_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_panda_tasmali_divan_edit_1789709313056_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_panda_tasmali_divan_edit_1789709313056_2.jpg"
+      "AgACAgIAAxkDAAIR_Gqz3a76ig4Es-lIKYXT4JAXGpZnAAIVH2sbrt6gSbSjb0R7uSAFAQADAgADeAADPQQ",
+      "AgACAgIAAxkDAAIR_Wqz3a5MnqzFhILzHCQWadjxyxhOAAIWH2sbrt6gSe-letyyRAfmAQADAgADeQADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -168,7 +163,22 @@
       "tanlov"
     ],
     "visible": true,
-    "created_at": "2026-09-17 09:19:25"
+    "created_at": "2026-09-17 09:19:25",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAIR_Gqz3a76ig4Es-lIKYXT4JAXGpZnAAIVH2sbrt6gSbSjb0R7uSAFAQADAgADeAADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAIR_Wqz3a5MnqzFhILzHCQWadjxyxhOAAIWH2sbrt6gSe-letyyRAfmAQADAgADeQADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAIR_Gqz3a76ig4Es-lIKYXT4JAXGpZnAAIVH2sbrt6gSbSjb0R7uSAFAQADAgADeAADPQQ",
+      "AgACAgIAAxkDAAIR_Wqz3a5MnqzFhILzHCQWadjxyxhOAAIWH2sbrt6gSe-letyyRAfmAQADAgADeQADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789639914756",
