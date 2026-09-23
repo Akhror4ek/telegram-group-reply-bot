@@ -737,15 +737,10 @@
     "price": 2700000,
     "category": "1 kishilik divanlar",
     "description": "Bej rangli zamonaviy matrasli divan\n\nVertikal kanal bezakli boshqismi va nafis dizayni bilan ajralib turadi. Qulay matras. Uyingizga zamonaviy ko‘rinish bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807430761_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAISimqz5UtTLuxUCWKBdEV9DqEXLLfgAAJQH2sbrt6gSRaXNECoxbASAQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807430761_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807433088_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807430761_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807430761_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_hitech_divan_laminat_1789807433088_2.jpg"
+      "AgACAgIAAxkDAAISimqz5UtTLuxUCWKBdEV9DqEXLLfgAAJQH2sbrt6gSRaXNECoxbASAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISi2qz5U1SnDG8XF41m7XKF4nfHToRAAJRH2sbrt6gSQ_DMmHgV05QAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -773,7 +768,22 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 08:43:55"
+    "created_at": "2026-09-19 08:43:55",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISimqz5UtTLuxUCWKBdEV9DqEXLLfgAAJQH2sbrt6gSRaXNECoxbASAQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISi2qz5U1SnDG8XF41m7XKF4nfHToRAAJRH2sbrt6gSQ_DMmHgV05QAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAISimqz5UtTLuxUCWKBdEV9DqEXLLfgAAJQH2sbrt6gSRaXNECoxbASAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISi2qz5U1SnDG8XF41m7XKF4nfHToRAAJRH2sbrt6gSQ_DMmHgV05QAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789807606591",
