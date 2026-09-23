@@ -954,15 +954,10 @@
     "price": 2250000,
     "category": "1 kishilik divanlar",
     "description": "Jigarrang rangli hashamatli divan-krovat\n\nKapitoneli boshqismi va kristalli bezaklari bilan ajralib turadi. Yumshoq mato va qulay dizayn. Uyingizga nafislik bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_jigarrang_eni_1_10_metr_1789810246447_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAISwmqz5ZYV2Bt6qHXzSL6_yco7npNrAAJYH2sbrt6gSY14o9XhZg0aAQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_jigarrang_eni_1_10_metr_1789810246447_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_jigarrang_eni_1_10_metr_1789810249245_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_jigarrang_eni_1_10_metr_1789810246447_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_jigarrang_eni_1_10_metr_1789810246447_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_jigarrang_eni_1_10_metr_1789810249245_2.jpg"
+      "AgACAgIAAxkDAAISwmqz5ZYV2Bt6qHXzSL6_yco7npNrAAJYH2sbrt6gSY14o9XhZg0aAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISw2qz5Zd1rnSLLA0P3dkJWgJsm3F_AAJZH2sbrt6gSbN4ZzD-PVdXAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -991,7 +986,22 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 09:30:51"
+    "created_at": "2026-09-19 09:30:51",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISwmqz5ZYV2Bt6qHXzSL6_yco7npNrAAJYH2sbrt6gSY14o9XhZg0aAQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISw2qz5Zd1rnSLLA0P3dkJWgJsm3F_AAJZH2sbrt6gSbN4ZzD-PVdXAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAISwmqz5ZYV2Bt6qHXzSL6_yco7npNrAAJYH2sbrt6gSY14o9XhZg0aAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISw2qz5Zd1rnSLLA0P3dkJWgJsm3F_AAJZH2sbrt6gSbN4ZzD-PVdXAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789810440191",
