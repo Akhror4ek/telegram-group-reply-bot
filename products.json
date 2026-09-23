@@ -587,13 +587,9 @@
     "price": 2590000,
     "category": "1 kishilik divanlar",
     "description": "Oltin bezakli hashamatli dizayni va qulay matras bilan ajralib turadi. Uyingizga nafislik va qulaylik bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_tilla_rang_divan_1789805880831_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAIShWqz5S7fgJNONWbhGh40m6wUg8B4AAJDH2sbrt6gSawGsrJzlDc2AQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_tilla_rang_divan_1789805880831_1.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_tilla_rang_divan_1789805880831_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_tilla_rang_divan_1789805880831_1.jpg"
+      "AgACAgIAAxkDAAIShWqz5S7fgJNONWbhGh40m6wUg8B4AAJDH2sbrt6gSawGsrJzlDc2AQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -617,7 +613,17 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 08:18:04"
+    "created_at": "2026-09-19 08:18:04",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAIShWqz5S7fgJNONWbhGh40m6wUg8B4AAJDH2sbrt6gSawGsrJzlDc2AQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAIShWqz5S7fgJNONWbhGh40m6wUg8B4AAJDH2sbrt6gSawGsrJzlDc2AQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789805999182",
