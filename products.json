@@ -846,15 +846,10 @@
     "price": 2600000,
     "category": "1 kishilik divanlar",
     "description": "Yashil rangli qalin matrasli divan\n\nKanal bezakli boshqismi va yumshoq matosi bilan ajralib turadi. Qalin matras qulay uyqu ta’minlaydi. Uyingizga zamonaviy ko‘rinish bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_yashil_divan_1789809434331_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAISs2qz5YKu2vI82NZr96PBFSqC3pRQAAJUH2sbrt6gSSR2IKAAAbZ03wEAAwIAA3cAAz0E",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_yashil_divan_1789809434331_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_yashil_divan_1789809436937_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_yashil_divan_1789809434331_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_yashil_divan_1789809434331_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_yashil_divan_1789809436937_2.jpg"
+      "AgACAgIAAxkDAAISs2qz5YKu2vI82NZr96PBFSqC3pRQAAJUH2sbrt6gSSR2IKAAAbZ03wEAAwIAA3cAAz0E",
+      "AgACAgIAAxkDAAIStGqz5YQwHqkiFBTojEtTEQjqYCczAAJVH2sbrt6gSVUp7Y1XjCzBAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -883,7 +878,22 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 09:17:20"
+    "created_at": "2026-09-19 09:17:20",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISs2qz5YKu2vI82NZr96PBFSqC3pRQAAJUH2sbrt6gSSR2IKAAAbZ03wEAAwIAA3cAAz0E"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAIStGqz5YQwHqkiFBTojEtTEQjqYCczAAJVH2sbrt6gSVUp7Y1XjCzBAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAISs2qz5YKu2vI82NZr96PBFSqC3pRQAAJUH2sbrt6gSSR2IKAAAbZ03wEAAwIAA3cAAz0E",
+      "AgACAgIAAxkDAAIStGqz5YQwHqkiFBTojEtTEQjqYCczAAJVH2sbrt6gSVUp7Y1XjCzBAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789809575971",
