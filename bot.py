@@ -62,6 +62,7 @@ PRODUCTS_FOLDER = "products"
 ORDERS_FILE = "orders.json"
 CHAT_HISTORY_FILE = "chat_history.json"
 ADMIN_DRAFTS_FILE = "admin_drafts.json"
+ADMINS_FILE = "admins.json"
 
 
 # ============================================================
@@ -79,6 +80,8 @@ ai_client = genai.Client(
 
 admin_states = {}
 admin_draft_checked_users = set()
+# Qo'shimcha adminlar persistent ravishda GitHub'da saqlanadi.
+additional_admin_ids = set()
 
 # chat_id -> {user_id, products, created_at}
 pending_product_confirmations = {}
@@ -172,8 +175,88 @@ def akso_knowledge_text():
 # BASIC HELPERS
 # ============================================================
 
-def is_admin(user_id):
+def is_owner(user_id):
     return user_id == ADMIN_ID
+
+
+def is_admin(user_id):
+    return user_id == ADMIN_ID or user_id in additional_admin_ids
+
+
+async def github_get_admin_ids():
+    """Qo'shimcha admin Telegram IDlarini GitHub'dan o'qiydi."""
+    try:
+        result = await github_api(
+            "GET",
+            f"{ADMINS_FILE}?ref={GITHUB_BRANCH}",
+        )
+        content = result.get("content", "")
+        if not content:
+            return []
+        decoded = base64.b64decode(
+            content.replace("\n", "")
+        ).decode("utf-8")
+        data = json.loads(decoded)
+        if isinstance(data, dict):
+            data = data.get("admin_ids", [])
+        if not isinstance(data, list):
+            return []
+        return sorted({int(x) for x in data if str(x).strip().isdigit()})
+    except Exception as e:
+        if "404" in str(e):
+            return []
+        print("ADMINS O'QISH XATOSI:", repr(e))
+        return []
+
+
+async def github_save_admin_ids(admin_ids):
+    """Qo'shimcha adminlarni kichik JSON faylga saqlaydi."""
+    unique_ids = sorted({int(x) for x in admin_ids if int(x) != ADMIN_ID})
+    payload_obj = {"admin_ids": unique_ids}
+    encoded = base64.b64encode(
+        json.dumps(
+            payload_obj,
+            ensure_ascii=False,
+            indent=2,
+        ).encode("utf-8")
+    ).decode("ascii")
+
+    sha = None
+    try:
+        current = await github_api(
+            "GET",
+            f"{ADMINS_FILE}?ref={GITHUB_BRANCH}",
+        )
+        sha = current.get("sha")
+    except Exception as e:
+        if "404" not in str(e):
+            raise
+
+    data = {
+        "message": "Update AKSO admins",
+        "content": encoded,
+        "branch": GITHUB_BRANCH,
+    }
+    if sha:
+        data["sha"] = sha
+
+    await github_api(
+        "PUT",
+        ADMINS_FILE,
+        data,
+    )
+
+
+async def load_additional_admins():
+    """Bot ishga tushganda qo'shimcha adminlarni xotiraga yuklaydi."""
+    global additional_admin_ids
+    try:
+        additional_admin_ids = set(await github_get_admin_ids())
+        additional_admin_ids.discard(ADMIN_ID)
+        print(f"✅ Qo'shimcha adminlar yuklandi: {sorted(additional_admin_ids)}")
+    except Exception as e:
+        additional_admin_ids = set()
+        print("ADMINS YUKLASH XATOSI:", repr(e))
 
 
 def format_money(value):
@@ -2561,6 +2644,125 @@ async def skip_command(
 
 
 # ============================================================
+# ADMIN MANAGEMENT (OWNER ONLY)
+# ============================================================
+
+async def add_admin_command(update, context):
+    if not update.message:
+        return
+    user = update.message.from_user
+    if not user or not is_owner(user.id):
+        await update.message.reply_text("❌ Yangi adminni faqat bot egasi tayinlay oladi.")
+        return
+
+    if not context.args:
+        await update.message.reply_text(
+            "👑 <b>Admin tayinlash</b>\n\n"
+            "Yangi adminning Telegram ID raqamini yuboring.\n\n"
+            "Masalan: <code>/addadmin 123456789</code>\n\n"
+            "ID olish uchun foydalanuvchi botga /id yuborishi mumkin.",
+            parse_mode="HTML",
+        )
+        return
+
+    raw = context.args[0].strip()
+    if not raw.isdigit():
+        await update.message.reply_text(
+            "❌ Telegram ID faqat raqamlardan iborat bo'lishi kerak.\n"
+            "Masalan: <code>/addadmin 123456789</code>",
+            parse_mode="HTML",
+        )
+        return
+
+    new_id = int(raw)
+    if new_id == ADMIN_ID:
+        await update.message.reply_text("👑 Bu ID allaqachon bot egasiga tegishli.")
+        return
+    if new_id in additional_admin_ids:
+        await update.message.reply_text("ℹ️ Bu foydalanuvchi allaqachon admin.")
+        return
+
+    additional_admin_ids.add(new_id)
+    try:
+        await github_save_admin_ids(additional_admin_ids)
+    except Exception as e:
+        additional_admin_ids.discard(new_id)
+        print("ADMIN QO'SHISH XATOSI:", repr(e))
+        await update.message.reply_text(
+            "❌ Adminni saqlashda xatolik yuz berdi. GitHub ulanishini tekshiring."
+        )
+        return
+
+    await update.message.reply_text(
+        "✅ <b>Yangi admin tayinlandi.</b>\n\n"
+        f"🆔 Telegram ID: <code>{new_id}</code>\n\n"
+        "U botga /start yuborgandan keyin admin panelidan foydalanishi mumkin.",
+        parse_mode="HTML",
+    )
+
+
+async def remove_admin_command(update, context):
+    if not update.message:
+        return
+    user = update.message.from_user
+    if not user or not is_owner(user.id):
+        await update.message.reply_text("❌ Adminni olib tashlashni faqat bot egasi amalga oshiradi.")
+        return
+
+    if not context.args or not context.args[0].strip().isdigit():
+        await update.message.reply_text(
+            "🗑 <b>Adminni olib tashlash</b>\n\n"
+            "Masalan: <code>/removeadmin 123456789</code>",
+            parse_mode="HTML",
+        )
+        return
+
+    old_id = int(context.args[0])
+    if old_id == ADMIN_ID:
+        await update.message.reply_text("❌ Bot egasini olib tashlab bo'lmaydi.")
+        return
+    if old_id not in additional_admin_ids:
+        await update.message.reply_text("ℹ️ Bu ID qo'shimcha adminlar ro'yxatida yo'q.")
+        return
+
+    additional_admin_ids.discard(old_id)
+    try:
+        await github_save_admin_ids(additional_admin_ids)
+    except Exception as e:
+        additional_admin_ids.add(old_id)
+        print("ADMIN OLIB TASHLASH XATOSI:", repr(e))
+        await update.message.reply_text("❌ Adminni ro'yxatdan o'chirishda xatolik yuz berdi.")
+        return
+
+    await update.message.reply_text(
+        f"✅ <b>Admin olib tashlandi.</b>\n\n🆔 Telegram ID: <code>{old_id}</code>",
+        parse_mode="HTML",
+    )
+
+
+async def admins_command(update, context):
+    if not update.message:
+        return
+    user = update.message.from_user
+    if not user or not is_owner(user.id):
+        await update.message.reply_text("❌ Adminlar ro'yxatini faqat bot egasi ko'ra oladi.")
+        return
+
+    lines = [
+        "👑 <b>AKSO administratorlari</b>",
+        "",
+        f"1. 👑 Bot egasi — <code>{ADMIN_ID}</code>",
+    ]
+    for idx, admin_id in enumerate(sorted(additional_admin_ids), start=2):
+        lines.append(f"{idx}. 👤 Admin — <code>{admin_id}</code>")
+
+    await update.message.reply_text(
+        "\n".join(lines),
+        parse_mode="HTML",
+    )
+
+
+# ============================================================
 # ADMIN LIST / EDIT / DELETE / CATEGORY / STATS
 # ============================================================
 
@@ -3963,6 +4165,12 @@ async def start_command(
         return
 
     user = update.message.from_user
+    if user and is_admin(user.id):
+        try:
+            await setup_admin_commands_for_chat(context.application, user.id)
+        except Exception as e:
+            print("ADMIN COMMAND MENU XATOSI:", repr(e))
+
     keyboard = (
         ADMIN_KEYBOARD
         if user and is_admin(user.id)
@@ -4000,8 +4208,8 @@ async def users_command(update, context):
     if not update.message:
         return
     user = update.message.from_user
-    if not user or not is_admin(user.id):
-        await update.message.reply_text("❌ Sizda bu komandadan foydalanish huquqi yo'q.")
+    if not user or not is_owner(user.id):
+        await update.message.reply_text("❌ Chat tarixini faqat bot egasi ko'ra oladi.")
         return
     await show_users_page(update, context, 0, edit=False)
 
@@ -4706,125 +4914,57 @@ Foydalanuvchi:
 # COMMAND MENUS
 # ============================================================
 
-async def setup_command_menus(
-    application,
-):
+async def get_admin_commands():
+    return [
+        BotCommand("start", "🤖 Botni ishga tushirish"),
+        BotCommand("catalog", "🛍 Mahsulot katalogi"),
+        BotCommand("store", "🏪 AKSO haqida"),
+        BotCommand("help", "❓ Yordam"),
+        BotCommand("id", "🆔 Telegram ID"),
+        BotCommand("addproduct", "➕ Mahsulot qo'shish"),
+        BotCommand("products", "📦 Mahsulotlar"),
+        BotCommand("editproduct", "✏️ Mahsulotni tahrirlash"),
+        BotCommand("deleteproduct", "🗑 Mahsulotni o'chirish"),
+        BotCommand("categories", "🗂 Kategoriyalar"),
+        BotCommand("stats", "📊 Statistika"),
+        BotCommand("orders", "🛒 Buyurtmalar"),
+        BotCommand("users", "👥 Foydalanuvchilar va chat tarixi"),
+        BotCommand("done", "✅ Rasmlarni tugatish"),
+        BotCommand("skip", "⏭ O'tkazib yuborish"),
+        BotCommand("cancel", "❌ Amalni bekor qilish"),
+        BotCommand("addadmin", "👑 Admin tayinlash (faqat egasi)"),
+        BotCommand("removeadmin", "🗑 Adminni olib tashlash (faqat egasi)"),
+        BotCommand("admins", "👑 Adminlar ro'yxati (faqat egasi)"),
+    ]
+
+
+async def setup_admin_commands_for_chat(application, chat_id):
+    await application.bot.set_my_commands(
+        await get_admin_commands(),
+        scope=BotCommandScopeChat(chat_id=chat_id),
+    )
+
+
+async def setup_command_menus(application):
+    await load_additional_admins()
     await application.bot.delete_my_commands()
 
     await application.bot.delete_my_commands(
-        scope=BotCommandScopeChat(
-            chat_id=ADMIN_ID
-        )
+        scope=BotCommandScopeChat(chat_id=ADMIN_ID)
     )
 
     user_commands = [
-        BotCommand(
-            "start",
-            "🤖 Botni ishga tushirish"
-        ),
-        BotCommand(
-            "catalog",
-            "🛍 Mahsulot katalogi"
-        ),
-        BotCommand(
-            "store",
-            "🏪 AKSO haqida"
-        ),
-        BotCommand(
-            "help",
-            "❓ Yordam"
-        ),
+        BotCommand("start", "🤖 Botni ishga tushirish"),
+        BotCommand("catalog", "🛍 Mahsulot katalogi"),
+        BotCommand("store", "🏪 AKSO haqida"),
+        BotCommand("help", "❓ Yordam"),
     ]
 
-    await application.bot.set_my_commands(
-        user_commands
-    )
+    await application.bot.set_my_commands(user_commands)
+    await setup_admin_commands_for_chat(application, ADMIN_ID)
 
-    admin_commands = [
-        BotCommand(
-            "start",
-            "🤖 Botni ishga tushirish"
-        ),
-        BotCommand(
-            "catalog",
-            "🛍 Mahsulot katalogi"
-        ),
-        BotCommand(
-            "store",
-            "🏪 AKSO haqida"
-        ),
-        BotCommand(
-            "help",
-            "❓ Yordam"
-        ),
-        BotCommand(
-            "id",
-            "🆔 Telegram ID"
-        ),
-        BotCommand(
-            "addproduct",
-            "➕ Mahsulot qo'shish"
-        ),
-        BotCommand(
-            "products",
-            "📦 Mahsulotlar"
-        ),
-        BotCommand(
-            "editproduct",
-            "✏️ Mahsulotni tahrirlash"
-        ),
-        BotCommand(
-            "deleteproduct",
-            "🗑 Mahsulotni o'chirish"
-        ),
-        BotCommand(
-            "categories",
-            "🗂 Kategoriyalar"
-        ),
-        BotCommand(
-            "stats",
-            "📊 Statistika"
-        ),
-        BotCommand(
-            "orders",
-            "🛒 Buyurtmalar"
-        ),
-        BotCommand(
-            "users",
-            "👥 Foydalanuvchilar va chat tarixi"
-        ),
-        BotCommand(
-            "done",
-            "✅ Rasmlarni tugatish"
-        ),
-        BotCommand(
-            "skip",
-            "⏭ O'tkazib yuborish"
-        ),
-        BotCommand(
-            "cancel",
-            "❌ Amalni bekor qilish"
-        ),
-    ]
-
-    await application.bot.set_my_commands(
-        admin_commands,
-        scope=BotCommandScopeChat(
-            chat_id=ADMIN_ID
-        )
-    )
-
-    print(
-        "✅ Telegram command menus o'rnatildi."
-    )
-
-    print(
-        "✅ Admin commands:",
-        [
-            c.command
-            for c in admin_commands
-        ]
-    )
+    print("✅ Telegram command menus o'rnatildi.")
+    print("✅ Admin commands o'rnatildi.")
 
 
 # ============================================================
@@ -4955,6 +5095,27 @@ telegram_app.add_handler(
     CommandHandler(
         "users",
         users_command
+    )
+)
+
+telegram_app.add_handler(
+    CommandHandler(
+        "addadmin",
+        add_admin_command
+    )
+)
+
+telegram_app.add_handler(
+    CommandHandler(
+        "removeadmin",
+        remove_admin_command
+    )
+)
+
+telegram_app.add_handler(
+    CommandHandler(
+        "admins",
+        admins_command
     )
 )
 
