@@ -2435,17 +2435,11 @@
     "price": 10800000,
     "category": "Yotoqxona divanlar to'plami",
     "description": "Bej va ko‘k rangli zamonaviy krovat to‘plami\n\nKvadrat yumshoq boshqism, oltin chiziqlar bilan  stoli va tumbochka bilan birga. Matrasi ortopedik, 7 yil kafolati bor. Yengil va chiroyli dizayn.",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_eco_narh_1790072077244_1.jpg",
+    "telegram_file_id": "AgACAgIAAxUHarOAMWV_RJuTZ5hgOsfxb1MRgZsAAqshaxv4h5lJpGmcceEGlMUBAAMCAAN3AAM9BA",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_eco_narh_1790072077244_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_eco_narh_1790072079675_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_eco_narh_1790072082775_3.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_eco_narh_1790072077244_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_eco_narh_1790072077244_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_eco_narh_1790072079675_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/2_kishilik_yotoqxona_divan_toplami_hitech_oq_eco_narh_1790072082775_3.jpg"
+      "AgACAgIAAxUHarOAMWV_RJuTZ5hgOsfxb1MRgZsAAqshaxv4h5lJpGmcceEGlMUBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAMQ_FV8hn5i8Qru81SWnbnCcAAq0haxv4h5lJs9CBGYmXtqgBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAMgM9oEFSjgdZFPSeRPUHUU8AAqwhaxv4h5lJbtNQxCXvbZcBAAMCAAN3AAM9BA"
     ],
     "keywords": [
       "kishilik",
@@ -2481,6 +2475,26 @@
       "dizayn"
     ],
     "visible": true,
-    "created_at": "2026-09-22 10:14:45"
+    "created_at": "2026-09-22 10:14:45",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAMWV_RJuTZ5hgOsfxb1MRgZsAAqshaxv4h5lJpGmcceEGlMUBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAMQ_FV8hn5i8Qru81SWnbnCcAAq0haxv4h5lJs9CBGYmXtqgBAAMCAAN3AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxUHarOAMgM9oEFSjgdZFPSeRPUHUU8AAqwhaxv4h5lJbtNQxCXvbZcBAAMCAAN3AAM9BA"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxUHarOAMWV_RJuTZ5hgOsfxb1MRgZsAAqshaxv4h5lJpGmcceEGlMUBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAMQ_FV8hn5i8Qru81SWnbnCcAAq0haxv4h5lJs9CBGYmXtqgBAAMCAAN3AAM9BA",
+      "AgACAgIAAxUHarOAMgM9oEFSjgdZFPSeRPUHUU8AAqwhaxv4h5lJbtNQxCXvbZcBAAMCAAN3AAM9BA"
+    ],
+    "image_storage": "telegram"
   }
 ]
