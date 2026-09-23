@@ -477,15 +477,10 @@
     "price": 2600000,
     "category": "1 kishilik divanlar",
     "description": "Bej rangli yumshoq divan-krovat\n\nTeksturali matosi va zamonaviy oq ramkali dizayni bilan ajralib turadi. Juda qulay va chiroyli. Uyingizga nafislik bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709539842_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAISgWqz5R4ZEhof5PIPOdKa5EjWEPcNAAI-H2sbrt6gSesxJtBd5hwzAQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709539842_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709542697_2.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709539842_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709539842_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_divan_hitech_1789709542697_2.jpg"
+      "AgACAgIAAxkDAAISgWqz5R4ZEhof5PIPOdKa5EjWEPcNAAI-H2sbrt6gSesxJtBd5hwzAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISgmqz5SAee-kxc3Uhc9bB7WukDahCAAI_H2sbrt6gSSZK-LXYn7G0AQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -513,7 +508,22 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-18 05:32:25"
+    "created_at": "2026-09-18 05:32:25",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISgWqz5R4ZEhof5PIPOdKa5EjWEPcNAAI-H2sbrt6gSesxJtBd5hwzAQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISgmqz5SAee-kxc3Uhc9bB7WukDahCAAI_H2sbrt6gSSZK-LXYn7G0AQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAISgWqz5R4ZEhof5PIPOdKa5EjWEPcNAAI-H2sbrt6gSesxJtBd5hwzAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISgmqz5SAee-kxc3Uhc9bB7WukDahCAAI_H2sbrt6gSSZK-LXYn7G0AQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789805215157",
