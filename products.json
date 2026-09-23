@@ -677,17 +677,11 @@
     "price": 2590000,
     "category": "1 kishilik divanlar",
     "description": "Oq-oltin rangli hashamatli matrasli divan\n\nKapitoneli boshqismi va kristalli bezaklari bilan ajralib turadi. Qulay matras va nafis dizayn. Uyingizga hashamat bag‘ishlaydi!",
-    "telegram_file_id": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_oq_rang_divan_1789806150317_1.jpg",
+    "telegram_file_id": "AgACAgIAAxkDAAISh2qz5UGtM-AeYVb5dTbxkA1BVVu_AAJLH2sbrt6gSWLREs0rRd8vAQADAgADdwADPQQ",
     "images": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_oq_rang_divan_1789806150317_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_oq_rang_divan_1789806152682_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_oq_rang_divan_1789806155123_3.jpg"
-    ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_oq_rang_divan_1789806150317_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_oq_rang_divan_1789806150317_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_oq_rang_divan_1789806152682_2.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/1_kishilik_matrasli_oq_rang_divan_1789806155123_3.jpg"
+      "AgACAgIAAxkDAAISh2qz5UGtM-AeYVb5dTbxkA1BVVu_AAJLH2sbrt6gSWLREs0rRd8vAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISiGqz5UPNjt7prmffeOJDvq2T2KWFAAJOH2sbrt6gSUMLijIXSnw_AQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISiWqz5UVtF-sGn_TEiGs8ot-6ay-3AAJPH2sbrt6gSRbZ8sFD_EeQAQADAgADdwADPQQ"
     ],
     "keywords": [
       "kishilik",
@@ -715,7 +709,27 @@
       "bagishlaydi"
     ],
     "visible": true,
-    "created_at": "2026-09-19 08:22:37"
+    "created_at": "2026-09-19 08:22:37",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISh2qz5UGtM-AeYVb5dTbxkA1BVVu_AAJLH2sbrt6gSWLREs0rRd8vAQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISiGqz5UPNjt7prmffeOJDvq2T2KWFAAJOH2sbrt6gSUMLijIXSnw_AQADAgADdwADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAISiWqz5UVtF-sGn_TEiGs8ot-6ay-3AAJPH2sbrt6gSRbZ8sFD_EeQAQADAgADdwADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAISh2qz5UGtM-AeYVb5dTbxkA1BVVu_AAJLH2sbrt6gSWLREs0rRd8vAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISiGqz5UPNjt7prmffeOJDvq2T2KWFAAJOH2sbrt6gSUMLijIXSnw_AQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAISiWqz5UVtF-sGn_TEiGs8ot-6ay-3AAJPH2sbrt6gSRbZ8sFD_EeQAQADAgADdwADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789807435519",
