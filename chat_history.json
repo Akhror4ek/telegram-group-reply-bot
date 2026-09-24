@@ -1020,8 +1020,18 @@
         "role": "assistant",
         "text": "Bo'lib to'lash shartlari va oylik to'sumlar haqida aniq ma'lumot berishimiz uchun, iltimos, qaysi mebelni nazarda tutayotganingizni aniqlashtirib yuboring (rasmini yuboring yoki nomini ayting). \n\nBizda bo'lib to'lash muddatlari quyidagicha:\n- **3 oy:** 0% ustama\n- **6 oy:** Odatda 18% ustama (ayrim mahsulotlarda, aksiya vaqtida yoki oldindan to'lov bilan ustamasiz bo'lishi ham mumkin)\n- **12 oy:** 36% ustama\n*Talab qilinadigan hujjat:* Faqat pasport.\n\nBatafsil ma'lumot uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07 yoki do'kon raqami: +998 78 555-17-77.",
         "time": 1790224362
+      },
+      {
+        "role": "user",
+        "text": "Owxonaga mebil",
+        "time": 1790224416
+      },
+      {
+        "role": "assistant",
+        "text": "Oshxona mebellari bo'yicha aniq narxlar va turlarini ko'rsatishimiz uchun iltimos, o'zingizga yoqqan oshxona mebelining rasmini yuboring yoki biz bilan bog'laning.\n\nBatafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07 yoki do'kon raqami: +998 78 555-17-77.",
+        "time": 1790224418
       }
     ],
-    "last_activity": 1790224362
+    "last_activity": 1790224418
   }
 }
