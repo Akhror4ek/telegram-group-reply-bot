@@ -1050,8 +1050,18 @@
         "role": "assistant",
         "text": "Assalomu alumat! AKSO do'konining virtual yordamchisiman. \n\nMahsulotlarimiz narxlari va to'lov shartlari bilan batafsil tanishish uchun operatorimizga murojaat qilishingizni so'raymiz:\n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
         "time": 1790224733
+      },
+      {
+        "role": "user",
+        "text": "Bo'lib tolawga necpul",
+        "time": 1790224897
+      },
+      {
+        "role": "assistant",
+        "text": "Bo'lib to'lash shartlari va oylik to'lov miqdori mahsulotning turiga qarab farq qiladi. Bo'lib to'lash uchun faqat pasport talab etiladi. \n\nTo'liq ma'lumot olish yoki o'zingizga kerakli mahsulotni tanlash uchun operatorimizga murojaat qilishingizni so'raymiz: \n📞 +998-94-529-07-07 yoki +998 78 555-17-77.",
+        "time": 1790224899
       }
     ],
-    "last_activity": 1790224733
+    "last_activity": 1790224899
   }
 }
