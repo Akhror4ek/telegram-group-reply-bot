@@ -1010,8 +1010,18 @@
         "role": "assistant",
         "text": "Mebelning naqd narxi bo'yicha aniq ma'lumot berishimiz uchun iltimos, qaysi mebelni nazarda tutayotganingizni aniqlashtirib yuboring (rasmini yuboring yoki nomini ayting). \n\nBatafsil ma'lumot olish uchun operatorimiz bilan bog'lanishingiz mumkin: \n📞 +998-94-529-07-07 yoki do'kon raqami: +998 78 555-17-77.",
         "time": 1790224353
+      },
+      {
+        "role": "user",
+        "text": "Bo'lib tolawga necpul",
+        "time": 1790224360
+      },
+      {
+        "role": "assistant",
+        "text": "Bo'lib to'lash shartlari va oylik to'sumlar haqida aniq ma'lumot berishimiz uchun, iltimos, qaysi mebelni nazarda tutayotganingizni aniqlashtirib yuboring (rasmini yuboring yoki nomini ayting). \n\nBizda bo'lib to'lash muddatlari quyidagicha:\n- **3 oy:** 0% ustama\n- **6 oy:** Odatda 18% ustama (ayrim mahsulotlarda, aksiya vaqtida yoki oldindan to'lov bilan ustamasiz bo'lishi ham mumkin)\n- **12 oy:** 36% ustama\n*Talab qilinadigan hujjat:* Faqat pasport.\n\nBatafsil ma'lumot uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07 yoki do'kon raqami: +998 78 555-17-77.",
+        "time": 1790224362
       }
     ],
-    "last_activity": 1790224353
+    "last_activity": 1790224362
   }
 }
