@@ -1084,8 +1084,13 @@
         "role": "user",
         "text": "2kishilikdivanlar naqtga nechi puldan boshlanadi",
         "time": 1790237743
+      },
+      {
+        "role": "user",
+        "text": "Divanni alohida oʻzi nechi pul",
+        "time": 1790237782
       }
     ],
-    "last_activity": 1790237743
+    "last_activity": 1790237782
   }
 }
