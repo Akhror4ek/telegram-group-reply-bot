@@ -1000,8 +1000,18 @@
         "role": "assistant",
         "text": "Salom! Yaxshimisiz? \n\nMebelning narxi va to'lov shartlari bo'yicha sizga aniq ma'lumot berishimiz uchun iltimos, qaysi mebelni nazarda tutayotganingizni aniqlashtirib yuboring (rasmini yuboring yoki nomini ayting). \n\nShuningdek, batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07 yoki do'kon raqami: +998 78 555-17-77.",
         "time": 1790224342
+      },
+      {
+        "role": "user",
+        "text": "Naqt olsa necpul",
+        "time": 1790224352
+      },
+      {
+        "role": "assistant",
+        "text": "Mebelning naqd narxi bo'yicha aniq ma'lumot berishimiz uchun iltimos, qaysi mebelni nazarda tutayotganingizni aniqlashtirib yuboring (rasmini yuboring yoki nomini ayting). \n\nBatafsil ma'lumot olish uchun operatorimiz bilan bog'lanishingiz mumkin: \n📞 +998-94-529-07-07 yoki do'kon raqami: +998 78 555-17-77.",
+        "time": 1790224353
       }
     ],
-    "last_activity": 1790224342
+    "last_activity": 1790224353
   }
 }
