@@ -571,9 +571,19 @@
         "role": "user",
         "text": "Toirova Lola",
         "time": 1790174749
+      },
+      {
+        "role": "user",
+        "text": "6 mln",
+        "time": 1790224797
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli, mablag' miqdorini yozdingiz. \n\nAKSO do'konida turli xil mahsulotlar mavjud. Aniqroq qanday mahsulot qidirayotganingizni yozsangiz, sizga yordam berishdan mamnun bo'lamiz! \n\nSavollaringiz bo'lsa, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki +998 78 555-17-77.",
+        "time": 1790224798
       }
     ],
-    "last_activity": 1790174749
+    "last_activity": 1790224798
   },
   "-1001865736985:6819727263": {
     "chat_id": -1001865736985,
