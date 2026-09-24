@@ -2737,17 +2737,23 @@
     "price": 1650000,
     "category": "Sandiqlar",
     "description": "Klassik uslubdagi hashamatli sandiq\n\nYog‘och va oltin rangda, markazda nafis medalyon va o‘yma bezaklar bilan. Keng saqlash joyiga ega. Uyingizga solobat va qulaylik bag‘ishlaydi.",
-    "telegram_file_id": "",
-    "telegram_file_ids": [],
-    "images": [],
+    "telegram_file_id": "AgACAgIAAxkDAAIT3Wq07QTflrhm9_ahXyC4LwgxSY4-AAJHHGsbrt6oSblaILwm2n8VAQADAgADdwADPQQ",
+    "telegram_file_ids": [
+      "AgACAgIAAxkDAAIT3Wq07QTflrhm9_ahXyC4LwgxSY4-AAJHHGsbrt6oSblaILwm2n8VAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAIT3mq07QfuG7ToqxaLMkGE1GPncuTXAAJIHGsbrt6oSed04YZbiUGhAQADAgADdwADPQQ"
+    ],
+    "images": [
+      "AgACAgIAAxkDAAIT3Wq07QTflrhm9_ahXyC4LwgxSY4-AAJHHGsbrt6oSblaILwm2n8VAQADAgADdwADPQQ",
+      "AgACAgIAAxkDAAIT3mq07QfuG7ToqxaLMkGE1GPncuTXAAJIHGsbrt6oSed04YZbiUGhAQADAgADdwADPQQ"
+    ],
     "image_sources": [
       {
-        "type": "document",
-        "value": "BQACAgIAAxkBAAITx2q0qrUKLRS6cN2KEbRVUYGWI7bLAAJXugACTn-pSTSIwsD2msHHPQQ"
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAIT3Wq07QTflrhm9_ahXyC4LwgxSY4-AAJHHGsbrt6oSblaILwm2n8VAQADAgADdwADPQQ"
       },
       {
-        "type": "document",
-        "value": "BQACAgIAAxkBAAITyGq0qrXKfCswsF42bWjIZ6_F_W4XAAJYugACTn-pSRESFFktaaz0PQQ"
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAIT3mq07QfuG7ToqxaLMkGE1GPncuTXAAJIHGsbrt6oSed04YZbiUGhAQADAgADdwADPQQ"
       }
     ],
     "image_storage": "telegram",
