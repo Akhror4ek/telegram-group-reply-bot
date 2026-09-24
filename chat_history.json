@@ -1063,5 +1063,24 @@
       }
     ],
     "last_activity": 1790224899
+  },
+  "-1001865736985:5910589213": {
+    "chat_id": -1001865736985,
+    "user_id": 5910589213,
+    "full_name": "Qodirova Shaxrizoda",
+    "username": "Hidoyatovna_Sh",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Bir kishilik matrasli divanlariyz nechi puldan boshlanadi",
+        "time": 1790237643
+      },
+      {
+        "role": "user",
+        "text": "Rasmi bormi",
+        "time": 1790237648
+      }
+    ],
+    "last_activity": 1790237648
   }
 }
