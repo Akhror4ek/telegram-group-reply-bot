@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "name",
+    "step": "price",
     "pending_images": [
       "BQACAgIAAxkBAAITx2q0qrUKLRS6cN2KEbRVUYGWI7bLAAJXugACTn-pSTSIwsD2msHHPQQ",
       "BQACAgIAAxkBAAITyGq0qrXKfCswsF42bWjIZ6_F_W4XAAJYugACTn-pSRESFFktaaz0PQQ"
@@ -14,11 +14,11 @@
       ".jpg",
       ".jpg"
     ],
-    "name": "",
+    "name": "vodiy sandiq ustunlik",
     "price": null,
     "category": "",
     "description": "",
     "admin_id": 8520907481,
-    "updated_at": 1790225082
+    "updated_at": 1790225219
   }
 }
