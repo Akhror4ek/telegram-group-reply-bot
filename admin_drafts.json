@@ -1,7 +1,7 @@
 {
   "8520907481": {
     "mode": "add",
-    "step": "category_selection",
+    "step": "category_new",
     "pending_images": [
       "BQACAgIAAxkBAAITx2q0qrUKLRS6cN2KEbRVUYGWI7bLAAJXugACTn-pSTSIwsD2msHHPQQ",
       "BQACAgIAAxkBAAITyGq0qrXKfCswsF42bWjIZ6_F_W4XAAJYugACTn-pSRESFFktaaz0PQQ"
@@ -19,6 +19,6 @@
     "category": "",
     "description": "Klassik uslubdagi hashamatli sandiq\n\nYog‘och va oltin rangda, markazda nafis medalyon va o‘yma bezaklar bilan. Keng saqlash joyiga ega. Uyingizga solobat va qulaylik bag‘ishlaydi.",
     "admin_id": 8520907481,
-    "updated_at": 1790225407
+    "updated_at": 1790225413
   }
 }
