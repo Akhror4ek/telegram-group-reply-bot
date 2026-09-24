@@ -1030,8 +1030,18 @@
         "role": "assistant",
         "text": "Oshxona mebellari bo'yicha aniq narxlar va turlarini ko'rsatishimiz uchun iltimos, o'zingizga yoqqan oshxona mebelining rasmini yuboring yoki biz bilan bog'laning.\n\nBatafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07 yoki do'kon raqami: +998 78 555-17-77.",
         "time": 1790224418
+      },
+      {
+        "role": "user",
+        "text": "Rasmdagi necpul",
+        "time": 1790224731
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alumat! AKSO do'konining virtual yordamchisiman. \n\nMahsulotlarimiz narxlari va to'lov shartlari bilan batafsil tanishish uchun operatorimizga murojaat qilishingizni so'raymiz:\n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
+        "time": 1790224733
       }
     ],
-    "last_activity": 1790224418
+    "last_activity": 1790224733
   }
 }
