@@ -2730,5 +2730,54 @@
       "AgACAgIAAxUHarOAMgM9oEFSjgdZFPSeRPUHUU8AAqwhaxv4h5lJbtNQxCXvbZcBAAMCAAN3AAM9BA"
     ],
     "image_storage": "telegram"
+  },
+  {
+    "id": "1790225446649",
+    "name": "vodiy sandiq ustunlik",
+    "price": 1650000,
+    "category": "Sandiqlar",
+    "description": "Klassik uslubdagi hashamatli sandiq\n\nYog‘och va oltin rangda, markazda nafis medalyon va o‘yma bezaklar bilan. Keng saqlash joyiga ega. Uyingizga solobat va qulaylik bag‘ishlaydi.",
+    "telegram_file_id": "",
+    "telegram_file_ids": [],
+    "images": [],
+    "image_sources": [
+      {
+        "type": "document",
+        "value": "BQACAgIAAxkBAAITx2q0qrUKLRS6cN2KEbRVUYGWI7bLAAJXugACTn-pSTSIwsD2msHHPQQ"
+      },
+      {
+        "type": "document",
+        "value": "BQACAgIAAxkBAAITyGq0qrXKfCswsF42bWjIZ6_F_W4XAAJYugACTn-pSRESFFktaaz0PQQ"
+      }
+    ],
+    "image_storage": "telegram",
+    "keywords": [
+      "vodiy",
+      "sandiq",
+      "ustunlik",
+      "klassik",
+      "uslub",
+      "hashamatli",
+      "yogoch",
+      "va",
+      "oltin",
+      "rang",
+      "markaz",
+      "nafis",
+      "medalyon",
+      "oyma",
+      "bezak",
+      "bilan",
+      "keng",
+      "saqlash",
+      "joyi",
+      "ega",
+      "uyingiz",
+      "solobat",
+      "qulaylik",
+      "bagishlaydi"
+    ],
+    "visible": true,
+    "created_at": "2026-09-24 04:50:46"
   }
 ]
