@@ -1092,5 +1092,24 @@
       }
     ],
     "last_activity": 1790237782
+  },
+  "-1001865736985:8762669701": {
+    "chat_id": -1001865736985,
+    "user_id": 8762669701,
+    "full_name": "Zubayr Doniyorvich",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalom aleykum wkaflarizi rasmdan tawab bering",
+        "time": 1790441131
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! \n\nKatalogdagi mahsulotlarni o'zboshimchalik bilan taklif qilmayman, lekin sizga qanday shkaf kerakligini yoki savollaringiz bo'lsa mamnuniyat bilan javob beraman. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998 94 529-07-07",
+        "time": 1790441134
+      }
+    ],
+    "last_activity": 1790441134
   }
 }
