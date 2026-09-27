@@ -1126,9 +1126,14 @@
       {
         "role": "user",
         "text": "Нахт пулга канча",
-        "time": 1790510001
+        "time": 1790510039
+      },
+      {
+        "role": "assistant",
+        "text": "Naqd puldagi narxlarimiz bo'yicha aniq ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingizni so'raymiz: \n📞 +998 94 529-07-07 yoki +998 78 555-17-77.",
+        "time": 1790510041
       }
     ],
-    "last_activity": 1790510001
+    "last_activity": 1790510041
   }
 }
