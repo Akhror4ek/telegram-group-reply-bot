@@ -1149,5 +1149,19 @@
       }
     ],
     "last_activity": 1790611944
+  },
+  "-1001865736985:8970919290": {
+    "chat_id": -1001865736985,
+    "user_id": 8970919290,
+    "full_name": "S M",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Naxtga neci pul",
+        "time": 1790614846
+      }
+    ],
+    "last_activity": 1790614846
   }
 }
