@@ -1135,5 +1135,19 @@
       }
     ],
     "last_activity": 1790510041
+  },
+  "-1001865736985:8900384572": {
+    "chat_id": -1001865736985,
+    "user_id": 8900384572,
+    "full_name": "Mustafo",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Kir moshinasi",
+        "time": 1790611944
+      }
+    ],
+    "last_activity": 1790611944
   }
 }
