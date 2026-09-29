@@ -1156,9 +1156,19 @@
         "role": "user",
         "text": "Kir moshinasi",
         "time": 1790611944
+      },
+      {
+        "role": "user",
+        "text": "Telefonlarni tashlanglar",
+        "time": 1790659615
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nIltimos, qaysi turdagi mahsulot yoki telefonlar qiziqayotganini aniqroq yozib yuboring (masalan, brendi yoki modeli). \n\nBatafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1790659617
       }
     ],
-    "last_activity": 1790611944
+    "last_activity": 1790659617
   },
   "-1001865736985:8970919290": {
     "chat_id": -1001865736985,
