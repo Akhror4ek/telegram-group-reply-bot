@@ -1118,9 +1118,14 @@
         "role": "assistant",
         "text": "Va alaykum assalom! \n\nKatalogdagi mahsulotlarni o'zboshimchalik bilan taklif qilmayman, lekin sizga qanday shkaf kerakligini yoki savollaringiz bo'lsa mamnuniyat bilan javob beraman. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998 94 529-07-07",
         "time": 1790441134
+      },
+      {
+        "role": "user",
+        "text": "Nechibpul ekan shkafchala",
+        "time": 1790670684
       }
     ],
-    "last_activity": 1790441134
+    "last_activity": 1790670684
   },
   "-1001865736985:8690794522": {
     "chat_id": -1001865736985,
