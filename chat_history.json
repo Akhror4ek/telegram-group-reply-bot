@@ -1180,9 +1180,19 @@
         "role": "assistant",
         "text": "Naqd pulga xarid qilishda juda qulay narxlar va chegirmalarimiz mavjud! Aniq narxlarni bilish yoki sizni qiziqtirgan mahsulot haqida ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07 yoki +998 78 555-17-77. \n\nYoki do'konimizga tashrif buyuring: Shersaxiy bozori yoni (stoyanka oldi).",
         "time": 1790657253
+      },
+      {
+        "role": "user",
+        "text": "Eng arzon 1 kishilik divalar qancha",
+        "time": 1790657347
+      },
+      {
+        "role": "assistant",
+        "text": "Aniq narxlarni bilish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07 yoki +998 78 555-17-77. \n\nYoki do'konimizga tashrif buyuring: Shersaxiy bozori yoni (stoyanka oldi).",
+        "time": 1790657349
       }
     ],
-    "last_activity": 1790657253
+    "last_activity": 1790657349
   },
   "-1001865736985:8796312484": {
     "chat_id": -1001865736985,
