@@ -1273,8 +1273,18 @@
         "role": "assistant",
         "text": "Arzimaydi! Yana qanday savollaringiz bor? Sizga yordam berishdan mamnun bo'lamiz!",
         "time": 1790659795
+      },
+      {
+        "role": "user",
+        "text": "Уйинда иштирок килмокчиман",
+        "time": 1790659876
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining o'yinida ishtirok etishni xohlayotganingizdan xursandmiz. \n\nO'yinlar va ularning shartlari haqida aniq ma'lumot olish uchun iltimos, operatorimizga murojaat qiling: \n📞 +998 94 529-07-07",
+        "time": 1790659878
       }
     ],
-    "last_activity": 1790659795
+    "last_activity": 1790659878
   }
 }
