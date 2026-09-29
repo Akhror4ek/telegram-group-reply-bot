@@ -1326,8 +1326,13 @@
         "role": "user",
         "text": "Bolalar divani va shkaflari bormi",
         "time": 1790668232
+      },
+      {
+        "role": "user",
+        "text": "Bolalar shkafi",
+        "time": 1790668292
       }
     ],
-    "last_activity": 1790668232
+    "last_activity": 1790668292
   }
 }
