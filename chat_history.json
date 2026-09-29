@@ -1237,5 +1237,24 @@
       }
     ],
     "last_activity": 1790653966
+  },
+  "-1001865736985:7302884168": {
+    "chat_id": -1001865736985,
+    "user_id": 7302884168,
+    "full_name": "Elmurotova Sayyora",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Ассалому алейкум Ош она мебеллари",
+        "time": 1790659739
+      },
+      {
+        "role": "assistant",
+        "text": "Ваалайкум ассалом! \n\nAKSO do'konida oshxona mebellari mavjud. Narxlar va shartlar bo'yicha batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 94 529-07-07\n\nYoki do'konimizga tashrif buyuring: Shersaxiy bozori yoni (stoyanka oldi). Ish vaqtimiz: har kuni 08:00 dan 20:00 gacha.",
+        "time": 1790659742
+      }
+    ],
+    "last_activity": 1790659742
   }
 }
