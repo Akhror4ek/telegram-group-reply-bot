@@ -818,9 +818,19 @@
         "role": "assistant",
         "text": "Assalomu alomat! Sizga qanday yordam bera olaman? AKSO do'koni bo'yicha savollaringiz bo'lsa, mamnuniyat bilan javob beraman.",
         "time": 1789804851
+      },
+      {
+        "role": "user",
+        "text": "1 mln 700 ming",
+        "time": 1790657284
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli! Narxlar va mahsulotlar bo'yicha aniq ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n\n📞 **Operator:** +998-94-529-07-07\n📞 **Telefon:** +998 78 555-17-77\n💬 **Telegram:** @aksouz",
+        "time": 1790657285
       }
     ],
-    "last_activity": 1789804851
+    "last_activity": 1790657285
   },
   "-1004452523372:519150987": {
     "chat_id": -1004452523372,
