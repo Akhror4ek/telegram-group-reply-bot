@@ -1253,8 +1253,18 @@
         "role": "assistant",
         "text": "Ваалайкум ассалом! \n\nAKSO do'konida oshxona mebellari mavjud. Narxlar va shartlar bo'yicha batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 94 529-07-07\n\nYoki do'konimizga tashrif buyuring: Shersaxiy bozori yoni (stoyanka oldi). Ish vaqtimiz: har kuni 08:00 dan 20:00 gacha.",
         "time": 1790659742
+      },
+      {
+        "role": "user",
+        "text": "Хуп булади",
+        "time": 1790659794
+      },
+      {
+        "role": "assistant",
+        "text": "Arzimaydi! Yana qanday savollaringiz bor? Sizga yordam berishdan mamnun bo'lamiz!",
+        "time": 1790659795
       }
     ],
-    "last_activity": 1790659742
+    "last_activity": 1790659795
   }
 }
