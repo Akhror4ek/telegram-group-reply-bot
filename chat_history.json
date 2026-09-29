@@ -1356,9 +1356,14 @@
         "role": "assistant",
         "text": "AKSO do'konida bolalar mebellari mavjud. Barcha mahsulotlarimizga o'rnatish (montaj) bepul va Qorako'l hamda Olot tumanlari bo'ylab yetkazib berish xizmati mutlaqo bepul! \n\nBo'lib to'lash imkoniyati ham bor (faqat pasport talab etiladi):\n- 3 oy: 0% ustama\n- 6 oy: odatda 18% ustama (lekin aksiya, ayrim mahsulotlar yoki oldindan to'lov bilan ustamasiz bo'lishi ham mumkin)\n- 12 oy: 36% ustama\n\nManzilimiz: Shersaxiy bozori yoni, stoyanka oldi. \nIsh vaqti: Har kuni, 08:00 dan 20:00 gacha.\n\nBatafsil ma'lumot olish yoki operator bilan bog'lanish uchun: +998 78 555-17-77 yoki +998 94 529-07-07.",
         "time": 1790668364
+      },
+      {
+        "role": "user",
+        "text": "Bu divan qancha",
+        "time": 1790678783
       }
     ],
-    "last_activity": 1790668364
+    "last_activity": 1790678783
   },
   "-1001865736985:862366852": {
     "chat_id": -1001865736985,
