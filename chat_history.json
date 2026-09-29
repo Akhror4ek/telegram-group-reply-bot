@@ -1438,8 +1438,13 @@
         "role": "user",
         "text": "Belgilagan roziviy narxi qancha naqtga",
         "time": 1790698184
+      },
+      {
+        "role": "assistant",
+        "text": "Kechirasiz, mijozlarga naqd narxni aytmaymiz. Narxlar va mahsulotlar bo'yicha batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998 94 529-07-07 yoki umumiy raqamimiz: +998 78 555-17-77.",
+        "time": 1790698197
       }
     ],
-    "last_activity": 1790698184
+    "last_activity": 1790698197
   }
 }
