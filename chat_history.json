@@ -1296,5 +1296,24 @@
       }
     ],
     "last_activity": 1790659878
+  },
+  "-1001865736985:1885874061": {
+    "chat_id": -1001865736985,
+    "user_id": 1885874061,
+    "full_name": "Кадырова Мавлюда",
+    "username": "doctor_n103",
+    "messages": [
+      {
+        "role": "user",
+        "text": "https://www.instagram.com/p/DdyT0QkgPUA/?img_index=2&stkn=M3JtOG1nb29meWxx",
+        "time": 1790667605
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nSiz Instagram'dagi havolani yubordingiz. Ushbu mahsulot yoki boshqa buyurtmalar bo'yicha ma'lumot olishni istasangiz, bizning operatorimizga murojaat qilishingiz mumkin: \n📞 +998 94 529-07-07\n\nSizga qanday yordam bera olaman?",
+        "time": 1790667607
+      }
+    ],
+    "last_activity": 1790667607
   }
 }
