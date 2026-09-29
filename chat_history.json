@@ -1182,9 +1182,19 @@
         "role": "assistant",
         "text": "Assalomu alaykum! \n\nQoidalarimizga ko'ra, mahsulotlarning naqd narxi yoki umumiy summasini shu yerda aytolmaymiz. \n\nSizga aniq ma'lumot berishimiz va savollaringizga to'liq javob berishimiz uchun operatorimizga murojaat qilishingizni so'raymiz:\n📞 +998-94-529-07-07 yoki +998 78 555-17-77\n\nDo'konimiz manzili: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi). Ish vaqti: har kuni 08:00 dan 20:00 gacha. Tashrif buyuring, mamnuniyat bilan yordam beramiz!",
         "time": 1790703747
+      },
+      {
+        "role": "user",
+        "text": "Личкамга ташанг нархларини",
+        "time": 1790703786
+      },
+      {
+        "role": "assistant",
+        "text": "Ваалайкум ассалом! \n\nҚоидаларимизга кўра, нархларни шу ерда ёки шахсий хабарларга юбора олмаймиз. \n\nАниқ маълумот олиш учун операторимизга мурожаат қилишингизни сўраймиз:\n📞 +998-94-529-07-07 ёки +998 78 555-17-77\n\nЁки Шерсахий бозори ёнидаги (Шерсахий стоянка олди) дўконимизга ташриф буюринг. Ҳар куни соат 08:00 дан 20:00 гача очиқмиз!",
+        "time": 1790703788
       }
     ],
-    "last_activity": 1790703747
+    "last_activity": 1790703788
   },
   "-1001865736985:8900384572": {
     "chat_id": -1001865736985,
