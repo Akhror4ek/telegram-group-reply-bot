@@ -1398,5 +1398,24 @@
       }
     ],
     "last_activity": 1790677550
+  },
+  "-1001865736985:1073758627": {
+    "chat_id": -1001865736985,
+    "user_id": 1073758627,
+    "full_name": "👸ZULFIYA👫IMRONBEK💕",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Salom aristonlar bormi",
+        "time": 1790693535
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! Ha, AKSO do'konida aristonlar (suv isitgichlari) mavjud. \n\nBatafsil ma'lumot olish yoki narxlar va modellarni bilish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
+        "time": 1790693539
+      }
+    ],
+    "last_activity": 1790693539
   }
 }
