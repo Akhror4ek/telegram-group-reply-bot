@@ -1427,5 +1427,19 @@
       }
     ],
     "last_activity": 1790693565
+  },
+  "-1001865736985:8333895939": {
+    "chat_id": -1001865736985,
+    "user_id": 8333895939,
+    "full_name": "💞",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Belgilagan roziviy narxi qancha naqtga",
+        "time": 1790698184
+      }
+    ],
+    "last_activity": 1790698184
   }
 }
