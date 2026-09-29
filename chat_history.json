@@ -1167,9 +1167,14 @@
         "role": "assistant",
         "text": "Naqd puldagi narxlarimiz bo'yicha aniq ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingizni so'raymiz: \n📞 +998 94 529-07-07 yoki +998 78 555-17-77.",
         "time": 1790510041
+      },
+      {
+        "role": "user",
+        "text": "700 мингли дивани размери ва нахтга нечи пул гиламларизи нахтга нечи пул метрими яхшиси нармалноси",
+        "time": 1790703696
       }
     ],
-    "last_activity": 1790510041
+    "last_activity": 1790703696
   },
   "-1001865736985:8900384572": {
     "chat_id": -1001865736985,
