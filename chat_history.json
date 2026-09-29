@@ -1359,5 +1359,24 @@
       }
     ],
     "last_activity": 1790668364
+  },
+  "-1001865736985:862366852": {
+    "chat_id": -1001865736985,
+    "user_id": 862366852,
+    "full_name": "ZILOLA RUSTAMOVA",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalom aleykum immer bochkali plososlariz qanchadan",
+        "time": 1790677548
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nMahsulotlarimizning narxlari bo'yicha aniq ma'lumot berishim uchun operatorimizga murojaat qilishingizni so'raymiz. \n\nOperator bilan bog'lanish uchun telefon: **+998 94 529-07-07** yoki **+998 78 555-17-77**",
+        "time": 1790677550
+      }
+    ],
+    "last_activity": 1790677550
   }
 }
