@@ -1172,9 +1172,19 @@
         "role": "user",
         "text": "700 мингли дивани размери ва нахтга нечи пул гиламларизи нахтга нечи пул метрими яхшиси нармалноси",
         "time": 1790703696
+      },
+      {
+        "role": "user",
+        "text": "Илтимос айтиб юбринг",
+        "time": 1790703745
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nQoidalarimizga ko'ra, mahsulotlarning naqd narxi yoki umumiy summasini shu yerda aytolmaymiz. \n\nSizga aniq ma'lumot berishimiz va savollaringizga to'liq javob berishimiz uchun operatorimizga murojaat qilishingizni so'raymiz:\n📞 +998-94-529-07-07 yoki +998 78 555-17-77\n\nDo'konimiz manzili: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi). Ish vaqti: har kuni 08:00 dan 20:00 gacha. Tashrif buyuring, mamnuniyat bilan yordam beramiz!",
+        "time": 1790703747
       }
     ],
-    "last_activity": 1790703696
+    "last_activity": 1790703747
   },
   "-1001865736985:8900384572": {
     "chat_id": -1001865736985,
