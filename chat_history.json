@@ -1414,8 +1414,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! Ha, AKSO do'konida aristonlar (suv isitgichlari) mavjud. \n\nBatafsil ma'lumot olish yoki narxlar va modellarni bilish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
         "time": 1790693539
+      },
+      {
+        "role": "user",
+        "text": "Rasmlari narxlari bn tashlang",
+        "time": 1790693563
+      },
+      {
+        "role": "assistant",
+        "text": "Tushundim. Oddiy suhbatda rasm yuborilmaydi va narxlar aytilmaydi. \n\nModellar bilan tanishish, rasmlari va narxlarini bilish uchun iltimos, operatorimizga murojaat qiling:\n\n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
+        "time": 1790693565
       }
     ],
-    "last_activity": 1790693539
+    "last_activity": 1790693565
   }
 }
