@@ -1160,9 +1160,19 @@
         "role": "user",
         "text": "Naxtga neci pul",
         "time": 1790614846
+      },
+      {
+        "role": "user",
+        "text": "Naxtga qancha",
+        "time": 1790657250
+      },
+      {
+        "role": "assistant",
+        "text": "Naqd pulga xarid qilishda juda qulay narxlar va chegirmalarimiz mavjud! Aniq narxlarni bilish yoki sizni qiziqtirgan mahsulot haqida ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07 yoki +998 78 555-17-77. \n\nYoki do'konimizga tashrif buyuring: Shersaxiy bozori yoni (stoyanka oldi).",
+        "time": 1790657253
       }
     ],
-    "last_activity": 1790614846
+    "last_activity": 1790657253
   },
   "-1001865736985:8796312484": {
     "chat_id": -1001865736985,
