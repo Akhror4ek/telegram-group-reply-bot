@@ -1315,5 +1315,19 @@
       }
     ],
     "last_activity": 1790667607
+  },
+  "-1001865736985:1749138798": {
+    "chat_id": -1001865736985,
+    "user_id": 1749138798,
+    "full_name": "❤MAFTUNA BAXRIDDINOVNA 👩‍⚕️",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Bolalar divani va shkaflari bormi",
+        "time": 1790668232
+      }
+    ],
+    "last_activity": 1790668232
   }
 }
