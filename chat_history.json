@@ -838,9 +838,19 @@
         "role": "assistant",
         "text": "Tushunarli! Qanday mahsulot qidirayotgan edingiz? Yoki sizga qanday yordam bera olaman?",
         "time": 1790671501
+      },
+      {
+        "role": "user",
+        "text": "990 ming",
+        "time": 1790678806
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli, narx yoki to'lov bo'yicha savolingiz bormi? \n\nAgar mahsulotlarimiz, bo'lib to'lash shartlari yoki boshqa xizmatlarimiz bilan qiziqayotgan bo'lsangiz, bemalol murojaat qilishingiz mumkin. Batafsil ma'lumot olish uchun operatorimizga bog'lanishingiz ham mumkin: \n📞 +998 94 529-07-07 yoki +998 78 555-17-77",
+        "time": 1790678809
       }
     ],
-    "last_activity": 1790671501
+    "last_activity": 1790678809
   },
   "-1004452523372:519150987": {
     "chat_id": -1004452523372,
