@@ -1371,9 +1371,14 @@
         "role": "user",
         "text": "Bu divan qancha",
         "time": 1790678783
+      },
+      {
+        "role": "user",
+        "text": "Shfanercha qancha",
+        "time": 1790678834
       }
     ],
-    "last_activity": 1790678783
+    "last_activity": 1790678834
   },
   "-1001865736985:862366852": {
     "chat_id": -1001865736985,
