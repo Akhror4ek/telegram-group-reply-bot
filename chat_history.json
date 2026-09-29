@@ -1200,9 +1200,14 @@
         "role": "assistant",
         "text": "Albatta, qanday mahsulotning rasmini ko'rmoqchisiz? Iltimos, mahsulot nomini ayting.",
         "time": 1790658729
+      },
+      {
+        "role": "user",
+        "text": "1kishilik divanni 700.000 ligini",
+        "time": 1790658753
       }
     ],
-    "last_activity": 1790658729
+    "last_activity": 1790658753
   },
   "-1001865736985:8796312484": {
     "chat_id": -1001865736985,
