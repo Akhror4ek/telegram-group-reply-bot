@@ -1562,5 +1562,19 @@
       }
     ],
     "last_activity": 1790766635
+  },
+  "-1001865736985:5241312604": {
+    "chat_id": -1001865736985,
+    "user_id": 5241312604,
+    "full_name": "♡ BUNYODBEK ♡ ÇAROSXON ♡ OYŞA ♡",
+    "username": "SALIMOVBUNYODBEK",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum \nQancha ekan",
+        "time": 1790786278
+      }
+    ],
+    "last_activity": 1790786278
   }
 }
