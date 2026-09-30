@@ -1578,8 +1578,13 @@
         "role": "assistant",
         "text": "Assalomu alaykum! \n\nQaysi mahsulotning narxi yoki shartlari bilan qiziqayotgan edingiz? Aniqroq yozsangiz, mamnuniyat bilan yordam beraman!",
         "time": 1790786287
+      },
+      {
+        "role": "user",
+        "text": "Ugoloklar 10 kishilik",
+        "time": 1790786310
       }
     ],
-    "last_activity": 1790786287
+    "last_activity": 1790786310
   }
 }
