@@ -1525,8 +1525,13 @@
         "role": "user",
         "text": "Assalomu aleykum. Oshxona mebellaridan tashlab bering narxlari bilan.",
         "time": 1790762302
+      },
+      {
+        "role": "user",
+        "text": "Oshxonam uzunli 1.80 metrga 2.30 metr. Mebelniy rangda garnitur va ugalok kerak.",
+        "time": 1790762527
       }
     ],
-    "last_activity": 1790762302
+    "last_activity": 1790762527
   }
 }
