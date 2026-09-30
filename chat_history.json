@@ -1471,5 +1471,24 @@
       }
     ],
     "last_activity": 1790698197
+  },
+  "-1001865736985:1897568460": {
+    "chat_id": -1001865736985,
+    "user_id": 1897568460,
+    "full_name": "SHOHNOZA",
+    "username": "Ikramjonovna",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Bular qancha",
+        "time": 1790744590
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. \n\nAniqroq javob berishim uchun qaysi mahsulotning narxi bilan qiziqayotganingizni yozib yuboring. \n\nAgar savolingiz bo'lsa, operatorimizga ham murojaat qilishingiz mumkin: +998-94-529-07-07 yoki +998 78 555-17-77.",
+        "time": 1790744592
+      }
+    ],
+    "last_activity": 1790744592
   }
 }
