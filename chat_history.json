@@ -1597,8 +1597,13 @@
         "role": "user",
         "text": "Assalom alekum sandiqlar qanchadan aka",
         "time": 1790796721
+      },
+      {
+        "role": "user",
+        "text": "Sandiqlar qancha naxtga",
+        "time": 1790796863
       }
     ],
-    "last_activity": 1790796721
+    "last_activity": 1790796863
   }
 }
