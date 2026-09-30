@@ -848,9 +848,19 @@
         "role": "assistant",
         "text": "Tushunarli, narx yoki to'lov bo'yicha savolingiz bormi? \n\nAgar mahsulotlarimiz, bo'lib to'lash shartlari yoki boshqa xizmatlarimiz bilan qiziqayotgan bo'lsangiz, bemalol murojaat qilishingiz mumkin. Batafsil ma'lumot olish uchun operatorimizga bog'lanishingiz ham mumkin: \n📞 +998 94 529-07-07 yoki +998 78 555-17-77",
         "time": 1790678809
+      },
+      {
+        "role": "user",
+        "text": "1mln 650 ming",
+        "time": 1790766724
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli, narxlar va mahsulotlar bo'yicha aniq ma'lumot olish yoki buyurtma berish uchun operatorimizga bog'lanishingiz mumkin:\n\n📞 **Telefon/Telegram operator:** +998-94-529-07-07\n📞 **Do'kon raqami:** +998 78 555-17-77\n\nSizga qaysi turdagi mahsulot kerak edi?",
+        "time": 1790766725
       }
     ],
-    "last_activity": 1790678809
+    "last_activity": 1790766725
   },
   "-1004452523372:519150987": {
     "chat_id": -1004452523372,
