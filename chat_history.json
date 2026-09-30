@@ -1514,5 +1514,19 @@
       }
     ],
     "last_activity": 1790746573
+  },
+  "-1001865736985:7801541554": {
+    "chat_id": -1001865736985,
+    "user_id": 7801541554,
+    "full_name": "Sevara",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu aleykum. Oshxona mebellaridan tashlab bering narxlari bilan.",
+        "time": 1790762302
+      }
+    ],
+    "last_activity": 1790762302
   }
 }
