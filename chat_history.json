@@ -1501,8 +1501,18 @@
         "role": "user",
         "text": "Мехмонхона стол стулларинидан ташланг",
         "time": 1790746550
+      },
+      {
+        "role": "user",
+        "text": "Нархини хам ëзинг",
+        "time": 1790746572
+      },
+      {
+        "role": "assistant",
+        "text": "Mehmonxona stol-stullari bo'yicha narxlar va turlarini aniqlashtirish uchun operatorimizga murojaat qilishingizni tavsiya qilaman. \n\nOperator bilan bog'lanish uchun: +998-94-529-07-07 yoki do'konimizga tashrif buyuring!",
+        "time": 1790746573
       }
     ],
-    "last_activity": 1790746550
+    "last_activity": 1790746573
   }
 }
