@@ -1533,5 +1533,24 @@
       }
     ],
     "last_activity": 1790762527
+  },
+  "-1001865736985:7815513053": {
+    "chat_id": -1001865736985,
+    "user_id": 7815513053,
+    "full_name": "💞 E. R. K. A. T. O. Y. 💞",
+    "username": "MUHAMMADSAIDJAYRONAXON",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Trimosi alohida necha pul ekan",
+        "time": 1790766633
+      },
+      {
+        "role": "assistant",
+        "text": "Mahsulotning narxi haqida aniq ma'lumot berishim uchun qo'shimcha ma'lumot kerak yoki buni operatorimizdan bilib olishingiz mumkin. \n\nOperatorimiz bilan bog'lanish uchun telefon raqam: +998-94-529-07-07 yoki umumiy raqamimiz: +998 78 555-17-77.",
+        "time": 1790766635
+      }
+    ],
+    "last_activity": 1790766635
   }
 }
