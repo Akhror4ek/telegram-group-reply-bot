@@ -1573,8 +1573,13 @@
         "role": "user",
         "text": "Assalomu alaykum \nQancha ekan",
         "time": 1790786278
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nQaysi mahsulotning narxi yoki shartlari bilan qiziqayotgan edingiz? Aniqroq yozsangiz, mamnuniyat bilan yordam beraman!",
+        "time": 1790786287
       }
     ],
-    "last_activity": 1790786278
+    "last_activity": 1790786287
   }
 }
