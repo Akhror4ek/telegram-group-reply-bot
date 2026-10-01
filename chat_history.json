@@ -1670,8 +1670,13 @@
         "role": "user",
         "text": "Salom shunaqa mebel birmi dokonilada",
         "time": 1790869722
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nSizga qanday mebel kerak edi? Iltimos, qanday turdagi mebel qidirayotganingizni yozib yuborsangiz, ma'lumot berishga harakat qilaman. \n\nAgar batafsil ma'lumot olishni istasangiz, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki +998 78 555-17-77.",
+        "time": 1790869729
       }
     ],
-    "last_activity": 1790869722
+    "last_activity": 1790869729
   }
 }
