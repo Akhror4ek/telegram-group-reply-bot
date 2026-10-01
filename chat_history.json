@@ -1685,8 +1685,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! Tushunarli. Aniqroq qaysi turdagi mebelni qidirayotganingizni yozib yuborsangiz (masalan, yotoqxona, mexmonxona yoki oshxona uchun), sizga yordam berishga harakat qilaman. \n\nBatafsil ma'lumot olish uchun operatorimizga ham murojaat qilishingiz mumkin: +998-94-529-07-07 yoki +998 78 555-17-77.",
         "time": 1790869790
+      },
+      {
+        "role": "user",
+        "text": "3 tasi birda raskladnoy mebeldan sorayapman",
+        "time": 1790869835
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli. \"3 tasi birda\" yoki shunga o'xshash transformer mebellar bo'yicha aniq ma'lumot olish yoki buyurtma berish uchun operatorimiz bilan bog'lanishingizni tavsiya qilaman. \n\nOperatorlarimiz raqami: \n📞 +998-94-529-07-07 \n📞 +998 78 555-17-77 \n\nYoki Telegram orqali yozishingiz mumkin: @aksouz",
+        "time": 1790869837
       }
     ],
-    "last_activity": 1790869790
+    "last_activity": 1790869837
   }
 }
