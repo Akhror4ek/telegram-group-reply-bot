@@ -1659,5 +1659,19 @@
       }
     ],
     "last_activity": 1790858579
+  },
+  "-1001865736985:7878253076": {
+    "chat_id": -1001865736985,
+    "user_id": 7878253076,
+    "full_name": "_bekmuratovna.",
+    "username": "Azimabekmurodovna",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Salom shunaqa mebel birmi dokonilada",
+        "time": 1790869722
+      }
+    ],
+    "last_activity": 1790869722
   }
 }
