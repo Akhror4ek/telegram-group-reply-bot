@@ -955,9 +955,14 @@
         "role": "user",
         "text": "Mehmonxonaga syenka bormi",
         "time": 1790842908
+      },
+      {
+        "role": "user",
+        "text": "Shkaf   maloshniy 3.5 m en8",
+        "time": 1790842943
       }
     ],
-    "last_activity": 1790842908
+    "last_activity": 1790842943
   },
   "-1001865736985:6492145299": {
     "chat_id": -1001865736985,
