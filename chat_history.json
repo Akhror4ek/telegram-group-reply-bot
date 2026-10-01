@@ -1695,8 +1695,18 @@
         "role": "assistant",
         "text": "Tushunarli. \"3 tasi birda\" yoki shunga o'xshash transformer mebellar bo'yicha aniq ma'lumot olish yoki buyurtma berish uchun operatorimiz bilan bog'lanishingizni tavsiya qilaman. \n\nOperatorlarimiz raqami: \n📞 +998-94-529-07-07 \n📞 +998 78 555-17-77 \n\nYoki Telegram orqali yozishingiz mumkin: @aksouz",
         "time": 1790869837
+      },
+      {
+        "role": "user",
+        "text": "Shunaqa mebeldan taxlashni iloji bormi qorakolda",
+        "time": 1790870093
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alum! \n\nHa, albatta! Qorako'l tumani bo'ylab yetkazib berish va barcha mahsulotlarga o'rnatish (montaj) xizmati mutlaqo bepul. \n\nSavollaringiz bo'lsa yoki buyurtma bermoqchi bo'lsangiz, operatorimizga murojaat qilishingiz mumkin: \n📞 +998 94 529-07-07 yoki do'kon raqami: +998 78 555-17-77. \n\nSizga qanday turdagi mebel kerak edi?",
+        "time": 1790870095
       }
     ],
-    "last_activity": 1790869837
+    "last_activity": 1790870095
   }
 }
