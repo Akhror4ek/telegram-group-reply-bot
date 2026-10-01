@@ -950,9 +950,14 @@
         "role": "assistant",
         "text": "Assalomu alaykum! \n\nMahsulotlarimizning naqd narxlari yoki jami bo'lib to'lash summasini onlayn tarzda ko'rsatmaymiz. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 94 529-07-07 yoki +998 78 555-17-77\nTelegram: @aksouz",
         "time": 1789921555
+      },
+      {
+        "role": "user",
+        "text": "Mehmonxonaga syenka bormi",
+        "time": 1790842908
       }
     ],
-    "last_activity": 1789921555
+    "last_activity": 1790842908
   },
   "-1001865736985:6492145299": {
     "chat_id": -1001865736985,
