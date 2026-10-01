@@ -1675,8 +1675,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nSizga qanday mebel kerak edi? Iltimos, qanday turdagi mebel qidirayotganingizni yozib yuborsangiz, ma'lumot berishga harakat qilaman. \n\nAgar batafsil ma'lumot olishni istasangiz, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki +998 78 555-17-77.",
         "time": 1790869729
+      },
+      {
+        "role": "user",
+        "text": "Shunaqa mebel kerak edi",
+        "time": 1790869788
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! Tushunarli. Aniqroq qaysi turdagi mebelni qidirayotganingizni yozib yuborsangiz (masalan, yotoqxona, mexmonxona yoki oshxona uchun), sizga yordam berishga harakat qilaman. \n\nBatafsil ma'lumot olish uchun operatorimizga ham murojaat qilishingiz mumkin: +998-94-529-07-07 yoki +998 78 555-17-77.",
+        "time": 1790869790
       }
     ],
-    "last_activity": 1790869729
+    "last_activity": 1790869790
   }
 }
