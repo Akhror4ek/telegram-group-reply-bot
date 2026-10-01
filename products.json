@@ -75,14 +75,10 @@
     "telegram_file_id": "AgACAgIAAxkBAAPeaqOnXGG_FmHtgtPXh4Sf3fJAfOoAAi8faxv3GiFJQRPA1inwomgBAAMCAAN5AAM9BA",
     "images": [
       "AgACAgIAAxkBAAPeaqOnXGG_FmHtgtPXh4Sf3fJAfOoAAi8faxv3GiFJQRPA1inwomgBAAMCAAN5AAM9BA",
-      "AgACAgIAAxkBAAPfaqOnXBWlLjY6CFko0k4uh21JYMYAAjAfaxv3GiFJcS9WZ26JTEABAAMCAAN5AAM9BA"
+      "AgACAgIAAxkBAAPfaqOnXBWlLjY6CFko0k4uh21JYMYAAjAfaxv3GiFJcS9WZ26JTEABAAMCAAN5AAM9BA",
+      "AgACAgIAAxkDAAIVTmq-NOpIFrXHNVfElCSWfyOuWQrtAAKSHGsb8lXwSfyCcUB3-aSDAQADAgADeQADPQQ",
+      "AgACAgIAAxkDAAIVT2q-NOyXD2Simmzbhnv4wMo-jc80AAKTHGsb8lXwSUoPPdIZy1rrAQADAgADeQADPQQ"
     ],
-    "raw_url": "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/temir_kart_oyogi_balonlik_1789110189011_1.jpg",
-    "raw_urls": [
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/temir_kart_oyogi_balonlik_1789110189011_1.jpg",
-      "https://raw.githubusercontent.com/Akhror4ek/telegram-group-reply-bot/main/products/temir_kart_oyogi_balonlik_1789110190268_2.jpg"
-    ],
-    "github_path": "products/temir_kart_oyogi_balonlik",
     "keywords": [
       "temir",
       "kart",
@@ -90,7 +86,32 @@
       "balonlik"
     ],
     "visible": true,
-    "created_at": "2026-09-11 07:03:11"
+    "created_at": "2026-09-11 07:03:11",
+    "image_sources": [
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkBAAPeaqOnXGG_FmHtgtPXh4Sf3fJAfOoAAi8faxv3GiFJQRPA1inwomgBAAMCAAN5AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkBAAPfaqOnXBWlLjY6CFko0k4uh21JYMYAAjAfaxv3GiFJcS9WZ26JTEABAAMCAAN5AAM9BA"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAIVTmq-NOpIFrXHNVfElCSWfyOuWQrtAAKSHGsb8lXwSfyCcUB3-aSDAQADAgADeQADPQQ"
+      },
+      {
+        "type": "photo",
+        "value": "AgACAgIAAxkDAAIVT2q-NOyXD2Simmzbhnv4wMo-jc80AAKTHGsb8lXwSUoPPdIZy1rrAQADAgADeQADPQQ"
+      }
+    ],
+    "telegram_file_ids": [
+      "AgACAgIAAxkBAAPeaqOnXGG_FmHtgtPXh4Sf3fJAfOoAAi8faxv3GiFJQRPA1inwomgBAAMCAAN5AAM9BA",
+      "AgACAgIAAxkBAAPfaqOnXBWlLjY6CFko0k4uh21JYMYAAjAfaxv3GiFJcS9WZ26JTEABAAMCAAN5AAM9BA",
+      "AgACAgIAAxkDAAIVTmq-NOpIFrXHNVfElCSWfyOuWQrtAAKSHGsb8lXwSfyCcUB3-aSDAQADAgADeQADPQQ",
+      "AgACAgIAAxkDAAIVT2q-NOyXD2Simmzbhnv4wMo-jc80AAKTHGsb8lXwSUoPPdIZy1rrAQADAgADeQADPQQ"
+    ],
+    "image_storage": "telegram"
   },
   {
     "id": "1789286363285",
