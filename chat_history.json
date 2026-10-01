@@ -1459,9 +1459,19 @@
         "role": "assistant",
         "text": "Tushundim. Oddiy suhbatda rasm yuborilmaydi va narxlar aytilmaydi. \n\nModellar bilan tanishish, rasmlari va narxlarini bilish uchun iltimos, operatorimizga murojaat qiling:\n\n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
         "time": 1790693565
+      },
+      {
+        "role": "user",
+        "text": "Rakvena bormi",
+        "time": 1790836204
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alyakum! \n\nAKSO do'konida rakvenalar mavjud. Narxlar va boshqa ma'lumotlar bo'yicha aniqlik kiritish uchun operatorimizga murojaat qilishingizni tavsiya qilaman: +998-94-529-07-07. \n\nYana qanday savollaringiz bor?",
+        "time": 1790836205
       }
     ],
-    "last_activity": 1790693565
+    "last_activity": 1790836205
   },
   "-1001865736985:8333895939": {
     "chat_id": -1001865736985,
