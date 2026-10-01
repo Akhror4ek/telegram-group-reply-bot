@@ -1636,8 +1636,18 @@
         "role": "user",
         "text": "Gilamlar",
         "time": 1790858480
+      },
+      {
+        "role": "user",
+        "text": "Oddiyroq 4ga3,5",
+        "time": 1790858577
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nGilamlarimiz bo'yicha aniq narxlar va o'lchamlarni tanlashda yordam berishimiz uchun operatorimizga murojaat qilishingizni tavsiya qilaman. \n\n📞 **Operator:** +998 94 529-07-07\n📱 **Telegram:** @aksouz",
+        "time": 1790858579
       }
     ],
-    "last_activity": 1790858480
+    "last_activity": 1790858579
   }
 }
