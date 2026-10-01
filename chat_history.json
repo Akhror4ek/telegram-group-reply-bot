@@ -1305,9 +1305,19 @@
         "role": "assistant",
         "text": "Naqd pulga xarid qilganingizda maxsus chegirmalarimiz va aksiyalarimiz mavjud! Mahsulotning aniq narxi va batafsil ma'lumot olish uchun operatorimizga murojaat qilishingizni so'raymiz:\n\n📞 +998 94 529-07-07 yoki +998 78 555-17-77",
         "time": 1790661552
+      },
+      {
+        "role": "user",
+        "text": "Naxtga qancha",
+        "time": 1790864939
+      },
+      {
+        "role": "assistant",
+        "text": "Naqd narxlar va to'lov turlari bo'yicha aniq ma'lumot olish uchun iltimos, operatorimizga murojaat qiling: \n📞 +998 94 529-07-07 yoki +998 78 555-17-77",
+        "time": 1790864941
       }
     ],
-    "last_activity": 1790661552
+    "last_activity": 1790864941
   },
   "-1001865736985:8796312484": {
     "chat_id": -1001865736985,
