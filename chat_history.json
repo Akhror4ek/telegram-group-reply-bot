@@ -1663,7 +1663,7 @@
   "-1001865736985:7878253076": {
     "chat_id": -1001865736985,
     "user_id": 7878253076,
-    "full_name": "_bekmuratovna.",
+    "full_name": "🦀Alyonishka🦀",
     "username": "Azimabekmurodovna",
     "messages": [
       {
@@ -1705,8 +1705,18 @@
         "role": "assistant",
         "text": "Assalomu alum! \n\nHa, albatta! Qorako'l tumani bo'ylab yetkazib berish va barcha mahsulotlarga o'rnatish (montaj) xizmati mutlaqo bepul. \n\nSavollaringiz bo'lsa yoki buyurtma bermoqchi bo'lsangiz, operatorimizga murojaat qilishingiz mumkin: \n📞 +998 94 529-07-07 yoki do'kon raqami: +998 78 555-17-77. \n\nSizga qanday turdagi mebel kerak edi?",
         "time": 1790870095
+      },
+      {
+        "role": "user",
+        "text": "Raxmat malumot uchun, boramiz",
+        "time": 1790870316
+      },
+      {
+        "role": "assistant",
+        "text": "Arzimaydi! Sizni AKSO do'konimizda kutib qolamiz. \n\nManzilimiz: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi). \nHar kuni 08:00 dan 20:00 gacha xizmatingizdamiz!",
+        "time": 1790870317
       }
     ],
-    "last_activity": 1790870095
+    "last_activity": 1790870317
   }
 }
