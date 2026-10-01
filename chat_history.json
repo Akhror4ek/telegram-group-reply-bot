@@ -1625,5 +1625,19 @@
       }
     ],
     "last_activity": 1790796863
+  },
+  "-1001865736985:5183195214": {
+    "chat_id": -1001865736985,
+    "user_id": 5183195214,
+    "full_name": "Oʻgʻiloy",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Gilamlar",
+        "time": 1790858480
+      }
+    ],
+    "last_activity": 1790858480
   }
 }
