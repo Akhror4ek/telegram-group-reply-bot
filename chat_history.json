@@ -1715,8 +1715,18 @@
         "role": "assistant",
         "text": "Arzimaydi! Sizni AKSO do'konimizda kutib qolamiz. \n\nManzilimiz: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi). \nHar kuni 08:00 dan 20:00 gacha xizmatingizdamiz!",
         "time": 1790870317
+      },
+      {
+        "role": "user",
+        "text": "Boshqatan tashang eskirga dyapti",
+        "time": 1790873110
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman? Ma'lumotlarni qaytadan yuborishim kerakmi?",
+        "time": 1790873113
       }
     ],
-    "last_activity": 1790870317
+    "last_activity": 1790873113
   }
 }
