@@ -1743,5 +1743,24 @@
       }
     ],
     "last_activity": 1790873176
+  },
+  "-1001865736985:7528677611": {
+    "chat_id": -1001865736985,
+    "user_id": 7528677611,
+    "full_name": "Шахло Эргашева",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Киммат",
+        "time": 1790881130
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunmadim, qaysi mahsulotimizning narxi qimmat tuyuldi? \n\nAgar mahsulotlarimiz, to'lov shartlari yoki chegirmalarimiz haqida savolingiz bo'lsa, bemalol murojaat qilishingiz mumkin. Shuningdek, batafsil ma'lumot olish uchun operatorimizga bog'lanishingiz mumkin: +998-94-529-07-07.",
+        "time": 1790881132
+      }
+    ],
+    "last_activity": 1790881132
   }
 }
