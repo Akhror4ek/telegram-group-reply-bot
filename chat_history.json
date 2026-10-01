@@ -1725,8 +1725,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman? Ma'lumotlarni qaytadan yuborishim kerakmi?",
         "time": 1790873113
+      },
+      {
+        "role": "user",
+        "text": "Shuni",
+        "time": 1790873148
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! Qaysi ma'lumotni nazarda tutayotganingizni yoki qanday mahsulot/xizmat haqida ma'lumot kerakligini aniqroq yozib yuborsangiz, mamnuniyat bilan yordam beraman. \n\nAgar savollaringiz bo'lsa, operatorimizga ham murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1790873151
       }
     ],
-    "last_activity": 1790873113
+    "last_activity": 1790873151
   }
 }
