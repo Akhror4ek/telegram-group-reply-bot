@@ -1762,5 +1762,19 @@
       }
     ],
     "last_activity": 1790881132
+  },
+  "-1001865736985:8608350947": {
+    "chat_id": -1001865736985,
+    "user_id": 8608350947,
+    "full_name": "Asliddin Jahongir",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Televizor",
+        "time": 1790936247
+      }
+    ],
+    "last_activity": 1790936247
   }
 }
