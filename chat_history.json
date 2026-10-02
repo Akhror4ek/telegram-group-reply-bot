@@ -1776,5 +1776,24 @@
       }
     ],
     "last_activity": 1790936247
+  },
+  "-1001865736985:889113182": {
+    "chat_id": -1001865736985,
+    "user_id": 889113182,
+    "full_name": "Гуля",
+    "username": "ataevagulnoza",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Ассалому алейкум,кайси вилоятда бу акция?",
+        "time": 1790952006
+      },
+      {
+        "role": "assistant",
+        "text": "Ваалайкум ассалом! \n\nBizning do'konimiz Buxoro viloyatida joylashgan. Manzilimiz: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi). Qorako'l va Olot tumanlari bo'ylab yetkazib berish xizmati mutlaqo bepul! \n\nQo'shimcha savollaringiz bo'lsa, bemalol murojaat qilishingiz mumkin.",
+        "time": 1790952008
+      }
+    ],
+    "last_activity": 1790952008
   }
 }
