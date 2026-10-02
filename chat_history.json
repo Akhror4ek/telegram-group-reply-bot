@@ -1806,8 +1806,13 @@
         "role": "user",
         "text": "Stol kerak",
         "time": 1790952549
+      },
+      {
+        "role": "user",
+        "text": "Stol stul kerak",
+        "time": 1790952581
       }
     ],
-    "last_activity": 1790952549
+    "last_activity": 1790952581
   }
 }
