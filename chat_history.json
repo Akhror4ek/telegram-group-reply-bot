@@ -858,9 +858,19 @@
         "role": "assistant",
         "text": "Tushunarli, narxlar va mahsulotlar bo'yicha aniq ma'lumot olish yoki buyurtma berish uchun operatorimizga bog'lanishingiz mumkin:\n\n📞 **Telefon/Telegram operator:** +998-94-529-07-07\n📞 **Do'kon raqami:** +998 78 555-17-77\n\nSizga qaysi turdagi mahsulot kerak edi?",
         "time": 1790766725
+      },
+      {
+        "role": "user",
+        "text": "?",
+        "time": 1790952590
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchiman. Sizga qanday yordam bera olaman?",
+        "time": 1790952591
       }
     ],
-    "last_activity": 1790766725
+    "last_activity": 1790952591
   },
   "-1004452523372:519150987": {
     "chat_id": -1004452523372,
