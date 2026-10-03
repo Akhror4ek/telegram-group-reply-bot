@@ -1827,9 +1827,19 @@
         "role": "assistant",
         "text": "Qaysi mahsulotimizning rasmlarini ko'rmoqchisiz? \n\nIltimos, qiziqtirgan mahsulotingizni yozib yuboring. Qo'shimcha ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: +998 94 529-07-07.",
         "time": 1791043473
+      },
+      {
+        "role": "user",
+        "text": "Ок. 5 хилининг расмларини куришим керак",
+        "time": 1791043539
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli. Iltimos, qaysi 5 xil mahsulotimizning rasmlarini ko'rmoqchi ekanligingizni yozib yuboring (masalan, mebel, texnika yoki boshqa turdagi mahsulotlar). \n\nShuningdek, batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: +998 94 529-07-07.",
+        "time": 1791043540
       }
     ],
-    "last_activity": 1791043473
+    "last_activity": 1791043540
   },
   "-1001865736985:6148794044": {
     "chat_id": -1001865736985,
