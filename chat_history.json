@@ -1874,5 +1874,24 @@
       }
     ],
     "last_activity": 1791042949
+  },
+  "786636866:786636866": {
+    "chat_id": 786636866,
+    "user_id": 786636866,
+    "full_name": "Мухаммадазиз",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "🔟кг пол афтомат кир мошина зуридан расмини ташанг.пули канча",
+        "time": 1791053150
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nQoidalarimizga ko'ra, chat orqali mahsulot rasmi va narxlarini taqdim etmaymiz. 10 kg li yarim avtomat kir yuvish mashinalari va ularning narxlari bilan tanishish hamda buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 94 529-07-07\n\nShuningdek, barcha mahsulotlarimizga **bepul yetkazib berish** (Qorako'l va Olot tumanlari bo'ylab), **bepul montaj** xizmati va **bo'lib to'lash** imkoniyati (pasportning o'zi bilan) mavjud! \n\nManzilimiz: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi).",
+        "time": 1791053153
+      }
+    ],
+    "last_activity": 1791053153
   }
 }
