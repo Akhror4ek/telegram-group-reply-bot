@@ -1837,9 +1837,19 @@
         "role": "assistant",
         "text": "Tushunarli. Iltimos, qaysi 5 xil mahsulotimizning rasmlarini ko'rmoqchi ekanligingizni yozib yuboring (masalan, mebel, texnika yoki boshqa turdagi mahsulotlar). \n\nShuningdek, batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: +998 94 529-07-07.",
         "time": 1791043540
+      },
+      {
+        "role": "user",
+        "text": "Расмини курмокчи эдим",
+        "time": 1791043632
+      },
+      {
+        "role": "assistant",
+        "text": "Qaysi mahsulotimizning rasmini ko'rmoqchisiz? Iltimos, mahsulot nomini yozib yuboring.",
+        "time": 1791043633
       }
     ],
-    "last_activity": 1791043540
+    "last_activity": 1791043633
   },
   "-1001865736985:6148794044": {
     "chat_id": -1001865736985,
