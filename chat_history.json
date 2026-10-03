@@ -1802,9 +1802,19 @@
         "role": "assistant",
         "text": "Ваалайкум ассалом! \n\nBizning do'konimiz Buxoro viloyatida joylashgan. Manzilimiz: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi). Qorako'l va Olot tumanlari bo'ylab yetkazib berish xizmati mutlaqo bepul! \n\nQo'shimcha savollaringiz bo'lsa, bemalol murojaat qilishingiz mumkin.",
         "time": 1790952008
+      },
+      {
+        "role": "user",
+        "text": "Ассалому алейкум, менга диван кровать ,яьни диван+ кровать керак",
+        "time": 1791043152
+      },
+      {
+        "role": "assistant",
+        "text": "Albatta. 😊 Qaysi divan kerak?\n\n• 🛋 Oddiy divan\n• 🛏 Divan-karavot\n• 📐 Burchakli divan\n• 🔄 Transformator divan\n\nByudjetingizni yozing, mos variantlarni ajrataman.",
+        "time": 1791043154
       }
     ],
-    "last_activity": 1790952008
+    "last_activity": 1791043154
   },
   "-1001865736985:6148794044": {
     "chat_id": -1001865736985,
