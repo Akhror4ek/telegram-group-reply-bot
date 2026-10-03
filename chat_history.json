@@ -1817,9 +1817,19 @@
         "role": "user",
         "text": "Трансформатор диван",
         "time": 1791043198
+      },
+      {
+        "role": "user",
+        "text": "Расмларини юборинг, илтимос",
+        "time": 1791043471
+      },
+      {
+        "role": "assistant",
+        "text": "Qaysi mahsulotimizning rasmlarini ko'rmoqchisiz? \n\nIltimos, qiziqtirgan mahsulotingizni yozib yuboring. Qo'shimcha ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: +998 94 529-07-07.",
+        "time": 1791043473
       }
     ],
-    "last_activity": 1791043198
+    "last_activity": 1791043473
   },
   "-1001865736985:6148794044": {
     "chat_id": -1001865736985,
