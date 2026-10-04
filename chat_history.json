@@ -1912,5 +1912,24 @@
       }
     ],
     "last_activity": 1791089387
+  },
+  "-1001865736985:7982446315": {
+    "chat_id": -1001865736985,
+    "user_id": 7982446315,
+    "full_name": "FARID JUMAYEV",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Oylik to‘lvi qanaqa razmerlari qanaqa",
+        "time": 1791101962
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz.\n\nBizda bo'lib to'lash shartlari quyidagicha:\n- **3 oy:** 0% ustama\n- **6 oy:** Odatda 18% ustama (lekin ayrim mahsulotlarda, aksiya vaqtida yoki oldindan to'lov bilan ustamasiz bo'lishi ham mumkin)\n- **12 oy:** 36% ustama\n*Rasmiylashtirish uchun faqat pasport talab qilinadi.*\n\nMahsulotlar razmerlari va narxlari bo'yicha aniq ma'lumot olish uchun qaysi mahsulotni qidirayotganingizni yozib yuboring yoki operatorimizga murojaat qiling: \n📞 +998-94-529-07-07 yoki +998 78 555-17-77.",
+        "time": 1791101964
+      }
+    ],
+    "last_activity": 1791101964
   }
 }
