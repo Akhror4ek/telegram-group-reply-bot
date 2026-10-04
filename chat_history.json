@@ -1991,8 +1991,13 @@
         "role": "assistant",
         "text": "Assalomu alyaykum! \n\n8 kishilik ratan stol-stullarimiz mavjud. Aniq narxi va shartlarini kelishish yoki buyurtma berish uchun operatorimizga bog'lanishingiz mumkin:\n📞 +998-94-529-07-07 yoki +998 78 555-17-77.\n\nManzilimiz: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi). Ish vaqtimiz har kuni 08:00 dan 20:00 gacha!",
         "time": 1791103984
+      },
+      {
+        "role": "user",
+        "text": "Куллер борми",
+        "time": 1791104096
       }
     ],
-    "last_activity": 1791103984
+    "last_activity": 1791104096
   }
 }
