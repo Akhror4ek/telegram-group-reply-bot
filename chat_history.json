@@ -2004,5 +2004,24 @@
       }
     ],
     "last_activity": 1791104139
+  },
+  "-1001865736985:7925914140": {
+    "chat_id": -1001865736985,
+    "user_id": 7925914140,
+    "full_name": "Dj Aybek",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "🏠 UYINGIZGA YANGI QIYOFА — SARHANDE PREMIUM\n✨ Zamonaviy natyajnoy potolok\n✨ Chiroyli va zamonaviy dizayn\n✨ Sifatli materiallar\n✨ Ustalar tomonidan professional o‘rnatish\n✨ Uy, mehmonxona, yotoqxona va boshqa xonalar uchun\n📍 Buxoro | Qorako‘l\n💎 SARHANDE PREMIUM NATYAJNOY POTОLOK\n“Mukammallik har detalda”\n📞 Buyurtma uchun:\n97 280 81 51\n93 112 82 28\n📲 Ishlarimiz va yangi dizaynlar:\n👉 https://t.me/sarhande_pirimium\nKanalga obuna bo‘ling — yangi ishlarimizni birinchi bo‘lib ko‘ring!",
+        "time": 1791140269
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! Men AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman? Do'konimiz, mahsulotlar, yetkazib berish, montaj yoki bo'lib to'lash shartlari haqida savollaringiz bo'lsa, mamnuniyat bilan javob beraman.",
+        "time": 1791140271
+      }
+    ],
+    "last_activity": 1791140271
   }
 }
