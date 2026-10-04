@@ -868,9 +868,19 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'konining virtual yordamchiman. Sizga qanday yordam bera olaman?",
         "time": 1790952591
+      },
+      {
+        "role": "user",
+        "text": "Uzunligi 3M, 6 oyga oʻzini narxida  1 mln 50 mingdan chiqadi",
+        "time": 1791103245
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\n6 oylik muddatli to'lov odatda 18% ustama bilan beriladi. Ammo ayrim mahsulotlarda, aksiya vaqtida yoki oldindan to'lov qilgan taqdirda 6 oyga ustamasiz (o'z narxida) chiqish imkoniyati bo'lishi mumkin. \n\nAniq hisob-kitob qilish va savollaringizga batafsil javob olish uchun operatorimizga murojaat qilishingizni so'raymiz:\n📞 +998 78 555-17-77 yoki +998 94 529-07-07",
+        "time": 1791103247
       }
     ],
-    "last_activity": 1790952591
+    "last_activity": 1791103247
   },
   "-1004452523372:519150987": {
     "chat_id": -1004452523372,
