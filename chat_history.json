@@ -1931,5 +1931,24 @@
       }
     ],
     "last_activity": 1791101964
+  },
+  "-1001865736985:5400281726": {
+    "chat_id": -1001865736985,
+    "user_id": 5400281726,
+    "full_name": "Sobirjon Safarov",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "👍",
+        "time": 1791103032
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
+        "time": 1791103034
+      }
+    ],
+    "last_activity": 1791103034
   }
 }
