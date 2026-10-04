@@ -1938,9 +1938,19 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz.\n\nBizda bo'lib to'lash shartlari quyidagicha:\n- **3 oy:** 0% ustama\n- **6 oy:** Odatda 18% ustama (lekin ayrim mahsulotlarda, aksiya vaqtida yoki oldindan to'lov bilan ustamasiz bo'lishi ham mumkin)\n- **12 oy:** 36% ustama\n*Rasmiylashtirish uchun faqat pasport talab qilinadi.*\n\nMahsulotlar razmerlari va narxlari bo'yicha aniq ma'lumot olish uchun qaysi mahsulotni qidirayotganingizni yozib yuboring yoki operatorimizga murojaat qiling: \n📞 +998-94-529-07-07 yoki +998 78 555-17-77.",
         "time": 1791101964
+      },
+      {
+        "role": "user",
+        "text": "Akrillikmi",
+        "time": 1791103347
+      },
+      {
+        "role": "assistant",
+        "text": "Kechirasiz, aniq qaysi mahsulot haqida so'rayotganingizni tushunmadim. Iltimos, mahsulot turini aniqroq yozing yoki savolingizni to'liqroq bering. \n\nQo'shimcha ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07",
+        "time": 1791103349
       }
     ],
-    "last_activity": 1791101964
+    "last_activity": 1791103349
   },
   "-1001865736985:5400281726": {
     "chat_id": -1001865736985,
