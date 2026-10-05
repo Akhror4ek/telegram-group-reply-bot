@@ -2023,5 +2023,19 @@
       }
     ],
     "last_activity": 1791140271
+  },
+  "-1001865736985:5702505049": {
+    "chat_id": -1001865736985,
+    "user_id": 5702505049,
+    "full_name": "Zilola Samatova",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Salom aleykum oshxona mebellaridan viberlarni narxi bilan tashlang iltimos",
+        "time": 1791171996
+      }
+    ],
+    "last_activity": 1791171996
   }
 }
