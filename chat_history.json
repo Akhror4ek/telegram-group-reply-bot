@@ -2120,5 +2120,24 @@
       }
     ],
     "last_activity": 1791217878
+  },
+  "-1001865736985:786636866": {
+    "chat_id": -1001865736985,
+    "user_id": 786636866,
+    "full_name": "Мухаммадазиз",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Ассалом. 10 кг лик.кирмошиналани расмини нархи бн ташанг.полафтомат",
+        "time": 1791222206
+      },
+      {
+        "role": "assistant",
+        "text": "Ваалайкум ассалом! \n\nКўrsatilgan talabingiz bo'yicha ma'lumotni aniqlashtirish va narxlarni taqdim etish uchun iltimos, operatorimizga murojaat qiling: \n📞 +998 94 529-07-07",
+        "time": 1791222209
+      }
+    ],
+    "last_activity": 1791222209
   }
 }
