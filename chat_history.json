@@ -2158,5 +2158,24 @@
       }
     ],
     "last_activity": 1791223036
+  },
+  "-1001865736985:6346022967": {
+    "chat_id": -1001865736985,
+    "user_id": 6346022967,
+    "full_name": "Шодон",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "https://www.facebook.com/share/r/19TDobg3mY/",
+        "time": 1791225260
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman? \n\nAgar savollaringiz bo'lsa (manzilimiz, ish vaqti, bo'lib to'lash shartlari, yetkazib berish yoki montaj haqida), bemalol murojaat qilishingiz mumkin.",
+        "time": 1791225262
+      }
+    ],
+    "last_activity": 1791225262
   }
 }
