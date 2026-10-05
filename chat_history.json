@@ -2139,5 +2139,24 @@
       }
     ],
     "last_activity": 1791222209
+  },
+  "-1001865736985:6990628239": {
+    "chat_id": -1001865736985,
+    "user_id": 6990628239,
+    "full_name": "Aziza Shuhratovna",
+    "username": "Muhammmad_2020",
+    "messages": [
+      {
+        "role": "user",
+        "text": "https://t.me/pardalarolot",
+        "time": 1791223033
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
+        "time": 1791223036
+      }
+    ],
+    "last_activity": 1791223036
   }
 }
