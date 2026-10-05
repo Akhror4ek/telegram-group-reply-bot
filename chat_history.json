@@ -2096,5 +2096,24 @@
       }
     ],
     "last_activity": 1791172074
+  },
+  "-1001865736985:6650065736": {
+    "chat_id": -1001865736985,
+    "user_id": 6650065736,
+    "full_name": "Нилуфар Рустамова",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "1",
+        "time": 1791217836
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
+        "time": 1791217837
+      }
+    ],
+    "last_activity": 1791217837
   }
 }
