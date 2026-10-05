@@ -2037,5 +2037,24 @@
       }
     ],
     "last_activity": 1791171996
+  },
+  "-1001865736985:6430188353": {
+    "chat_id": -1001865736985,
+    "user_id": 6430188353,
+    "full_name": "ДЕРЗКИЙ_004",
+    "username": "Chayon_004",
+    "messages": [
+      {
+        "role": "user",
+        "text": "https://t.me/Paranda_bozor_888",
+        "time": 1791172047
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchiman. Sizga qanday yordam bera olaman?",
+        "time": 1791172048
+      }
+    ],
+    "last_activity": 1791172048
   }
 }
