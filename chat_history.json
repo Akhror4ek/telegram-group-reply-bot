@@ -2063,8 +2063,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'konining virtual yordamchiman. Sizga qanday yordam bera olaman?",
         "time": 1791172048
+      },
+      {
+        "role": "user",
+        "text": "Shu gurpaga qoʻshilinglar iltimos",
+        "time": 1791172072
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! Bizning asosiy aloqa va ma'lumot olish kanallarimiz quyidagilar:\n\nTelegram: @aksouz\nInstagram: @akso.uz\nTelefon: +998 78 555-17-77\nOperator: +998-94-529-07-07\n\nAgar savollaringiz bo'lsa, mamnuniyat bilan javob beraman!",
+        "time": 1791172074
       }
     ],
-    "last_activity": 1791172048
+    "last_activity": 1791172074
   }
 }
