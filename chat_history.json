@@ -2112,8 +2112,13 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
         "time": 1791217837
+      },
+      {
+        "role": "user",
+        "text": "1kishilik yani bolalarga divanlar qancha",
+        "time": 1791217878
       }
     ],
-    "last_activity": 1791217837
+    "last_activity": 1791217878
   }
 }
