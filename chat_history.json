@@ -1886,9 +1886,14 @@
         "role": "user",
         "text": "18talik stol stullar necha pul",
         "time": 1791042949
+      },
+      {
+        "role": "user",
+        "text": "Kullerlar bormi narxi qancha",
+        "time": 1791210847
       }
     ],
-    "last_activity": 1791042949
+    "last_activity": 1791210847
   },
   "786636866:786636866": {
     "chat_id": 786636866,
