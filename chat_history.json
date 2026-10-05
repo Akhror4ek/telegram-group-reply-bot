@@ -1793,9 +1793,14 @@
         "role": "user",
         "text": "Televizor",
         "time": 1790936247
+      },
+      {
+        "role": "user",
+        "text": "Faqat divani oʻzi bor ikki ikki kishilik",
+        "time": 1791192133
       }
     ],
-    "last_activity": 1790936247
+    "last_activity": 1791192133
   },
   "-1001865736985:889113182": {
     "chat_id": -1001865736985,
