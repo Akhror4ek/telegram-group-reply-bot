@@ -2034,9 +2034,19 @@
         "role": "user",
         "text": "Salom aleykum oshxona mebellaridan viberlarni narxi bilan tashlang iltimos",
         "time": 1791171996
+      },
+      {
+        "role": "user",
+        "text": "Sifatli kattasidan bo'lsin pulini farqi yo'q",
+        "time": 1791172057
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nMahsulotlarimiz narxlari va turlari bilan tanishish hamda o'zingizga mos kattasini tanlash uchun iltimos, operatorimizga murojaat qiling: \n📞 +998-94-529-07-07 yoki Telegram: @aksouz \n\nBizda yetkazib berish va o'rnatish (montaj) xizmatlari mutlaqo bepul!",
+        "time": 1791172059
       }
     ],
-    "last_activity": 1791171996
+    "last_activity": 1791172059
   },
   "-1001865736985:6430188353": {
     "chat_id": -1001865736985,
