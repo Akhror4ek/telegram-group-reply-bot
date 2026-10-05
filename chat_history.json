@@ -2047,16 +2047,16 @@
       },
       {
         "role": "user",
-        "text": "Rahmat",
-        "time": 1791172100
+        "text": "O\"zimiz boramiz bo'lmasa soat 10:00da",
+        "time": 1791172152
       },
       {
         "role": "assistant",
-        "text": "Arzimaydi! Yana qanday savollaringiz bor? Sizga yordam berishdan mamnunmiz! 😊",
-        "time": 1791172102
+        "text": "Judek yaxshi! Kutib qolamiz. \n\nManzilimiz: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi). Ish vaqti: Har kuni 08:00 dan 20:00 gacha. \n\nKelganingizda yordam berishdan mamnun bo'lamiz! Savollar bo'lsa: +998 78 555-17-77.",
+        "time": 1791172154
       }
     ],
-    "last_activity": 1791172102
+    "last_activity": 1791172154
   },
   "-1001865736985:6430188353": {
     "chat_id": -1001865736985,
