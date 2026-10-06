@@ -2216,5 +2216,19 @@
       }
     ],
     "last_activity": 1791278048
+  },
+  "-1001865736985:6036040144": {
+    "chat_id": -1001865736985,
+    "user_id": 6036040144,
+    "full_name": "🌍🌍🌍🤑🤑🤑",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Skaf",
+        "time": 1791293973
+      }
+    ],
+    "last_activity": 1791293973
   }
 }
