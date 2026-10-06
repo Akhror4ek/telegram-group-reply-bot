@@ -2227,8 +2227,13 @@
         "role": "user",
         "text": "Skaf",
         "time": 1791293973
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz.\n\nShkaf sotib olish bo'yicha qanday savolingiz bor? Razmerlari, dizayni yoki bo'lib to'lash shartlari qiziqtiryaptimi? \n\nAgar batafsil ma'lumot kerak bo'lsa, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07",
+        "time": 1791293997
       }
     ],
-    "last_activity": 1791293973
+    "last_activity": 1791293997
   }
 }
