@@ -1891,9 +1891,19 @@
         "role": "user",
         "text": "Kullerlar bormi narxi qancha",
         "time": 1791210847
+      },
+      {
+        "role": "user",
+        "text": "Telefonlar bormi",
+        "time": 1791276544
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nBizda telefonlar mavjud emas. Maishiy texnika va boshqa kerakli mahsulotlar bo'yicha yordam bera olaman. Savollaringiz bo'lsa, bemalol murojaat qiling!",
+        "time": 1791276546
       }
     ],
-    "last_activity": 1791210847
+    "last_activity": 1791276546
   },
   "786636866:786636866": {
     "chat_id": 786636866,
