@@ -2235,5 +2235,19 @@
       }
     ],
     "last_activity": 1791293997
+  },
+  "6036040144:6036040144": {
+    "chat_id": 6036040144,
+    "user_id": 6036040144,
+    "full_name": "🌍🌍🌍🤑🤑🤑",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Skaf bormi",
+        "time": 1791294025
+      }
+    ],
+    "last_activity": 1791294025
   }
 }
