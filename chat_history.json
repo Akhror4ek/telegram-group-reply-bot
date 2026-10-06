@@ -2187,5 +2187,24 @@
       }
     ],
     "last_activity": 1791225262
+  },
+  "-1001865736985:6715415769": {
+    "chat_id": -1001865736985,
+    "user_id": 6715415769,
+    "full_name": "Lobar",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "шифанер замонавий",
+        "time": 1791278002
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nZamonaviy shkaflarimiz (shifanerlarimiz) mavjud. Batafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07 yoki +998 78 555-17-77",
+        "time": 1791278004
+      }
+    ],
+    "last_activity": 1791278004
   }
 }
