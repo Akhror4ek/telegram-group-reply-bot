@@ -2246,8 +2246,13 @@
         "role": "user",
         "text": "Skaf bormi",
         "time": 1791294025
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alom! \n\nKatalogimizdagi mavjud mahsulotlar va ularning narxlari/shartlari bo'yicha aniq ma'lumot olish uchun operatorimizga murojaat qilishingizni so'raymiz:\n📞 +998-94-529-07-07\n\nYoki bizga Shersaxiy bozori yonidagi (stoyanka oldi) AKSO do'konimizga tashrif buyurishingiz mumkin!",
+        "time": 1791294042
       }
     ],
-    "last_activity": 1791294025
+    "last_activity": 1791294042
   }
 }
