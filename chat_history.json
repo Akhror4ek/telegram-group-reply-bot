@@ -2203,8 +2203,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nZamonaviy shkaflarimiz (shifanerlarimiz) mavjud. Batafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07 yoki +998 78 555-17-77",
         "time": 1791278004
+      },
+      {
+        "role": "user",
+        "text": "расм ташланг танлаб буюртма бераман",
+        "time": 1791278047
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nBatafsil ma'lumot olish, rasmlarni ko'rish va tanlab buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07 yoki +998 78 555-17-77\nTelegram: @aksouz",
+        "time": 1791278048
       }
     ],
-    "last_activity": 1791278004
+    "last_activity": 1791278048
   }
 }
