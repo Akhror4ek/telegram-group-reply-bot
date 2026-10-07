@@ -2380,5 +2380,19 @@
       }
     ],
     "last_activity": 1791365771
+  },
+  "-1001865736985:1455336344": {
+    "chat_id": -1001865736985,
+    "user_id": 1455336344,
+    "full_name": "Asrorova Sadoqat",
+    "username": "SadoqatAsrorova",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Xaladelniklar narxlari bilan kerak",
+        "time": 1791381556
+      }
+    ],
+    "last_activity": 1791381556
   }
 }
