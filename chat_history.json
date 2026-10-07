@@ -2312,5 +2312,24 @@
       }
     ],
     "last_activity": 1791352899
+  },
+  "-1001865736985:490341067": {
+    "chat_id": -1001865736985,
+    "user_id": 490341067,
+    "full_name": "OLOT KTMP Yangiyeva Dildora",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Xaladelnik bormi",
+        "time": 1791355030
+      },
+      {
+        "role": "assistant",
+        "text": "Ha, AKSO do'konida muzlatkichlar (xolodilniklar) mavjud. \n\nBarcha mahsulotlarimizga yetkazib berish (Qorako'l va Olot tumanlari bo'ylab) va o'rnatish (montaj) mutlaqo bepul! \n\nMahsulotlar va ularning narxlari bilan tanishish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 78 555-17-77 yoki +998 94 529-07-07",
+        "time": 1791355032
+      }
+    ],
+    "last_activity": 1791355032
   }
 }
