@@ -1997,9 +1997,19 @@
         "role": "assistant",
         "text": "Assalomu alaykum! \n\nBu bo'yicha aniq ma'lumotga ega emasman. Qo'shimcha ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki Telegram orqali: @aksouz.",
         "time": 1791357010
+      },
+      {
+        "role": "user",
+        "text": "Raxmat",
+        "time": 1791357042
+      },
+      {
+        "role": "assistant",
+        "text": "Arzimaydi! Yana qanday savollaringiz bor? Sizga yordam berishdan mamnunman!",
+        "time": 1791357043
       }
     ],
-    "last_activity": 1791357010
+    "last_activity": 1791357043
   },
   "1082388939:1082388939": {
     "chat_id": 1082388939,
