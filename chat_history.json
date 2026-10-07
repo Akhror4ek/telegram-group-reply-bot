@@ -2283,5 +2283,24 @@
       }
     ],
     "last_activity": 1791346464
+  },
+  "-1001865736985:5410485269": {
+    "chat_id": -1001865736985,
+    "user_id": 5410485269,
+    "full_name": "IBROHIMBEK",
+    "username": "AbbosbekIrodaIbrohim",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Salomalekum sipalni bormi",
+        "time": 1791352842
+      },
+      {
+        "role": "assistant",
+        "text": "Vaalaykum assalom! \n\n\"Sipalni\" deganda nimani nazarda tutayotganingizni to'shak (spalniy mebel) yoki boshqa mahsulotni so'rayotganingizni aniqlashtirsangiz yaxshi bo'lardi. \n\nAgar savolingiz bo'yicha aniqlik kiritish kerak bo'lsa yoki batafsil ma'lumot olishni istasangiz, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki umumiy raqamimiz: +998 78 555-17-77.",
+        "time": 1791352845
+      }
+    ],
+    "last_activity": 1791352845
   }
 }
