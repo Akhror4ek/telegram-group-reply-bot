@@ -2270,8 +2270,18 @@
         "role": "assistant",
         "text": "Ва alaykum assalom! \n\nHa, oshxona to‘plamlari (kuxni набор) mavjud. \n\nSizga qanday dizayn, o'lcham yoki turdagi oshxona mebeli kerakligini aniqlashtirsak, yoki to'liqroq ma'lumot olish uchun operatorimizga bog'lanishingiz mumkin:\n📞 +998 78 555-17-77\n📱 +998 94 529-07-07",
         "time": 1791346423
+      },
+      {
+        "role": "user",
+        "text": "Расмларини ташанг ушанга караб буйиртма берардим",
+        "time": 1791346462
+      },
+      {
+        "role": "assistant",
+        "text": "Tushundim. Afsuski, hozircha chat orqali tayyor rasmlarni yubora olmayman. \n\nBarcha modellarimiz va ularning turlari bilan tanishish hamda buyurtma berish uchun Shersaxiy bozori yonidagi (stoyanka oldi) do'konimizga tashrif buyurishingizni so'raymiz. \n\nShuningdek, batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 78 555-17-77\n📱 +998 94 529-07-07",
+        "time": 1791346464
       }
     ],
-    "last_activity": 1791346423
+    "last_activity": 1791346464
   }
 }
