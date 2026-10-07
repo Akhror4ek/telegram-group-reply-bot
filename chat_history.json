@@ -2254,5 +2254,24 @@
       }
     ],
     "last_activity": 1791294042
+  },
+  "-1001865736985:5697295892": {
+    "chat_id": -1001865736985,
+    "user_id": 5697295892,
+    "full_name": "Gulchehra Baxshilloyeva",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Салом кух ни набор лар борми",
+        "time": 1791346421
+      },
+      {
+        "role": "assistant",
+        "text": "Ва alaykum assalom! \n\nHa, oshxona to‘plamlari (kuxni набор) mavjud. \n\nSizga qanday dizayn, o'lcham yoki turdagi oshxona mebeli kerakligini aniqlashtirsak, yoki to'liqroq ma'lumot olish uchun operatorimizga bog'lanishingiz mumkin:\n📞 +998 78 555-17-77\n📱 +998 94 529-07-07",
+        "time": 1791346423
+      }
+    ],
+    "last_activity": 1791346423
   }
 }
