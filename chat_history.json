@@ -2457,5 +2457,24 @@
       }
     ],
     "last_activity": 1791430193
+  },
+  "-1001865736985:777000": {
+    "chat_id": -1001865736985,
+    "user_id": 777000,
+    "full_name": "Telegram",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "🛋️ AKSO mebel do‘koniga SOTUVCHI kerak!\n\n👤 Lavozim: Sotuvchi\n💰 Maosh: Kelishilgan holda\n\n⏰ Ish vaqti: 09:00–19:00\n📍 Manzil: Qorako‘l shahri, Shersaxiy bozori yonida\n\n🎯 Talablar:\n• Mijozlar bilan yaxshi muloqot qila olish\n• Sotuvga qiziqishi bo‘lish\n• Faol, mas’uliyatli va intiluvchan\n• Xushmuomala va ozoda bo‘lish\n• Jamoa bilan ishlay olish\n• Mebel mahsulotlariga qiziqish\n• Tajriba bo‘lsa — afzallik\n\nAloqa uchun: +998 88 394 7777 \n+998 99 073 4262",
+        "time": 1791437702
+      },
+      {
+        "role": "assistant",
+        "text": "Vakansiya bo'yicha batafsil ma'lumot olish yoki bog'lanish uchun e'londa ko'rsatilgan raqamlarga murojaat qilishingiz mumkin: \n📞 +998 88 394 7777 \n📞 +998 99 073 4262",
+        "time": 1791437707
+      }
+    ],
+    "last_activity": 1791437707
   }
 }
