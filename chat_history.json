@@ -2528,5 +2528,24 @@
       }
     ],
     "last_activity": 1791465086
+  },
+  "-1001865736985:784127280": {
+    "chat_id": -1001865736985,
+    "user_id": 784127280,
+    "full_name": "☝️❤",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu aleykum sizlarda gazli bilan kuxna nabor bormi",
+        "time": 1791467497
+      },
+      {
+        "role": "assistant",
+        "text": "Ваalaykum assalom! \n\nHa, bizda oshxona jihozlari va to'plamlari mavjud. Aniqroq ma'lumot olish yoki sizga mos variantlarni ko'rib chiqish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07\n\nYoki bizning telegram kanalimizga yozing: @aksouz",
+        "time": 1791467499
+      }
+    ],
+    "last_activity": 1791467499
   }
 }
