@@ -2449,8 +2449,13 @@
         "role": "assistant",
         "text": "Tushunarli. Bizda bo'lib to'lash xizmati mavjud (3 oy — 0% ustama, 6 oy va 12 oy shartlari bor, faqat pasport talab qilinadi). \n\nBiroq, oylik to'lov miqdori va shartlari siz tanlagan mahsulotga bog'liq. Qaysi mahsulotni xarid qilmoqchisiz? \n\nAniqroq ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998 94 529-07-07 yoki +998 78 555-17-77",
         "time": 1791430082
+      },
+      {
+        "role": "user",
+        "text": "Гиламларни расмини ташланг курайлик",
+        "time": 1791430193
       }
     ],
-    "last_activity": 1791430082
+    "last_activity": 1791430193
   }
 }
