@@ -1901,9 +1901,14 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nBizda telefonlar mavjud emas. Maishiy texnika va boshqa kerakli mahsulotlar bo'yicha yordam bera olaman. Savollaringiz bo'lsa, bemalol murojaat qiling!",
         "time": 1791276546
+      },
+      {
+        "role": "user",
+        "text": "Stol kerak",
+        "time": 1791425110
       }
     ],
-    "last_activity": 1791276546
+    "last_activity": 1791425110
   },
   "786636866:786636866": {
     "chat_id": 786636866,
