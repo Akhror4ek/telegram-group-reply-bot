@@ -2495,5 +2495,19 @@
       }
     ],
     "last_activity": 1791444558
+  },
+  "-1001865736985:249029229": {
+    "chat_id": -1001865736985,
+    "user_id": 249029229,
+    "full_name": "BILOLXO'JA",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Oshxona mebeli",
+        "time": 1791450994
+      }
+    ],
+    "last_activity": 1791450994
   }
 }
