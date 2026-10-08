@@ -1354,9 +1354,19 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nMahsulotlarimiz bilan batafsil tanishish va sizga mos variantlarni tanlash uchun operatorimizga murojaat qilishingizni tavsiya qilaman:\n📞 +998 94 529-07-07\nTelegram: @aksouz",
         "time": 1790653966
+      },
+      {
+        "role": "user",
+        "text": "https://youtube.com/@durdonajoraqulova-p7s?si=HIRPZ2jqcuJQjtwu",
+        "time": 1791472478
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchiman. Sizga qanday yordam bera olaman? \n\nAgar savollaringiz bo'lsa, bemalol murojaat qilishingiz mumkin!",
+        "time": 1791472480
       }
     ],
-    "last_activity": 1790653966
+    "last_activity": 1791472480
   },
   "-1001865736985:7302884168": {
     "chat_id": -1001865736985,
