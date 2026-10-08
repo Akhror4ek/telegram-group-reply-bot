@@ -2476,5 +2476,24 @@
       }
     ],
     "last_activity": 1791437707
+  },
+  "-1001865736985:7383864623": {
+    "chat_id": -1001865736985,
+    "user_id": 7383864623,
+    "full_name": "Muhiba Nayimova",
+    "username": "DShMMS",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum poluavtamat kir moshina 8 kilolik qancha",
+        "time": 1791444557
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nMahsulotlarimizning narxlari bo'yicha aniq ma'lumot olish yoki buyurtma berish uchun iltimos, operatorimizga murojaat qiling:\n📞 +998 94 529-07-07",
+        "time": 1791444558
+      }
+    ],
+    "last_activity": 1791444558
   }
 }
