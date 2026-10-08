@@ -2404,5 +2404,19 @@
       }
     ],
     "last_activity": 1791381587
+  },
+  "-1001865736985:7758701389": {
+    "chat_id": -1001865736985,
+    "user_id": 7758701389,
+    "full_name": "17baxronov🕸️",
+    "username": "baxronov_jasurbek",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Televizor bormi",
+        "time": 1791429276
+      }
+    ],
+    "last_activity": 1791429276
   }
 }
