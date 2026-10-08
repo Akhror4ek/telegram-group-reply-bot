@@ -2415,8 +2415,13 @@
         "role": "user",
         "text": "Televizor bormi",
         "time": 1791429276
+      },
+      {
+        "role": "user",
+        "text": "Samsung katta televizor yoʻqmi",
+        "time": 1791429309
       }
     ],
-    "last_activity": 1791429276
+    "last_activity": 1791429309
   }
 }
