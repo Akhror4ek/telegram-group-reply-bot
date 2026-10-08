@@ -2544,8 +2544,18 @@
         "role": "assistant",
         "text": "Ваalaykum assalom! \n\nHa, bizda oshxona jihozlari va to'plamlari mavjud. Aniqroq ma'lumot olish yoki sizga mos variantlarni ko'rib chiqish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998-94-529-07-07\n\nYoki bizning telegram kanalimizga yozing: @aksouz",
         "time": 1791467499
+      },
+      {
+        "role": "user",
+        "text": "Bulsa surat narxi bilan tashlang",
+        "time": 1791467513
+      },
+      {
+        "role": "assistant",
+        "text": "Oddiy suhbatda mahsulot rasmi va narxini yubormaymiz. \n\nTo'liq ma'lumot olish va narxlarni bilish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07\nTelegram: @aksouz",
+        "time": 1791467515
       }
     ],
-    "last_activity": 1791467499
+    "last_activity": 1791467515
   }
 }
