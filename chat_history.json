@@ -2567,5 +2567,24 @@
       }
     ],
     "last_activity": 1791467515
+  },
+  "-1001865736985:1217598176": {
+    "chat_id": -1001865736985,
+    "user_id": 1217598176,
+    "full_name": "ЗИЛОЛА БОЛТАЕВА",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "ХАЛАДЕЛНИКЛАР.  КАТТА ЛАРИ.",
+        "time": 1791491876
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nKatta hajmdagi muzlatgichlarimiz mavjud. To'liq ma'lumot olish yoki tanlovda yordamlashish uchun operatorimizga bog'lanishingiz mumkin:\n📞 +998 78 555-17-77\n📱 +998 94 529-07-07\n\nYetkazib berish va montaj qilish xizmatlarimiz mutlaqo bepul!",
+        "time": 1791491879
+      }
+    ],
+    "last_activity": 1791491879
   }
 }
