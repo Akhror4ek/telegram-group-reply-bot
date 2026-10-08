@@ -2520,8 +2520,13 @@
         "role": "user",
         "text": "Hhjuu",
         "time": 1791465079
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman? Do'konimiz, mahsulotlar yoki shartlar haqida savollaringiz bo'lsa, bemalol murojaat qilishingiz mumkin.",
+        "time": 1791465086
       }
     ],
-    "last_activity": 1791465079
+    "last_activity": 1791465086
   }
 }
