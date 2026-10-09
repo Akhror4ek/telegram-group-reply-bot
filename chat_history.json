@@ -2654,5 +2654,24 @@
       }
     ],
     "last_activity": 1791515503
+  },
+  "-1001865736985:6878432039": {
+    "chat_id": -1001865736985,
+    "user_id": 6878432039,
+    "full_name": "Sayidova N.E.",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Kuxniya mebellarni rasmlaridan tashlanglar iltimos narxlari bilan",
+        "time": 1791520457
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nAfsuski, hozircha oddiy suhbatda rasm va narxlarni to'g'ridan-to'g'ri taqdim eta olmayman. \n\nBatafsil ma'lumot olish yoki mahsulotlarimiz bilan tanishish uchun operatorimizga murojaat qilishingizni tavsiya qilaman: \n📞 +998 94 529-07-07\n\nYoki telegram kanalimizga yozishingiz mumkin: @aksouz",
+        "time": 1791520459
+      }
+    ],
+    "last_activity": 1791520459
   }
 }
