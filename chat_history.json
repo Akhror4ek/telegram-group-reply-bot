@@ -2694,8 +2694,13 @@
         "role": "user",
         "text": "Shifaner",
         "time": 1791524212
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli! Shifanerlarimiz bilan yaqindan tanishish yoki o'zingizga mos modelni tanlash uchun Shersaxiy bozori yonidagi do'konimizga tashrif buyurishingiz mumkin (mo'ljal: Shersaxiy stoyanka oldi). \n\nShuningdek, batafsil ma'lumot olish uchun operatorimiz bilan bog'lanishingiz mumkin:\n📞 +998-94-529-07-07\n\nIsh vaqtimiz: Har kuni, dam olish kunlarisiz, 08:00 dan 20:00 gacha.",
+        "time": 1791524219
       }
     ],
-    "last_activity": 1791524212
+    "last_activity": 1791524219
   }
 }
