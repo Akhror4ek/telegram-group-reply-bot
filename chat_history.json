@@ -2707,5 +2707,24 @@
       }
     ],
     "last_activity": 1791524224
+  },
+  "-1001865736985:8967758586": {
+    "chat_id": -1001865736985,
+    "user_id": 8967758586,
+    "full_name": "♾️",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Kirmoshina kerak",
+        "time": 1791524353
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alum! AKSO do'koniga xush kelibsiz. \n\nBizda kir yuvish mashinalari mavjud. Barcha mahsulotlarimizga yetkazib berish (Qorako'l va Olot tumanlari bo'ylab) hamda o'rnatish (montaj) mutlaqo bepul! Shuningdek, naqd, karta va bo'lib to'lash imkoniyatlari ham bor.\n\nQaysi turdagi yoki rusumdagi kir yuvish mashinasi qiziqtiryapti? Yoki batafsil ma'lumot olish uchun operatorimizga bog'lanishingiz mumkin: +998-94-529-07-07",
+        "time": 1791524355
+      }
+    ],
+    "last_activity": 1791524355
   }
 }
