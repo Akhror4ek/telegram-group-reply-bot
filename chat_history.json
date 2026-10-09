@@ -2612,8 +2612,18 @@
         "role": "assistant",
         "text": "Va alaykum assalom! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
         "time": 1791507894
+      },
+      {
+        "role": "user",
+        "text": "Kandidsanerla nechi pul ekan",
+        "time": 1791507924
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! Narxlar mahsulotning modeliga va turiga qarab farq qiladi. \n\nAniq narxlarni bilish va o'zingizga mos konditsionerni tanlash uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki Telegram orqali @aksouz. Yoki Shersaxiy bozori yonidagi do'konimizga tashrif buyuring!",
+        "time": 1791507925
       }
     ],
-    "last_activity": 1791507894
+    "last_activity": 1791507925
   }
 }
