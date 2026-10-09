@@ -2783,5 +2783,19 @@
       }
     ],
     "last_activity": 1791538761
+  },
+  "-1001865736985:7197214407": {
+    "chat_id": -1001865736985,
+    "user_id": 7197214407,
+    "full_name": "Hilola Abdurashid qizi",
+    "username": "Hilola1915",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Avtomat kir yuvish mashinasi",
+        "time": 1791539444
+      }
+    ],
+    "last_activity": 1791539444
   }
 }
