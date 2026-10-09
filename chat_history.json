@@ -2586,5 +2586,24 @@
       }
     ],
     "last_activity": 1791491879
+  },
+  "-1001865736985:6046545160": {
+    "chat_id": -1001865736985,
+    "user_id": 6046545160,
+    "full_name": "Nodirabegim",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Yaxshi",
+        "time": 1791507868
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomiz alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
+        "time": 1791507870
+      }
+    ],
+    "last_activity": 1791507870
   }
 }
