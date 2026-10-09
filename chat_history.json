@@ -2635,5 +2635,24 @@
       }
     ],
     "last_activity": 1791507963
+  },
+  "-1001865736985:8348223575": {
+    "chat_id": -1001865736985,
+    "user_id": 8348223575,
+    "full_name": "Muhabbat Tohir Qizi",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Xkir mashina 6kgli qancha turafi",
+        "time": 1791515501
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nMahsulotlarimizning narxlari haqida aniq ma'lumot berish va sizga to'g'ri tanlov qilishda yordam berish uchun operatorimizga murojaat qilishingizni tavsiya qilaman. \n\nOperator raqami: +998-94-529-07-07\nYoki Telegram orqali yozishingiz mumkin: @aksouz",
+        "time": 1791515503
+      }
+    ],
+    "last_activity": 1791515503
   }
 }
