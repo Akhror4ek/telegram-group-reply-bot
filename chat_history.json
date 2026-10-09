@@ -2726,5 +2726,24 @@
       }
     ],
     "last_activity": 1791524355
+  },
+  "-1001865736985:8935859103": {
+    "chat_id": -1001865736985,
+    "user_id": 8935859103,
+    "full_name": "Said Umar",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "osh xana ugalovnik bormo",
+        "time": 1791527839
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alom! AKSO do'koniga xush kelibsiz. \n\nOshxona uchun burchak (uglovoy) jihozlarimiz mavjud. Batafsil ma'lumot olish yoki mahsulotlarimiz bilan tanishish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 94 529-07-07 yoki Telegram: @aksouz",
+        "time": 1791527842
+      }
+    ],
+    "last_activity": 1791527842
   }
 }
