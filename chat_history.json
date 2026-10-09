@@ -2745,5 +2745,24 @@
       }
     ],
     "last_activity": 1791527842
+  },
+  "-1001865736985:1805356553": {
+    "chat_id": -1001865736985,
+    "user_id": 1805356553,
+    "full_name": "SHоdiya",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "3.5 Mtlik ugaloklar yaxshidan bormi",
+        "time": 1791535358
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nSavolingiz bo'yicha aniq ma'lumot olish uchun operatorimizga murojaat qilishingizni tavsiya qilaman: \n📞 +998 94 529-07-07\n\nYoki umumiy savollar bo'yicha do'konimizga tashrif buyurishingiz mumkin. Manzilimiz: Shersaxiy bozori yoni (Shersaxiy stoyanka oldi). Ish vaqtimiz: har kuni 08:00 dan 20:00 gacha.",
+        "time": 1791535360
+      }
+    ],
+    "last_activity": 1791535360
   }
 }
