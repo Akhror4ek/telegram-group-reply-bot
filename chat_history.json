@@ -2764,5 +2764,24 @@
       }
     ],
     "last_activity": 1791535360
+  },
+  "-1001865736985:8809051046": {
+    "chat_id": -1001865736985,
+    "user_id": 8809051046,
+    "full_name": "javlon rasulov",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Arestonlari narxini tashlap yuboringlar",
+        "time": 1791538760
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alum! AKSO do'koniga xush kelibsiz. \n\nNarxlar va bo'lib to'lash shartlari bo'yicha batafsil ma'lumot olish uchun operatorimizga bog'lanishingizni tavsiya qilaman:\n📞 +998 94 529-07-07 yoki Telegram: @aksouz",
+        "time": 1791538761
+      }
+    ],
+    "last_activity": 1791538761
   }
 }
