@@ -2673,5 +2673,19 @@
       }
     ],
     "last_activity": 1791520459
+  },
+  "-1001865736985:649445437": {
+    "chat_id": -1001865736985,
+    "user_id": 649445437,
+    "full_name": "Dilobar Azamatovna",
+    "username": "dilosh1910",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Shifaner bormi",
+        "time": 1791524188
+      }
+    ],
+    "last_activity": 1791524188
   }
 }
