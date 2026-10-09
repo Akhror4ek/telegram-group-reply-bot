@@ -2794,8 +2794,18 @@
         "role": "user",
         "text": "Avtomat kir yuvish mashinasi",
         "time": 1791539444
+      },
+      {
+        "role": "user",
+        "text": "7kg",
+        "time": 1791539474
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konida 7 kg li avtomat kir yuvish mashinalari mavjud. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 Telefon: +998 78 555-17-77 yoki +998 94 529-07-07\n💬 Telegram: @aksouz",
+        "time": 1791539475
       }
     ],
-    "last_activity": 1791539444
+    "last_activity": 1791539475
   }
 }
