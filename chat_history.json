@@ -2602,8 +2602,18 @@
         "role": "assistant",
         "text": "Assalomiz alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
         "time": 1791507870
+      },
+      {
+        "role": "user",
+        "text": "Assalomu alaykum",
+        "time": 1791507893
+      },
+      {
+        "role": "assistant",
+        "text": "Va alaykum assalom! AKSO do'koniga xush kelibsiz. Sizga qanday yordam bera olaman?",
+        "time": 1791507894
       }
     ],
-    "last_activity": 1791507870
+    "last_activity": 1791507894
   }
 }
