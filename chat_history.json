@@ -2689,8 +2689,13 @@
         "role": "assistant",
         "text": "Assalomu alomaykum! AKSO do'koniga xush kelibsiz. \n\nHa, bizda shifanerlar mavjud. To'liqroq ma'lumot olish yoki sizga mos variantlarni tanlash uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07\n\nYoki bizga Shersaxiy bozori yonidagi do'konimizga tashrif buyuring!",
         "time": 1791524198
+      },
+      {
+        "role": "user",
+        "text": "Shifaner",
+        "time": 1791524212
       }
     ],
-    "last_activity": 1791524198
+    "last_activity": 1791524212
   }
 }
