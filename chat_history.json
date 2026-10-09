@@ -2622,8 +2622,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! Narxlar mahsulotning modeliga va turiga qarab farq qiladi. \n\nAniq narxlarni bilish va o'zingizga mos konditsionerni tanlash uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki Telegram orqali @aksouz. Yoki Shersaxiy bozori yonidagi do'konimizga tashrif buyuring!",
         "time": 1791507925
+      },
+      {
+        "role": "user",
+        "text": "🆗",
+        "time": 1791507962
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli! Yana qanday savollaringiz bor? Sizga yordam berishdan mamnuniyat tuyaman!",
+        "time": 1791507963
       }
     ],
-    "last_activity": 1791507925
+    "last_activity": 1791507963
   }
 }
