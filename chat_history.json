@@ -2826,5 +2826,24 @@
       }
     ],
     "last_activity": 1791588575
+  },
+  "-1001865736985:8255778331": {
+    "chat_id": -1001865736985,
+    "user_id": 8255778331,
+    "full_name": ".",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Iphone telefonlar bormi",
+        "time": 1791594582
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alohida! \n\nAfsuski, menda bu ma'lumot yo'q. Aniqroq ma'lumot olish uchun operatorimizga murojaat qilishingizni tavsiya qilaman: +998-94-529-07-07 yoki +998 78 555-17-77.",
+        "time": 1791594583
+      }
+    ],
+    "last_activity": 1791594583
   }
 }
