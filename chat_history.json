@@ -2681,9 +2681,14 @@
         "role": "assistant",
         "text": "Arzimaydi! Sizga yana qanday yordam bera olaman?",
         "time": 1791606780
+      },
+      {
+        "role": "user",
+        "text": "Aksiýaďà qnďay ķir ýùŵish maßĥìñalaŕì bor ďemòqßĥi mañ",
+        "time": 1791607052
       }
     ],
-    "last_activity": 1791606780
+    "last_activity": 1791607052
   },
   "-1001865736985:6878432039": {
     "chat_id": -1001865736985,
