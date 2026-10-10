@@ -2661,9 +2661,19 @@
         "role": "assistant",
         "text": "Assalomu alumm! Kir yuvish mashinasi kerak ekansiz. \n\nSizga qanday turdagi (masalan, yuklama hajmi yoki rusumi bo'yicha) kir yuvish mashinasi kerakligini aniqlashtirishimiz uchun operatorimizga murojaat qilishingizni tavsiya qilaman. \n\nOperator bilan bog'lanish uchun telefon: **+998 94 529-07-07** yoki **+998 78 555-17-77**",
         "time": 1791606631
+      },
+      {
+        "role": "user",
+        "text": "94529 0707",
+        "time": 1791606719
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli! Operatorimiz bilan bog'lanish uchun telefon raqami: **+998 94 529-07-07**\n\nUlar sizga kir yuvish mashinalari bo'yicha batafsil ma'lumot berib, tanlashda yordam berishadi. Yana qanday savollaringiz bor?",
+        "time": 1791606720
       }
     ],
-    "last_activity": 1791606631
+    "last_activity": 1791606720
   },
   "-1001865736985:6878432039": {
     "chat_id": -1001865736985,
