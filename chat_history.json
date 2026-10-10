@@ -2671,9 +2671,19 @@
         "role": "assistant",
         "text": "Tushunarli! Operatorimiz bilan bog'lanish uchun telefon raqami: **+998 94 529-07-07**\n\nUlar sizga kir yuvish mashinalari bo'yicha batafsil ma'lumot berib, tanlashda yordam berishadi. Yana qanday savollaringiz bor?",
         "time": 1791606720
+      },
+      {
+        "role": "user",
+        "text": "Ŕàxmàt",
+        "time": 1791606778
+      },
+      {
+        "role": "assistant",
+        "text": "Arzimaydi! Sizga yana qanday yordam bera olaman?",
+        "time": 1791606780
       }
     ],
-    "last_activity": 1791606720
+    "last_activity": 1791606780
   },
   "-1001865736985:6878432039": {
     "chat_id": -1001865736985,
