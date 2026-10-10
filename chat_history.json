@@ -2691,9 +2691,19 @@
         "role": "assistant",
         "text": "Assalomu alaykum! \n\nAksiyadagi kir yuvish mashinalari va ularning turlari haqida aniq ma'lumot olish hamda buyurtma berish uchun operatorimizga murojaat qilishingizni so'raymiz:\n📞 **+998 94 529-07-07**\n\nYoki biz bilan Telegram orqali bog'lanishingiz mumkin: **@aksouz**",
         "time": 1791607064
+      },
+      {
+        "role": "user",
+        "text": "9ŕ ⁵ŵ9 ⁰7 ⁰7",
+        "time": 1791607181
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. \n\nSiz operatorimizning raqamini yozdingiz (`+998 94 529-07-07`). Savollaringiz bo'lsa, bemalol murojaat qilishingiz mumkin!",
+        "time": 1791607183
       }
     ],
-    "last_activity": 1791607064
+    "last_activity": 1791607183
   },
   "-1001865736985:6878432039": {
     "chat_id": -1001865736985,
