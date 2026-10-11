@@ -2906,8 +2906,18 @@
         "role": "user",
         "text": "Dars stol stuli 1kishilik",
         "time": 1791732343
+      },
+      {
+        "role": "user",
+        "text": "Naxtga 500.000",
+        "time": 1791732362
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli. Naqd puldagi narxlar va jami bo'lib to'lash summasini aytmaymiz. \n\nAgar sizda AKSO do'konimizdagi dars stol-stullari, ularning bo'lib to'lash shartlari yoki boshqa xizmatlarimiz (bepul yetkazib berish va montaj) bo'yicha savollar bo'lsa, bemalol murojaat qilishingiz mumkin! \n\nBatafsil ma'lumot olish uchun operatorimiz bilan bog'lanishingiz mumkin: \n📞 +998 94 529-07-07\nYoki umumiy raqam: +998 78 555-17-77",
+        "time": 1791732364
       }
     ],
-    "last_activity": 1791732343
+    "last_activity": 1791732364
   }
 }
