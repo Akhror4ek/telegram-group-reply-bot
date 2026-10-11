@@ -2916,8 +2916,18 @@
         "role": "assistant",
         "text": "Tushunarli. Naqd puldagi narxlar va jami bo'lib to'lash summasini aytmaymiz. \n\nAgar sizda AKSO do'konimizdagi dars stol-stullari, ularning bo'lib to'lash shartlari yoki boshqa xizmatlarimiz (bepul yetkazib berish va montaj) bo'yicha savollar bo'lsa, bemalol murojaat qilishingiz mumkin! \n\nBatafsil ma'lumot olish uchun operatorimiz bilan bog'lanishingiz mumkin: \n📞 +998 94 529-07-07\nYoki umumiy raqam: +998 78 555-17-77",
         "time": 1791732364
+      },
+      {
+        "role": "user",
+        "text": "Tashlaber",
+        "time": 1791732379
+      },
+      {
+        "role": "assistant",
+        "text": "Kechirasiz, oddiy suhbatga mahsulot rasmini yubormaymiz. \n\nAgar mahsulotlarimiz, ularning turlari yoki bo'lib to'lash shartlari (pasport bilan, 3, 6, 12 oygacha) haqida savolingiz bo'lsa, bemalol so'rashingiz mumkin. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 94 529-07-07\n📞 +998 78 555-17-77",
+        "time": 1791732380
       }
     ],
-    "last_activity": 1791732364
+    "last_activity": 1791732380
   }
 }
