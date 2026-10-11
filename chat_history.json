@@ -2895,5 +2895,19 @@
       }
     ],
     "last_activity": 1791594583
+  },
+  "8970919290:8970919290": {
+    "chat_id": 8970919290,
+    "user_id": 8970919290,
+    "full_name": "S M",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Dars stol stuli 1kishilik",
+        "time": 1791732343
+      }
+    ],
+    "last_activity": 1791732343
   }
 }
