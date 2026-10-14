@@ -1155,9 +1155,14 @@
         "role": "user",
         "text": "Necci oyda tolaw kerak",
         "time": 1791973363
+      },
+      {
+        "role": "user",
+        "text": "Oyna ustal olmoqciman bo'lib tolawga necpul",
+        "time": 1791976308
       }
     ],
-    "last_activity": 1791973363
+    "last_activity": 1791976308
   },
   "-1001865736985:5910589213": {
     "chat_id": -1001865736985,
