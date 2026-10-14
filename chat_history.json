@@ -1145,9 +1145,14 @@
         "role": "assistant",
         "text": "Bo'lib to'lash shartlari va oylik to'lov miqdori mahsulotning turiga qarab farq qiladi. Bo'lib to'lash uchun faqat pasport talab etiladi. \n\nTo'liq ma'lumot olish yoki o'zingizga kerakli mahsulotni tanlash uchun operatorimizga murojaat qilishingizni so'raymiz: \n📞 +998-94-529-07-07 yoki +998 78 555-17-77.",
         "time": 1790224899
+      },
+      {
+        "role": "user",
+        "text": "Oyna ustal olmoqciman bo'lib tolawga necpul dan to'g'ri keladi",
+        "time": 1791973343
       }
     ],
-    "last_activity": 1790224899
+    "last_activity": 1791973343
   },
   "-1001865736985:5910589213": {
     "chat_id": -1001865736985,
