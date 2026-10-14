@@ -2657,9 +2657,14 @@
         "role": "assistant",
         "text": "Tushunarli! Yana qanday savollaringiz bor? Sizga yordam berishdan mamnuniyat tuyaman!",
         "time": 1791507963
+      },
+      {
+        "role": "user",
+        "text": "Assalomu alaykum kanditsanerla nechi pul ekan",
+        "time": 1791974120
       }
     ],
-    "last_activity": 1791507963
+    "last_activity": 1791974120
   },
   "-1001865736985:8348223575": {
     "chat_id": -1001865736985,
