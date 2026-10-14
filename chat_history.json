@@ -104,9 +104,14 @@
         "role": "assistant",
         "text": "Assalomu alum! AKSO do'koniga xush kelibsiz. \n\nSizga \"Classic\" yo'nalishidagi qaysi mahsulot kerak edi? Yoki savollaringiz bormi?",
         "time": 1791956377
+      },
+      {
+        "role": "user",
+        "text": "Classic divan",
+        "time": 1791956387
       }
     ],
-    "last_activity": 1791956377
+    "last_activity": 1791956387
   },
   "8520907481:8520907481": {
     "chat_id": 8520907481,
