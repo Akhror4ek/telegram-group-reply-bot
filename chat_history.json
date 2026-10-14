@@ -94,9 +94,19 @@
         "role": "user",
         "text": "Kuller",
         "time": 1790054842
+      },
+      {
+        "role": "user",
+        "text": "Classic",
+        "time": 1791956375
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alum! AKSO do'koniga xush kelibsiz. \n\nSizga \"Classic\" yo'nalishidagi qaysi mahsulot kerak edi? Yoki savollaringiz bormi?",
+        "time": 1791956377
       }
     ],
-    "last_activity": 1790054842
+    "last_activity": 1791956377
   },
   "8520907481:8520907481": {
     "chat_id": 8520907481,
