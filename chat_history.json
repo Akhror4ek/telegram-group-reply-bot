@@ -2988,5 +2988,19 @@
       }
     ],
     "last_activity": 1791975062
+  },
+  "-1001865736985:7755540915": {
+    "chat_id": -1001865736985,
+    "user_id": 7755540915,
+    "full_name": "Guli",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Kir mashina",
+        "time": 1792046165
+      }
+    ],
+    "last_activity": 1792046165
   }
 }
