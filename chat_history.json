@@ -3002,5 +3002,19 @@
       }
     ],
     "last_activity": 1792046165
+  },
+  "-1001865736985:6734584943": {
+    "chat_id": -1001865736985,
+    "user_id": 6734584943,
+    "full_name": "SULTONOVA SVETLANA Lana",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "https://t.me/sveta_geenleaf",
+        "time": 1792078052
+      }
+    ],
+    "last_activity": 1792078052
   }
 }
