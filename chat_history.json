@@ -3069,8 +3069,13 @@
         "role": "user",
         "text": "2kishilik divan garniturlari bilan",
         "time": 1792150813
+      },
+      {
+        "role": "user",
+        "text": "2kishilik",
+        "time": 1792150859
       }
     ],
-    "last_activity": 1792150813
+    "last_activity": 1792150859
   }
 }
