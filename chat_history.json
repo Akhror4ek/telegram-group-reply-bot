@@ -3030,5 +3030,19 @@
       }
     ],
     "last_activity": 1792118277
+  },
+  "1728312875:1728312875": {
+    "chat_id": 1728312875,
+    "user_id": 1728312875,
+    "full_name": "Ozod Ergashev",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Spalni kamplekt",
+        "time": 1792139155
+      }
+    ],
+    "last_activity": 1792139155
   }
 }
