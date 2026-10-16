@@ -3044,5 +3044,19 @@
       }
     ],
     "last_activity": 1792139155
+  },
+  "-1001865736985:1162148231": {
+    "chat_id": -1001865736985,
+    "user_id": 1162148231,
+    "full_name": "YULDUZ ASROROVNA",
+    "username": "Hayitovafaberlic",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum plisos kerak edi qanaqa xillari bor",
+        "time": 1792145493
+      }
+    ],
+    "last_activity": 1792145493
   }
 }
