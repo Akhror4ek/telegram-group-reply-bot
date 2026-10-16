@@ -3079,8 +3079,18 @@
         "role": "user",
         "text": "2kishilik spalni",
         "time": 1792150895
+      },
+      {
+        "role": "user",
+        "text": "Raxmat",
+        "time": 1792150938
+      },
+      {
+        "role": "assistant",
+        "text": "Arzimaydi! Sizga yana qanday yordam bera olaman? \n\nAgar savollaringiz bo'lsa, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1792150941
       }
     ],
-    "last_activity": 1792150895
+    "last_activity": 1792150941
   }
 }
