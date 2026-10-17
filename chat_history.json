@@ -3092,5 +3092,19 @@
       }
     ],
     "last_activity": 1792150941
+  },
+  "-1001865736985:7676284875": {
+    "chat_id": -1001865736985,
+    "user_id": 7676284875,
+    "full_name": "Hafizov Alisher la xavla vala kuvvata illa billax",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "https://t.me/Qarakol0898989",
+        "time": 1792232728
+      }
+    ],
+    "last_activity": 1792232728
   }
 }
