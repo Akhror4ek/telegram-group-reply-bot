@@ -3106,5 +3106,19 @@
       }
     ],
     "last_activity": 1792232728
+  },
+  "-1001865736985:5467619774": {
+    "chat_id": -1001865736985,
+    "user_id": 5467619774,
+    "full_name": "Narzullayeva",
+    "username": "Dili122698",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalom aleykum shundan bormi",
+        "time": 1792255321
+      }
+    ],
+    "last_activity": 1792255321
   }
 }
