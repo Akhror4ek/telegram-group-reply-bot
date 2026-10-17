@@ -3150,8 +3150,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nBolalar belanchaklari bo'yicha ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
         "time": 1792256209
+      },
+      {
+        "role": "user",
+        "text": "Belanchak bolalar uchun",
+        "time": 1792256314
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nBolalar belanchaklari bo'yicha batafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n\n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
+        "time": 1792256316
       }
     ],
-    "last_activity": 1792256209
+    "last_activity": 1792256316
   }
 }
