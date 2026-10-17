@@ -3134,5 +3134,24 @@
       }
     ],
     "last_activity": 1792255591
+  },
+  "5467619774:5467619774": {
+    "chat_id": 5467619774,
+    "user_id": 5467619774,
+    "full_name": "Narzullayeva",
+    "username": "Dili122698",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Detski belanchak",
+        "time": 1792256208
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'koniga xush kelibsiz. \n\nBolalar belanchaklari bo'yicha ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998-94-529-07-07\n📱 Telegram: @aksouz",
+        "time": 1792256209
+      }
+    ],
+    "last_activity": 1792256209
   }
 }
