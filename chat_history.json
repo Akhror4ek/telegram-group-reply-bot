@@ -3177,5 +3177,19 @@
       }
     ],
     "last_activity": 1792293375
+  },
+  "-1001865736985:118346091": {
+    "chat_id": -1001865736985,
+    "user_id": 118346091,
+    "full_name": "Ravshanoy",
+    "username": "ravshanay4002",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum konkursda 3-oʻrinni oganidik nima boʻldi kimga telefon qilaylik",
+        "time": 1792301459
+      }
+    ],
+    "last_activity": 1792301459
   }
 }
