@@ -3114,9 +3114,14 @@
         "role": "user",
         "text": "Bolar kiyimi uchun faqat shkaf",
         "time": 1792333762
+      },
+      {
+        "role": "user",
+        "text": "Shkaf",
+        "time": 1792333798
       }
     ],
-    "last_activity": 1792333762
+    "last_activity": 1792333798
   },
   "-1001865736985:7676284875": {
     "chat_id": -1001865736985,
