@@ -3089,9 +3089,19 @@
         "role": "assistant",
         "text": "Arzimaydi! Sizga yana qanday yordam bera olaman? \n\nAgar savollaringiz bo'lsa, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1792150941
+      },
+      {
+        "role": "user",
+        "text": "Bolalarni kiyimini solish uchun",
+        "time": 1792333615
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu ajoyib! Bolalar kiyimlarini solish uchun qanday mebel qidirayotgan edingiz? Masalan, shkaf yoki komod kerakmi?\n\nAgar aniqroq savolingiz bo'lsa yoki mahsulotlarimiz bilan batafsil tanishishni istasangiz, operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07 yoki +998 78 555-17-77.",
+        "time": 1792333617
       }
     ],
-    "last_activity": 1792150941
+    "last_activity": 1792333617
   },
   "-1001865736985:7676284875": {
     "chat_id": -1001865736985,
