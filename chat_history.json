@@ -3163,5 +3163,19 @@
       }
     ],
     "last_activity": 1792256316
+  },
+  "-1001865736985:7685726160": {
+    "chat_id": -1001865736985,
+    "user_id": 7685726160,
+    "full_name": "Adolat",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum sizlarda kapilek emas sipalnini oʻzi bormi bolsa oylik toʻlovi qancha chiqadi",
+        "time": 1792293375
+      }
+    ],
+    "last_activity": 1792293375
   }
 }
