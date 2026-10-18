@@ -1175,9 +1175,14 @@
         "role": "user",
         "text": "Necpul bu",
         "time": 1792340639
+      },
+      {
+        "role": "user",
+        "text": "Buci",
+        "time": 1792340646
       }
     ],
-    "last_activity": 1792340639
+    "last_activity": 1792340646
   },
   "-1001865736985:5910589213": {
     "chat_id": -1001865736985,
