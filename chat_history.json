@@ -3251,5 +3251,19 @@
       }
     ],
     "last_activity": 1792301459
+  },
+  "-1001865736985:8808422674": {
+    "chat_id": -1001865736985,
+    "user_id": 8808422674,
+    "full_name": "Boburbek",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Salom",
+        "time": 1792403272
+      }
+    ],
+    "last_activity": 1792403272
   }
 }
