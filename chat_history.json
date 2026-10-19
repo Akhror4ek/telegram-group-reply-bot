@@ -1190,9 +1190,14 @@
         "role": "user",
         "text": "Salom necpul ekan bu parta",
         "time": 1792373128
+      },
+      {
+        "role": "user",
+        "text": "Salom wulari narxni ayting",
+        "time": 1792377656
       }
     ],
-    "last_activity": 1792373128
+    "last_activity": 1792377656
   },
   "-1001865736985:5910589213": {
     "chat_id": -1001865736985,
