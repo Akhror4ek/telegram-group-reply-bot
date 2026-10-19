@@ -1185,9 +1185,14 @@
         "role": "user",
         "text": "Buci",
         "time": 1792340646
+      },
+      {
+        "role": "user",
+        "text": "Salom necpul ekan bu parta",
+        "time": 1792373128
       }
     ],
-    "last_activity": 1792340646
+    "last_activity": 1792373128
   },
   "-1001865736985:5910589213": {
     "chat_id": -1001865736985,
