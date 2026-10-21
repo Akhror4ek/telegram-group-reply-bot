@@ -3313,5 +3313,19 @@
       }
     ],
     "last_activity": 1792429767
+  },
+  "-1001865736985:8037979677": {
+    "chat_id": -1001865736985,
+    "user_id": 8037979677,
+    "full_name": "𝑆𝑎𝑖𝑑𝑜𝑣𝑎_𝑀𝑎𝑓𝑡𝑢𝑛𝑎",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Muzlatilgan",
+        "time": 1792576513
+      }
+    ],
+    "last_activity": 1792576513
   }
 }
