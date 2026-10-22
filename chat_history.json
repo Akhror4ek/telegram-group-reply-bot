@@ -3351,5 +3351,19 @@
       }
     ],
     "last_activity": 1792648708
+  },
+  "-1001865736985:8951713996": {
+    "chat_id": -1001865736985,
+    "user_id": 8951713996,
+    "full_name": "🌙",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Bolalar uchun divanlar bormi",
+        "time": 1792674938
+      }
+    ],
+    "last_activity": 1792674938
   }
 }
