@@ -903,9 +903,14 @@
         "role": "user",
         "text": "1 kishiligi 400 ming 2 kishiligi 890 ming",
         "time": 1792379753
+      },
+      {
+        "role": "user",
+        "text": "✅✅",
+        "time": 1792651542
       }
     ],
-    "last_activity": 1792379753
+    "last_activity": 1792651542
   },
   "-1004452523372:519150987": {
     "chat_id": -1004452523372,
