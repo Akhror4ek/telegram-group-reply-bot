@@ -310,9 +310,14 @@
         "role": "assistant",
         "text": "Va alaykum assalom! \n\nHa, albatta. AKSO do'konidan xarid qilgan bo'lsangiz, Qorako'l va Olot tumanlari bo'ylab yetkazib berish (dastavka) mutlaqo bepul va hech qanday shartlarsiz amalga oshiriladi. Shuningdek, barcha mahsulotlarni o'rnatish (montaj qilish) ham bepul bajariladi. \n\nYetkazib berish vaqtini aniqlashtirish yoki boshqa savollar uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1789397677
+      },
+      {
+        "role": "user",
+        "text": "Detiski. Divanla",
+        "time": 1792739028
       }
     ],
-    "last_activity": 1789397677
+    "last_activity": 1792739028
   },
   "-1001865736985:7089319505": {
     "chat_id": -1001865736985,
