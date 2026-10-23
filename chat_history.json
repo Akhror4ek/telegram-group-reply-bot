@@ -3370,5 +3370,19 @@
       }
     ],
     "last_activity": 1792674938
+  },
+  "-1001865736985:6987616062": {
+    "chat_id": -1001865736985,
+    "user_id": 6987616062,
+    "full_name": "Samandar Sirojbek oʻgʻli",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "assalomu aleykum gaz pilitalardan b9lsa tashlang",
+        "time": 1792739784
+      }
+    ],
+    "last_activity": 1792739784
   }
 }
