@@ -3384,5 +3384,19 @@
       }
     ],
     "last_activity": 1792739784
+  },
+  "-1001865736985:1274257492": {
+    "chat_id": -1001865736985,
+    "user_id": 1274257492,
+    "full_name": "Isakova Roziya",
+    "username": "Isakova95",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum hammaga\nFaberlic maxsulotlarini katalog narxidan ichki narxda arzonga olishni oʻrgataman \nBugun 3ta 1chi yozgan qizlaga \nTekinga oʻrgataman.",
+        "time": 1792740261
+      }
+    ],
+    "last_activity": 1792740261
   }
 }
