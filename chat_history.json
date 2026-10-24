@@ -3436,5 +3436,19 @@
       }
     ],
     "last_activity": 1792812901
+  },
+  "-1001865736985:8938447370": {
+    "chat_id": -1001865736985,
+    "user_id": 8938447370,
+    "full_name": "🐯 🐯🐯",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu aleykum yaxshimisiz ugalok zalga derak edi?",
+        "time": 1792814297
+      }
+    ],
+    "last_activity": 1792814297
   }
 }
