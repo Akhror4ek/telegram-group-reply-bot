@@ -3447,8 +3447,13 @@
         "role": "user",
         "text": "Assalomu aleykum yaxshimisiz ugalok zalga derak edi?",
         "time": 1792814297
+      },
+      {
+        "role": "user",
+        "text": "1 yilga bo'lib beramanmi? Nechi pul bu ugalok",
+        "time": 1792814443
       }
     ],
-    "last_activity": 1792814297
+    "last_activity": 1792814443
   }
 }
