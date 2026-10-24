@@ -3423,8 +3423,18 @@
         "role": "user",
         "text": "Oshxona mebeli",
         "time": 1792812837
+      },
+      {
+        "role": "user",
+        "text": "3 mln 800 gacha 3x4",
+        "time": 1792812900
+      },
+      {
+        "role": "assistant",
+        "text": "Tushunarli! Oshxona mebeli bo'yicha siz ko'rsatgan narx va o'lcham bo'yicha aniq ma'lumot berishim uchun, iltimos, operatorimizga murojaat qiling. \n\nOperatorimiz sizga barcha mos variantlarni batafsil tushuntiradi:\n📞 **Telefon:** +998 78 555-17-77 yoki +998 94 529-07-07\n✈️ **Telegram:** @aksouz",
+        "time": 1792812901
       }
     ],
-    "last_activity": 1792812837
+    "last_activity": 1792812901
   }
 }
