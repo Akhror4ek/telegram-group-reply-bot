@@ -3412,5 +3412,19 @@
       }
     ],
     "last_activity": 1792755497
+  },
+  "1926841562:1926841562": {
+    "chat_id": 1926841562,
+    "user_id": 1926841562,
+    "full_name": "Аziza Rajabova",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Oshxona mebeli",
+        "time": 1792812837
+      }
+    ],
+    "last_activity": 1792812837
   }
 }
