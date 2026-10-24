@@ -3493,5 +3493,19 @@
       }
     ],
     "last_activity": 1792818347
+  },
+  "-1001865736985:1926841562": {
+    "chat_id": -1001865736985,
+    "user_id": 1926841562,
+    "full_name": "Аziza Rajabova",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Oshxonaga mebellar bormi",
+        "time": 1792835257
+      }
+    ],
+    "last_activity": 1792835257
   }
 }
