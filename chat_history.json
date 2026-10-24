@@ -3471,8 +3471,13 @@
         "role": "user",
         "text": "Trimolar qanchadan",
         "time": 1792817948
+      },
+      {
+        "role": "user",
+        "text": "Rasmi bilan narxini tashab bering",
+        "time": 1792817966
       }
     ],
-    "last_activity": 1792817948
+    "last_activity": 1792817966
   }
 }
