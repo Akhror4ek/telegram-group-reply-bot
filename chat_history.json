@@ -3479,5 +3479,19 @@
       }
     ],
     "last_activity": 1792817966
+  },
+  "-1001865736985:940703843": {
+    "chat_id": -1001865736985,
+    "user_id": 940703843,
+    "full_name": "☝️❤ALHAMDULLILAH ☝️❤",
+    "username": "Uzb_796",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Т то",
+        "time": 1792818347
+      }
+    ],
+    "last_activity": 1792818347
   }
 }
