@@ -2987,9 +2987,14 @@
         "role": "assistant",
         "text": "Assalomu alohida! \n\nAfsuski, menda bu ma'lumot yo'q. Aniqroq ma'lumot olish uchun operatorimizga murojaat qilishingizni tavsiya qilaman: +998-94-529-07-07 yoki +998 78 555-17-77.",
         "time": 1791594583
+      },
+      {
+        "role": "user",
+        "text": "Assalomu aleykum oshxona mebellarini rasmlarini tashab bering iltimos",
+        "time": 1792814836
       }
     ],
-    "last_activity": 1791594583
+    "last_activity": 1792814836
   },
   "8970919290:8970919290": {
     "chat_id": 8970919290,
