@@ -3460,5 +3460,19 @@
       }
     ],
     "last_activity": 1792814443
+  },
+  "-1001865736985:8016005682": {
+    "chat_id": -1001865736985,
+    "user_id": 8016005682,
+    "full_name": "Marjona",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Trimolar qanchadan",
+        "time": 1792817948
+      }
+    ],
+    "last_activity": 1792817948
   }
 }
