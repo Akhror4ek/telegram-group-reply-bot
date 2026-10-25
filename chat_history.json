@@ -3507,5 +3507,19 @@
       }
     ],
     "last_activity": 1792835257
+  },
+  "-1001865736985:1288601939": {
+    "chat_id": -1001865736985,
+    "user_id": 1288601939,
+    "full_name": "🤍🕊️Mehribonim🤍🕊️",
+    "username": "MubinaHadicha",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Bu qancha ekan",
+        "time": 1792949392
+      }
+    ],
+    "last_activity": 1792949392
   }
 }
