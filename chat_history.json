@@ -3583,5 +3583,19 @@
       }
     ],
     "last_activity": 1793008925
+  },
+  "-1001865736985:8549346076": {
+    "chat_id": -1001865736985,
+    "user_id": 8549346076,
+    "full_name": "Nodir",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Assalomu alaykum",
+        "time": 1793027248
+      }
+    ],
+    "last_activity": 1793027248
   }
 }
