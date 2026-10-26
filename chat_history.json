@@ -3554,5 +3554,19 @@
       }
     ],
     "last_activity": 1793002221
+  },
+  "-1001865736985:1059117221": {
+    "chat_id": -1001865736985,
+    "user_id": 1059117221,
+    "full_name": "Отабек Бокиев",
+    "username": "Uzmb_karakul",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Уголок",
+        "time": 1793008925
+      }
+    ],
+    "last_activity": 1793008925
   }
 }
