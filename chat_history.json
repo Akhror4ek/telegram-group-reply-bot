@@ -693,9 +693,14 @@
         "role": "user",
         "text": "Assalomu alaykum",
         "time": 1793025719
+      },
+      {
+        "role": "user",
+        "text": "Noutbuklar haqida rasm tashang.narxlari bilan birga.12.oyga",
+        "time": 1793025793
       }
     ],
-    "last_activity": 1793025719
+    "last_activity": 1793025793
   },
   "-1001865736985:7103340119": {
     "chat_id": -1001865736985,
