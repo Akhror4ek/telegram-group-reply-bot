@@ -3602,5 +3602,19 @@
       }
     ],
     "last_activity": 1793027248
+  },
+  "-1001865736985:121588270": {
+    "chat_id": -1001865736985,
+    "user_id": 121588270,
+    "full_name": "Karomat Raximovich",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "12 талик стол стул",
+        "time": 1793066564
+      }
+    ],
+    "last_activity": 1793066564
   }
 }
