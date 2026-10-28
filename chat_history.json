@@ -3694,8 +3694,13 @@
         "role": "user",
         "text": "Qanday modellari",
         "time": 1793205215
+      },
+      {
+        "role": "assistant",
+        "text": "Modellar haqida batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin:\n\n📞 +998 78 555-17-77  \n📱 +998 94 529-07-07  \nTelegram: @aksouz",
+        "time": 1793205233
       }
     ],
-    "last_activity": 1793205215
+    "last_activity": 1793205233
   }
 }
