@@ -3684,8 +3684,18 @@
         "role": "user",
         "text": "Telefon bormi",
         "time": 1793205192
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! Ha, AKSO do'konida telefonlar mavjud. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin:\n📞 +998 78 555-17-77\n📱 +998 94 529-07-07\nTelegram: @aksouz",
+        "time": 1793205210
+      },
+      {
+        "role": "user",
+        "text": "Qanday modellari",
+        "time": 1793205215
       }
     ],
-    "last_activity": 1793205192
+    "last_activity": 1793205215
   }
 }
