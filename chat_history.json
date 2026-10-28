@@ -3674,8 +3674,13 @@
         "role": "user",
         "text": "Telefon",
         "time": 1793205168
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alumat! AKSO do'konida telefonlar mavjud. \n\nBatafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: \n📞 +998 78 555-17-77 \n📱 +998 94 529-07-07 \nTelegram: @aksouz",
+        "time": 1793205184
       }
     ],
-    "last_activity": 1793205168
+    "last_activity": 1793205184
   }
 }
