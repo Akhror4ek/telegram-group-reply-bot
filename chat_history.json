@@ -3635,5 +3635,19 @@
       }
     ],
     "last_activity": 1793163001
+  },
+  "1041742291:1041742291": {
+    "chat_id": 1041742291,
+    "user_id": 1041742291,
+    "full_name": "F",
+    "username": "",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Oshxona mebellari",
+        "time": 1793163209
+      }
+    ],
+    "last_activity": 1793163209
   }
 }
