@@ -24,6 +24,7 @@ from telegram import (
     InputFile,
     KeyboardButton,
     ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
 )
 from telegram.ext import (
     Application,
@@ -2715,6 +2716,38 @@ async def skip_command(
 
 
 # ============================================================
+# TEMPORARILY REMOVE OLD REPLY KEYBOARDS (OWNER ONLY)
+# ============================================================
+
+async def remove_keyboard_command(update, context):
+    """Remove the persisted custom reply keyboard from a group chat."""
+    message = update.effective_message
+    user = update.effective_user
+    chat = update.effective_chat
+    if not message or not user:
+        return
+
+    if not is_owner(user.id):
+        await message.reply_text("❌ Bu komandadan faqat bot egasi foydalanishi mumkin.")
+        return
+
+    if not chat or chat.type not in ("group", "supergroup"):
+        await message.reply_text(
+            "ℹ️ Bu komandani tugmalarni olib tashlamoqchi bo'lgan guruh ichida yuboring."
+        )
+        return
+
+    try:
+        await message.reply_text(
+            "✅ Eski bot tugmalari olib tashlandi.",
+            reply_markup=ReplyKeyboardRemove(selective=False),
+        )
+    except Exception as exc:
+        print("REPLY KEYBOARD OLIB TASHLASH XATOSI:", repr(exc))
+        raise
+
+
+# ============================================================
 # ADMIN MANAGEMENT (OWNER ONLY)
 # ============================================================
 
@@ -5292,6 +5325,7 @@ async def get_admin_commands():
         BotCommand("removeadmin", "🗑 Adminni olib tashlash (faqat egasi)"),
         BotCommand("admins", "👑 Adminlar ro'yxati (faqat egasi)"),
         BotCommand("migrateimages", "♻️ Eski rasmlarni Telegramga ko'chirish"),
+        BotCommand("removekeyboard", "🧹 Guruhdagi eski tugmalarni olib tashlash (faqat egasi)"),
     ]
 
 
@@ -5480,6 +5514,13 @@ telegram_app.add_handler(
     CommandHandler(
         "migrateimages",
         migrate_images_command
+    )
+)
+
+telegram_app.add_handler(
+    CommandHandler(
+        "removekeyboard",
+        remove_keyboard_command
     )
 )
 
