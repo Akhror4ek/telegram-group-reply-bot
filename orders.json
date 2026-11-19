@@ -152,5 +152,19 @@
     "payment": "Bo'lib to'lash",
     "installment_months": 3,
     "status": "new"
+  },
+  {
+    "id": "AKSO-1012",
+    "created_at": 1795091817,
+    "chat_id": 659740309,
+    "user_id": 659740309,
+    "name": "dgrhdfjngd xfnfbf",
+    "phone": "+998944557887",
+    "location": "qorakul",
+    "product_id": "1789639914756",
+    "product_name": "HItech divan 1 kishilik",
+    "payment": "Naqd",
+    "installment_months": null,
+    "status": "new"
   }
 ]
