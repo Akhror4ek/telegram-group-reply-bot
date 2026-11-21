@@ -166,5 +166,19 @@
     "payment": "Naqd",
     "installment_months": null,
     "status": "new"
+  },
+  {
+    "id": "AKSO-1013",
+    "created_at": 1795244625,
+    "chat_id": 6256406257,
+    "user_id": 6256406257,
+    "name": "Qorayev Salohiddin",
+    "phone": "884760116",
+    "location": "Jondor",
+    "product_id": "1789286363285",
+    "product_name": "LG televizor 43 dyum",
+    "payment": "Bo'lib to'lash",
+    "installment_months": 12,
+    "status": "new"
   }
 ]
