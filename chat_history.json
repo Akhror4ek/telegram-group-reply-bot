@@ -3786,8 +3786,18 @@
         "role": "assistant",
         "text": "Assalomu aftay! AKSO do'konida telefonlar va boshqa turli xil texnikalar mavjud. \n\nSizga qanday telefon kerak edi? Brendi yoki modeli bo'yicha aytsangiz, ma'lumot berishim mumkin. \n\nShuningdek, barcha mahsulotlarimizga **bepul yetkazib berish** (Qorako'l va Olot tumanlari bo'ylab), **bepul montaj** va **bo'lib to'lash** imkoniyatlari mavjud! Batafsil ma'lumot olish uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1795244539
+      },
+      {
+        "role": "user",
+        "text": "Apple",
+        "time": 1795244653
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alum! AKSO do'koniga xush kelibsiz. \n\nAfsuski, bizda Apple mahsulotlari bo'yicha ma'lumot mavjud emas. Qo'shimcha savollar bo'yicha operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1795244655
       }
     ],
-    "last_activity": 1795244539
+    "last_activity": 1795244655
   }
 }
