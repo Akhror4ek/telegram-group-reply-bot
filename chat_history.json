@@ -3826,8 +3826,18 @@
         "role": "assistant",
         "text": "Afsuski, bizda Redmi mahsulotlari bo'yicha ma'lumot mavjud emas. Qo'shimcha savollar bo'yicha operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1795244677
+      },
+      {
+        "role": "user",
+        "text": "Kondisaner",
+        "time": 1795244729
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! \n\nBarcha mahsulotlarimizga bepul montaj va Qorako'l hamda Olot tumanlari bo'ylab bepul yetkazib berish xizmati mavjud. \n\nQo'shimcha ma'lumotlar olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1795244730
       }
     ],
-    "last_activity": 1795244677
+    "last_activity": 1795244730
   }
 }
