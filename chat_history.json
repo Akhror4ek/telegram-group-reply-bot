@@ -3740,5 +3740,19 @@
       }
     ],
     "last_activity": 1794501281
+  },
+  "6256406257:6256406257": {
+    "chat_id": 6256406257,
+    "user_id": 6256406257,
+    "full_name": "Mohlaroyim Bahriddinova",
+    "username": "ImronbekIymonam",
+    "messages": [
+      {
+        "role": "user",
+        "text": "Tilla",
+        "time": 1795243103
+      }
+    ],
+    "last_activity": 1795243103
   }
 }
