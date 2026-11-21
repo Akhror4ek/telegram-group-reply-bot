@@ -3796,8 +3796,18 @@
         "role": "assistant",
         "text": "Assalomu alum! AKSO do'koniga xush kelibsiz. \n\nAfsuski, bizda Apple mahsulotlari bo'yicha ma'lumot mavjud emas. Qo'shimcha savollar bo'yicha operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1795244655
+      },
+      {
+        "role": "user",
+        "text": "Honor",
+        "time": 1795244661
+      },
+      {
+        "role": "assistant",
+        "text": "Afsuski, bizda Honor mahsulotlari bo'yicha ma'lumot mavjud emas. Qo'shimcha savollar bo'yicha operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1795244662
       }
     ],
-    "last_activity": 1795244655
+    "last_activity": 1795244662
   }
 }
