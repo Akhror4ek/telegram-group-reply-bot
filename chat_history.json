@@ -3836,8 +3836,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! \n\nBarcha mahsulotlarimizga bepul montaj va Qorako'l hamda Olot tumanlari bo'ylab bepul yetkazib berish xizmati mavjud. \n\nQo'shimcha ma'lumotlar olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1795244730
+      },
+      {
+        "role": "user",
+        "text": "Bormi",
+        "time": 1795244766
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
+        "time": 1795244768
       }
     ],
-    "last_activity": 1795244730
+    "last_activity": 1795244768
   }
 }
