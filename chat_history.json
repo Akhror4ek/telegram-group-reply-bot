@@ -3846,8 +3846,18 @@
         "role": "assistant",
         "text": "Assalomu alaykum! AKSO do'konining virtual yordamchisiman. Sizga qanday yordam bera olaman?",
         "time": 1795244768
+      },
+      {
+        "role": "user",
+        "text": "Kondisaner bormi",
+        "time": 1795244777
+      },
+      {
+        "role": "assistant",
+        "text": "Assalomu alaykum! Ha, konditsionerlarimiz bor. Batafsil ma'lumot olish yoki buyurtma berish uchun operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1795244779
       }
     ],
-    "last_activity": 1795244768
+    "last_activity": 1795244779
   }
 }
