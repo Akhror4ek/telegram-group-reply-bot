@@ -3816,8 +3816,18 @@
         "role": "assistant",
         "text": "Afsuski, bizda Samsung mahsulotlari bo'yicha ma'lumot mavjud emas. Qo'shimcha savollar bo'yicha operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
         "time": 1795244670
+      },
+      {
+        "role": "user",
+        "text": "Redni",
+        "time": 1795244676
+      },
+      {
+        "role": "assistant",
+        "text": "Afsuski, bizda Redmi mahsulotlari bo'yicha ma'lumot mavjud emas. Qo'shimcha savollar bo'yicha operatorimizga murojaat qilishingiz mumkin: +998-94-529-07-07.",
+        "time": 1795244677
       }
     ],
-    "last_activity": 1795244670
+    "last_activity": 1795244677
   }
 }
